@@ -1,0 +1,26 @@
+runtime: php73
+
+handlers:
+# Serve a directory as a static resource.
+- url: /stylesheets
+  static_dir: stylesheets
+
+
+# Serve images as static resources.
+- url: /(.+\.(gif|png|jpg))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg)$
+
+# Serve your app through a front controller at index.php or public/index.php.
+- url: .*
+  script: auto
+
+entrypoint:
+  serve handler.php
+
+env_variables:
+  ## Put production environment variables here.
+  APP_KEY: gg4//Q/u8ms+8pjZqGq4g/tUSiCMyRU1FkE33EvCM1I=
+  APP_STORAGE: /tmp
+  VIEW_COMPILED_PATH: /tmp
+  SESSION_DRIVER: cookie
