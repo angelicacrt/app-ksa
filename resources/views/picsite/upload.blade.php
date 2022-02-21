@@ -52,16 +52,11 @@
                                 <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">Nama File</th>
-                                    {{-- <th scope="col">Upload Time</th>
-                                    <th scope="col">status</th>
-                                    <th scope="col">Reason</th>
-                                    <th scope="col">Due Date</th> --}}
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
-                                {{-- <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload"> --}}
 {{--Babelan ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                                     @if (Auth::user()->cabang == 'Babelan')
                                     @for ($a = 1 ; $a <= 24 ; $a++)
@@ -81,23 +76,11 @@
                                         <tr>
                                             <td class=table-primary>{{ $a }}</td>
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                            {{-- @foreach ($document as $doc )
-                                                <td class=table-primary id="time1">{{$doc->$time_upload}}</td> 
-                                                <td class=table-primary id="status1">{{$doc->$stats}}</td>
-                                                <td class=table-primary id="reason1">{{$doc->$reason}}</td>
-                                                @endforeach
-                                            <td class=table-primary id="duetime1">{{$date}}</td> 
-                                            @if (empty($doc->$stats) or $doc->$stats == 'rejected') --}}
                                                 <td class=table-light>
                                                     <div class="input-group mb-3">
                                                         <input type="file" class="form-control" name={{$ufile}} id="ufile">
                                                     </div>
                                                 </td>  
-                                                {{-- <input name={{$ufile}} id="ufile" type="file" onClick=""/>  --}}
-                                                {{-- <a href="/picsite/view" target="_blank">view</a> --}}
-                                            {{-- @else
-                                                <td>  </td>
-                                            @endif --}}
                                         </tr>
                                     @endfor
                                     @endif
@@ -124,23 +107,11 @@
                                         <tr>
                                             <td class=table-primary>{{$a}}</td>   
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                            {{-- @foreach ($documentberau as $d )                           
-                                                <td class=table-primary id="time">{{$d->$time_upload}}</td>                                        
-                                                <td class=table-primary id="status">{{$d->$stats}}</td>                                      
-                                                <td class=table-primary id="reason">{{$d->$reason}}</td>                                        
-                                            @endforeach
-                                            <td class=table-primary id="duetime1">{{$date}}</td> 
-                                            @if (empty($d->$stats) or $d->$stats == 'rejected') --}}
                                             <td class=table-light>
                                                 <div class="input-group mb-3">
                                                     <input type="file" class="form-control" name="{{$beraufile}}" id="beraufile">
                                                 </div>
                                             </td>  
-                                            {{-- <input name="{{$beraufile}}" id="beraufile" type="file" onClick=""/>  --}}
-                                            {{-- <a href="/picsite/view" target="_blank">view</a> --}}
-                                            {{-- @else
-                                            <td> </td>
-                                            @endif --}}
                                         </tr>
                                     @endfor
                                     @endif
@@ -169,23 +140,11 @@
                                     <tr>   
                                         <td class=table-primary>{{ $a }}</td>
                                         <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                        {{-- @foreach ($documentbanjarmasin as $b )
-                                        <td class=table-primary id="time">{{$b->$time_upload}}</td>                                        
-                                        <td class=table-primary id="status">{{$b->$stats}}</td>                                      
-                                        <td class=table-primary id="reason">{{$b->$reason}}</td>                                        
-                                        @endforeach
-                                        <td class=table-primary id="duetime1">{{$date}}</td> 
-                                        @if (empty($b->$stats)or $b->$stats == 'rejected') --}}
                                             <td class=table-light>
                                                 <div class="input-group mb-3">
                                                     <input type="file" class="form-control" name="{{$banjarmasinfile}}" id="banjarmasinfile">
                                                 </div>
-                                                  {{-- <a href="/picsite/view" target="_blank">view</a> --}}
                                             </td>  
-                                                {{-- <input name="{{$banjarmasinfile}}" id="banjarmasinfile" type="file" onClick=""/>  --}}
-                                        {{-- @else
-                                            <td> </td>
-                                        @endif --}}
                                     </tr>      
                                 @endfor
                             @endif
@@ -217,22 +176,11 @@
                                         <tr>
                                             <td class=table-primary>{{ $a }}</td>   
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                            {{-- @foreach ($documentsamarinda as $s )                           
-                                                <td class=table-primary id="time">{{$s->$time_upload}}</td>                                        
-                                                <td class=table-primary id="status">{{$s->$stats}}</td>                                      
-                                                <td class=table-primary id="reason">{{$s->$reason}}</td>                                        
-                                            @endforeach
-                                            <td class=table-primary id="duetime1">{{$date}}</td> 
-                                            @if (empty($s->$stats)or $s->$stats == 'rejected') --}}
                                                 <td class=table-light>
                                                     <div class="input-group mb-3">
                                                         <input type="file" class="form-control" name="{{$samarindafile}}" id="samarindafile">
                                                     </div>
                                                 </td>  
-                                                    {{-- <input name="{{$samarindafile}}" id="samarindafile" type="file" onClick=""/>  --}}
-                                            {{-- @else
-                                                <td> </td>
-                                            @endif --}}
                                         </tr>     
                                         @endfor
                                     @endif
@@ -274,8 +222,8 @@
                                     @endif
                                 </tbody>   
                         </table>
+                    </form>
                         <button class="btn btn-danger" id="realsubmit" style="margin-left: 50%; display: none;" type="submit" name="Submit" value="Upload" onClick="">Submit</button>
-
                         <script>
                             document.getElementById('topsubmit').addEventListener('click', openDialog);
                             function openDialog() {
@@ -288,7 +236,6 @@
                                 }, 5000 ); // 5 secs
                         </script>
                         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                    </form>
                     </div>
                 </div>
             </div>   
