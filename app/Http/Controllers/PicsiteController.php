@@ -617,33 +617,6 @@ class PicsiteController extends Controller
                 $path = $request->file('ufile17')->storeas('babelan/'. $year . "/". $month , $name17 , 's3');
                 if (documents::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                     documents::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
-                        
-                        'BKI'=> basename($path),
-                        'status17' => 'on review',
-                        'time_upload17' => date("Y-m-d h:i:s"),
-                    ]);
-                }else{
-                    documents::create([
-                        'cabang' => Auth::user()->cabang ,
-                        'user_id' => Auth::user()->id,
-
-                        'nama_kapal' => $request->nama_kapal,
-                        'periode_awal' => $request->tgl_awal,
-                        'periode_akhir' => $request->tgl_akhir,
-
-                        'BKI'=> basename($path),
-                        'status17' => 'on review',
-                        'time_upload17' => date("Y-m-d h:i:s"),
-                    ]);
-                }
-            }
-            if ($request->hasFile('ufile17')) {
-                $file17 = $request->file('ufile17');
-                $name17 = 'Picsite-'. Auth::user()->cabang . $file17->getClientOriginalName();
-                $tujuan_upload = 'babelan/BKI';
-                $path = $request->file('ufile17')->storeas('babelan/'. $year . "/". $month , $name17 , 's3');
-                if (documents::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    documents::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'BKI_Lambung'=> basename($path),
                         'status17' => 'on review',
                         'time_upload17' => date("Y-m-d h:i:s"),
@@ -832,7 +805,7 @@ class PicsiteController extends Controller
                     }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload Success!');
+            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
 
         if (Auth::user()->cabang == 'Berau') {
@@ -1745,7 +1718,7 @@ class PicsiteController extends Controller
                     }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload success!');
+            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
             
         if (Auth::user()->cabang == 'Banjarmasin') {
@@ -2769,7 +2742,7 @@ class PicsiteController extends Controller
                     }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload success!');
+            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
             
         if (Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Morosi') {
@@ -3972,7 +3945,7 @@ class PicsiteController extends Controller
                     }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload success!');
+            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
 
         if (Auth::user()->cabang == "Jakarta") {
@@ -5110,7 +5083,7 @@ class PicsiteController extends Controller
                         'Lain_Lain5' => basename($path),]);
                     }
             }
-            return redirect('/picsite/upload')->with('success', 'Upload success!');
+            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
         
 //email to user

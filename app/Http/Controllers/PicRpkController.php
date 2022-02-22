@@ -40,7 +40,8 @@ class PicRpkController extends Controller
                 'rfile4' => 'mimes:pdf|max:1024' ,
                 'rfile5' => 'mimes:pdf|max:1024' ,
                 'rfile6' => 'mimes:pdf|max:1024' ,
-                'rfile7' => 'mimes:pdf|max:1024' 
+                'rfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required'
             ]);
             if ($request->hasFile('rfile1')) {
                 //dd($request);
@@ -232,7 +233,7 @@ class PicRpkController extends Controller
                     ]);
                 }
             }
-            return redirect('picsite/rpk')->with('message', 'Upload success!');
+            return redirect('picsite/rpk')->with('message', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
         if(Auth::user()->cabang == 'Berau'){
@@ -245,7 +246,8 @@ class PicRpkController extends Controller
                 'brfile4' => 'mimes:pdf|max:1024' ,
                 'brfile5' => 'mimes:pdf|max:1024' ,
                 'brfile6' => 'mimes:pdf|max:1024' ,
-                'brfile7' => 'mimes:pdf|max:1024' 
+                'brfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required'
             ]);
             if ($request->hasFile('brfile1')) {
                 //dd($request);
@@ -437,7 +439,7 @@ class PicRpkController extends Controller
                     ]);
                 }  
             }
-            return redirect('picsite/rpk')->with('message', 'Upload success!');
+            return redirect('picsite/rpk')->with('message', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
         if(Auth::user()->cabang == 'Banjarmasin' or Auth::user()->cabang == 'Bunati'){
@@ -450,7 +452,8 @@ class PicRpkController extends Controller
                 'bjrfile4' => 'mimes:pdf|max:1024' ,
                 'bjrfile5' => 'mimes:pdf|max:1024' ,
                 'bjrfile6' => 'mimes:pdf|max:1024' ,
-                'bjrfile7' => 'mimes:pdf|max:1024' 
+                'bjrfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required'
             ]);
             if ($request->hasFile('bjrfile1')) {
                 //dd($request);
@@ -643,7 +646,7 @@ class PicRpkController extends Controller
                     ]);
                 }
             }
-            return redirect('picsite/rpk')->with('message', 'Upload success!');
+            return redirect('picsite/rpk')->with('message', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
         if(Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari'  or Auth::user()->cabang == 'Morosi'){
@@ -849,7 +852,7 @@ class PicRpkController extends Controller
                     ]);
                 }
             }
-            return redirect('picsite/rpk')->with('message', 'Upload success!');
+            return redirect('picsite/rpk')->with('message', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
         
         if(Auth::user()->cabang == 'Jakarta'){
@@ -863,7 +866,8 @@ class PicRpkController extends Controller
                 'jktfile4' => 'mimes:pdf|max:1024' ,
                 'jktfile5' => 'mimes:pdf|max:1024' ,
                 'jktfile6' => 'mimes:pdf|max:1024' ,
-                'jktfile7' => 'mimes:pdf|max:1024' 
+                'jktfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required'
             ]);
             if ($request->hasFile('jktfile1')) {
                 //dd($request);
@@ -1056,7 +1060,7 @@ class PicRpkController extends Controller
                 }
             }
 
-            return redirect('picsite/rpk')->with('message', 'Upload success!');
+            return redirect('picsite/rpk')->with('message', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
         //email to user
