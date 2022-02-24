@@ -44,9 +44,9 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z\s-]*$/'],
             'no_induk_pegawai' => ['required', 'numeric', 'digits_between:6,7', 'unique:users'],
-            // 'user_noTelp' => ['required', 'numeric','digits_between:8,12', 'unique:users'],
+            'user_noTelp' => ['required', 'numeric','digits_between:8,12', 'unique:users'],
             'email' => ['required', 'string', 'email:rfc,dns', 'ends_with:ptksa.id', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
+            // 'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
             'cabang' => ['required', 'string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

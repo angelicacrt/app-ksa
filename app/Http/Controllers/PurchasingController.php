@@ -30,7 +30,7 @@ class PurchasingController extends Controller
         // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
         // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
         
         
@@ -75,7 +75,7 @@ class PurchasingController extends Controller
 
         // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
         $in_progress = OrderHead::where(function($query){
@@ -133,7 +133,7 @@ class PurchasingController extends Controller
 
         // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
         // Count the completed & in progress order
@@ -440,6 +440,10 @@ class PurchasingController extends Controller
         return (new POExport($orderHeads -> order_id))->download('PO-' . $orderHeads -> order_id . '_' .  date("d-m-Y") . '.xlsx');
     }
 
+    public function downloadPoPdf(OrderHead $orderHeads){
+        return (new POExport($orderHeads -> order_id))->download('PO-' . $orderHeads -> order_id . '_' .  date("d-m-Y") . '.pdf', Excel::DOMPDF);
+    }
+
     public function editSupplier(Request $request, Supplier $suppliers){
         // Find the supplier id, then edit the ratings
         Supplier::find($suppliers->id)->update([
@@ -485,7 +489,7 @@ class PurchasingController extends Controller
         //     ->orWhere('role_user.role_id' , '=', '4');
         // })->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
                 
         // Find all the items that has been approved from the logistic | Per 3 months
@@ -534,7 +538,7 @@ class PurchasingController extends Controller
         //     ->orWhere('role_user.role_id' , '=', '4');
         // })->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
                 
         // Find all the items that has been approved from the logistic | Per 3 months
@@ -637,7 +641,8 @@ class PurchasingController extends Controller
     public function addSupplier(Request $request){
         // Validate request
         $validated = $request -> validate([
-            'supplierName' => ['required', 'string', 'starts_with:CV,PT', 'unique:suppliers'],
+            // 'supplierName' => ['required', 'string', 'starts_with:CV,PT', 'unique:suppliers'],
+            'supplierName' => ['required', 'string', 'unique:suppliers'],
             'supplierPic' => ['required', 'string'],
             'supplierEmail' => ['required', 'string', 'email:rfc,dns', 'unique:suppliers'],
             'supplierAddress' => ['required', 'string'],

@@ -188,7 +188,7 @@ class DashboardAjaxController extends Controller
         if($request -> ajax()){
             // Find order from logistic role, then they can approve and send it to the purchasing role
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
 
             if($request -> searchData != ''){
@@ -212,7 +212,9 @@ class DashboardAjaxController extends Controller
     public function supervisorRefreshDashboardCompleted(Request $request){
         if($request -> ajax()){
             // Find order from logistic role, then they can approve and send it to the purchasing role
-            $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
+            $users = User::whereHas('roles', function($query){
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
+            })->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
 
             // Then find all the order details from the orderHeads
             $order_id = OrderHead::whereIn('user_id', $users)->whereYear('created_at', date('Y'))->pluck('id');
@@ -242,7 +244,9 @@ class DashboardAjaxController extends Controller
     public function supervisorRefreshDashboardInProgress(Request $request){
         if($request -> ajax()){
             // Find order from logistic role, then they can approve and send it to the purchasing role
-            $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
+            $users = User::whereHas('roles', function($query){
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
+            })->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
 
             // Then find all the order details from the orderHeads
             $order_id = OrderHead::whereIn('user_id', $users)->whereYear('created_at', date('Y'))->pluck('id');
@@ -310,7 +314,7 @@ class DashboardAjaxController extends Controller
 
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
             
             if($request -> searchData != ''){
@@ -339,7 +343,7 @@ class DashboardAjaxController extends Controller
 
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
 
@@ -378,7 +382,7 @@ class DashboardAjaxController extends Controller
 
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
             if(request('search')){
@@ -417,7 +421,7 @@ class DashboardAjaxController extends Controller
 
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
             if($request -> searchData != ''){
@@ -445,7 +449,7 @@ class DashboardAjaxController extends Controller
 
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
             if($request -> searchData != ''){
@@ -483,7 +487,7 @@ class DashboardAjaxController extends Controller
 
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
             if($request -> searchData != ''){
@@ -514,6 +518,26 @@ class DashboardAjaxController extends Controller
                 $orderDetails = OrderDetail::with('item')->whereIn('orders_id', $order_id)->get();
         
                 return view('purchasingManager.purchasingManagerDashboardComponent', compact('orderHeads', 'orderDetails'))->render();
+            }
+        }
+    }
+
+    public function purchasingManagerRefreshItemStockPage(Request $request){
+        if($request -> ajax()){
+            // Check the stocks of all branches
+            if($request -> searchData != '' && $request -> default_branch !== 'All'){
+                $search = $request -> searchData;
+                
+                $items = Item::where(function($query) use ($search) {
+                    $query->where('itemName', 'like', '%' . $search . '%')
+                    ->orWhere('codeMasterItem', 'like', '%' . $search . '%');
+                })->where('cabang', $request -> default_branch)->Paginate(10);
+
+                return view('purchasingManager.purchasingManagerItemStockComponent', compact('items'))->render();
+            }else{
+                $items = Item::orderBy('cabang')->Paginate(10);
+
+                return view('purchasingManager.purchasingManagerItemStockComponent', compact('items'))->render();
             }
         }
     }
@@ -551,7 +575,6 @@ class DashboardAjaxController extends Controller
             return view('adminPurchasing.adminPurchasingFormApComponent', compact('apList', 'suppliers'))->render();
         }
     }
-
 
     public function adminPurchasingRefreshReportAp(Request $request){
         if($request -> ajax()){

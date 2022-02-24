@@ -1,6 +1,6 @@
 @extends('../layouts.base')
 
-@section('title', 'Picsite-Upload-Form')
+@section('title', 'Picsite Upload RPK')
 
 @section('container')
 <div class="row">
@@ -24,7 +24,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        @if ($success = Session::get('message'))
+                        @if ($success = Session::get('success'))
                             <div class="alert alert-success alert-block" id="message">
                                 <strong>{{ $success }}</strong>
                             </div>
@@ -35,7 +35,22 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <label>Nama Kapal</label>
-                                    <input type="text" name="nama_kapal" style="text-transform: uppercase;"class="form-control" required placeholder="Nama Kapal">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Tug</span>
+                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md" required>
+                                        <datalist id="Nama_kapals">
+                                            @foreach ($tug as $t)
+                                                <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
+                                            @endforeach
+                                        </datalist>
+                                        <span class="input-group-text">Barge</span>
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" required id="Nama_Barge" >
+                                        <datalist id="nama_tug_barges">
+                                            @foreach ($barge as $b)
+                                                <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
+                                            @endforeach
+                                        </datalist>
+                                      </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label>from</label>

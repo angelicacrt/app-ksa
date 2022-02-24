@@ -499,7 +499,7 @@ class LogisticController extends Controller
         // Find order from logistic role/goods in
         // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->pluck('users.id');
         
         // Find all the items that has been approved from the user | last 6 month
@@ -756,7 +756,7 @@ class LogisticController extends Controller
         // Find order from user/goods in => order created from logistic
         // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', Auth::user()->cabang)->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', Auth::user()->cabang)->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
         
         // Find all the items that has been approved from the logistic | last 6 month

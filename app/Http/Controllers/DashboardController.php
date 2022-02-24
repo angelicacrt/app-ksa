@@ -93,7 +93,7 @@ class DashboardController extends Controller
             // Find order from logistic role, then they can approve and send it to the purchasing role
             // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
 
             if(request('search')){
@@ -134,7 +134,7 @@ class DashboardController extends Controller
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', $default_branch)->pluck('users.id');
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
             
             if(request('search')){
@@ -191,7 +191,7 @@ class DashboardController extends Controller
             // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
             // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', Auth::user()->cabang)->pluck('users.id');
             $users = User::whereHas('roles', function($query){
-                $query->where('name', 'logistic');
+                $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
             })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
             if(request('search')){
@@ -413,30 +413,65 @@ class DashboardController extends Controller
                     }
                 }
             // SearchBar ---------------------------------------------------------
-                // babelan search bar
-                //check if search-bar is filled or not
+                // babelan search feature
                 if(Auth::user()->cabang == "Babelan"){
-                    if (Auth::user()->cabang == "Babelan" and $request->filled('search_kapal')) {
+                    //STILL IN PROGRESS 
+
+                    // if(Auth::user()->cabang == "Babelan" and $request->filled('search_status') and $request->filled('search_kapal')){
+                    //     for($i = 1; $i <= 24 ; $i++){
+                    //         $angka = 'status'. $i;
+                    //         $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    //         ->where($angka , 'Like', '%' . $request->search_status . '%')
+                    //         ->whereDate('periode_akhir', '>=', $datetime)
+                    //         ->orderBy('id', 'DESC')
+                    //         ->latest()->get();
+                    //         dd($angka);
+                    //     }
+                    //     for($j = 1; $j <= 7 ; $j++){
+                    //         //get DocRPK Data as long as the periode_akhir and search based (column database)
+                    //         $rpkangka = 'status'. $j;
+                    //         $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
+                    //         ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    //         ->where($rpkangka ,'Like', '%' . $request->search_status . '%')
+                    //         ->whereDate('periode_akhir', '>=', $datetime)
+                    //         ->orderBy('id', 'DESC')
+                    //         ->latest()->get();
+                    //     }
+                        
+                    //     return view('picsite.picDashboard', compact('document','docrpk'));
+                    // }
+                    // elseif(Auth::user()->cabang == "Babelan" and $request->filled('search_status')){
+                    //     for($i = 1; $i <= 24 ; $i++){
+                    //         $angka = 'status'. $i;
+                    //         $document = documents::where($angka,'Like', '%' . $request->search_status . '%')
+                    //         ->whereDate('periode_akhir', '>=', $datetime)
+                    //         ->orderBy('id', 'DESC')
+                    //         ->latest()->get();
+                    //     }
+                    //     for($j = 1; $j <= 7 ; $j++){
+                    //         //get DocRPK Data as long as the periode_akhir and search based (column database)
+                    //         $rpkangka = 'status'. $j;
+                    //         $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
+                    //         ->where($rpkangka ,'Like', '%' . $request->search_status . '%')
+                    //         ->whereDate('periode_akhir', '>=', $datetime)
+                    //         ->orderBy('id', 'DESC')
+                    //         ->latest()->get();
+                    //     }
+                    //     return view('picsite.picDashboard', compact('document','docrpk'));
+                    // }
+                    //check if search-bar is filled or not
+                    if(Auth::user()->cabang == "Babelan" and $request->filled('search_kapal')) {
                         //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
-                        //pakai whereColumn untuk membandingkan antar 2 value column agar munculkan data dari pembuatan sampai bulan akhir periode
                         $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
                         ->orderBy('id', 'DESC')
-                        ->latest()->get();
+                        ->latest()->paginate(1);
         
-                        //get DocRPK Data as long as the periode_akhir and search based (column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
-                        ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                        ->whereDate('periode_akhir', '>=', $datetime)
-                        ->orderBy('id', 'DESC')
-                        ->latest()->get();
-                        
-                        return view('picsite.picDashboard', compact('document','docrpk'));
-                    }else{
+                        return view('picsite.picDashboard', compact('document'));
+                     }else{
                         //get DocRPK Data as long as the periode_akhir(column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        return view('picsite.picDashboard', compact('document','docrpk'));
+                        $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                        return view('picsite.picDashboard', compact('document'));
                     }
                 }
                 if(Auth::user()->cabang == "Berau"){
@@ -445,19 +480,12 @@ class DashboardController extends Controller
                         $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
                         ->orderBy('id', 'DESC')
-                        ->latest()->get();
+                        ->latest()->paginate(1);
         
-                        //get DocRPK Data as long as the periode_akhir(column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
-                        ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                        ->whereDate('periode_akhir', '>=', $datetime)
-                        ->orderBy('id', 'DESC')
-                        ->latest()->get();
-                        return view('picsite.picDashboard', compact('documentberau','docrpk'));
+                        return view('picsite.picDashboard', compact('documentberau'));
                     }else{
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        return view('picsite.picDashboard', compact('documentberau','docrpk'));
+                        $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                        return view('picsite.picDashboard', compact('documentberau'));
                     }
                 }
                 if(Auth::user()->cabang == "Banjarmasin" or Auth::user()->cabang == "Bunati"){
@@ -466,19 +494,12 @@ class DashboardController extends Controller
                         $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)->where('cabang', Auth::user()->cabang)
                         ->orderBy('id', 'DESC')
-                        ->latest()->get();
+                        ->latest()->paginate(1);
         
-                        //get DocRPK Data as long as the periode_akhir(column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
-                        ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                        ->whereDate('periode_akhir', '>=', $datetime)
-                        ->orderBy('id', 'DESC')
-                        ->latest()->get();
-                        return view('picsite.picDashboard', compact('documentbanjarmasin','docrpk'));
+                        return view('picsite.picDashboard', compact('documentbanjarmasin'));
                     }else{
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('cabang', Auth::user()->cabang)->latest()->get();
-                        return view('picsite.picDashboard', compact('documentbanjarmasin','docrpk'));
+                        $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('cabang', Auth::user()->cabang)->latest()->paginate(1);
+                        return view('picsite.picDashboard', compact('documentbanjarmasin'));
                     }
                 }
                 if(Auth::user()->cabang == "Samarinda" or Auth::user()->cabang == "Kendari" or Auth::user()->cabang == "Morosi"){
@@ -487,19 +508,12 @@ class DashboardController extends Controller
                         $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)->where('cabang', Auth::user()->cabang)
                         ->orderBy('id', 'DESC')
-                        ->latest()->get();
+                        ->latest()->paginate(1);
         
-                        //get DocRPK Data as long as the periode_akhir(column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
-                        ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                        ->whereDate('periode_akhir', '>=', $datetime)
-                        ->orderBy('id', 'DESC')
-                        ->latest()->get();
-                        return view('picsite.picDashboard', compact('documentsamarinda','docrpk'));
+                        return view('picsite.picDashboard', compact('documentsamarinda'));
                     }else{
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('cabang', Auth::user()->cabang)->latest()->get();
-                        return view('picsite.picDashboard', compact('documentsamarinda', 'docrpk'));
+                        $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('cabang', Auth::user()->cabang)->latest()->paginate(1);
+                        return view('picsite.picDashboard', compact('documentsamarinda'));
                     }
                 }
                 if(Auth::user()->cabang == "Jakarta"){
@@ -507,21 +521,12 @@ class DashboardController extends Controller
                         $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
                         ->orderBy('id', 'DESC')
-                        ->latest()->get();
+                        ->latest()->paginate(1);
     
-                        //get DocRPK Data as long as the periode_akhir and search based (column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)
-                        ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                        ->whereDate('periode_akhir', '>=', $datetime)
-                        ->orderBy('id', 'DESC')
-                        ->latest()->get();
-                        
-                        return view('picsite.picDashboard', compact('documentjakarta','docrpk'));
+                        return view('picsite.picDashboard', compact('documentjakarta'));
                     }else{
-                        //get DocRPK Data as long as the periode_akhir(column database)
-                        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                        return view('picsite.picDashboard', compact('documentjakarta','docrpk'));
+                        $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                        return view('picsite.picDashboard', compact('documentjakarta'));
                     }
                 }
         }elseif(Auth::user()->hasRole('picAdmin')){

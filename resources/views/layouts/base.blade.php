@@ -45,7 +45,7 @@
         @if(Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
-        @if(Auth::user()->hasRole('logistic') || Auth::user()->hasRole('supervisor') || Auth::user()->hasRole('supervisorLogisticMaster'))
+        @if(Auth::user()->hasRole('logistic') || Auth::user()->hasRole('supervisorLogistic') || Auth::user()->hasRole('supervisorLogisticMaster'))
             <div class="navbar-nav ml-auto mr-3">
                 <div class="nav-item text-nowrap">
                     <button class="text-white bell-button" type="button" data-toggle="modal" data-target="#itemBelowStockModal"><span data-feather='bell'></span></button>
@@ -84,7 +84,7 @@
         @yield('container')
     </div>
 
-    @if(Auth::user()->hasRole('logistic') || Auth::user()->hasRole('supervisor') || Auth::user()->hasRole('supervisorLogisticMaster'))
+    @if(Auth::user()->hasRole('logistic') || Auth::user()->hasRole('supervisorLogistic') || Auth::user()->hasRole('supervisorLogisticMaster'))
         <div class="modal fade" id="itemBelowStockModal" tabindex="-1" role="dialog" aria-labelledby="reject-orderTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">

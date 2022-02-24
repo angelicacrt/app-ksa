@@ -27,7 +27,7 @@
         </div>
         <div style="width: 30%;">
             <h3 class="text-danger font-weight-bold mb-4">Deskripsi</h3>
-            <textarea name="" class="w-100 h-75" style="border-radius: 10px" disabled>-</textarea>
+            <textarea name="" class="w-100 h-75" style="border-radius: 10px; font-size:24px;" disabled>-</textarea>
         </div>
     </div>
 @else
@@ -327,7 +327,7 @@
         </div>
         <div style="width: 30%;">
             <h5 class="text-danger font-weight-bold mb-4">Deskripsi</h5>
-            <textarea name="" id="" class="w-100 h-75" style="border-radius: 10px" disabled>{{ $operationalData -> description }}</textarea>
+            <textarea name="" id="" class="w-100 h-75" style="border-radius: 10px; font-size:24px;" disabled>{{ $operationalData -> description }}</textarea>
         </div>
     </div>
 @endif

@@ -32,6 +32,10 @@
                         </span>
                         Rekapitulasi Dana
                     </a>
+                    <a class="nav-link" aria-current="page" href="/picsite/Record-Document">
+                        <span data-feather="clock" style="color: black"></span>
+                        Record Documents
+                    </a>
                 @endif
             </li>
         </ul>

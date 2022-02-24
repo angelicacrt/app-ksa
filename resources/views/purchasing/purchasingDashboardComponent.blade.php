@@ -1,11 +1,11 @@
 <table class="table">
     <thead class="thead bg-danger">
-    <tr>
-        <th scope="col">Order ID</th>
-        <th scope="col">Status</th>
-        <th scope="col">Description</th>
-        <th scope="col">Detail</th>
-    </tr>
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Status</th>
+            <th scope="col">Description</th>
+            <th scope="col">Detail</th>
+        </tr>
     </thead>
     <tbody>
         @foreach($orderHeads as $oh)
@@ -32,13 +32,15 @@
                 <button type="button" class="btn btn-info mb-2" data-toggle="modal" data-target="#detail-{{ $oh -> id }}">Detail</button>
                 @if(strpos($oh -> status, 'Delivered') !== false || strpos($oh -> status, 'Completed') !== false || strpos($oh -> status, 'Revised') !== false || strpos($oh -> status, 'Finalized') !== false)
                 {{-- @if(strpos($oh -> status, 'Delivered') !== false || strpos($oh -> status, 'Completed') !== false) --}}
-                    <a href="/purchasing/{{ $oh -> id }}/download-po" class="btn btn-warning mb-2" target="_blank">Download PO</a>
+                    {{-- <a href="/purchasing/{{ $oh -> id }}/download-po" class="btn btn-warning mb-2" target="_blank">Download PO</a> --}}
+                    <button type="button" class="btn btn-dark mb-2" data-toggle="modal" data-target="#downloadPO-order-{{ $oh -> id }}">Download</button>
                 @endif
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
 @foreach($orderHeads as $oh)
     <div class="modal fade" id="detail-{{ $oh->id }}" tabindex="-1" role="dialog" aria-labelledby="detailTitle"
         aria-hidden="true">
@@ -128,6 +130,31 @@
                 </div>
             </form>
         </div>
+        </div>
+    </div>
+    <div class="modal fade" id="downloadPO-order-{{ $oh -> id }}" tabindex="-1" role="dialog" aria-labelledby="reject-orderTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title" id="rejectTitle" style="color: white">Download PO {{ $oh -> order_id }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="">
+                    @csrf
+                    <div class="modal-body"> 
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-warning" data-feather="download" style="height: 15%; width: 15%;"></span>
+                            <h5 class="font-weight-bold mt-3">Choose Download As</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/purchasing/{{ $oh -> id }}/download-po" class="btn btn-secondary mb-2" target="_blank">Download as Excel</a>
+                        <a href="/purchasing/{{ $oh -> id }}/download-po-pdf" class="btn btn-success mb-2" target="_blank">Download as PDF</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endforeach

@@ -1,38 +1,17 @@
+@if(Auth::user()->hasRole('picSite'))
 @extends('../layouts.base')
 
-@section('title', 'Picsite Dashboard')
+@section('title', 'Picsite Document Records Fund Request')
 
 @section('container')
 <div class="row">
     @include('picsite.sidebarpic')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        
         <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>Welcome back, {{ Auth::user()->name }} !</h2>
-            <h4>Cabang : {{ Auth::user()->cabang }}</h4>
-            <h3>
-                <div id="txt"></div>
-
-                <script>
-                    function startTime() {
-                    const today = new Date();
-                    let h = today.getHours();
-                    let m = today.getMinutes();
-                    let s = today.getSeconds();
-                    m = checkTime(m);
-                    s = checkTime(s);
-                    document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-                    setTimeout(startTime, 1000);
-                    }
-                    
-                    function checkTime(i) {
-                    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-                        return i;
-                    }
-                </script>
-                <hr class="rounded">
-            </h3>    
-            
+            <h1 class="display-4"><strong>Document Records Fund Request</strong></h1>
+            <p class="lead">This Page is for Past-Date document RPK & fund request form...
+              </p>
+              <hr class="rounded">
             <style>{
                 {{-- /* Rounded border */ --}}
                 hr.rounded {
@@ -41,18 +20,20 @@
                 }
             }
             </style>
-            
-            <form method="GET" action="/dashboard/search" role="search">
-                <div class="row">
 
+            <br>
+
+            <form method="GET" action="/picsite/search-record" role="search">
+                <div class="row">
                     <div class="col">
-                            <a class="btn btn-outline-danger" style="right: 50%" href="/picsite/dashboard/rpk">Change to RPK</a>
+                        <a class="btn btn-outline-danger" style="right: 50%" href="/picsite/Record-Document-RPK">Change to RPK</a>
                     </div>
+                    
                     <div class="col">
                         @if (Auth::user()->cabang == 'Babelan')
-                            <div class="d-flex justify-content-end">
-                                {{ $document->links() }}
-                            </div>
+                        <div class="d-flex justify-content-end">
+                            {{ $document->links() }}
+                        </div>
                         @endif
                         @if (Auth::user()->cabang == 'Berau')
                             <div class="d-flex justify-content-end">
@@ -75,6 +56,7 @@
                             </div>
                         @endif
                     </div>
+
                     <div class="col">
                         <label class="sr-only" for="search_kapal">Nama Kapal</label>
                         <div class="input-group">
@@ -91,7 +73,7 @@
                             </button>
                         </div>
                     </div>
-                    {{-- still in progress --}}
+                    {{-- in progress --}}
                     {{-- <div class="auto-cols-auto">
                         <div class="col-sm-3 my-1" style="margin-left:-1%" >
                             <select name="search_status" id="search_status" class="form-control" >
@@ -106,7 +88,7 @@
                 </div>
             </form>
 
-            <table id="content" class="table"style="margin-top: 1%">
+            <table  id="content" class="table"style="margin-top: 1%">
                 <thead class="thead-dark" >
                     <tr>
                         <th class="table-info">Time Uploaded</th>
@@ -159,7 +141,7 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -180,7 +162,7 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$doc ->$reason}}</td>                                        
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -201,7 +183,7 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -273,7 +255,7 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$d ->$reason}}</td>
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -294,7 +276,7 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$d->$reason}}</td>    
                                 <td class="table-success">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -315,7 +297,7 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$d->$reason}}</td>   
                                 <td class="table-danger">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -390,7 +372,7 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$b ->$reason}}</td>
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -411,7 +393,7 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$b->$reason}}</td>
                                 <td class="table-success">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -432,7 +414,7 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$b->$reason}}</td>
                                 <td class="table-danger">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -515,7 +497,7 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$s ->$reason}}</td>   
                                 <td class="table-warning">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -536,7 +518,7 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$s->$reason}}</td>    
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -557,7 +539,7 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$s->$reason}}</td>    
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -635,7 +617,7 @@
                                     <td class="table-warning" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$jkt->$reason}}</td>   
                                     <td class="table-warning">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picsite/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -656,7 +638,7 @@
                                 <td class="table-success" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -677,7 +659,7 @@
                                 <td class="table-danger" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -712,4 +694,7 @@
         }
         setInterval(refreshDiv, 60000);
     </script>
-@endsection 
+@endsection
+@else
+    @include('../layouts/notAuthorized')
+@endif

@@ -58,7 +58,7 @@
                 </div>
             @enderror
 
-            @error('supplier_id')
+            @error('supplier')
                 <div class="alert alert-danger" style="width: 40%; margin-left: 30%">
                     Nama Supplier Invalid
                 </div>

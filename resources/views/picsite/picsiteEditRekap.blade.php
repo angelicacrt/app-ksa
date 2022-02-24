@@ -1,6 +1,6 @@
 @extends('../layouts.base')
 
-@section('title', 'insiden-insurance-SPGR-Notes')
+@section('title', 'Edit Rekapulasi dana')
 
 @section('container')
 <x-guest-layout>
@@ -10,7 +10,7 @@
         <div class="col" style="margin-top: 15px">
             <div class="jumbotron jumbotron-fluid" >
                 <div class="container">
-                  <h1 class="display-4"><strong>Rekapitulasi Dana</strong></h1>
+                  <h1 class="display-4"><strong>Edit Rekapitulasi Dana</strong></h1>
                 </div>
             </div>
 

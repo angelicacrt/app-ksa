@@ -23,10 +23,14 @@
                             <button class="btn btn-outline-success"  id="top" style=" width: 100%;" data-toggle="modal" data-target="#Download">Download</button>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                            {{ $rekapdana->links() }}
+                        </div>
+                    </div>
                 </div>
 
-
-
+                
                 {{-- Modal download --}}
                     <div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="Download" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">

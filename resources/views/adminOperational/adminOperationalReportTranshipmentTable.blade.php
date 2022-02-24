@@ -2,6 +2,21 @@
     <h1 class="text-center">No Data Found</h1>
 @else
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        @if(count($operationalData) > 0)
+            <div class="d-flex justify-content-center">
+                <form action="/admin-operational/daily-reports/download" method="POST">
+                    @csrf
+
+                    <input type="hidden" name="tugName" value="{{ $tugName }}">
+                    <input type="hidden" name="bargeName" value="{{ $bargeName }}">
+                    <input type="hidden" name="taskType" value="{{ $taskType }}">
+                    <input type="hidden" name="month" value="{{ $month }}">
+                    <input type="hidden" name="year" value="{{ $year }}">
+
+                    <button class="btn btn-danger btn-lg mt-2" type="submit">Download</button>
+                </form>
+            </div>
+        @endif
         <table class="table">
             <thead class="thead bg-danger">
             <tr>
@@ -51,21 +66,6 @@
             </tbody>
         </table>
     </div>
-    @if(count($operationalData) > 0)
-        <div class="d-flex justify-content-center">
-            <form action="/admin-operational/daily-reports/download" method="POST">
-                @csrf
-
-                <input type="hidden" name="tugName" value="{{ $tugName }}">
-                <input type="hidden" name="bargeName" value="{{ $bargeName }}">
-                <input type="hidden" name="taskType" value="{{ $taskType }}">
-                <input type="hidden" name="month" value="{{ $month }}">
-                <input type="hidden" name="year" value="{{ $year }}">
-
-                <button class="btn btn-danger btn-lg mt-2" type="submit">Download</button>
-            </form>
-        </div>
-    @endif
 @endif
 
 <style>

@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -204,6 +204,12 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         // Ajax
         Route::post('/refresh-supervisor-item-stocks', [DashboardAjaxController::class, 'supervisorRefreshItemStockPage'])->name('refreshSupervisorItemStock');
 
+        // Make Order Page
+        Route::get('/make-order', [SupervisorController::class, 'makeOrderPage'])->name('makeOrderPage');
+        Route::post('/{user}/add-cart', [SupervisorController::class, 'addItemToCart'])->name('addItemToCart');
+        Route::delete('/{cart}/delete', [SupervisorController::class, 'deleteItemFromCart'])->name('deleteItemFromCart');
+        Route::post('/{user}/submit-order', [SupervisorController::class, 'submitOrder'])->name('submitOrder');
+
         // DO Page
         Route::get('/approval-do', [SupervisorController::class, 'approvalDoPage'])->name('approvalDoPage');
         Route::get('/approval-do/{orderDos}/forward', [SupervisorController::class, 'forwardDo']);
@@ -223,6 +229,7 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/dashboard/{branch}', [PurchasingController::class, 'branchDashboard']);
         Route::post('/{suppliers}/edit', [PurchasingController::class, 'editSupplier']);
         Route::get('/{orderHeads}/download-po', [PurchasingController::class, 'downloadPo']);
+        Route::get('/{orderHeads}/download-po-pdf', [PurchasingController::class, 'downloadPoPdf']);
 
         // Ajax
         Route::post('/refresh-purchasing-dashboard', [DashboardAjaxController::class, 'purchasingRefreshDashboard'])->name('purchasingRefreshDashboard');
@@ -287,6 +294,16 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/refresh-purchasing-manager-dashboard', [DashboardAjaxController::class, 'purchasingManagerRefreshDashboard'])->name('purchasingManagerRefreshDashboard');
         Route::post('/refresh-purchasing-manager-dashboard-completed', [DashboardAjaxController::class, 'purchasingManagerRefreshDashboardCompleted'])->name('purchasingManagerRefreshDashboardCompleted');
         Route::post('/refresh-purchasing-manager-dashboard-in-progress', [DashboardAjaxController::class, 'purchasingManagerRefreshDashboardInProgress'])->name('purchasingManagerRefreshDashboardInProgress');
+
+        // Item Stocks
+        Route::get('/item-stocks', [PurchasingManagerController::class, 'itemStock'])->name('itemStock');
+        Route::get('/item-stocks/{branch}', [PurchasingManagerController::class, 'itemStockBranch']);
+        Route::post('/item-stocks', [PurchasingManagerController::class, 'addItemStock']);
+        Route::post('/item-stocks/{item}/edit-item', [PurchasingManagerController::class, 'editItemStock']);
+        Route::delete('/item-stocks/{item}/delete-item', [PurchasingManagerController::class, 'deleteItemStock']);
+
+        // Ajax
+        Route::post('/refresh-purchasing-manager-item-stocks', [DashboardAjaxController::class, 'purchasingManagerRefreshItemStockPage'])->name('refreshPurchasingManagerItemStock');
 
         // Approve Order Page
         // Route::get('/order/{orderHeads}/approve', [PurchasingManagerController::class, 'approveOrderPage']);
@@ -365,6 +382,19 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/uploadrekap',[PicsiteController::class, 'uploadrekap']);
         Route::post('/exportExcel', [PicsiteController::class, 'exportEXCEL']);
         Route::post('/exportPDF', [PicsiteController::class, 'exportPDF']);
+        
+        //Record Document
+        Route::get('/Record-Document',[PicsiteController::class, 'DocRecord']);
+        Route::get('/Record-Document-RPK',[PicsiteController::class, 'DocRecordRPK']);
+        Route::get('/search-record', [PicsiteController::class , 'searchDocRecord']);
+        Route::get('/search-record-RPK', [PicsiteController::class , 'searchDocRecordRPK']);
+        Route::post('/rpk/view', [PicsiteController::class, 'viewRecord']);
+        Route::post('/dana/view', [PicsiteController::class, 'viewRecord']);
+
+        //rpk dashboard
+        Route::get('/dashboard/rpk', [PicsiteController::class , 'DashboardRPK']);
+        Route::get('/dashboard/rpk-search', [PicsiteController::class , 'DashboardRPKsearch']);
+        
     });
 
     Route::prefix('picadmin')->name('picadmin.')->group(function(){

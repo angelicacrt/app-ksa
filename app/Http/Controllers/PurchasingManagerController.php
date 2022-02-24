@@ -13,10 +13,12 @@ use App\Exports\JO_Report;
 use App\Models\JobDetails;
 use App\Models\OrderDetail;
 use App\Models\ApListDetail;
+use App\Models\ItemBelowStock;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use App\Exports\ReportAPExport;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendItemBelowStockReportJob;
 use App\Exports\PurchasingReportExport;
 
 class PurchasingManagerController extends Controller
@@ -38,7 +40,7 @@ class PurchasingManagerController extends Controller
         // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
         // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
         
         if(request('search')){
@@ -83,7 +85,7 @@ class PurchasingManagerController extends Controller
         // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
         // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
         $in_progress = OrderHead::where(function($query){
@@ -142,7 +144,7 @@ class PurchasingManagerController extends Controller
         // Find order from the logistic role, because purchasing role can only see the order from "logistic/admin logistic" role NOT from "crew" roles
         // $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
 
         // Count the completed & in progress order
@@ -316,6 +318,163 @@ class PurchasingManagerController extends Controller
         return redirect('/purchasing-manager/dashboard/' . $default_branch)->with('statusB', 'Updated Successfully');
     }
 
+    public function itemStock(){
+        // Check the stocks of all branches
+        $default_branch = 'All';
+
+        if(request('search')){
+            $items = Item::where(function($query){
+                $query->where('itemName', 'like', '%' . request('search') . '%')
+                ->orWhere('cabang', 'like', '%' . request('search') . '%')
+                ->orWhere('codeMasterItem', 'like', '%' . request('search') . '%');
+            })->Paginate(10)->withQueryString();
+
+            return view('purchasingManager.purchasingManagerItemStock', compact('items', 'default_branch'));
+        }else{
+            $items = Item::orderBy('cabang')->Paginate(10)->withQueryString();
+            // $items = Item::latest()->Paginate(10)->withQueryString();
+
+            return view('purchasingManager.purchasingManagerItemStock', compact('items', 'default_branch'));
+        }
+    }
+
+    public function itemStockBranch($branch){
+        // Check the stocks of all branches
+        $default_branch = $branch;
+
+        if(request('search')){
+            $items = Item::where(function($query){
+                $query->where('itemName', 'like', '%' . request('search') . '%')
+                ->orWhere('codeMasterItem', 'like', '%' . request('search') . '%');
+            })->where('cabang', $default_branch)->Paginate(10)->withQueryString();
+
+            return view('purchasingManager.purchasingManagerItemStock', compact('items', 'default_branch'));
+        }else{
+            if($default_branch == 'All'){
+                $items = Item::orderBy('cabang')->Paginate(10)->withQueryString();
+            }else{
+                $items = Item::where('cabang', $default_branch)->Paginate(10)->withQueryString();
+            }
+
+            return view('purchasingManager.purchasingManagerItemStock', compact('items', 'default_branch'));
+        }
+    }
+
+    public function addItemStock(Request $request){
+        // Storing the item to the stock
+        $request->validate([
+           'itemName' => 'required',
+           'itemAge' => 'required|integer|min:1',
+           'umur' => 'required',
+           'itemStock' => 'required|integer|min:1',
+           'minStock' => 'required|integer|min:1',
+           'unit' => 'required',
+           'golongan' => 'required',
+           // 'serialNo' => 'nullable|numeric',
+           'serialNo' => 'required|regex:/^[0-9]{2}-[0-9]{4}-[0-9]/',
+           'codeMasterItem' => 'nullable',
+           'cabang' => 'required',
+           'description' => 'nullable'
+       ]);
+
+       // Formatting the item age
+       $new_itemAge = $request->itemAge . ' ' . $request->umur;
+       
+       // Create the item
+       $item = Item::create([
+           'itemName' => $request -> itemName,
+           'itemAge' => $new_itemAge,
+           'itemStock' => $request -> itemStock,
+           'minStock' => $request -> minStock,
+           'unit' => $request -> unit,
+           'golongan' => $request -> golongan,
+           'serialNo' => $request -> serialNo,
+           'codeMasterItem' => $request -> codeMasterItem,
+           'cabang' => $request->cabang,
+           'description' => $request -> description
+       ]);
+
+       // Check if the item stock is below the minimum stock, if it is true then insert a new data to the ItemBelowStock table and dispatch a new email to user using job
+       if($item -> itemStock < $item -> minStock){
+           if(ItemBelowStock::where('item_id', $item -> id)->exists()){
+               ItemBelowStock::where('item_id', $item -> id)->update([
+                   'stock_defficiency' => ($item -> minStock) - ($item -> itemStock)
+               ]);
+           }else{
+               ItemBelowStock::create([
+                   'item_id' => $item -> id,
+                   'stock_defficiency' => ($item -> minStock) - ($item -> itemStock)
+               ]);
+               SendItemBelowStockReportJob::dispatch($item->id, $item->cabang);
+           }
+       }elseif(ItemBelowStock::where('item_id', $item -> id)->exists()){
+           ItemBelowStock::find($item -> id)->destroy();
+       }
+
+       return redirect('/purchasing-manager/item-stocks')->with('status', 'Added Successfully');
+    }
+
+    public function deleteItemStock(Item $item){
+        Item::destroy($item->id);
+
+        return redirect('/purchasing-manager/item-stocks')->with('status', 'Deleted Successfully');
+    }
+
+    public function editItemStock(Request $request, Item $item){
+        // Edit the requested item
+        $request->validate([
+            'itemName' => 'required',
+            'itemAge' => 'required|integer|min:1',
+            'umur' => 'required',
+            'itemStock' => 'required|integer|min:1',
+            'minStock' => 'required|integer|min:1',
+            'unit' => 'required',
+            'golongan' => 'required',
+            'serialNo' => 'required|regex:/^[0-9]{2}-[0-9]{4}-[0-9]/',
+            'codeMasterItem' => 'nullable',
+            'itemState' => 'required|in:Available,Hold',
+            'description' => 'nullable'
+        ]);
+
+        // Formatting the item age
+        $new_itemAge = $request->itemAge . ' ' . $request->umur;
+
+        // Update the item
+        Item::where('id', $item->id)->update([
+            'itemName' => $request -> itemName,
+            'itemAge' => $new_itemAge,
+            'itemStock' => $request->itemStock,
+            'minStock' => $request -> minStock,
+            'unit' => $request -> unit,
+            'golongan' => $request -> golongan,
+            'serialNo' => $request -> serialNo,
+            'codeMasterItem' => $request -> codeMasterItem,
+            'itemState' => $request -> itemState,
+            'description' => $request -> description
+        ]);
+
+        $item_to_find = Item::where('id', $item->id)->first();
+
+        // Check if the item stock is below the minimum stock, if it is true then insert a new data to the ItemBelowStock table and dispatch a new email to user using job
+        if($item_to_find -> itemStock < $item_to_find -> minStock){
+            if(ItemBelowStock::where('item_id', $item_to_find -> id)->exists()){
+                ItemBelowStock::where('item_id', $item_to_find -> id)->update([
+                    'stock_defficiency' => ($item_to_find -> minStock) - ($item_to_find -> itemStock)
+                ]);
+            }else{
+                ItemBelowStock::create([
+                    'item_id' => $item_to_find -> id,
+                    'stock_defficiency' => ($item_to_find -> minStock) - ($item_to_find -> itemStock)
+                ]);
+                SendItemBelowStockReportJob::dispatch($item_to_find->id, $item_to_find->cabang);
+            }
+        }elseif(ItemBelowStock::where('item_id', $item_to_find -> id)->exists()){
+            ItemBelowStock::where('item_id', $item_to_find -> id)->delete();
+        }
+
+        return redirect('/purchasing-manager/item-stocks')->with('status', 'Edit Successfully');
+    }
+
     public function reportPage(){
         // Basically the report is created per 3 months, so we divide it into 4 reports
         // Base on current month, then we classified what period is the report
@@ -347,7 +506,7 @@ class PurchasingManagerController extends Controller
         //     ->orWhere('role_user.role_id' , '=', '4');
         // })->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', $default_branch)->pluck('users.id');
                 
         // Find all the items that has been approved from the logistic | Per 3 months
@@ -395,7 +554,7 @@ class PurchasingManagerController extends Controller
         //     ->orWhere('role_user.role_id' , '=', '4');
         // })->where('cabang', 'like', $default_branch)->pluck('users.id');
         $users = User::whereHas('roles', function($query){
-            $query->where('name', 'logistic');
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
         })->where('cabang', 'like', $default_branch)->pluck('users.id');
                 
         // Find all the items that has been approved from the logistic | Per 3 months

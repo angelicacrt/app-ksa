@@ -1,10 +1,10 @@
-@if(Auth::user()->hasRole('supervisorLogistic') || Auth::user()->hasRole('supervisorLogisticMaster'))
+@if(Auth::user()->hasRole('purchasingManager'))
     @extends('../layouts.base')
 
-    @section('title', 'Supervisor Stocks')
+    @section('title', 'Item Stocks')
 
     @section('container')
-        @include('supervisor.sidebar')
+        @include('purchasingManager.sidebar')
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-5">
             <h1 class="mb-3" style="text-align: center">Stock Availability</h1>
@@ -64,12 +64,10 @@
                 </div>
             @enderror
 
-            @if(Auth::user()->hasRole('supervisorLogisticMaster'))
-                <!-- Button trigger modal #1 -->
-                <button type="button" class="btn btn-primary mb-3 ml-3" data-toggle="modal" data-target="#addItem">
-                    Add Item +
-                </button>
-            @endif
+            <!-- Button trigger modal #1 -->
+            <button type="button" class="btn btn-primary mb-3 ml-3" data-toggle="modal" data-target="#addItem">
+                Add Item +
+            </button>
             
             <div class="d-flex justify-content-between">
                 <div class="col-md-6">
@@ -82,14 +80,14 @@
                 </div>
                 <div class="col">
                     <select name="cabang" class="form-select w-25" onchange="window.location = this.value;">
-                        <option selected disabled>Pilih Cabang</option>
-                        <option value="/supervisor/item-stocks/All" {{ $default_branch == 'All' ? 'selected' : '' }}>Semua Cabang</option>
-                        <option value="/supervisor/item-stocks/Jakarta" {{ $default_branch == 'Jakarta' ? 'selected' : '' }}>Jakarta</option>
-                        <option value="/supervisor/item-stocks/Banjarmasin" {{ $default_branch == 'Banjarmasin' ? 'selected' : '' }}>Banjarmasin</option>
-                        <option value="/supervisor/item-stocks/Samarinda" {{ $default_branch == 'Samarinda' ? 'selected' : '' }}>Samarinda</option>
-                        <option value="/supervisor/item-stocks/Bunati" {{ $default_branch == 'Bunati' ? 'selected' : '' }}>Bunati</option>
-                        <option value="/supervisor/item-stocks/Babelan" {{ $default_branch == 'Babelan' ? 'selected' : '' }}>Babelan</option>
-                        <option value="/supervisor/item-stocks/Berau" {{ $default_branch == 'Berau' ? 'selected' : '' }}>Berau</option>
+                    <option selected disabled>Pilih Cabang</option>
+                        <option value="/purchasing-manager/item-stocks/All" {{ $default_branch == 'All' ? 'selected' : '' }}>Semua Cabang</option>
+                        <option value="/purchasing-manager/item-stocks/Jakarta" {{ $default_branch == 'Jakarta' ? 'selected' : '' }}>Jakarta</option>
+                        <option value="/purchasing-manager/item-stocks/Banjarmasin" {{ $default_branch == 'Banjarmasin' ? 'selected' : '' }}>Banjarmasin</option>
+                        <option value="/purchasing-manager/item-stocks/Samarinda" {{ $default_branch == 'Samarinda' ? 'selected' : '' }}>Samarinda</option>
+                        <option value="/purchasing-manager/item-stocks/Bunati" {{ $default_branch == 'Bunati' ? 'selected' : '' }}>Bunati</option>
+                        <option value="/purchasing-manager/item-stocks/Babelan" {{ $default_branch == 'Babelan' ? 'selected' : '' }}>Babelan</option>
+                        <option value="/purchasing-manager/item-stocks/Berau" {{ $default_branch == 'Berau' ? 'selected' : '' }}>Berau</option>
                     </select>
                 </div>
                 <div class="mr-4">
@@ -104,7 +102,7 @@
             </div>
 
             <div id="content" style="overflow-x:auto;">
-                @include('supervisor.supervisorItemStockComponent')
+                @include('purchasingManager.purchasingManagerItemStockComponent')
             </div>
 
             <div class="d-flex justify-content-end">
@@ -123,7 +121,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="/supervisor/item-stocks">
+                            <form method="POST" action="/purchasing-manager/item-stocks">
                                 @csrf
                                 <div class="form-group">
                                     <label for="itemName">Nama Barang</label>
@@ -284,7 +282,7 @@
             function refresh(){
                 event.preventDefault();
 
-                let url = "{{ route('supervisor.refreshSupervisorItemStock') }}";
+                let url = "{{ route('purchasingManager.refreshPurchasingManagerItemStock') }}";
                 let searchData = document.getElementById('search').value;
                 let default_branch = '{{ $default_branch }}';
                 let _token = $('input[name=_token]').val();

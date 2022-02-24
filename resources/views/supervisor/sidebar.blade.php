@@ -35,6 +35,17 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link
+                    @php
+                        if(basename($_SERVER['REQUEST_URI']) == 'make-order'){
+                            echo('active');
+                        }
+                    @endphp" href="{{ Route("supervisor.makeOrderPage") }}">
+                    <span data-feather="plus-circle"></span>
+                    Make Order Goods
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link 
                 @php
                     if(basename($_SERVER['REQUEST_URI']) == 'approval-do'){

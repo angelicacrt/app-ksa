@@ -1,11 +1,11 @@
-@if(Auth::user()->hasRole('logistic'))
+@if(Auth::user()->hasRole('supervisorLogistic') || Auth::user()->hasRole('supervisorLogisticMaster'))
     @extends('../layouts.base')
 
-    @section('title', 'Logistic Make Order')
+    @section('title', 'Supervisor Make Order')
 
     @section('container')
     <div class="row">
-        @include('logistic.sidebar')
+        @include('supervisor.sidebar')
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-3 wrapper">
                 <h1 class="mt-3" style="text-align: center">Create Order</h1>
@@ -73,7 +73,7 @@
                 <div class="row">
                     {{-- <div> --}}
                     <div class="col">
-                        <form method="POST" action="/logistic/{{ Auth::user()->id }}/add-cart">
+                        <form method="POST" action="/supervisor/{{ Auth::user()->id }}/add-cart">
                             @csrf
                             <div class="form-group p-2">
                                 <label for="item_id" class="mt-3 mb-3">Item</label>
@@ -139,7 +139,7 @@
                                         <td class="bg-white">{{ $c -> item -> golongan }}</td>
                                         <td class="bg-white">{{ $c -> note }}</td>
                                         {{-- Delete Item --}}
-                                        <form method="POST" action="/logistic/{{ $c -> id }}/delete">
+                                        <form method="POST" action="/supervisor/{{ $c -> id }}/delete">
                                             @csrf
                                             @method('delete')
                                             <td class="bg-white"><button class="btn btn-warning btn-sm">Delete Item</button></td>
@@ -162,7 +162,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/logistic/{{ Auth::user()->id }}/submit-order">
+                <form method="POST" action="/supervisor/{{ Auth::user()->id }}/submit-order">
                     @csrf
                     <div class="modal-body"> 
                         <div class="form-group p-2">
@@ -187,7 +187,6 @@
                             <select class="form-control" name="company" id="company">
                                 <option value="KSA">KSA</option>
                                 <option value="ISA">ISA</option>
-                                <option value="SKB">SKB</option>
                                 <option value="KSAO">KSA OFFSHORE</option>
                                 <option value="KSAM">KSA MARITIME</option>
                             </select>
@@ -221,7 +220,6 @@
 
     <style>
         body{
-            /* background-image: url('/images/logistic-background.png'); */
             background-repeat: no-repeat;
             background-size: cover;
         }

@@ -62,11 +62,11 @@ class POExport implements FromQuery, WithHeadings, ShouldAutoSize, WithEvents
             AfterSheet::class => function (AfterSheet $event) {
                 $event->sheet->getStyle('A5:G5')->applyFromArray([
                     'font' => [
-                        'color' => ['argb' => 'FFFFFF']
+                        'bold' => true ,
                     ],
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'color' => ['argb' => 'A01D23']
+                        'color' => ['argb' => 'FFFF8080']
                     ]
                 ]);
 

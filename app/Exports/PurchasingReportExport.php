@@ -41,7 +41,9 @@ class PurchasingReportExport implements FromQuery, WithHeadings, ShouldAutoSize,
         }
 
         // Find order from logistic role but with different setup with the goods in
-        $users = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.role_id' , '=', '3')->where('cabang', $this->default_branch)->pluck('users.id');
+        $users = User::whereHas('roles', function($query){
+            $query->where('name', 'logistic')->orWhere('name', 'supervisorLogistic')->orWhere('name', 'supervisorLogisticMaster');
+        })->where('cabang', $this->default_branch)->pluck('users.id');
         
         // Report for each role is different, adjust the report based on the auth role
         if(Auth::user()->hasRole('logistic')){
