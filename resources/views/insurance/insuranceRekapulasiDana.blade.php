@@ -11,10 +11,16 @@
             <div class="jumbotron jumbotron-fluid" >
                 <div class="container">
                     <h1 class="display-4"><strong>Rekapitulasi Dana</strong></h1>
-
-                    <div class="col">
-                        <div class="text-md-center">
-                            <button class="btn btn-outline-success"  id="top" style=" width: 100%;" data-toggle="modal" data-target="#Download">Download</button>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-md-center">
+                                <button class="btn btn-outline-success"  id="top" style=" width: 100%;" data-toggle="modal" data-target="#Download">Download</button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                                {{ $rekapdana->links() }}
+                            </div>
                         </div>
                     </div>
     

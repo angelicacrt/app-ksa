@@ -136,9 +136,9 @@ class InsuranceController extends Controller
 
     //History Rekapulsi Dana page
     public function historyRekapulasiDana(){
-        $rekapdana= Rekapdana::whereColumn('created_at' , '<=', 'DateNote2')
-        ->latest()
-        ->get();
+        $datetime = date('Y-m-d');
+        $rekapdana= Rekapdana::latest()
+        ->paginate(25);
         return view('insurance.insuranceRekapulasiDana', compact('rekapdana'));
     }
 }

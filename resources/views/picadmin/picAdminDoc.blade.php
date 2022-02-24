@@ -11,26 +11,26 @@
                 <h1 class="Header-5">Document & Fund Request Review</h1>
                 <hr class="my-4">
 
+                <form method="GET" action="/picadmin/dana/search" role="search">
                 <div class="form-row">
                   {{-- cabang filter --}}
                   <div class="col-md-auto">
-                    <select name="cabang" class="form-select" onchange="window.location = this.value;">
+                    <select name="search" class="form-select">
                         <option selected disabled hidden='true' value="">Pilih Cabang</option>
-                        <option value="/picadmin/dana?search=All">Semua Cabang</option>
-                        <option value="/picadmin/dana?search=Babelan">Babelan</option>
-                        <option value="/picadmin/dana?search=Berau">Berau</option>
-                        <option value="/picadmin/dana?search=Samarinda">Samarinda</option>
-                        <option value="/picadmin/dana?search=Banjarmasin">Banjarmasin</option>
-                        <option value="/picadmin/dana?search=Jakarta">Jakarta</option>
-                        <option value="/picadmin/dana?search=Bunati">Bunati</option>
-                        <option value="/picadmin/dana?search=Kendari">Kendari</option>
-                        <option value="/picadmin/dana?search=Morosi">Morosi</option>
+                        <option value="All">Semua Cabang</option>
+                        <option value="Babelan">Babelan</option>
+                        <option value="Berau">Berau</option>
+                        <option value="Banjarmasin">Banjarmasin</option>
+                        <option value="Samarinda">Samarinda</option>
+                        <option value="Jakarta">Jakarta</option>
+                        <option value="Bunati">Bunati</option>
+                        <option value="Kendari">Kendari</option>
+                        <option value="Morosi">Morosi</option>
                     </select>
                   </div>
 
                   {{-- search bar --}}
                   <div class="col-md-auto">
-                    <form method="GET" action="/picadmin/dana/search" role="search">
                       <div class="auto-cols-auto">
                           <div class="col" style="margin-left:-1%" >
                               <label class="sr-only" for="search_kapal">Nama Kapal</label>
@@ -51,9 +51,24 @@
                               </div>
                           </div>
                       </div>
-                    </form>
+                    </div>
+                    <div class="col">
+                      <div class="d-flex justify-content-end">
+                        @if($searchresult == 'Babelan')
+                          {{$document->links()}}
+                        @elseif($searchresult == 'Berau')
+                          {{$documentberau->links()}}
+                        @elseif($searchresult == 'Banjarmasin' or $searchresult == 'Bunati')
+                          {{$documentbanjarmasin->links()}}
+                        @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
+                          {{$documentsamarinda->links()}}
+                        @elseif($searchresult == 'Jakarta')
+                          {{$documentjakarta->links()}}
+                        @endif
+                      </div>
                   </div>
                 </div>
+                </form>
 
                   @error('reasonbox')
                   <div class="alert alert-danger" style="width: 40%; margin-left: 30%">

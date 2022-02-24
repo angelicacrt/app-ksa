@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -167,24 +167,24 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         // Dashboard Page
         Route::get('/completed-order', [SupervisorController::class, 'completedOrder'])->name('completed-order');
         Route::get('/in-progress-order', [SupervisorController::class, 'inProgressOrder'])->name('in-progress-order');
-        Route::get('/completed-job', [SupervisorController::class, 'completedJobRequest'])->name('completed-JobRequest');
-        Route::get('/in-progress-job', [SupervisorController::class, 'inProgressJobRequest'])->name('in-progress-JobRequest');
         Route::get('/{orderHeads}/approve-order', [SupervisorController::class, 'approveOrder']);
         Route::put('/{orderHeads}/reject-order', [SupervisorController::class, 'rejectOrder']);
         Route::get('/{orderHeads}/download-pr', [SupervisorController::class, 'downloadPr']);
-
+        
         // Ajax
         Route::post('/refresh-supervisor-dashboard', [DashboardAjaxController::class, 'supervisorRefreshDashboard'])->name('supervisorRefreshDashboard');
         Route::post('/refresh-supervisor-dashboard-completed', [DashboardAjaxController::class, 'supervisorRefreshDashboardCompleted'])->name('supervisorRefreshDashboardCompleted');
         Route::post('/refresh-supervisor-dashboard-in-progress', [DashboardAjaxController::class, 'supervisorRefreshDashboardInProgress'])->name('supervisorRefreshDashboardInProgress');
-
+        
         // Report Page
         Route::get('/report', [SupervisorController::class, 'reportsPage'])->name('report');
         Route::get('/report/download', [SupervisorController::class, 'downloadReport'])->name('downloadReport');
-
+        
         // JR Report Page
-        Route::get('/Jr_report', [SupervisorController::class, 'Jr_Reports_Page'])->name('JR_report');
+        // Route::get('/completed-job', [SupervisorController::class, 'completedJobRequest'])->name('completed-JobRequest');
+        // Route::get('/in-progress-job', [SupervisorController::class, 'inProgressJobRequest'])->name('in-progress-JobRequest');
         Route::get('/Job_Request_List', [SupervisorController::class, 'JR_list_page'])->name('Job_Request_List');
+        Route::get('/Jr_report', [SupervisorController::class, 'Jr_Reports_Page'])->name('JR_report');
         Route::get('/Jr_report/download', [SupervisorController::class, 'Download_JR_report'])->name('download_JR_Report');
         Route::get('/Jr_report/download_pdf', [SupervisorController::class, 'Download_JR_report_PDF']);
 
@@ -398,6 +398,10 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
     });
 
     Route::prefix('picadmin')->name('picadmin.')->group(function(){
+        // admin rpk Dashboard Page
+        Route::get('/dashboard-RPK',[picAdminController::class, 'dashboardAdminRPK']);
+        Route::get('/dashboard-RPK/search',[picAdminController::class, 'dashboardAdminRPK']);
+
         // admin review funds page
         Route::get('/dana', 'picAdminController@checkform');
         Route::get('/dana/search', 'picAdminController@checkform');
@@ -413,6 +417,14 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/RPK/search', [picAdminController::class , 'checkrpk']);
         Route::post('/rpk/update-status',[picAdminController::class, 'approverpk']);
         Route::post('/rpk/rejectrpk',[picAdminController::class, 'rejectrpk']);
+
+        //record page
+        Route::get('/RecordDocuments',[picAdminController::class, 'RecordDocuments']);
+        Route::get('/RecordDocumentsRPK',[picAdminController::class, 'RecordDocumentsRPK']);
+        Route::get('/RecordDocuments/search',[picAdminController::class, 'RecordDocuments']);
+        Route::get('/RecordDocumentsRPK/search',[picAdminController::class, 'RecordDocumentsRPK']);
+        Route::post('/RecordDocuments/dana/view',[picAdminController::class, 'viewRecordDocuments']);
+        Route::post('/RecordDocuments/RPK/view',[picAdminController::class, 'viewRecordDocuments']);
 
         //rekapdana page
         Route::get('/RekapulasiDana',[picAdminController::class, 'RekapulasiDana']);

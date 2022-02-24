@@ -72,7 +72,7 @@
                     class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     required>
                     <option selected value="" disabled>Choose...</option>
-                    <option value="purchasingLogistik" id="purchasingLogistik" @if (old('department') == 'purchasingLogistik') selected="selected" @endif>Purchasing - Logistik</option>
+                    <!-- <option value="purchasingLogistik" id="purchasingLogistik" @if (old('department') == 'purchasingLogistik') selected="selected" @endif>Purchasing - Logistik</option> -->
                     <option value="dokumenLegal" id="dokumenLegal" @if (old('department') == 'dokumenLegal') selected="selected" @endif>Dokumen Legal - Asuransi</option>
                     <option value="operasional" id="operasional" @if (old('role_id') == 'operasional') selected="selected" @endif>Operasional</option>
                 </select>
@@ -90,9 +90,9 @@
                     <option selected value="" disabled>Choose...</option>
                     <option value="AsuransiIncident" id="picIncident" @if (old('role_id') == 'AsuransiIncident') selected="selected" @endif>Asuransi Incident</option>
                     <option value="picSite" id="picSite" @if (old('role_id') == 'picSite') selected="selected" @endif>PIC Site</option>
-                    <option value="purchasing" id="purchasing" @if (old('role_id') == 'purchasing') selected="selected" @endif>Purchasing</option>
+                    <!-- <option value="purchasing" id="purchasing" @if (old('role_id') == 'purchasing') selected="selected" @endif>Purchasing</option>
                     <option value="logistic" id="logistic" @if (old('role_id') == 'logistic') selected="selected" @endif>Logistic</option>
-                    <option value="supervisorLogistic" id="supervisorLogistic" @if (old('role_id') == 'supervisorLogistic') selected="selected" @endif>Supervisor Logistic</option>
+                    <option value="supervisorLogistic" id="supervisorLogistic" @if (old('role_id') == 'supervisorLogistic') selected="selected" @endif>Supervisor Logistic</option> -->
                     <option value="crew" id="crew" @if (old('role_id') == 'crew') selected="selected" @endif>Crew</option>
                 </select>
             </div>
@@ -157,9 +157,6 @@
                     var e = document.getElementById("role_id");
                     e.selectedIndex = e.querySelector('option[value="' + id + '"]').index;
                 }
-                var logistik = document.getElementById("logistic") 
-                var spvlogistik = document.getElementById("supervisorLogistic")
-                var purchasing = document.getElementById("purchasing")
                 var insiden = document.getElementById("picIncident") 
                 var doc = document.getElementById("picSite")
                 var crew = document.getElementById("crew")
@@ -167,27 +164,13 @@
 
                 insiden.style.display = 'none'
                 doc.style.display = 'none'
-                logistik.style.display = 'none'
-                spvlogistik.style.display = 'none'
-                purchasing.style.display = 'none'
                 crew.style.display = 'none'
 
                 departmentChooseOption.onchange = function (event){
-                    if (departmentChooseOption.value == "purchasingLogistik"){
-                        selectdep ('logistic');
-                        insiden.style.display = 'none'
-                        doc.style.display = 'none'
-                        crew.style.display = 'none'
-
-                        logistik.style.display = ''
-                        spvlogistik.style.display = ''
-                        purchasing.style.display = ''
-                    }else if(departmentChooseOption.value == "dokumenLegal"){
+                    
+                    if(departmentChooseOption.value == "dokumenLegal"){
                         selectdep ('picSite');
 
-                        logistik.style.display = 'none'
-                        spvlogistik.style.display = 'none'
-                        purchasing.style.display = 'none'
                         crew.style.display = 'none'
 
                         insiden.style.display = ''
@@ -197,16 +180,10 @@
 
                         insiden.style.display = 'none'
                         doc.style.display = 'none'
-                        logistik.style.display = 'none'
-                        spvlogistik.style.display = 'none'
-                        purchasing.style.display = 'none'
                         crew.style.display = ''
                     }else{
                         document.getElementById("picIncident").hidden = false;
                         document.getElementById("picSite").hidden = false;
-                        document.getElementById("purchasing").hidden = false;
-                        document.getElementById("logistic").hidden = false;
-                        document.getElementById("supervisorLogistic").hidden = false;
                         document.getElementById("crew").hidden = false;
                     }
                 }
@@ -232,16 +209,8 @@
                 }
                 var dropdown = document.getElementById("role_id");
                 dropdown.onchange = function (event) {
-                    if(dropdown.value == "purchasing"){
-                        selectopt('Jakarta');
-                        document.getElementById("Banjarmasin").disabled = true;
-                        document.getElementById("Samarinda").disabled = true;
-                        document.getElementById("Bunati").disabled = true;
-                        document.getElementById("Babelan").disabled = true;
-                        document.getElementById("Berau").disabled = true;
-                        document.getElementById("Kendari").disabled = false;
-                        document.getElementById("Morosi").disabled = true;
-                    }else if (dropdown.value == "picSite") {
+                    
+                    if (dropdown.value == "picSite") {
                         selectopt('Jakarta');
                         document.getElementById("Banjarmasin").disabled = false;
                         document.getElementById("Samarinda").disabled = false;

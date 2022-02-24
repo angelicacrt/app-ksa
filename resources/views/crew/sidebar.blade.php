@@ -12,7 +12,7 @@
                     Dashboard
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link 
                 @php
                     if(basename($_SERVER['REQUEST_URI']) == 'Job_Request_List'){
@@ -45,7 +45,7 @@
                     <span data-feather="layout"></span>
                     Create Job Request
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link
                     @php

@@ -57,6 +57,20 @@
                                     }
                                 @endphp
                             >Berau</option>
+                            <option value="/purchasing/report/Kendari"
+                                @php
+                                    if($default_branch == 'Kendari'){
+                                        echo('selected');
+                                    }
+                                @endphp
+                            >Kendari</option>
+                            <option value="/purchasing/report/Morosi"
+                                @php
+                                    if($default_branch == 'Morosi'){
+                                        echo('selected');
+                                    }
+                                @endphp
+                            >Morosi</option>
                         </select>
                     </div>
                         @if(count($orders) > 0)

@@ -217,7 +217,7 @@
                                     <th scope="col" class="left-20">Harga per Barang</th>
                                     <th scope="col" class="center">Harga</th>
                                     <th scope="col" class="center">Supplier</th>
-                                    <th scope="col" class="center">" class="center">Action</th>
+                                    <th scope="col" class="center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

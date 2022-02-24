@@ -66,6 +66,7 @@
                                         </button>
                                     </td>
                                 @elseif($jr -> status == 'Job Request In Progress By Logistics')
+                                <td style="word-wrap: break-word;min-width: 250px;max-width: 250px;">This Job Request is Awaiting Approval from Logistics</td>
                                     <td>
                                         <button type="button" class="btn btn-info" data-toggle="modal" id="detail" data-target="#editJob-{{ $jr -> id }}">
                                             Detail

@@ -57,6 +57,20 @@
                                 }
                             @endphp
                         >Berau</option>
+                        <option value="/purchasing-manager/dashboard/Kendari"
+                            @php
+                                if($default_branch == 'Kendari'){
+                                    echo('selected');
+                                }
+                            @endphp
+                        >Kendari</option>
+                        <option value="/purchasing-manager/dashboard/Morosi"
+                            @php
+                                if($default_branch == 'Morosi'){
+                                    echo('selected');
+                                }
+                            @endphp
+                        >Morosi</option>
                     </select>
                 </div>
             </div>

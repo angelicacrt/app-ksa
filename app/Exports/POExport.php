@@ -60,6 +60,7 @@ class POExport implements FromQuery, WithHeadings, ShouldAutoSize, WithEvents
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
+                $event->sheet->mergeCells('A1:G1');
                 $event->sheet->getStyle('A5:G5')->applyFromArray([
                     'font' => [
                         'bold' => true ,
@@ -92,6 +93,11 @@ class POExport implements FromQuery, WithHeadings, ShouldAutoSize, WithEvents
                 $event->sheet->getDelegate()->getStyle('A:G')
                 ->getAlignment()
                 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+
+                $event->sheet->getDelegate()->getStyle('A1:G1')
+                ->getAlignment()
+                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A3);
                 $event->sheet->getDelegate()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
             }

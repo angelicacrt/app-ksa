@@ -10,50 +10,57 @@
             <div class="jumbotron">
                 <h1 class="Header-5">RPK Review</h1>
                 <hr class="my-4">
-
+                
+                <form method="GET" action="/picadmin/RPK/search" role="search">
                 <div class="form-row">
                     {{-- cabang filter --}}
                     <div class="col-md-auto">
-                        <select name="cabang" class="form-select" placeholder="Pilih Cabang" onchange="window.location = this.value;">
+                        <select name="search" class="form-select" placeholder="Pilih Cabang">
                             <option selected disabled hidden='true' value="">Pilih Cabang</option>
-                            <option value="/picadmin/rpk?search=All">Semua Cabang</option>
-                            <option value="/picadmin/rpk?search=Babelan">Babelan</option>
-                            <option value="/picadmin/rpk?search=Berau">Berau</option>
-                            <option value="/picadmin/rpk?search=Samarinda">Samarinda</option>
-                            <option value="/picadmin/rpk?search=Banjarmasin">Banjarmasin</option>
-                            <option value="/picadmin/dana?search=Jakarta">Jakarta</option>
-                            <option value="/picadmin/dana?search=Bunati">Bunati</option>
-                            <option value="/picadmin/dana?search=Kendari">Kendari</option>
-                            <option value="/picadmin/dana?search=Morosi">Morosi</option>
+                            <option value="All">Semua Cabang</option>
+                            <option value="Babelan">Babelan</option>
+                            <option value="Berau">Berau</option>
+                            <option value="Samarinda">Samarinda</option>
+                            <option value="Banjarmasin">Banjarmasin</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bunati">Bunati</option>
+                            <option value="Kendari">Kendari</option>
+                            <option value="Morosi">Morosi</option>
                         </select>
                     </div>
                     {{-- search bar --}}
                     <div class="col-md-auto">
-                        <form method="GET" action="/picadmin/RPK/search" role="search">
-                            <div class="auto-cols-auto">
-                                <div class="col" style="margin-left:-1%" >
-                                    <label class="sr-only" for="search_kapal">Nama Kapal</label>
-                                    <div class="input-group">
-                                    {{-- <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                            </svg>
-                                        </div>
-                                    </div> --}}
-                                    <input type="text" style="text-transform: uppercase;" name="search_kapal" id="search_kapal" class="form-control" placeholder="Search Nama Kapal" autofocus>
-                                    <button type="submit" class="btn btn-info">
+                        <div class="auto-cols-auto">
+                            <div class="col" style="margin-left:-1%" >
+                                <label class="sr-only" for="search_kapal">Nama Kapal</label>
+                                <div class="input-group">
+                                {{-- <div class="input-group-prepend">
+                                    <div class="input-group-text">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                          </svg> 
-                                    </button>
+                                        </svg>
                                     </div>
+                                </div> --}}
+                                <input type="text" style="text-transform: uppercase;" name="search_kapal" id="search_kapal" class="form-control" placeholder="Search Nama Kapal" autofocus>
+                                <button type="submit" class="btn btn-info">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg> 
+                                </button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                            {{ $docrpk->links() }}
+                        </div>
                     </div>
                 </div>
+                </form>
+                    
                 <br>
+                
                 @error('reasonbox')
                   <div class="alert alert-danger" style="width: 40%; margin-left: 30%">
                       Alasan Wajib Diisi
@@ -142,6 +149,7 @@
                                     </form>
                                 </div>
                                 @else
+                                {{-- Approve modal button --}}
                                     <div class="col-md-auto">
                                         <button type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#ApproveTitle-{{$reason}}">
                                             Approve File

@@ -1,39 +1,19 @@
 @extends('../layouts.base')
 
-@section('title', 'PicAdmin Dashboard')
+@section('title', 'PicAdmin Record Dana Documents')
 
 @section('container')
 <div class="row">
     @include('picadmin.picAdminsidebar')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>Welcome back, {{ Auth::user()->name }} ! - Admin</h2>
-            <h2>Cabang : {{ Auth::user()->cabang }}</h2>
-            <h3>
-                <div id="txt"></div>
-
-                <script>
-                    function startTime() {
-                    const today = new Date();
-                    let h = today.getHours();
-                    let m = today.getMinutes();
-                    let s = today.getSeconds();
-                    m = checkTime(m);
-                    s = checkTime(s);
-                    document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-                    setTimeout(startTime, 1000);
-                    }
-                    
-                    function checkTime(i) {
-                    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-                        return i;
-                    }
-                </script>
-            </h3>
             <div class="jumbotron jumbotron-fluid" >
-                <h1 class="Header-1" style="margin-top: -3%; margin-left: 44%;">Overview</h1>
+                <div class="Header-1">
+                    <h1 class="text-center">Record Fund Request Documents</h1>
+                </div>
                 <hr class="my-4">
-                <form method="GET" action="/dashboard/search" role="search">
+                    
+                <form method="GET" action="/picadmin/RecordDocuments/search" role="search">
                 <div class="row">
                     <div class="col">
                         <div class="auto-cols-auto">
@@ -52,40 +32,40 @@
                         </div>
                     </div>
                     <div class="col">
-                        <select name="search" id="cabangfilter"class="form-select" >
-                        <option selected disabled hidden='true' value="">Pilih Cabang</option>
-                        <option value="All">Semua Cabang</option>
-                        <option value="Babelan">Babelan</option>
-                        <option value="Berau">Berau</option>
-                        <option value="Samarinda">Samarinda</option>
-                        <option value="Banjarmasin">Banjarmasin</option>
-                        <option value="Jakarta">Jakarta</option>
-                        <option value="Bunati">Bunati</option>
-                        <option value="Kendari">Kendari</option>
-                        <option value="Morosi">Morosi</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/dashboard-RPK">Change to RPK</a>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                      @if($searchresult == 'Babelan')
-                        {{$document->links()}}
-                      @elseif($searchresult == 'Berau')
-                        {{$documentberau->links()}}
-                      @elseif($searchresult == 'Banjarmasin' or $searchresult == 'Bunati')
-                        {{$documentbanjarmasin->links()}}
-                      @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
-                        {{$documentsamarinda->links()}}
-                      @elseif($searchresult == 'Jakarta')
-                        {{$documentjakarta->links()}}
-                      @endif
+                        <select name="search" id="cabangfilter"class="form-select" :value="old('cabangfilter')" >
+                            <option selected disabled hidden='true' value="">Pilih Cabang</option>
+                            <option value="All">Semua Cabang</option>
+                            <option value="Babelan">Babelan</option>
+                            <option value="Berau">Berau</option>
+                            <option value="Samarinda">Samarinda</option>
+                            <option value="Banjarmasin">Banjarmasin</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bunati">Bunati</option>
+                            <option value="Kendari">Kendari</option>
+                            <option value="Morosi">Morosi</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/RecordDocumentsRPK">Change to RPK</a>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                          @if($searchresult == 'Babelan')
+                            {{$document->links()}}
+                          @elseif($searchresult == 'Berau')
+                            {{$documentberau->links()}}
+                          @elseif($searchresult == 'Banjarmasin' or $searchresult == 'Bunati')
+                            {{$documentbanjarmasin->links()}}
+                          @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
+                            {{$documentsamarinda->links()}}
+                          @elseif($searchresult == 'Jakarta')
+                            {{$documentjakarta->links()}}
+                          @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            </form>
-                
+                </form>
+
                 @if($errors->any())
                     @foreach ($errors->all() as $error)
                         <div class="alert error alert-danger" id="error">{{ $error }}
@@ -143,29 +123,6 @@
                         <tr>
                             {{-- agar tidak keluar hasil kosong --}}
                         </tr>
-                    {{-- @elseif ($doc->$stats == 'on review')
-                        <tr>
-                            hasil on review
-                            <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
-                            <td class="table-warning"><strong>{{ $doc->cabang }}</strong></td>
-                            <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
-                            <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
-                            <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
-                            <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                            <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
-                            <td class="table-warning">
-                                <form method="post" action="/dashboard/dana/view" target="_blank">
-                                    @csrf
-                                    <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
-                                    <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
-                                    <input type="hidden" name='result' value={{$doc->$scan}} />
-                                    <input type="hidden" name = 'tipefile' value='DANA'>
-                                    <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
-                                    <button type="submit" name="views3" class="btn btn-dark">view</button>
-                                </form>
-                            </td>                                     
-                        </tr> --}}
                     @elseif($doc->$stats == 'approved')
                         <tr>
                             <td class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
@@ -177,7 +134,7 @@
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$doc ->$reason}}</td>                                        
                             <td class="table-success">
-                                <form method="post" action="/dashboard/dana/view" target="_blank">
+                                <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                     <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -199,7 +156,7 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
                             <td class="table-danger">
-                                <form method="post" action="/dashboard/dana/view" target="_blank">
+                                <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                     <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -253,29 +210,6 @@
                 <tr>
                     {{-- agar tidak keluar hasil kosong --}}
                 </tr>
-                {{-- @elseif ($d->$stats == 'on review')
-                    <tr>
-                        hasil on review
-                        <td class="table-warning"><strong>{{ $d->$time_upload }}</strong></td>
-                        <td class="table-warning"><strong>{{ $d->cabang }}</strong></td>
-                        <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
-                        <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
-                        <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
-                        <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
-                        <td class="table-warning" id="reason">{{$d ->$reason}}</td>
-                        <td class="table-warning">
-                            <form method="post" action="/dashboard/dana/view" target="_blank">
-                                @csrf
-                                <input type="hidden" name = 'cabang' value={{$d->cabang}}>
-                                <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
-                                <input type="hidden" name='result' value={{$d->$scan}} />
-                                <input type="hidden" name = 'tipefile' value='DANA'>
-                                <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
-                                <button type="submit" name="views3" class="btn btn-dark">view</button>
-                            </form>
-                        </td>    
-                    </tr> --}}
                 @elseif($d->$stats == 'approved')
                     <tr>
                         <td class="table-success"><strong>{{ $d->$time_upload }}</strong></td>
@@ -287,7 +221,7 @@
                         <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-success" id="reason">{{$d->$reason}}</td>    
                         <td class="table-success">
-                            <form method="post" action="/dashboard/dana/view" target="_blank">
+                            <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                 <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -309,7 +243,7 @@
                         <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-danger" id="reason">{{$d->$reason}}</td>   
                         <td class="table-danger">
-                            <form method="post" action="/dashboard/dana/view" target="_blank">
+                            <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                 <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -376,7 +310,7 @@
                         <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                         <td class="table-success" id="reason">{{$b->$reason}}</td>
                         <td class="table-success">
-                            <form method="post" action="/dashboard/dana/view" target="_blank">
+                            <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                 <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -398,7 +332,7 @@
                         <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                         <td class="table-danger" id="reason">{{$b->$reason}}</td>
                         <td class="table-danger">
-                            <form method="post" action="/dashboard/dana/view" target="_blank">
+                            <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                 <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -473,7 +407,7 @@
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$s->$reason}}</td>    
                             <td class="table-success">
-                                <form method="post" action="/dashboard/dana/view" target="_blank">
+                                <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                     <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -495,7 +429,7 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$s->$reason}}</td>    
                             <td class="table-danger">
-                                <form method="post" action="/dashboard/dana/view" target="_blank">
+                                <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                     <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -553,34 +487,11 @@
                             $date = date('Y-m-28');
                             $scan = $JAKARTA[$a-1];
                         @endphp
-                            <input type="hidden" name='status' value={{$stats}}>
-                            @if(empty($jkt->$stats))
+                        <input type="hidden" name='status' value={{$stats}}>
+                        @if(empty($jkt->$stats))
                             <tr>
                                 {{-- agar tidak keluar hasil kosong --}}
                             </tr>
-                            {{-- @elseif ($jkt->$stats == 'on review')
-                            <tr>
-                                hasil on review
-                                <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                <td class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
-                                <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
-                                <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
-                                <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
-                                <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
-                                <td class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
-                                <td class="table-warning">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
-                                        @csrf
-                                        <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
-                                        <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
-                                        <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
-                                        <input type="hidden" name='result' value={{$jkt->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
-                                        <button type="submit" name="views3" class="btn btn-dark">view</button>
-                                    </form>
-                                </td>                                                                   
-                            </tr> --}}
                         @elseif($jkt->$stats == 'approved')
                             <tr>
                                 <td class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
@@ -592,7 +503,7 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
                                 <td class="table-success">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -614,7 +525,7 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
                                 <td class="table-danger">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                         @csrf
                                         <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>

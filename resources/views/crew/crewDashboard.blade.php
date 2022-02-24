@@ -67,6 +67,18 @@
                                     } 
                                     @endphp
                                 >Berau</option>
+                                <option value="Kendari" id="Kendari"
+                                    @php if(Auth::user()->cabang == 'Kendari') {
+                                        echo('selected');
+                                    } 
+                                    @endphp
+                                >Kendari</option>
+                                <option value="Morosi" id="Morosi"
+                                    @php if(Auth::user()->cabang == 'Morosi') {
+                                        echo('selected');
+                                    } 
+                                    @endphp
+                                >Morosi</option>
                             </select>
                             <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                         </div>

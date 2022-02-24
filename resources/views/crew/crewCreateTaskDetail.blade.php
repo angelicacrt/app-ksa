@@ -152,109 +152,112 @@
                                                 </div>
                                             @endif
 
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand {{ $ot -> user -> cabang == 'Samarinda' ? '(Optional)' : '' }}</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="DOH" id="DOH" value="{{ $ot -> DOH != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOH)) : '' }}">
+                                            @if($ot -> user -> cabang !== 'Kendari' && $ot -> user -> cabang !== 'Babelan')
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand {{ $ot -> user -> cabang == 'Samarinda' ? '(Optional)' : '' }}</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="DOH" id="DOH" value="{{ $ot -> DOH != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOH)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="DOB" id="DOB" value="{{ $ot -> DOB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOB)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="DOB" id="DOB" value="{{ $ot -> DOB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOB)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Departure to (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="departurePOD" id="departurePOD" value="{{ $ot -> departurePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departurePOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure to (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="departurePOD" id="departurePOD" value="{{ $ot -> departurePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departurePOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Arrival (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="arrivalPODGeneral" id="arrivalPODGeneral" value="{{ $ot -> arrivalPODGeneral != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODGeneral)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="arrivalPODGeneral" id="arrivalPODGeneral" value="{{ $ot -> arrivalPODGeneral != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODGeneral)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Start Aside (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="startAsidePOD" id="startAsidePOD" value="{{ $ot -> startAsidePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsidePOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Start Aside (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="startAsidePOD" id="startAsidePOD" value="{{ $ot -> startAsidePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsidePOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Aside (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="asidePOD" id="asidePOD" value="{{ $ot -> asidePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> asidePOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Aside (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="asidePOD" id="asidePOD" value="{{ $ot -> asidePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> asidePOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Commence Load (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="commenceLoadPOD" id="commenceLoadPOD" value="{{ $ot -> commenceLoadPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commenceLoadPOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Load (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="commenceLoadPOD" id="commenceLoadPOD" value="{{ $ot -> commenceLoadPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commenceLoadPOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Completed Loading (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="completedLoadingPOD" id="completedLoadingPOD" value="{{ $ot -> completedLoadingPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> completedLoadingPOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Completed Loading (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="completedLoadingPOD" id="completedLoadingPOD" value="{{ $ot -> completedLoadingPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> completedLoadingPOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Cast Off (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="cOffPOD" id="cOffPOD" value="{{ $ot -> cOffPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> cOffPOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Cast Off (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="cOffPOD" id="cOffPOD" value="{{ $ot -> cOffPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> cOffPOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="DOBPOD" id="DOBPOD" value="{{ $ot -> DOBPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOBPOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="DOBPOD" id="DOBPOD" value="{{ $ot -> DOBPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOBPOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    @if($ot -> user -> cabang == 'Samarinda')
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure Pangkalan</h5>
-                                                    @else
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure To</h5>
-                                                    @endif
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="departureTime" id="departureTime" value="{{ $ot -> departureTime != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departureTime)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        @if($ot -> user -> cabang == 'Samarinda')
+                                                            <h5 class="card-title text-center text-danger font-weight-bold">Departure Pangkalan</h5>
+                                                        @else
+                                                            <h5 class="card-title text-center text-danger font-weight-bold">Departure To</h5>
+                                                        @endif
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="departureTime" id="departureTime" value="{{ $ot -> departureTime != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departureTime)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
+
                                         @endif
                                         @if($ot -> taskType == 'Operational Transhipment')
                                             <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
@@ -367,101 +370,103 @@
                                                     </div>
                                                 </div>
                                             @endif
-
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand {{ $ot -> user -> cabang == 'Samarinda' ? '(Optional)' : '' }}</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="DOH" id="DOH" value="{{ $ot -> DOH != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOH)) : '' }}">
+                                            
+                                            @if($ot -> user -> cabang !== 'Kendari' && $ot -> user -> cabang !== 'Babelan')
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand {{ $ot -> user -> cabang == 'Samarinda' ? '(Optional)' : '' }}</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="DOH" id="DOH" value="{{ $ot -> DOH != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOH)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="DOB" id="DOB" value="{{ $ot -> DOB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOB)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="DOB" id="DOB" value="{{ $ot -> DOB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOB)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Departure (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="departurePOD" id="departurePOD" value="{{ $ot -> departurePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departurePOD)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="departurePOD" id="departurePOD" value="{{ $ot -> departurePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departurePOD)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Arrival (POD)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="arrivalPODGeneral" id="arrivalPODGeneral" value="{{ $ot -> arrivalPODGeneral != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODGeneral)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival (POD)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="arrivalPODGeneral" id="arrivalPODGeneral" value="{{ $ot -> arrivalPODGeneral != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODGeneral)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Start Aside (MV)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="startAsideMVTranshipment" id="startAsideMVTranshipment" value="{{ $ot -> startAsideMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsideMVTranshipment)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Start Aside (MV)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="startAsideMVTranshipment" id="startAsideMVTranshipment" value="{{ $ot -> startAsideMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsideMVTranshipment)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Aside (MV)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="asideMVTranshipment" id="asideMVTranshipment" value="{{ $ot -> asideMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> asideMVTranshipment)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Aside (MV)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="asideMVTranshipment" id="asideMVTranshipment" value="{{ $ot -> asideMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> asideMVTranshipment)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Commence Discharge (MV)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="commMVTranshipment" id="commMVTranshipment" value="{{ $ot -> commMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commMVTranshipment)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Discharge (MV)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="commMVTranshipment" id="commMVTranshipment" value="{{ $ot -> commMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commMVTranshipment)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Complete Discharge (MV)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="compMVTranshipment" id="compMVTranshipment" value="{{ $ot -> compMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> compMVTranshipment)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Complete Discharge (MV)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="compMVTranshipment" id="compMVTranshipment" value="{{ $ot -> compMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> compMVTranshipment)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Cast Off (MV)</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="cOffMVTranshipment" id="cOffMVTranshipment" value="{{ $ot -> cOffMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> cOffMVTranshipment)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Cast Off (MV)</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="cOffMVTranshipment" id="cOffMVTranshipment" value="{{ $ot -> cOffMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> cOffMVTranshipment)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
-                                                <div class="card-body">
-                                                    @if($ot -> user -> cabang == 'Samarinda')
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure Pangkalan</h5>
-                                                    @else
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure To</h5>
-                                                    @endif
-                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
-                                                    <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="departureTimeTranshipment" id="departureTimeTranshipment" value="{{ $ot -> departureTimeTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departureTimeTranshipment)) : '' }}">
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        @if($ot -> user -> cabang == 'Samarinda')
+                                                            <h5 class="card-title text-center text-danger font-weight-bold">Departure Pangkalan</h5>
+                                                        @else
+                                                            <h5 class="card-title text-center text-danger font-weight-bold">Departure To</h5>
+                                                        @endif
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="departureTimeTranshipment" id="departureTimeTranshipment" value="{{ $ot -> departureTimeTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departureTimeTranshipment)) : '' }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                         @endif
                                         @if($ot -> taskType == 'Return Cargo')
                                             <div class="card border-dark mx-3 mb-3" style="width: 17rem;">

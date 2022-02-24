@@ -119,9 +119,9 @@
                                     <th scope="col">Item Barang</th>
                                     <th scope="col" class="center">Quantity</th>
                                     <th scope="col">Harga per Barang</th>
-                                    <th scope="col">Harga</th>
-                                    <th scope="col">Supplier</th>
-                                    <th scope="col">Status Barang</th>
+                                    <th scope="col" class="center">Harga</th>
+                                    <th scope="col" class="center">Supplier</th>
+                                    <th scope="col" class="center">Status Barang</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,23 +135,23 @@
                                             <h5>{{ $od -> quantity }} {{ $od -> item -> unit }}</h5>
                                         </td>
 
-                                        <td>
+                                        <td class="center">
                                             <div class="d-flex">
                                                 <h5 class="mr-2">Rp. {{ number_format($od -> itemPrice, 2, ",", ".") }}</h5>
                                             </div>
                                         </td>
                                         
-                                        <td>
+                                        <td class="center">
                                             <h5>Rp. {{ number_format($od -> totalItemPrice, 2, ",", ".")}}</h5>
                                         </td>
                                         
-                                        <td>
+                                        <td class="center">
                                             <h5>
                                                 {{ $od -> supplier }}
                                             </h5>
                                         </td>
 
-                                        <td>
+                                        <td class="center">
                                             <h5>
                                                 @if($od -> orderItemState == 'Accepted')
                                                     <span style="color: green; font-weight: bold;">{{ $od -> orderItemState }}</span>

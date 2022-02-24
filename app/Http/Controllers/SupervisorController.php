@@ -137,45 +137,56 @@ class SupervisorController extends Controller
         }
     }
 
-    public function completedJobRequest(){
-        // Get all the job request within the logged in user within 6 month
-        $JobRequestHeads = JobHead::with('user')->where(function($query){
-            $query->where('status', 'like', 'Job Request Completed (Crew)')
-            ->orWhere('status', 'like', 'Job Request Rejected By Logistic');
-        })->whereYear('created_at', date('Y'))->latest()->paginate(10);
+    // public function completedJobRequest(){
+    //     // Get all the job request within the logged in user within 6 month
+    //     $JobRequestHeads = JobHead::with('user')->where(function($query){
+    //         $query->where('status', 'like', 'Job Request Completed')
+    //         ->orWhere('status', 'like', 'Job Request Rejected By Purchasing');
+    //     })->whereYear('created_at', date('Y'))->latest()->paginate(10);
 
-         // Get the jobDetail from jasa_id within the orderHead table 
-        $job_id = JobHead::where('user_id', Auth::user()->id)->pluck('id');
-        $jobDetails = JobDetails::whereIn('jasa_id', $job_id)->get();
-        // Count the completed & in progress job Requests
+    //      // Get the jobDetail from jasa_id within the orderHead table 
+    //     $job_id = JobHead::where('user_id', Auth::user()->id)->pluck('id');
+    //     $jobDetails = JobDetails::whereIn('jasa_id', $job_id)->get();
+    //     // Count the completed & in progress job Requests
         
-        $job_in_progress = JobHead::where(function($query){
-            $query->where('status', 'like', 'Job Request In Progress By Logistic');           
-        })->whereYear('created_at', date('Y'))->count();
+    //     $job_in_progress = JobHead::where(function($query){
+    //         $query->where('status', 'like', 'Job Request In Progress By'. '%')
+    //         ->orWhere('status', 'like', 'Job Request Approved By' . '%');
+    //     })->whereYear('created_at', date('Y'))->count();
+
+    //     $completedJR = JobHead::where(function($query){
+    //         $query->where('status', 'like', 'Job Request Completed')
+    //         ->orWhere('status', 'like', 'Job Request Rejected By Purchasing');
+    //     })->whereYear('created_at', date('Y'))->count();
         
-        $completedJR = $JobRequestHeads->count();
-        return view('supervisor.supervisorDashboard', compact('job_in_progress','JobRequestHeads' , 'jobDetails', 'completedJR'));
-    }
-
-    public function inProgressJobRequest(){
-        // Get all the order within the logged in user within 6 month
-        $JobRequestHeads = JobHead::with('user')->where(function($query){
-            $query->where('status', 'like', 'Job Request In Progress By Logistic');
-        })->whereYear('created_at', date('Y'))->paginate(10);
-
-        // Get the orderDetail from orders_id within the orderHead table 
-        $job_id = $JobRequestHeads->pluck('id');
-        $jobDetails = JobDetails::whereIn('jasa_id', $job_id)->get();
-
-        $job_completed = JobHead::where(function($query){
-            $query->where('status', 'like', 'Job Request Completed (Crew)')
-            ->orWhere('status', 'like', 'Job Request Rejected By Logistic');
-        })->whereYear('created_at', date('Y'))->count();
+    //     $in_progress = JobHead::where(function($query){
+    //         $query->where('status', 'like', 'Job Request In Progress By'. '%')
+    //         ->orWhere('status', 'like', 'Job Request Approved By' . '%');
+    //     })->whereYear('created_at', date('Y'))->count();
         
-        $JR_in_progress = $JobRequestHeads->count();
+    //     // $completedJR = $JobRequestHeads->count();
+    //     return view('supervisor.supervisorDashboard', compact('job_in_progress','JobRequestHeads' , 'jobDetails', 'completedJR'));
+    // }
 
-        return view('supervisor.supervisorDashboard', compact('JR_in_progress' ,'jobDetails' ,'JobRequestHeads','job_completed'));
-    }
+    // public function inProgressJobRequest(){
+    //     // Get all the order within the logged in user within 6 month
+    //     $JobRequestHeads = JobHead::with('user')->where(function($query){
+    //         $query->where('status', 'like', 'Job Request In Progress By Logistic');
+    //     })->whereYear('created_at', date('Y'))->paginate(10);
+
+    //     // Get the orderDetail from orders_id within the orderHead table 
+    //     $job_id = $JobRequestHeads->pluck('id');
+    //     $jobDetails = JobDetails::whereIn('jasa_id', $job_id)->get();
+
+    //     $job_completed = JobHead::where(function($query){
+    //         $query->where('status', 'like', 'Job Request Completed (Crew)')
+    //         ->orWhere('status', 'like', 'Job Request Rejected By Logistic');
+    //     })->whereYear('created_at', date('Y'))->count();
+        
+    //     $JR_in_progress = $JobRequestHeads->count();
+
+    //     return view('supervisor.supervisorDashboard', compact('JR_in_progress' ,'jobDetails' ,'JobRequestHeads','job_completed'));
+    // }
 
     public function approveOrder(OrderHead $orderHeads){
         // Check if already been processed or not
@@ -774,7 +785,7 @@ class SupervisorController extends Controller
         })->whereYear('created_at', date('Y'))->count();
         
         $job_in_progress = JobHead::where(function($query){
-            $query->where('status', 'like', 'Job Request In Progress By' . '%')
+            $query->where('status', 'like', 'Job Request In Progress By Purchasing')
             ->orWhere('status', 'like', 'Job Request Approved By' . '%');
         })->whereYear('created_at', date('Y'))->count();
 

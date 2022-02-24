@@ -667,85 +667,91 @@ class DashboardController extends Controller
                     return Storage::disk('s3')->response('jakarta/' . $year . "/". $month . "/RPK" . "/" . $viewer);
                 }
             }
-
+            //Search bar
+            //check if search-bar is filled or not
+            //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+            //pakai whereColumn untuk membandingkan antar 2 value column agar munculkan data dari pembuatan sampai bulan akhir periode
             //search filter based on cabang on picadmin dashboard page
                 $searchresult = $request->search;
                 if ($searchresult == 'All') {
-                    $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 }
                 elseif ($request->filled('search')) {
-                    $document = DB::table('documents')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentberau = DB::table('beraudb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentbanjarmasin = DB::table('banjarmasindb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentsamarinda = DB::table('samarindadb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentjakarta = documentJakarta::where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $docrpk = DB::table('rpkdocuments')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    return view('picadmin.picAdminDashboard', compact('docrpk','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda','documentjakarta'));
-                }
-                else{{
-                    $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                }};
+                    $document = DB::table('documents')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentberau = DB::table('beraudb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentbanjarmasin = DB::table('banjarmasindb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentsamarinda = DB::table('samarindadb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentjakarta = documentJakarta::where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda','documentjakarta'));
+                }else if($request->filled('search_kapal')){
+                    //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+                    //pakai whereColumn untuk membandingkan antar 2 value column agar munculkan data dari pembuatan sampai bulan akhir periode
+                    $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(1);
 
-            //Search bar
-            //check if search-bar is filled or not
-            if ($request->filled('search_kapal')) {
-                //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
-                //pakai whereColumn untuk membandingkan antar 2 value column agar munculkan data dari pembuatan sampai bulan akhir periode
-                $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
-                ->orderBy('id', 'DESC')
-                ->latest()->get();
+                    //berau search bar
+                    $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(1);
 
-                //berau search bar
-                $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
-                ->orderBy('id', 'DESC')
-                ->latest()->get();
+                    $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(1);
 
-                $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
-                ->orderBy('id', 'DESC')
-                ->latest()->get();
+                    $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(1);
 
-                $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
-                ->orderBy('id', 'DESC')
-                ->latest()->get();
+                    $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(1);
+                    return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda', 'documentjakarta'));
+                }elseif($request->filled('search_kapal') && $request->filled('search')){
+                    $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(1);
 
-                $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
-                ->orderBy('id', 'DESC')
-                ->latest()->get();
+                    //berau search bar
+                    $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(1);
 
-                //get DocRPK Data as long as the periode_akhir(column database)
-                $docrpk = DB::table('rpkdocuments')
-                ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
-                ->orderBy('id', 'DESC')
-                ->latest()->get();
-                
-                return view('picadmin.picAdminDashboard', compact('docrpk','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda', 'documentjakarta'));
-             }else{
-                 //get DocRPK Data as long as the periode_akhir(column database)
-                $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-                return view('picadmin.picAdminDashboard', compact('docrpk', 'document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
-            }
+                    $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(1);
 
+                    $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(1);
+
+                    $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(1);
+                    return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
+                }else{
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
+                };
         }elseif(Auth::user()->hasRole('AsuransiIncident')){
             $datetime = date('Y-m-d');
             $year = date('Y');

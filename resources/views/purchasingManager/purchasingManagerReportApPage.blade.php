@@ -57,6 +57,20 @@
                                     }
                                 @endphp
                             >Berau</option>
+                            <option value="/purchasing-manager/report-ap/Kendari"
+                                @php
+                                    if($default_branch == 'Kendari'){
+                                        echo('selected');
+                                    }
+                                @endphp
+                            >Kendari</option>
+                            <option value="/purchasing-manager/report-ap/Morosi"
+                                @php
+                                    if($default_branch == 'Morosi'){
+                                        echo('selected');
+                                    }
+                                @endphp
+                            >Morosi</option>
                         </select>
                     </div>
                     <div class="p-2 mr-auto">

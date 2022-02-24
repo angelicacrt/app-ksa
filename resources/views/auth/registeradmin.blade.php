@@ -62,7 +62,7 @@
                         class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         required>
                         <option selected value="" disabled>Choose...</option>
-                        <option value="purchasingLogistik" id="purchasingLogistik" @if (old('department') == 'purchasingLogistik') selected="selected" @endif>Purchasing - Logistik</option>
+                        <!-- <option value="purchasingLogistik" id="purchasingLogistik" @if (old('department') == 'purchasingLogistik') selected="selected" @endif>Purchasing - Logistik</option> -->
                         <option value="dokumenLegal" id="dokumenLegal" @if (old('department') == 'dokumenLegal') selected="selected" @endif>Dokumen Legal - Asuransi</option>
                         <option value="operasional" id="operasional"  @if (old('role_id') == 'operasional') selected="selected" @endif>Operasional</option>
                     </select>
@@ -79,9 +79,9 @@
                         <option value="picAdmin" id="picAdmin"  @if (old('role_id') == 'picAdmin') selected="selected" @endif>PIC Admin</option>
                         <option value="InsuranceManager" id="insurance" @if (old('role_id') == 'InsuranceManager') selected="selected" @endif>Manager Asuransi</option>
                         <option value="adminOperational" id="adminOperational" @if (old('role_id') == 'adminOperational') selected="selected" @endif>Admin Operational</option>
-                        <option value="adminPurchasing" id="adminPurchasing" @if (old('role_id') == 'adminPurchasing') selected="selected" @endif>Admin Purchasing</option>
+                        <!-- <option value="adminPurchasing" id="adminPurchasing" @if (old('role_id') == 'adminPurchasing') selected="selected" @endif>Admin Purchasing</option>
                         <option value="purchasingManager" id="purchasingManager" @if (old('role_id') == 'purchasingManager') selected="selected" @endif>Purchasing Manager</option>
-                        <option value="supervisorLogisticMaster" id="supervisorLogisticMaster" @if (old('role_id') == 'supervisorLogisticMaster') selected="selected" @endif>Supervisor Logistic Master</option>
+                        <option value="supervisorLogisticMaster" id="supervisorLogisticMaster" @if (old('role_id') == 'supervisorLogisticMaster') selected="selected" @endif>Supervisor Logistic Master</option> -->
                     </select>
                 </div>
                 <br>
@@ -161,48 +161,25 @@
                     var picAdmin = document.getElementById("picAdmin") 
                     var insurance = document.getElementById("insurance")
                     var adminOperational = document.getElementById("adminOperational")
-                    var adminPurchasing = document.getElementById("adminPurchasing") 
-                    var purchasingManager = document.getElementById("purchasingManager")
-                    var supervisorLogisticMaster = document.getElementById("supervisorLogisticMaster")
-                    var departmentChooseOption = document.getElementById("department")
-
-                    adminPurchasing.style.display = 'none'
-                    purchasingManager.style.display = 'none'
-                    supervisorLogisticMaster.style.display = 'none'
+                   
                     picAdmin.style.display = 'none'
                     insurance.style.display = 'none'
                     adminOperational.style.display = 'none'
+                    var departmentChooseOption = document.getElementById("department")
+
 
                     departmentChooseOption.onchange = function (event){
-                        if (departmentChooseOption.value == "purchasingLogistik"){
-
-                            selectdep ('adminPurchasing');
-                            picAdmin.style.display = 'none'
-                            insurance.style.display = 'none'
-                            adminOperational.style.display = 'none'
-
-                            adminPurchasing.style.display = ''
-                            purchasingManager.style.display = ''
-                            supervisorLogisticMaster.style.display = ''
-                        }else if(departmentChooseOption.value == "dokumenLegal"){
-                            selectdep ('picAdmin');
+                        if(departmentChooseOption.value == "dokumenLegal"){
+                            selectdep ('');
 
                             adminOperational.style.display = 'none'
-                            adminPurchasing.style.display = 'none'
-                            purchasingManager.style.display = 'none'
-                            supervisorLogisticMaster.style.display = 'none'
-
                             picAdmin.style.display = ''
                             insurance.style.display = ''
                         }else if(departmentChooseOption.value == "operasional"){
                             selectdep ('adminOperational');
 
-                            adminPurchasing.style.display = 'none'
-                            purchasingManager.style.display = 'none'
-                            supervisorLogisticMaster.style.display = 'none'
                             picAdmin.style.display = 'none'
                             insurance.style.display = 'none'
-
                             adminOperational.style.display = ''
                         }else{
                             document.getElementById("picAdmin").disabled = true;
@@ -211,24 +188,16 @@
                             document.getElementById("insurance").hidden = false;
                             document.getElementById("adminOperational").disabled = true;
                             document.getElementById("adminOperational").hidden = false;
-                            document.getElementById("adminPurchasing").disabled = true;
-                            document.getElementById("adminPurchasing").hidden = false;
-                            document.getElementById("purchasingManager").disabled = true;
-                            document.getElementById("purchasingManager").hidden = false;
-                            document.getElementById("supervisorLogisticMaster").disabled = true;
-                            document.getElementById("supervisorLogisticMaster").hidden = false;
                         }
                     }
 
-                    function selectopt(id)
-                    {
+                    function selectopt(id){
                         var e = document.getElementById("cabang");
                         e.selectedIndex=e.querySelector('option[value="'+id+'"]').index;
                     }
                     var dropdown = document.getElementById("role_id");
-                    dropdown.onchange = function(event){
-                        
-                        if(dropdown.value=="picAdmin" || dropdown.value=="InsuranceManager"){
+                    dropdown.onclick = function(event){
+                        if(dropdown.value=="picAdmin"){
                             selectopt('Jakarta');
                             document.getElementById("Samarinda").disabled = true;
                             document.getElementById("Banjarmasin").disabled = true;
@@ -236,14 +205,16 @@
                             document.getElementById("Babelan").disabled = true;
                             document.getElementById("Berau").disabled = true;
                             document.getElementById("Kendari").disabled = true;
-                        }else if(dropdown.value == "adminPurchasing" || dropdown.value == "purchasingManager"){
+                            console.log('pic admin selected');
+                        }else if(dropdown.value == "InsuranceManager"){
                             selectopt('Jakarta');
                             document.getElementById("Banjarmasin").disabled = true;
                             document.getElementById("Samarinda").disabled = true;
                             document.getElementById("Bunati").disabled = true;
                             document.getElementById("Babelan").disabled = true;
                             document.getElementById("Berau").disabled = true;
-                            document.getElementById("Kendari").disabled = false;
+                            document.getElementById("Kendari").disabled = true;
+                            console.log('insurance selected');
                         }else{
                             document.getElementById("Jakarta").disabled = false;
                             document.getElementById("Samarinda").disabled = false;
@@ -252,6 +223,7 @@
                             document.getElementById("Babelan").disabled = false;
                             document.getElementById("Berau").disabled = false;
                             document.getElementById("Kendari").disabled = false;
+                            console.log('else case selected');
                         }
                     }
                 </script>

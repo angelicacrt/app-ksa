@@ -88,6 +88,8 @@
                         <option value="/purchasing-manager/item-stocks/Bunati" {{ $default_branch == 'Bunati' ? 'selected' : '' }}>Bunati</option>
                         <option value="/purchasing-manager/item-stocks/Babelan" {{ $default_branch == 'Babelan' ? 'selected' : '' }}>Babelan</option>
                         <option value="/purchasing-manager/item-stocks/Berau" {{ $default_branch == 'Berau' ? 'selected' : '' }}>Berau</option>
+                        <option value="/purchasing-manager/item-stocks/Kendari" {{ $default_branch == 'Kendari' ? 'selected' : '' }}>Kendari</option>
+                        <option value="/purchasing-manager/item-stocks/Morosi" {{ $default_branch == 'Morosi' ? 'selected' : '' }}>Morosi</option>
                     </select>
                 </div>
                 <div class="mr-4">
