@@ -954,4 +954,10 @@
         </div>
     </main>
 </div>
+<style>
+  .modal-backdrop {
+        height: 100%;
+        width: 100%;
+    }
+</style>
 @endsection

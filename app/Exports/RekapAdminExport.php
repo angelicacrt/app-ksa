@@ -19,12 +19,15 @@ use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use PHPExcel_Worksheet_PageSetup;
 
-class RekapAdminExport implements FromCollection , ShouldAutoSize , WithHeadings , WithEvents
+class RekapAdminExport implements FromQuery , ShouldAutoSize , WithHeadings , WithEvents
 {
     use Exportable;
     /**
     * @return \Illuminate\Support\Collection
     */
+    public function __construct($identify){
+        $this->identify = $identify;
+    }
     public function headings(): array
     {
         return[
@@ -44,12 +47,19 @@ class RekapAdminExport implements FromCollection , ShouldAutoSize , WithHeadings
             ]
         ];
     }
-    public function Collection()
+    public function query()
     {
         $datetime = date('Y-m-d');
-        DB::statement(DB::raw('set @row:=0'));
-        $RekapExpo = Rekapdana::whereDate('DateNote2', '>=', $datetime)
-        ->selectRaw('*, @row:=@row+1 as id')->get();
+        if ($this->identify == null || $this->identify == 'All') {
+            // check if null
+            DB::statement(DB::raw('set @row:=0'));
+            $RekapExpo = Rekapdana::latest()
+            ->selectRaw('*, @row:=@row+1 as id');
+        }else{
+            DB::statement(DB::raw('set @row:=0'));
+            $RekapExpo = Rekapdana::where('Cabang', $this->identify)
+            ->selectRaw('*, @row:=@row+1 as id');
+        }
         return $RekapExpo;
     }
     public function registerEvents(): array

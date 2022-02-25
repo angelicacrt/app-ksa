@@ -13,7 +13,10 @@
     <x-auth-card >
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
+                <div class="center-items">
+                    <img src="\images\logo.png" style=" width: 60%; margin-block: -10%;" alt="">
+                </div>
             </a>
         </x-slot>
 
@@ -243,5 +246,17 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
-
 </html>
+<style>
+    .center-items{
+        margin: auto;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    @media (max-width: 768px) {
+    body {
+        height:117.7vh;
+    }
+</style>

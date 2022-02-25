@@ -9,7 +9,13 @@ use App\Models\Tug;
 use App\Exports\DailyReportsExport;
 
 class AdminOperationalController extends Controller
-{
+{   
+    public function lostTimeDetailsPage(){
+        $operationalData = OperationalBoatData::where('status', 'On Going')->where('taskType', 'Non Operational')->paginate(6);
+
+        return view('adminOperational.adminOperationalLostTimeDetails', compact('operationalData'));
+    }
+
     public function reportTranshipmentPage(){
         // Only Get The Tug|Barge That Is Inactive
         $tugs = Tug::where('tugAvailability', true)->get();

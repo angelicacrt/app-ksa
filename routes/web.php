@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/add-newbarge', [AdminOperationalController::class, 'addNewBarge'])->name('addNewBarge');
         Route::delete('/delete-barge', [AdminOperationalController::class, 'deleteBarge']);
 
+        // Lost Time Details Page
+        Route::get('/lost-time-details', [AdminOperationalController::class, 'lostTimeDetailsPage'])->name('lostTimeDetails');
     });
 
     Route::prefix('logistic')->name('logistic.')->group(function(){
@@ -428,6 +430,7 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
 
         //rekapdana page
         Route::get('/RekapulasiDana',[picAdminController::class, 'RekapulasiDana']);
+        Route::get('/RekapulasiDana/search',[picAdminController::class, 'RekapulasiDana']);
         Route::post('/exportExcel', [picAdminController::class, 'exportEXCEL']);
         Route::post('/exportPDF', [picAdminController::class, 'exportPDF']);
     });
@@ -477,6 +480,7 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
 
         //Rekapulasi Dana history page
         Route::get('/HistoryRekapulasiDana', 'InsuranceController@historyRekapulasiDana');
+        Route::get('/HistoryRekapulasiDana/search',[InsuranceController::class, 'historyRekapulasiDana']);
         Route::post('/exportExcel', [InsuranceController::class, 'exportEXCEL']);
         Route::post('/exportPDF', [InsuranceController::class, 'exportPDF']);
     });

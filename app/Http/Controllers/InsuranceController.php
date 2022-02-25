@@ -95,13 +95,13 @@ class InsuranceController extends Controller
     
     //history note SPGR page
     public function historynotespgr(){
-        $UploadNotes = DB::table('note_spgrs')->latest()->get();
+        $UploadNotes = DB::table('note_spgrs')->latest()->paginate(25);
         return view('insurance.insuranceHistoryNotes', compact('UploadNotes'));
     }
     
     //History form claim page
     public function historyFormclaim(){
-        $Headclaim = headerformclaim::all();
+        $Headclaim = headerformclaim::latest()->paginate(25);
         return view('insurance.insuranceHistoryFormclaim', compact('Headclaim'));
     }
    
@@ -119,26 +119,43 @@ class InsuranceController extends Controller
         return $this->excel::download(new FCIexport($identify), 'FCI'.$name.'.xlsx');
     }
     
-    //export Rekap page
-    public function exportPDF(){
+    //export Rekap pdf page
+    public function exportPDF(Request $request){
         $date = Carbon::now();
         $monthName = $date->format('F');
-
-        return Excel::download(new RekapAdminExport, 'RekapDanaInsuranceManager'. '-' . $monthName . '-' .'.pdf' , \Maatwebsite\Excel\Excel::DOMPDF);
+        $identify = $request->cabang_rekap;
+        // dd($identify);
+        return Excel::download(new RekapAdminExport($identify), 'RekapDanaInsuranceManager'. '-' . $monthName . '-' .'.pdf' , \Maatwebsite\Excel\Excel::DOMPDF);
     }
 
-    //export Rekap page
-    public function exportEXCEL(){
+    //export Rekap excel page
+    public function exportEXCEL(Request $request){
         $date = Carbon::now();
         $monthName = $date->format('F');
-        return Excel::download(new RekapAdminExport, 'RekapDanaInsuranceManager'. '-' . $monthName . '-' . '.xlsx');
+        $identify = $request->cabang_rekap;
+        // dd($identify);
+        return Excel::download(new RekapAdminExport($identify), 'RekapDanaInsuranceManager'. '-' . $monthName . '-' . '.xlsx');
     }
 
     //History Rekapulsi Dana page
-    public function historyRekapulasiDana(){
+    public function historyRekapulasiDana(Request $request){
         $datetime = date('Y-m-d');
-        $rekapdana= Rekapdana::latest()
-        ->paginate(25);
-        return view('insurance.insuranceRekapulasiDana', compact('rekapdana'));
+        $searchresult = $request->search;
+        if ($searchresult == 'All') {
+            $rekapdana= Rekapdana::latest()
+            ->paginate(25);
+            return view('insurance.insuranceRekapulasiDana' , compact('rekapdana' , 'searchresult'));
+        }elseif ($request->filled('search')) {
+            $rekapdana= Rekapdana::latest()
+            ->where('Cabang', $request->search)
+            ->paginate(25);
+            return view('insurance.insuranceRekapulasiDana' , compact('rekapdana' , 'searchresult'));
+        }else{
+            //get DocRPK Data as long as the periode_akhir(column database)
+            $rekapdana= Rekapdana::latest()
+            ->paginate(25);
+            return view('insurance.insuranceRekapulasiDana', compact('rekapdana' , 'searchresult'));
+        }
+        return view('insurance.insuranceRekapulasiDana', compact('rekapdana' , 'searchresult'));
     }
 }

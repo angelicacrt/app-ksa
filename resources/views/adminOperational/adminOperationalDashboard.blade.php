@@ -120,14 +120,14 @@
                     </div>
                 </div>
                 <div class="right-section mt-3 ml-3">
-                    <div class="jumbotron jumbotron-fluid mx-2">
-                        <div class="container mt-5">
-                          <h3 class="display-8 text-wrap font-weight-bold text-center">Percentage Ship's Activity : </h2>
-                          <h2 class="font-weight-bold text-center text-success display-3">
+                    <div onclick="redirectToMonitoring()" class="jumbotron jumbotron-fluid mx-2">
+                        <div class="container mt-2">
+                          <p class=" text-wrap font-weight-bold text-center" style="font-size: 2vw">Percentage Ship's Activity : </p>
+                          <p class="font-weight-bold text-center text-success" style="font-size: 2vw">
                             {{ $percentage_ship_activity }}%
-                          </h2>
-                          <h2 class="display-7 text-wrap font-weight-bold text-center mt-5">Total Lost Time : </h2>
-                          <h2 class="display-3 text-wrap text-center text-secondary font-weight-bold">{{ $total_lost_time }} Days</h2>
+                          </p>
+                          <p class=" text-wrap font-weight-bold text-center mt-3" style="font-size: 2vw">Total Lost Time : </p>
+                          <p class=" text-wrap text-center text-secondary font-weight-bold" style="font-size: 2vw">{{ $total_lost_time }} Days</p>
                         </div>
                     </div>
                 </div>
@@ -233,6 +233,12 @@
         setTimeout(function() {
             $('.alert').fadeOut('fast');
         }, 3000); 
+    </script>
+
+    <script type="text/javascript">
+        function redirectToMonitoring(){
+          window.location.href = "{{ route('adminOperational.lostTimeDetails')}}";
+        }
     </script>
 
     @endsection

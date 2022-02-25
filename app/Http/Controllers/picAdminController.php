@@ -545,24 +545,40 @@ class picAdminController extends Controller
         $this->excel = $excel;
     }
     //export Rekap PDF page
-    public function exportPDF() {
+    public function exportPDF(Request $request) {
         $date = Carbon::now();
         $monthName = $date->format('F');
-
-        return (new RekapAdminExport)->download('RekapulasiDanaPicAdmin'. '-' . $monthName . '-' .'.pdf' , \Maatwebsite\Excel\Excel::DOMPDF);
+        $identify = $request->cabang_rekap;
+        // dd($identify);
+        return (new RekapAdminExport($identify))->download('RekapulasiDanaPicAdmin'. '-' . $monthName . '-' .'.pdf' , \Maatwebsite\Excel\Excel::DOMPDF);
     }
     //export Rekap Excel page
-    public function exportEXCEL() {
+    public function exportEXCEL(Request $request) {
         $date = Carbon::now();
         $monthName = $date->format('F');
-        return Excel::download(new RekapAdminExport, 'RekapulasiDanaPicAdmin'. '-' . $monthName . '-' . '.xlsx');
+        $identify = $request->cabang_rekap;
+        return Excel::download(new RekapAdminExport($identify), 'RekapulasiDanaPicAdmin'. '-' . $monthName . '-' . '.xlsx');
     }
     // RekapulasiDana page
-    public function RekapulasiDana(){
+    public function RekapulasiDana(Request $request){
         $datetime = date('Y-m-d');
-        $rekapdana= Rekapdana::latest()
-        ->paginate(25);
-        return view('picadmin.picAdminRekapulasiDana', compact('rekapdana'));
+        $searchresult = $request->search;
+        if ($searchresult == 'All') {
+            $rekapdana= Rekapdana::latest()
+            ->paginate(25);
+            return view('picadmin.picAdminRekapulasiDana' , compact('rekapdana' , 'searchresult'));
+        }elseif ($request->filled('search')) {
+            $rekapdana= Rekapdana::latest()
+            ->where('Cabang', $request->search)
+            ->paginate(25);
+            return view('picadmin.picAdminRekapulasiDana' , compact('rekapdana' , 'searchresult'));
+        }else{
+            //get DocRPK Data as long as the periode_akhir(column database)
+            $rekapdana= Rekapdana::latest()
+            ->paginate(25);
+            return view('picadmin.picAdminRekapulasiDana', compact('rekapdana' , 'searchresult'));
+        }
+        return view('picadmin.picAdminRekapulasiDana', compact('rekapdana' , 'searchresult'));
     }
 
     // RecordDocuments page

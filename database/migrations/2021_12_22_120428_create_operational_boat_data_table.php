@@ -131,7 +131,7 @@ class CreateOperationalBoatDataTable extends Migration
             $table->double('cycleTime')->nullable();
             $table->double('document')->nullable();
             $table->string('totalTime', 50)->nullable();
-            $table->double('totalLostDays')->nullable();
+            $table->string('totalLostDays', 50)->nullable();
 
             // Additional Calculation Data For Return Cargo
             $table->double('sailingToMVCargo')->nullable();

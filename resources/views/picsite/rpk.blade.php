@@ -33,7 +33,7 @@
                         <form action="/picsite/uploadrpk" method="POST" enctype="multipart/form-data" name="formUploadrpk" id="formUploadrpk">
                             @csrf
                             <div class="form-row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>Nama Kapal</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Tug</span>
@@ -52,11 +52,11 @@
                                         </datalist>
                                       </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label>from</label>
                                     <input type="date" name="tgl_awal" class="form-control" requiredplaceholder="Periode Awal">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label>to</label>
                                     <input type="date" name="tgl_akhir" class="form-control" required placeholder="Periode Akhir">
                                 </div>

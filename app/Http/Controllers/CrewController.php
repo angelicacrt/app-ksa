@@ -570,9 +570,9 @@ class CrewController extends Controller
             $calculation['cycleTimeCargo'] = number_format((double) $cycleTimeCargo, 2);
 
         }elseif($operationalData -> taskType == 'Non Operational'){
-            $totalLostDays = !empty($operationalData -> arrivalTime) && !empty($operationalData -> departurePOL) ? date_diff(new DateTime($operationalData -> arrivalTime), new DateTime($operationalData -> departurePOL))->format('%h.%i') : 0;
+            $totalLostDays = !empty($operationalData -> arrivalTime) && !empty($operationalData -> departurePOL) ? date_diff(new DateTime($operationalData -> arrivalTime), new DateTime($operationalData -> departurePOL))->format('%D Days %H Hours') : 'n/a';
 
-            $calculation['totalLostDays'] = number_format((double) $totalLostDays, 2);
+            $calculation['totalLostDays'] = $totalLostDays;
         }
 
         // Update The Following Task Id

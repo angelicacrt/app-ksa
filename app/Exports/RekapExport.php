@@ -51,7 +51,6 @@ class RekapExport implements FromCollection , ShouldAutoSize , WithHeadings , Wi
         DB::statement(DB::raw('set @row:=0'));
         $datetime = date('Y-m-d');
         $RekapExpo = Rekapdana::where('Cabang', Auth::user()->cabang)
-        ->whereDate('DateNote2', '>=', $datetime)
         ->selectRaw('*, @row:=@row+1 as id')->get();
         // dd($RekapExpo);
         return $RekapExpo;

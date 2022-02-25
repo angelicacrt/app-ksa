@@ -316,8 +316,8 @@
                         @elseif($operationalData -> taskType == 'Non Operational')
                             <div class="card mx-3 my-3 text-white bg-dark card-styling" style="width: 17rem; height: 15vh;">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Total Lost Time</h5>
-                                    <h6 class="card-subtitle mb-2 mt-2 text-center"><span class="df-clock mr-2" data-feather="clock"></span>{{ $operationalData -> totalLostDays != NULL ? $operationalData -> totalLostDays . ' Hours' : 'n/a' }}</h6>
+                                    <h5 class="card-title text-center">Total Lost Day</h5>
+                                    <h6 class="card-subtitle mb-2 mt-2 text-center"><span class="df-clock mr-2" data-feather="clock"></span>{{ !empty($operationalData -> totalLostDays) ? $operationalData -> totalLostDays : 'n/a' }}</h6>
                                 </div>
                             </div>
                         @endif

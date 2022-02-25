@@ -33,8 +33,8 @@
                        
                         <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
-                            <div class="form-row">
-                                <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6">
                                     <label>Nama Kapal</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Tug</span>
@@ -51,13 +51,13 @@
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
                                             @endforeach
                                         </datalist>
-                                      </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label>from</label>
                                     <input type="date" class="form-control" name="tgl_awal"  required placeholder="Periode Awal">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label>to</label>
                                     <input type="date" class="form-control" name="tgl_akhir" required placeholder="Periode Akhir">
                                 </div>

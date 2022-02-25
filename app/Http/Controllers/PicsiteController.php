@@ -357,7 +357,6 @@ class PicsiteController extends Controller
         public function RekapulasiDana(){
             $datetime = date('Y-m-d');
             $rekapdana= Rekapdana::where('Cabang', Auth::user()->cabang)
-            ->whereDate('DateNote2', '>=', $datetime)
             ->latest()
             ->paginate(25);
 
