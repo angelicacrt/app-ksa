@@ -33,6 +33,7 @@
             'Bunati' => 'BUN' ,
             'Kendari' => 'KDR' ,
             'Morosi' => 'MRS' ,
+            'Batu Licin' => 'BTL' ,
         ];
     @endphp
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">

@@ -3,7 +3,16 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 @if (Auth::user()->hasRole('picSite') and Auth::user()->cabang == 'Bunati')
-                    <a class="nav-link" aria-current="page" href="/dashboard">
+                    <a class="nav-link" aria-current="page" href="/picsite/dashboard/rpk">
+                        <span data-feather="home"></span>
+                        Dashboard
+                    </a>
+                    <a class="nav-link" aria-current="page" href="/picsite/rpk">
+                        <span data-feather="file-plus" style="color: black"></span>
+                        Upload RPK Documents
+                    </a>
+                @elseif (Auth::user()->hasRole('picSite') and Auth::user()->cabang == 'Batu Licin')
+                    <a class="nav-link" aria-current="page" href="/picsite/dashboard/rpk">
                         <span data-feather="home"></span>
                         Dashboard
                     </a>

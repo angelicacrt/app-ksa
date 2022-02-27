@@ -147,7 +147,7 @@
                                 @endfor
                                 @endif
                     {{-- Banjarmasin --}}
-                                @if (Auth::user()->cabang == 'Banjarmasin' or Auth::user()->cabang == 'Bunati')
+                                @if (Auth::user()->cabang == 'Banjarmasin' or Auth::user()->cabang == 'Bunati' or Auth::user()->cabang == 'Batu Licin')
                                 @for ($a = 1 ; $a <= 7 ; $a++)
                                 @php
                                     $name = array('Surat Keterangan Asal Barang','Cargo Manifest','Voyage Report/ Term Sheet'

@@ -114,6 +114,7 @@
                     <option value="Banjarmasin" id="Banjarmasin" @if (old('cabang') == 'Banjarmasin') selected="selected" @endif>Banjarmasin</option>
                     <option value="Samarinda" id="Samarinda" @if (old('cabang') == 'Samarinda') selected="selected" @endif>Samarinda</option>
                     <option value="Bunati" id="Bunati" @if (old('cabang') == 'Bunati') selected="selected" @endif>Bunati</option>
+                    <option value="Batu Licin" id="Batu_Licin" @if (old('cabang') == 'Batu_Licin') selected="selected" @endif>Batu Licin</option>
                     <option value="Babelan" id="Babelan" @if (old('cabang') == 'Babelan') selected="selected" @endif>Babelan</option>
                     <option value="Berau" id="Berau" @if (old('cabang') == 'Berau') selected="selected" @endif>Berau</option>
                     <option value="Kendari" id="Kendari" @if (old('cabang') == 'Kendari') selected="selected" @endif>Kendari</option>
@@ -222,6 +223,7 @@
                         document.getElementById("Berau").disabled = false;
                         document.getElementById("Kendari").disabled = false;
                         document.getElementById("Morosi").disabled = false;
+                        document.getElementById("Batu_Licin").disabled = false;
                     }else if(dropdown.value == "AsuransiIncident"){
                         selectopt('Jakarta');
                         document.getElementById("Banjarmasin").disabled = true;
@@ -231,6 +233,7 @@
                         document.getElementById("Berau").disabled = true;
                         document.getElementById("Kendari").disabled = true;
                         document.getElementById("Morosi").disabled = true;
+                        document.getElementById("Batu_Licin").disabled = true;
                     }else{
                         document.getElementById("Jakarta").disabled = false;
                         document.getElementById("Samarinda").disabled = false;
@@ -239,7 +242,8 @@
                         document.getElementById("Babelan").disabled = false;
                         document.getElementById("Berau").disabled = false;
                         document.getElementById("Kendari").disabled = false;
-                        document.getElementById("Morosi").disabled = true;
+                        document.getElementById("Morosi").disabled = false;
+                        document.getElementById("Batu_Licin").disabled = false;
                     }
                 }
             </script>

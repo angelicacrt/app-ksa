@@ -279,21 +279,22 @@ class PicRpkController extends Controller
             return redirect('picsite/rpk')->with('success', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
-        $request->validate([
-            'brfile1' => 'mimes:pdf|max:1024' ,
-            'brfile2' => 'mimes:pdf|max:1024' ,
-            'brfile3' => 'mimes:pdf|max:1024' ,
-            'brfile4' => 'mimes:pdf|max:1024' ,
-            'brfile5' => 'mimes:pdf|max:1024' ,
-            'brfile6' => 'mimes:pdf|max:1024' ,
-            'brfile7' => 'mimes:pdf|max:1024' ,
-            'nama_kapal' => 'required',
-            'Nama_Barge' => 'required',
-        ]);
-
+        
         if(Auth::user()->cabang == 'Berau'){
+            $request->validate([
+                'brfile1' => 'mimes:pdf|max:1024' ,
+                'brfile2' => 'mimes:pdf|max:1024' ,
+                'brfile3' => 'mimes:pdf|max:1024' ,
+                'brfile4' => 'mimes:pdf|max:1024' ,
+                'brfile5' => 'mimes:pdf|max:1024' ,
+                'brfile6' => 'mimes:pdf|max:1024' ,
+                'brfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required',
+                'Nama_Barge' => 'required',
+            ]);
+            
             $year = date('Y');
-        $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
+            $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
             $month = date('m');
             if ($request->hasFile('brfile1')) {
                 //dd($request);
@@ -530,21 +531,21 @@ class PicRpkController extends Controller
             return redirect('picsite/rpk')->with('success', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
-        $request->validate([
-            'bjrfile1' => 'mimes:pdf|max:1024' ,
-            'bjrfile2' => 'mimes:pdf|max:1024' ,
-            'bjrfile3' => 'mimes:pdf|max:1024' ,
-            'bjrfile4' => 'mimes:pdf|max:1024' ,
-            'bjrfile5' => 'mimes:pdf|max:1024' ,
-            'bjrfile6' => 'mimes:pdf|max:1024' ,
-            'bjrfile7' => 'mimes:pdf|max:1024' ,
-            'nama_kapal' => 'required',
-            'Nama_Barge' => 'required',
-        ]);
-
-        if(Auth::user()->cabang == 'Banjarmasin' or Auth::user()->cabang == 'Bunati'){
+        
+        if(Auth::user()->cabang == 'Banjarmasin' or Auth::user()->cabang == 'Bunati' or Auth::user()->cabang == 'Batu Licin'){
+            $request->validate([
+                'bjrfile1' => 'mimes:pdf|max:1024' ,
+                'bjrfile2' => 'mimes:pdf|max:1024' ,
+                'bjrfile3' => 'mimes:pdf|max:1024' ,
+                'bjrfile4' => 'mimes:pdf|max:1024' ,
+                'bjrfile5' => 'mimes:pdf|max:1024' ,
+                'bjrfile6' => 'mimes:pdf|max:1024' ,
+                'bjrfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required',
+                'Nama_Barge' => 'required',
+            ]);
             $year = date('Y');
-        $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
+            $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
             $month = date('m');
             if ($request->hasFile('bjrfile1')) {
                 //dd($request);
@@ -553,7 +554,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/surat_barang';
                 $path = $request->file('bjrfile1')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'status1' => 'on review',
                         'surat_barang' => basename($path),
@@ -586,7 +586,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/cargo_manifest';
                 $path = $request->file('bjrfile2')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'status2' => 'on review',
                         'cargo_manifest'=> basename($path) ,
@@ -619,7 +618,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/voyage';
                 $path = $request->file('bjrfile3')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'status3' => 'on review',
                         'voyage' => basename($path),
@@ -652,7 +650,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/bill_lading';
                 $path = $request->file('bjrfile4')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'status4' => 'on review',
                         'bill_lading' => basename($path),
@@ -686,7 +683,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/gerak_kapal';
                 $path = $request->file('bjrfile5')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([                   
                         'status5' => 'on review',
                         'gerak_kapal'=> basename($path) ,
@@ -719,7 +715,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/docking';
                 $path = $request->file('bjrfile6')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([                
                         'status6' => 'on review',
                         'docking' => basename($path),
@@ -752,7 +747,6 @@ class PicRpkController extends Controller
                 $tujuan_upload = 'RPK/surat_kapal';
                 $path = $request->file('bjrfile7')->storeas('banjarmasin/'. $year . "/". $month. '/RPK' , $name1, 's3');
                 if(documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                    
                     documentrpk::where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('cabang' , Auth::user()->cabang)->where('periode_akhir' , $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([                
                         'status7' => 'on review',
                         'time_upload7' => date("Y-m-d h:i:s"),
@@ -782,21 +776,21 @@ class PicRpkController extends Controller
             return redirect('picsite/rpk')->with('success', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
-        $request->validate([
-            'smrfile1' => 'mimes:pdf|max:1024' ,
-            'smrfile2' => 'mimes:pdf|max:1024' ,
-            'smrfile3' => 'mimes:pdf|max:1024' ,
-            'smrfile4' => 'mimes:pdf|max:1024' ,
-            'smrfile5' => 'mimes:pdf|max:1024' ,
-            'smrfile6' => 'mimes:pdf|max:1024' ,
-            'smrfile7' => 'mimes:pdf|max:1024' ,
-            'nama_kapal' => 'required',
-            'Nama_Barge' => 'required',
-        ]);
-
+        
         if(Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari'  or Auth::user()->cabang == 'Morosi'){
+            $request->validate([
+                'smrfile1' => 'mimes:pdf|max:1024' ,
+                'smrfile2' => 'mimes:pdf|max:1024' ,
+                'smrfile3' => 'mimes:pdf|max:1024' ,
+                'smrfile4' => 'mimes:pdf|max:1024' ,
+                'smrfile5' => 'mimes:pdf|max:1024' ,
+                'smrfile6' => 'mimes:pdf|max:1024' ,
+                'smrfile7' => 'mimes:pdf|max:1024' ,
+                'nama_kapal' => 'required',
+                'Nama_Barge' => 'required',
+            ]);
             $year = date('Y');
-        $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
+            $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
             $month = date('m');
             if ($request->hasFile('smrfile1')) {
                 //dd($request);

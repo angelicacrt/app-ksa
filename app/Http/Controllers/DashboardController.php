@@ -372,7 +372,7 @@ class DashboardController extends Controller
                         // dd($viewer);
                         return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/RPK" . "/" . $viewer);
                     }
-                    if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                    if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati' or $request->cabang == 'Batu Licin'){
                         $filenameRPK = $request->viewdocrpk;
                         $kapal_id = $request->kapal_nama;
                         $result = $request->result;
@@ -413,6 +413,10 @@ class DashboardController extends Controller
                     }
                 }
             // SearchBar ---------------------------------------------------------
+                if(Auth::user()->cabang == "Bunati" or Auth::user()->cabang == 'Batu Licin'){
+                    $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+                    return view('picsite.picDashboardRPK', compact('docrpk'));
+                }
                 // babelan search feature
                 if(Auth::user()->cabang == "Babelan"){
                     //STILL IN PROGRESS 
@@ -488,7 +492,7 @@ class DashboardController extends Controller
                         return view('picsite.picDashboard', compact('documentberau'));
                     }
                 }
-                if(Auth::user()->cabang == "Banjarmasin" or Auth::user()->cabang == "Bunati"){
+                if(Auth::user()->cabang == "Banjarmasin"){
                     if ($request->filled('search_kapal')) {
                         //banjarmasin search bar
                         $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
@@ -627,7 +631,7 @@ class DashboardController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/RPK" . "/" . $viewer);
                 }
-                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati' or $request->cabang == 'Batu Licin'){
                     $filenameRPK = $request->viewdocrpk;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
