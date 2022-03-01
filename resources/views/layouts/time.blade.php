@@ -1,4 +1,4 @@
-<div class="flex-wrap align-items-center mb-3 mt-3 ml-3 rcorners1 w-50">
+<div class="flex-wrap align-items-center mb-3 mt-3 ml-3 rcorners1">
     @if((int)date("H") >= 18)
         <h2 class="med-query">Malam, {{ Auth::user()->name }} !</h2>
     @elseif((int)date("H") >= 15)
@@ -14,6 +14,8 @@
 <style>
     .rcorners1 {
         border-radius: 25px;
+        width: 35%;
+        flex: auto;
         /* background-color: rgba(255, 0, 0, 0.5); */
         background-color: rgba(245, 97, 97, 0.7);
         padding: 20px;

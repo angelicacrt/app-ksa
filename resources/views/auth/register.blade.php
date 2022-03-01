@@ -15,7 +15,7 @@
             <a href="/">
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
                 <div class="center-items">
-                    <img src="\images\logo.png" style=" width: 60%; margin-block: -10%;" alt="">
+                    <img src="\images\logo_ksa_1.png" style=" width: 40%;" alt="">
                 </div>
             </a>
         </x-slot>
