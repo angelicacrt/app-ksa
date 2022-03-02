@@ -259,14 +259,26 @@ class CrewController extends Controller
     public function createTaskPost(Request $request){
         if($request -> taskType == 'Non Operational'){
             // Validate Request For Non Operational Task (barge can be null)
-            $validated = $request -> validate([
-                'tugName' => 'required|exists:tugs,tugName',
-                'bargeName' => 'nullable',
-                'portOfLoading' => 'required|string',
-                'portOfDischarge' => 'required|string',
-                'cargoAmountStart' => 'required|numeric|min:1',
-                'taskType' => 'required|in:Operational Shipment,Operational Transhipment,Non Operational'
-            ]);
+            // kendari does not need cargoAmountStart
+            if (Auth::user()->cabang == 'Kendari') {
+                $validated = $request -> validate([
+                    'tugName' => 'required|exists:tugs,tugName',
+                    'bargeName' => 'nullable',
+                    'portOfLoading' => 'required|string',
+                    'portOfDischarge' => 'required|string',
+                    'cargoAmountStart' => 'nullable|numeric',
+                    'taskType' => 'required|in:Operational Shipment,Operational Transhipment,Non Operational'
+                ]);
+            }else{
+                $validated = $request -> validate([
+                    'tugName' => 'required|exists:tugs,tugName',
+                    'bargeName' => 'nullable',
+                    'portOfLoading' => 'required|string',
+                    'portOfDischarge' => 'required|string',
+                    'cargoAmountStart' => 'required|numeric|min:1',
+                    'taskType' => 'required|in:Operational Shipment,Operational Transhipment,Non Operational'
+                ]);
+            }
 
             // Checking If The bargeName Null
             $checkTugIsAvailable = null;
@@ -294,14 +306,25 @@ class CrewController extends Controller
             }
         }else{
             // Validate Request For Other Task (barge cannot be null)
-            $validated = $request -> validate([
-                'tugName' => 'required|exists:tugs,tugName',
-                'bargeName' => 'required|exists:barges,bargeName',
-                'portOfLoading' => 'required|string',
-                'portOfDischarge' => 'required|string',
-                'cargoAmountStart' => 'required|numeric|min:1',
-                'taskType' => 'required|in:Operational Shipment,Operational Transhipment,Non Operational'
-            ]);
+            if (Auth::user()->cabang == 'Kendari') {
+                $validated = $request -> validate([
+                    'tugName' => 'required|exists:tugs,tugName',
+                    'bargeName' => 'nullable',
+                    'portOfLoading' => 'required|string',
+                    'portOfDischarge' => 'required|string',
+                    'cargoAmountStart' => 'nullable|numeric',
+                    'taskType' => 'required|in:Operational Shipment,Operational Transhipment,Non Operational'
+                ]);
+            }else{
+                $validated = $request -> validate([
+                    'tugName' => 'required|exists:tugs,tugName',
+                    'bargeName' => 'required|exists:barges,bargeName',
+                    'portOfLoading' => 'required|string',
+                    'portOfDischarge' => 'required|string',
+                    'cargoAmountStart' => 'required|numeric|min:1',
+                    'taskType' => 'required|in:Operational Shipment,Operational Transhipment,Non Operational'
+                ]);
+            }
 
             // Check if Tug|Barge Already Taken or Not
             $checkTugIsAvailable = Tug::where('tugName', $request -> tugName)->first();
@@ -398,6 +421,7 @@ class CrewController extends Controller
                 'commenceLoadL' => 'nullable|date',
                 'completedLoadingL' => 'nullable|date',
                 'cOffL' => 'nullable|date',
+                'StandByB' => 'nullable|date',
                 'DOH' => 'nullable|date',
                 'DOB' => 'nullable|date',
                 'departurePOD' => 'nullable|date',
@@ -474,8 +498,13 @@ class CrewController extends Controller
         $calculation['document'] = (double) $document;
 
         if($operationalData -> taskType == 'Operational Shipment'){
-            // Total Time = Arrival Time - Departure time
-            $totalTime = !empty($operationalData -> arrivalTime) && !empty($operationalData -> departureTime) ? date_diff(new DateTime($operationalData -> arrivalTime), new DateTime($operationalData -> departureTime))->format('%D Days %H Hours') : 'n/a';
+            // khusus Babelan dan Kendari => Total Time = Arrival Time - Stand By Berlabuh (StandByB)
+            if(Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Babelan'){
+                $totalTime = !empty($operationalData -> arrivalTime) && !empty($operationalData -> StandByB) ? date_diff(new DateTime($operationalData -> arrivalTime), new DateTime($operationalData -> StandByB))->format('%D Days %H Hours') : 'n/a';
+            }else{
+                // Total Time = Arrival Time - Departure time
+                $totalTime = !empty($operationalData -> arrivalTime) && !empty($operationalData -> departureTime) ? date_diff(new DateTime($operationalData -> arrivalTime), new DateTime($operationalData -> departureTime))->format('%D Days %H Hours') : 'n/a';
+            }
 
             $calculation['totalTime'] = $totalTime;
         }elseif($operationalData -> taskType == 'Operational Transhipment'){
@@ -589,20 +618,20 @@ class CrewController extends Controller
         // Helper Var
         if($data -> user -> cabang == 'Samarinda'){
             $operationShipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departureJetty', 'pengolonganNaik', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD', 'DOBPOD'];
-
             $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+        
         }elseif($data -> user -> cabang == 'Kendari' || $data -> user -> cabang == 'Babelan'){
-            $operationShipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'customer', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
-
-            $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $operationShipment_loops = ['from', 'to', 'condition','StandByB', 'cargoAmountEnd', 'customer', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $operationTranshipment_loops = ['from', 'to', 'condition','StandByB', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+        
         }elseif($data -> user -> cabang == 'Morosi'){
             $operationShipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD'];
-            
             $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+        
         }else{
             $operationShipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD', 'DOBPOD'];
-
             $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+        
         }
 
 
@@ -673,7 +702,7 @@ class CrewController extends Controller
         if($request -> cabang == 'Samarinda'){
             $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
         }elseif($request -> cabang == 'Kendari' || $request -> cabang == 'Babelan'){
-            $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $operationTranshipment_loops = ['from', 'to', 'condition', 'StandByB', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
         }elseif($request -> cabang == 'Morosi'){
             $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
         }else{

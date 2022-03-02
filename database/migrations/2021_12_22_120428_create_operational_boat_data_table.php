@@ -29,7 +29,7 @@ class CreateOperationalBoatDataTable extends Migration
             $table->string('portOfLoading', 50);
             $table->string('portOfDischarge', 50);
             $table->string('taskType', 30);
-            $table->double('cargoAmountStart');
+            $table->double('cargoAmountStart')->nullable();
             $table->string('customer')->nullable();
             $table->string('status', 15)->default('On Going');
 
@@ -52,6 +52,7 @@ class CreateOperationalBoatDataTable extends Migration
             $table->dateTime('commenceLoadL')->nullable();
             $table->dateTime('completedLoadingL')->nullable();
             $table->dateTime('cOffL')->nullable();
+            $table->dateTime('StandByB')->nullable();
 
             $table->dateTime('DOH')->nullable();
             $table->dateTime('DOB')->nullable();
@@ -73,6 +74,7 @@ class CreateOperationalBoatDataTable extends Migration
             // => commenceLoadL
             // => completedLoadingL
             // => cOffL
+            // => StandByB
             // => DOH
             // => DOB
             // => departurePOD

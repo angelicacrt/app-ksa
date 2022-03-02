@@ -79,7 +79,7 @@
 
     <div class="container-fluid" id="testing">
         <script>
-            document.body.style.zoom = "95%";
+            document.body.style.zoom = "88%";
             // document.body.style.zoom = screen.logicalXDPI;
         </script>
         @yield('container')

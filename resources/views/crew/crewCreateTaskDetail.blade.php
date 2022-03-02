@@ -112,6 +112,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @if (Auth::user() && Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Babelan')
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">StandBy Berlabuh</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="StandByB" id="StandByB" value="{{ $ot -> StandByB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> StandByB)) : '' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>                                     
+                                            @endif
+                                            
 
                                             @if($ot -> user -> cabang == 'Samarinda')
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
@@ -349,6 +361,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @if (Auth::user() && Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Babelan')
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">StandBy Berlabuh</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="StandByB" id="StandByB" value="{{ $ot -> StandByB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> StandByB)) : '' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>                                     
+                                            @endif
 
                                             @if($ot -> user -> cabang == 'Samarinda')
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
@@ -578,6 +601,7 @@
                                     </div> --}}
 
                                 </div>
+{{-- bagian kanan ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}}
                                 <div style="width: 30%; margin-top: 7vh">
                                     <div class="d-flex justify-content-center">
                                         <div class="form-group col-md-12">
@@ -599,9 +623,30 @@
                                                 @endif
                                             </select>
                                         </div>
-
                                     </div>
-                                    @if($ot -> taskType != 'Non Operational')
+
+                                    @if($ot -> taskType != 'Non Operational' && Auth::user()->cabang == 'Kendari')
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-group col-md-12">
+                                                <label class="text-danger font-weight-bold" for="cargoAmountEnd">Jumlah Kargo : </label>
+                                                @if($ot -> taskType != 'Return Cargo')
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" name="cargoAmountEnd" min="1" step="0.001" id="" placeholder="Input Jumlah Kargo Dalam Ton..." value="{{ $ot -> cargoAmountEnd }}">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">Ton</div>
+                                                        </div>
+                                                    </div>
+                                                @elseif($ot -> taskType == 'Return Cargo')
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" name="cargoAmountEndCargo" min="1" step="0.001" id="" placeholder="Input Jumlah Kargo Dalam Ton..." value="{{ $ot -> cargoAmountEndCargo }}">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">Ton</div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @elseif($ot -> taskType != 'Non Operational')
                                         <div class="d-flex justify-content-around mt-3">
                                             <div class="form-group col-md-6">
                                                 <label class="text-danger font-weight-bold" for="estimatedTime">Estimasi (dalam hari) : </label>

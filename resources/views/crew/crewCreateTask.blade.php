@@ -32,62 +32,120 @@
                     @endif
 
                     <div>
-                        <form method="POST" action="/crew/create-task">
-                            @csrf
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label>Tug</label>
-                                    <select class="form-control" name="tugName" id="tugName" style=" height:50px;" required>
-                                        @forelse($tugs as $t)
-                                            <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
-                                        @empty
-                                            <option value="" disabled>No Tugs Available</option>
-                                        @endforelse
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Barge</label>
-                                    <select class="form-control" name="bargeName" id="bargeName" style=" height:50px;">
-                                            <option value="">None</option>
-                                        @foreach($barges as $b)
-                                            <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="portOfLoading">Port Of Loading</label>
-                                    <input name="portOfLoading" type="text" class="form-control" id="portOfLoading" maxlength="50" placeholder="Input Port Of Loading..."
-                                        style=" height: 50px" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="cargoAmountStart">Jumlah Kargo Awal</label>
-                                    <div class="input-group">
-                                        <input name="cargoAmountStart" type="number" min="1" class="form-control" id="cargoAmountStart" step="0.001" placeholder="Input Jumlah Kargo Awal Dalam Ton..."
-                                        style=" height: 50px" required>
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text" style="height: 50px">Ton</div>
-                                        </div>
+                        @if (Auth::user()->cabang == 'Kendari')
+                            <form method="POST" action="/crew/create-task">
+                                {{-- remove jumlah kargo awal --}}
+                                @csrf
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Tug</label>
+                                        <select class="form-control" name="tugName" id="tugName" style=" height:50px;" required>
+                                            @forelse($tugs as $t)
+                                                <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
+                                            @empty
+                                                <option value="" disabled>No Tugs Available</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Barge</label>
+                                        <select class="form-control" name="bargeName" id="bargeName" style=" height:50px;">
+                                                <option value="">None</option>
+                                            @foreach($barges as $b)
+                                                <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label>Please choose type of tasks : </label>
+                                        <select class="form-control" name="taskType" id="taskType" style=" height:50px;" required>
+                                            <option value="" disabled>Choose Task...</option>
+                                            <option value="Operational Shipment">Operational Shipment</option>
+                                            <option value="Operational Transhipment">Operational Transhipment</option>
+                                            <option value="Non Operational">Non Operational</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group col-md-4">
+                                        <label for="portOfLoading">Port Of Loading</label>
+                                        <input name="portOfLoading" type="text" class="form-control" id="portOfLoading" maxlength="50" placeholder="Input Port Of Loading..."
+                                            style=" height: 50px" required>
+                                    </div>
+                                   
+                                    <div class="form-group col-md-4">
+                                        <label for="portOfDischarge">Port Of Discharge</label>
+                                        <input name="portOfDischarge" type="text" class="form-control" id="portOfDischarge" maxlength="50" placeholder="Input Port Of Discharge..."
+                                            style=" height: 50px" required>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label>Please choose type of tasks : </label>
-                                    <select class="form-control" name="taskType" id="taskType" style=" height:50px;" required>
-                                        <option value="" disabled>Choose Task...</option>
-                                        <option value="Operational Shipment">Operational Shipment</option>
-                                        <option value="Operational Transhipment">Operational Transhipment</option>
-                                        <option value="Non Operational">Non Operational</option>
-                                    </select>
+
+                                
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="mt-5 btn btn-primary">Submit</button>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="portOfDischarge">Port Of Discharge</label>
-                                    <input name="portOfDischarge" type="text" class="form-control" id="portOfDischarge" maxlength="50" placeholder="Input Port Of Discharge..."
-                                        style=" height: 50px" required>
+                            </form>
+                        @else
+                            {{-- jumlah kargo awal added --}}
+                            <form method="POST" action="/crew/create-task">
+                                @csrf
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Tug</label>
+                                        <select class="form-control" name="tugName" id="tugName" style=" height:50px;" required>
+                                            @forelse($tugs as $t)
+                                                <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
+                                            @empty
+                                                <option value="" disabled>No Tugs Available</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Barge</label>
+                                        <select class="form-control" name="bargeName" id="bargeName" style=" height:50px;">
+                                                <option value="">None</option>
+                                            @foreach($barges as $b)
+                                                <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="cargoAmountStart">Jumlah Kargo Awal</label>
+                                        <div class="input-group">
+                                            <input name="cargoAmountStart" type="number" min="1" class="form-control" id="cargoAmountStart" step="0.001" placeholder="Input Jumlah Kargo Awal Dalam Ton..."
+                                            style=" height: 50px" required>
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text" style="height: 50px">Ton</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Please choose type of tasks : </label>
+                                        <select class="form-control" name="taskType" id="taskType" style=" height:50px;" required>
+                                            <option value="" disabled>Choose Task...</option>
+                                            <option value="Operational Shipment">Operational Shipment</option>
+                                            <option value="Operational Transhipment">Operational Transhipment</option>
+                                            <option value="Non Operational">Non Operational</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="portOfLoading">Port Of Loading</label>
+                                        <input name="portOfLoading" type="text" class="form-control" id="portOfLoading" maxlength="50" placeholder="Input Port Of Loading..."
+                                            style=" height: 50px" required>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label for="portOfDischarge">Port Of Discharge</label>
+                                        <input name="portOfDischarge" type="text" class="form-control" id="portOfDischarge" maxlength="50" placeholder="Input Port Of Discharge..."
+                                            style=" height: 50px" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="mt-5 btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="mt-5 btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        @endif
+                        
                     </div>
 
                 </div>
