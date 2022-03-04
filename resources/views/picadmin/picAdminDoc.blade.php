@@ -23,7 +23,6 @@
                         <option value="Banjarmasin">Banjarmasin</option>
                         <option value="Samarinda">Samarinda</option>
                         <option value="Jakarta">Jakarta</option>
-                        <option value="Bunati">Bunati</option>
                         <option value="Kendari">Kendari</option>
                         <option value="Morosi">Morosi</option>
                     </select>
@@ -58,7 +57,7 @@
                           {{$document->links()}}
                         @elseif($searchresult == 'Berau')
                           {{$documentberau->links()}}
-                        @elseif($searchresult == 'Banjarmasin' or $searchresult == 'Bunati')
+                        @elseif($searchresult == 'Banjarmasin')
                           {{$documentbanjarmasin->links()}}
                         @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
                           {{$documentsamarinda->links()}}

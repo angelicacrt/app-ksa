@@ -732,7 +732,7 @@ class picAdminController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/" . $viewer);
                 }
-                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati' or $request->cabang == 'Batu Licin'){
                     $filename = $request->viewdoc;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
@@ -799,7 +799,7 @@ class picAdminController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/RPK" . "/" . $viewer);
                 }
-                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati' or $request->cabang == 'Batu Licin'){
                     $filenameRPK = $request->viewdocrpk;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;

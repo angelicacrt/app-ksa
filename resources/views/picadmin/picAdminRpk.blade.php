@@ -24,6 +24,7 @@
                             <option value="Banjarmasin">Banjarmasin</option>
                             <option value="Jakarta">Jakarta</option>
                             <option value="Bunati">Bunati</option>
+                            <option value="Batu Licin">Batu Licin</option>
                             <option value="Kendari">Kendari</option>
                             <option value="Morosi">Morosi</option>
                         </select>
@@ -58,8 +59,6 @@
                     </div>
                 </div>
                 </form>
-                    
-                <br>
                 
                 @error('reasonbox')
                   <div class="alert alert-danger" style="width: 40%; margin-left: 30%">

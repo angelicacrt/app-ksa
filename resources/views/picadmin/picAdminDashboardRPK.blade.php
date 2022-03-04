@@ -61,6 +61,7 @@
                             <option value="Banjarmasin">Banjarmasin</option>
                             <option value="Jakarta">Jakarta</option>
                             <option value="Bunati">Bunati</option>
+                            <option value="Batu Licin">Batu Licin</option>
                             <option value="Kendari">Kendari</option>
                             <option value="Morosi">Morosi</option>
                         </select>

@@ -79,6 +79,12 @@
                                     } 
                                     @endphp
                                 >Morosi</option>
+                                <option value="Batu Licin" id="Morosi"
+                                    @php if(Auth::user()->cabang == 'Batu Licin') {
+                                        echo('selected');
+                                    } 
+                                    @endphp
+                                >Batu Licin</option>
                             </select>
                             <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                         </div>

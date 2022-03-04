@@ -621,8 +621,8 @@ class CrewController extends Controller
             $operationTranshipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
         
         }elseif($data -> user -> cabang == 'Kendari' || $data -> user -> cabang == 'Babelan'){
-            $operationShipment_loops = ['from', 'to', 'condition','StandByB', 'cargoAmountEnd', 'customer', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
-            $operationTranshipment_loops = ['from', 'to', 'condition','StandByB', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $operationShipment_loops = ['from', 'to', 'condition','StandByB', 'estimatedTime', 'cargoAmountEnd', 'customer', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $operationTranshipment_loops = ['from', 'to', 'condition','StandByB', 'estimatedTime', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
         
         }elseif($data -> user -> cabang == 'Morosi'){
             $operationShipment_loops = ['from', 'to', 'condition', 'estimatedTime', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD'];

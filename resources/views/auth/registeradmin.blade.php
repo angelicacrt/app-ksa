@@ -11,7 +11,7 @@
                 <a href="/">
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
                     <div class="center-items">
-                        <img src="\images\logo.png" style=" width: 60%; margin-block: -10%;" alt="">
+                        <img src="\images\logo_ksa_1.png" style=" width: 40%;" alt="">
                     </div>
                 </a>
             </x-slot>
@@ -100,6 +100,7 @@
                         <option value="Samarinda" id="Samarinda" @if (old('cabang') == 'Samarinda') selected="selected" @endif>Samarinda</option>
                         <option value="Bunati" id="Bunati" @if (old('cabang') == 'Bunati') selected="selected" @endif>Bunati</option>
                         <option value="Babelan" id="Babelan" @if (old('cabang') == 'Babelan') selected="selected" @endif>Babelan</option>
+                        <option value="Batu Licin" id="Batu_Licin" @if (old('cabang') == 'Batu_Licin') selected="selected" @endif>Batu Licin</option>
                         <option value="Berau" id="Berau" @if (old('cabang') == 'Berau') selected="selected" @endif>Berau</option>
                         <option value="Kendari" id="Kendari" @if (old('cabang') == 'Kendari') selected="selected" @endif>Kendari</option>
                     </select>
