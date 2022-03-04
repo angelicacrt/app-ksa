@@ -209,7 +209,8 @@
                             document.getElementById("Babelan").disabled = true;
                             document.getElementById("Berau").disabled = true;
                             document.getElementById("Kendari").disabled = true;
-                            console.log('pic admin selected');
+                            document.getElementById("Batu_Licin").disabled = true;
+                            // console.log('pic admin selected');
                         }else if(dropdown.value == "InsuranceManager"){
                             selectopt('Jakarta');
                             document.getElementById("Banjarmasin").disabled = true;
@@ -218,7 +219,8 @@
                             document.getElementById("Babelan").disabled = true;
                             document.getElementById("Berau").disabled = true;
                             document.getElementById("Kendari").disabled = true;
-                            console.log('insurance selected');
+                            document.getElementById("Batu_Licin").disabled = true;
+                            // console.log('insurance selected');
                         }else{
                             document.getElementById("Jakarta").disabled = false;
                             document.getElementById("Samarinda").disabled = false;
@@ -227,7 +229,7 @@
                             document.getElementById("Babelan").disabled = false;
                             document.getElementById("Berau").disabled = false;
                             document.getElementById("Kendari").disabled = false;
-                            console.log('else case selected');
+                            // console.log('else case selected');
                         }
                     }
                 </script>
