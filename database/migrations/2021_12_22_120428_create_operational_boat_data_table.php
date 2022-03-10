@@ -36,6 +36,7 @@ class CreateOperationalBoatDataTable extends Migration
             // Secondary Data
             $table->string('from', 30)->nullable();
             $table->string('to', 30)->nullable();
+            $table->string('MotherVessel', 50)->nullable();
             $table->string('condition', 50)->nullable();
             $table->string('estimatedTime', 30)->nullable();
             $table->double('cargoAmountEnd')->nullable();
@@ -121,6 +122,9 @@ class CreateOperationalBoatDataTable extends Migration
 
             // Calculation Data
             $table->double('sailingToMV')->nullable();
+            $table->double('standbyBL')->nullable();
+            $table->double('sailingTimeMsk')->nullable();
+            $table->double('sailingTimeKlr')->nullable();
             $table->double('sailingToJetty')->nullable();
             $table->double('maneuver')->nullable();
             $table->double('dischTime')->nullable();

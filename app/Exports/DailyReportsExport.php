@@ -2,16 +2,17 @@
 
 namespace App\Exports;
 
-use App\Models\OperationalBoatData;
 use App\Models\Tug;
 use App\Models\Barge;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\Exportable;
+use App\Models\OperationalBoatData;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
 class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, WithEvents, WithStrictNullComparison
@@ -25,12 +26,24 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
         $this -> bargeName = $bargeName;
         $this -> month = $month;
         $this -> year = $year;
+        $this->MV = $operationalData = OperationalBoatData::
+        where('status', 'Finalized')
+        ->where(function ($query){
+            $query
+            ->where('taskType', 'Operational Transhipment')
+            ->orWhere('taskType', 'Return Cargo');
+        })
+        ->where('tugName', $this -> tugName)
+        ->where('bargeName', $this -> bargeName)
+        ->whereMonth('operational_boat_data.created_at', $this -> month)
+        ->whereYear('operational_boat_data.created_at', $this -> year)
+        ->pluck('MotherVessel')[0];
     }
 
 
     public function query()
     {  
-        if($this -> taskType == 'Operational Transhipment'){
+        if($this -> taskType == 'Operational Transhipment' && Auth::user()->cabang == 'Batu Licin'){
             $operationalData = OperationalBoatData::
             where('status', 'Finalized')
             ->where(function ($query){
@@ -43,7 +56,25 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
             ->whereMonth('operational_boat_data.created_at', $this -> month)
             ->whereYear('operational_boat_data.created_at', $this -> year)
             ->select('tugName', 'bargeName', 'from', 'to', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'cargoAmountEnd', 'cargoAmountEndCargo', 'portOfLoading', 'portOfDischarge', 'faVessel',
-                    'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo', 'departureTimeTranshipment', 'departureTime', 'sailingToJetty', 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing', 'document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
+                    'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+                    'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo',
+                    'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'sailingToJetty', 'standbyBL' , 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
+        }elseif($this -> taskType == 'Operational Transhipment'){
+            $operationalData = OperationalBoatData::
+            where('status', 'Finalized')
+            ->where(function ($query){
+                $query
+                ->where('taskType', 'Operational Transhipment')
+                ->orWhere('taskType', 'Return Cargo');
+            })
+            ->where('tugName', $this -> tugName)
+            ->where('bargeName', $this -> bargeName)
+            ->whereMonth('operational_boat_data.created_at', $this -> month)
+            ->whereYear('operational_boat_data.created_at', $this -> year)
+            ->select('tugName', 'bargeName', 'from', 'to', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'cargoAmountEnd', 'cargoAmountEndCargo', 'portOfLoading', 'portOfDischarge', 'faVessel',
+                    'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+                    'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo',
+                    'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'sailingToJetty', 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
         }elseif($this -> taskType == 'Non Operational'){
             $operationalData = OperationalBoatData::
             where('status', 'Finalized')
@@ -61,7 +92,8 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
             ->where('taskType', 'Operational Shipment')
             ->whereMonth('operational_boat_data.created_at', $this -> month)
             ->whereYear('operational_boat_data.created_at', $this -> year)
-            ->select('tugName', 'bargeName', 'from', 'to', 'customer', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'portOfLoading', 'portOfDischarge', 'departureJetty', 'pengolonganNaik', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePod', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD', 'departureTime', 'totalTime');
+            ->select('tugName', 'bargeName', 'from', 'to', 'customer', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'portOfLoading', 'portOfDischarge', 'departureJetty', 'pengolonganNaik', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+            'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePod', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD', 'departureTime', 'totalTime');
         }
 
         return $operationalData;
@@ -74,6 +106,7 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
                 ['Report Export'],
                 // Pre Data
                 [' '],
+                ['Mother Vessel : ' , $this->MV],
                 ['Tug/Barge : ', $this -> tugName . '/' . $this -> bargeName],
                 [' '],
                 // Table Data
@@ -81,7 +114,7 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
                 'F/A Vessel (Arrival Pangkalan)', 'Departure To Jetty', 'Pengolongan Naik', 'Arrival POL', 
                 'Start Aside (L)', 'Aside (L)', 'Commence Loading (L)', 'Complete Loading (L)', 'Cast Off (L)', 'Pengolongan Turun', 'Mooring Area',
                 'D.O.H', 'D.O.B', 'Departure POD', 'Arrival POD Transhipment', 'Arrival POD Return Cargo', 'Start Aside (MV) Transhipment', 'Start Aside (MV) Return Cargo', 'Aside (MV) Transhipment', 'Aside (MV) Cargo', 'Commence Loading (MV) Transhipment', 'Commence Loading (MV) Cargo', 'Complete Loading (MV) Transhipment', 'Complete Loading (MV) Cargo', 'Cast Off (MV) Transhipment', 'Cast Off (MV) Cargo', 'Departure To (Departure Pangkalan)', 'Departure To (Cargo)',
-                'Sailing To Jetty', 'Berthing', 'Prepare Ldg', 'Ldg Time', 'Ldg Rate', 'Unberthing', 'Document', 'Sailing To MV Transhipment', 'Sailing To MV Cargo', 'Maneuver Transhipment', 'Maneuver Cargo', 'Disch Time Transhipment', 'Disch Time Cargo', 'Disch Rate / Day Transhipment', 'Disch Rate / Day Cargo', 'Cycle Time Transhipment', 'Cycle Time Cargo']
+                'sailing Time Masuk' , 'sailing Time Keluar' ,'Sailing To Jetty','Standby (Batu Licin)', 'Berthing', 'Prepare Ldg', 'Ldg Time', 'Ldg Rate', 'Unberthing', 'Document', 'Sailing To MV Transhipment', 'Sailing To MV Cargo', 'Maneuver Transhipment', 'Maneuver Cargo', 'Disch Time Transhipment', 'Disch Time Cargo', 'Disch Rate / Day Transhipment', 'Disch Rate / Day Cargo', 'Cycle Time Transhipment', 'Cycle Time Cargo']
             ];
         }elseif($this -> taskType == 'Non Operational'){
             return [
@@ -121,21 +154,39 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
         if($this -> taskType == 'Operational Transhipment'){
             return [
                 AfterSheet::class => function (AfterSheet $event) {
-                    $event->sheet->getStyle('A5:BB5')->applyFromArray([
+                    $event->sheet->mergeCells('A1:K1');
+                    $event->sheet->getDelegate()->getStyle('A1:K1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                    $event->sheet->getStyle('A6:AK6')->applyFromArray([
                         'font' => [
                             'color' => ['argb' => 'FFFFFF']
                         ],
                         'fill' => [
                             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                            'color' => ['argb' => 'A01D23']
+                            'color' => ['argb' => '000080']
+                        ],
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                                'color' => ['argb' => 'FF000000'],
+                        ]]
+                    ]);
+                    $event->sheet->getStyle('AL6:BE6')->applyFromArray([
+                        'fill' => [
+                            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                            'color' => ['argb' => 'FFFFFF00']
                         ]
-    
                     ]);
                 }
             ];
         }elseif($this -> taskType == 'Operational Shipment'){
             return [
                 AfterSheet::class => function (AfterSheet $event) {
+                    $event->sheet->mergeCells('A1:K1');
+                    $event->sheet->getDelegate()->getStyle('A1:K1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                     $event->sheet->getStyle('A5:AC5')->applyFromArray([
                         'font' => [
                             'color' => ['argb' => 'FFFFFF']
@@ -143,14 +194,22 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
                         'fill' => [
                             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                             'color' => ['argb' => 'A01D23']
-                        ]
-    
+                        ],
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                                'color' => ['argb' => 'FF000000'],
+                        ]]
                     ]);
                 }
             ];
         }else{
             return [
                 AfterSheet::class => function (AfterSheet $event) {
+                    $event->sheet->mergeCells('A1:K1');
+                    $event->sheet->getDelegate()->getStyle('A1:K1')
+                    ->getAlignment()
+                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                     $event->sheet->getStyle('A5:M5')->applyFromArray([
                         'font' => [
                             'color' => ['argb' => 'FFFFFF']
@@ -158,8 +217,12 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
                         'fill' => [
                             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                             'color' => ['argb' => 'A01D23']
-                        ]
-    
+                        ],
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                                'color' => ['argb' => 'FF000000'],
+                        ]]
                     ]);
                 }
             ];

@@ -119,15 +119,27 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Please choose type of tasks : </label>
-                                        <select class="form-control" name="taskType" id="taskType" style=" height:50px;" required>
-                                            <option value="" disabled>Choose Task...</option>
-                                            <option value="Operational Shipment">Operational Shipment</option>
-                                            <option value="Operational Transhipment">Operational Transhipment</option>
-                                            <option value="Non Operational">Non Operational</option>
-                                        </select>
-                                    </div>
+                                    @if (Auth::user()->cabang == 'Batu Licin')
+                                        <div class="form-group col-md-4">
+                                            <label>Please choose type of tasks : </label>
+                                            <select class="form-control" name="taskType" id="taskType" style=" height:50px;" required>
+                                                <option value="" disabled>Choose Task...</option>
+                                                <option value="Operational Transhipment">Operational Transhipment</option>
+                                                <option value="Non Operational">Non Operational</option>
+                                            </select>
+                                        </div>
+                                    @else
+                                        <div class="form-group col-md-4">
+                                            <label>Please choose type of tasks : </label>
+                                            <select class="form-control" name="taskType" id="taskType" style=" height:50px;" required>
+                                                <option value="" disabled>Choose Task...</option>
+                                                <option value="Operational Shipment">Operational Shipment</option>
+                                                <option value="Operational Transhipment">Operational Transhipment</option>
+                                                <option value="Non Operational">Non Operational</option>
+                                            </select>
+                                        </div>
+                                    @endif
+
                                     <div class="form-group col-md-4">
                                         <label for="portOfLoading">Port Of Loading</label>
                                         <input name="portOfLoading" type="text" class="form-control" id="portOfLoading" maxlength="50" placeholder="Input Port Of Loading..."
