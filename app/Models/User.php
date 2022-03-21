@@ -14,6 +14,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
