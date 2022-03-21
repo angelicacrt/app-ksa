@@ -42,17 +42,21 @@
             </style>
 
             <form method="GET" action="/picsite/dashboard/rpk-search" role="search">
-                <div class="row">
-                    @if (Auth::user()->cabang == "Bunati" or Auth::user()->cabang == 'Batu Licin')
-                        <div class="col">
-                            
-                        </div>
-                    @else
-                        <div class="col">
+                @if (Auth::user()->cabang == "Bunati" or Auth::user()->cabang == 'Batu Licin')
+                    <div class="col">
+                        
+                    </div>
+                @else
+                    <div class="form-inline">
+                        <div class="form-check mb-2 mr-sm-2">
                             <a class="btn btn-outline-danger" style="right: 50%" href="/dashboard">Change to Dana</a>
                         </div>
-                    @endif
-
+                        <div class="form-check mb-2 mr-sm-2">
+                            <a class="btn btn-outline-danger" href="/dashboard">Change to Fund Request</a>
+                        </div>
+                    </div>
+                @endif
+                <div class="row">
                     <div class="col">
                         <div class="d-flex justify-content-end">
                             {{ $docrpk->links() }}

@@ -31,7 +31,7 @@
                 </script>
             </h3>
             <div class="jumbotron jumbotron-fluid" >
-                <h1 class="Header-1" style="margin-top: -3%; margin-left: 44%;">Overview</h1>
+                <h1 class="Header-1" style="margin-top: -3%; ">Overview - RPK Document</h1>
                 <hr class="my-4">
                 <form method="GET" action="/picadmin/dashboard-RPK/search" role="search">
                 <div class="row">
@@ -67,12 +67,15 @@
                         </select>
                     </div>
                     <div class="col">
-                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/dashboard">Change to Dana</a>
-                    </div>
-                    <div class="col">
                         <div class="d-flex justify-content-end">
                             {{ $docrpk->links() }}
                         </div>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/dashboard-Realisasi">Change to Realisasi Dana</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger"  href="/dashboard">Change to Dana</a>
                     </div>
                 </div>
                 </form>
@@ -194,6 +197,9 @@
         </div>
     </main>
 </div>
+    <style>
+        h1 {text-align: center;}
+    </style>
     <script type="text/javascript">
         function refreshDiv(){
             $('#content').load(location.href + ' #content')

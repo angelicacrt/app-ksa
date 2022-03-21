@@ -37,7 +37,7 @@
                 </div>
                 
                 <!-- No Telp -->
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     <x-label for="user_noTelp" :value="__('Nomor Telepon')" />
                     <div class="input-group mt-2">
                         <div class="input-group-prepend">
@@ -45,7 +45,7 @@
                         </div>
                         <input type="text" class="form-control" id="user_noTelp" name="user_noTelp" style="border-radius: 8px; border-color: rgb(196, 194, 194);" placeholder="Input nomor telepon dalam angka..." value={{ old('user_noTelp') }}>
                     </div>
-                </div>
+                </div> --}}
                 
                 <br>
                 <!-- No Induk Pegawai -->

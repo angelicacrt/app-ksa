@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -375,15 +375,6 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         //Fund Request page
         Route::get('/upload', [PicsiteController::class , 'uploadform']);
         Route::post('/upload',[PicsiteController::class, 'uploadfile'])->name('upload.uploadFile');
-
-        //rekapdana page
-        Route::get('/RekapulasiDana',[PicsiteController::class, 'RekapulasiDana']);
-        Route::get('/editRekapulasiDana/{rekap}',[PicsiteController::class, 'editrekap']);
-        Route::put('/RekapulasiDana/update/{rekap}',[PicsiteController::class, 'updaterekap']);
-        Route::delete('/RekapulasiDana/destroy/{rekap}',[PicsiteController::class, 'destroyrekap']);
-        Route::post('/uploadrekap',[PicsiteController::class, 'uploadrekap']);
-        Route::post('/exportExcel', [PicsiteController::class, 'exportEXCEL']);
-        Route::post('/exportPDF', [PicsiteController::class, 'exportPDF']);
         
         //Record Document
         Route::get('/Record-Document',[PicsiteController::class, 'DocRecord']);
@@ -392,10 +383,16 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/search-record-RPK', [PicsiteController::class , 'searchDocRecordRPK']);
         Route::post('/rpk/view', [PicsiteController::class, 'viewRecord']);
         Route::post('/dana/view', [PicsiteController::class, 'viewRecord']);
-
+        
         //rpk dashboard
         Route::get('/dashboard/rpk', [PicsiteController::class , 'DashboardRPK']);
         Route::get('/dashboard/rpk-search', [PicsiteController::class , 'DashboardRPKsearch']);
+        
+        //realisasi fund dashboard
+        Route::get('/realisasiDana',[PicsiteController::class, 'realisasiDana']);
+        Route::get('/dashboard/realisasi', [PicsiteController::class , 'Dashboard_Realisasi']);
+        Route::post('/realisasi/view', [PicsiteController::class , 'view_Realisasi']);
+        Route::get('/dashboard/realisasi-search', [PicsiteController::class , 'Dashboard_Realisasi']);
         
     });
 
@@ -428,11 +425,10 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/RecordDocuments/dana/view',[picAdminController::class, 'viewRecordDocuments']);
         Route::post('/RecordDocuments/RPK/view',[picAdminController::class, 'viewRecordDocuments']);
 
-        //rekapdana page
-        Route::get('/RekapulasiDana',[picAdminController::class, 'RekapulasiDana']);
-        Route::get('/RekapulasiDana/search',[picAdminController::class, 'RekapulasiDana']);
-        Route::post('/exportExcel', [picAdminController::class, 'exportEXCEL']);
-        Route::post('/exportPDF', [picAdminController::class, 'exportPDF']);
+        //realisasi page
+        Route::get('/dashboard-Realisasi',[picAdminController::class, 'AdminRealisasiDana']);
+        Route::get('/Realisasi-Dana/search',[picAdminController::class, 'AdminRealisasiDana']);
+        Route::post('/RealisasiDana-view',[picAdminController::class, 'AdminRealisasiDana_view']);
     });
 
     Route::prefix('picincident')->name('picincident.')->group(function(){
@@ -478,11 +474,10 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/historyFormclaimdownload', 'InsuranceController@historyFormclaimDownload');
         Route::delete('/historyFormclaim/destroy/{claims}', 'InsuranceController@historyFormclaimDelete');
 
-        //Rekapulasi Dana history page
-        Route::get('/HistoryRekapulasiDana', 'InsuranceController@historyRekapulasiDana');
-        Route::get('/HistoryRekapulasiDana/search',[InsuranceController::class, 'historyRekapulasiDana']);
-        Route::post('/exportExcel', [InsuranceController::class, 'exportEXCEL']);
-        Route::post('/exportPDF', [InsuranceController::class, 'exportPDF']);
+        //Realisasi Dana history page
+        Route::get('/Realisasi-Dana', 'InsuranceController@insuranceRealisasiDana');
+        Route::get('/RealisasiDana-search',[InsuranceController::class, 'insuranceRealisasiDana']);
+        Route::post('/Realisasi-Dana-view',[InsuranceController::class, 'insuranceRealisasiDana_view']);
     });
 });
 

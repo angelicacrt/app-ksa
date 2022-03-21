@@ -90,6 +90,7 @@
                         <th>Periode (Y-M-D)</th>
                         <th>Nama File</th>
                         <th>Jenis File</th>
+                        <th>Dana diajukan</th>
                         <th>Status</th>
                         <th>Reason</th>
                         <th>Action</th>
@@ -116,6 +117,7 @@
                           $time_upload ="time_upload".$a;
                           $stats ="status".$a;
                           $reason = "reason".$a;
+                          $dana = "dana".$a;
                           $date = date('Y-m-28');
                           $scan = $BABELAN[$a-1];
                       @endphp
@@ -131,7 +133,8 @@
                           <td class="table-danger" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                           <td class="table-danger" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                           <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>  
-                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                          <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
                           <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                           <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
                         @elseif($doc->$stats == "approved")
@@ -140,7 +143,8 @@
                           <td class="table-success" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                           <td class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                           <td class="table-success" id="namafile">{{$names[$a-1]}}</td>  
-                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                          <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
                           <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                           <td class="table-success" id="reason">{{$doc ->$reason}}</td>
                         @endif
@@ -150,7 +154,8 @@
                           <td class="table-info" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                           <td class="table-info" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                           <td class="table-info" id="namafile">{{$names[$a-1]}}</td>  
-                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                          <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
                           <td class="table-info" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                           <td class="table-info" id="reason">{{$doc ->$reason}}</td>
                           <td scope="col">
@@ -266,32 +271,33 @@
                     @forelse($documentberau as $d )
                        @for ( $a = 1 ; $a <= 34 ; $a++)
                        @php
-                       $BERAU = array('pnbp_sertifikat_konstruksi','jasa_urus_sertifikat',
-                        'pnbp_sertifikat_perlengkapan','pnbp_sertifikat_radio','pnbp_sertifikat_ows',
-                        'pnbp_garis_muat','pnbp_pemeriksaan_endorse_sl','pemeriksaan_sertifikat',
-                        'marine_inspektor','biaya_clearance','pnbp_master_cable', 
-                        'cover_deck_logbook','cover_engine_logbook','exibitum_dect_logbook',
-                        'exibitum_engine_logbook','pnbp_deck_logbook','pnbp_engine_logbook',
-                        'biaya_docking','lain-lain','biaya_labuh_tambat',
-                        'biaya_rambu','pnbp_pemeriksaan','sertifikat_bebas_sanitasi&p3k',
-                        'sertifikat_garis_muat','pnpb_sscec','ijin_sekali_jalan', 'bki_lambung', 'bki_mesin', 'bki_Garis_muat',
-                        'Lain_Lain1' , 'Lain_Lain2' , 'Lain_Lain3' , 'Lain_Lain4' , 'Lain_Lain5');
+                          $BERAU = array('pnbp_sertifikat_konstruksi','jasa_urus_sertifikat',
+                            'pnbp_sertifikat_perlengkapan','pnbp_sertifikat_radio','pnbp_sertifikat_ows',
+                            'pnbp_garis_muat','pnbp_pemeriksaan_endorse_sl','pemeriksaan_sertifikat',
+                            'marine_inspektor','biaya_clearance','pnbp_master_cable', 
+                            'cover_deck_logbook','cover_engine_logbook','exibitum_dect_logbook',
+                            'exibitum_engine_logbook','pnbp_deck_logbook','pnbp_engine_logbook',
+                            'biaya_docking','lain-lain','biaya_labuh_tambat',
+                            'biaya_rambu','pnbp_pemeriksaan','sertifikat_bebas_sanitasi&p3k',
+                            'sertifikat_garis_muat','pnpb_sscec','ijin_sekali_jalan', 'bki_lambung', 'bki_mesin', 'bki_Garis_muat',
+                            'Lain_Lain1' , 'Lain_Lain2' , 'Lain_Lain3' , 'Lain_Lain4' , 'Lain_Lain5');
 
-                        $names = array('PNBP Sertifikat Konstruksi','Jasa Urus Sertifikat','PNBP Sertifikat Perlengkapan',
-                                        'PNBP Sertifikat Radio','PNBP Sertifikat OWS','PNBP Garis Muat',
-                                        'PNBP Pemeriksaan Endorse SL','Pemeriksaan Sertifikat','Marine Inspektor',
-                                        'Biaya Clearance','PNBP Master Cable','Cover Deck LogBook',
-                                        'Cover Engine LogBook','Exibitum Dect LogBook','Exibitum Engine LogBook',
-                                        'PNBP Deck Logbook','PNBP Engine Logbook','Biaya Docking',
-                                        'Lain-lain','Biaya Labuh Tambat','Biaya Rambu',
-                                        'PNBP Pemeriksaan','Sertifikat Bebas Sanitasi & P3K','Sertifikat Garis Muat',
-                                        'PNBP SSCEC','Ijin Sekali Jalan', 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat',
-                                        'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
-                            $time_upload ="time_upload".$a;
-                            $stats ="status".$a;
-                            $reason = "reason".$a;
-                            $date = date('Y-m-28');
-                            $scan = $BERAU[$a-1];
+                          $names = array('PNBP Sertifikat Konstruksi','Jasa Urus Sertifikat','PNBP Sertifikat Perlengkapan',
+                            'PNBP Sertifikat Radio','PNBP Sertifikat OWS','PNBP Garis Muat',
+                            'PNBP Pemeriksaan Endorse SL','Pemeriksaan Sertifikat','Marine Inspektor',
+                            'Biaya Clearance','PNBP Master Cable','Cover Deck LogBook',
+                            'Cover Engine LogBook','Exibitum Dect LogBook','Exibitum Engine LogBook',
+                            'PNBP Deck Logbook','PNBP Engine Logbook','Biaya Docking',
+                            'Lain-lain','Biaya Labuh Tambat','Biaya Rambu',
+                            'PNBP Pemeriksaan','Sertifikat Bebas Sanitasi & P3K','Sertifikat Garis Muat',
+                            'PNBP SSCEC','Ijin Sekali Jalan', 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat',
+                            'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
+                          $time_upload ="time_upload".$a;
+                          $stats ="status".$a;
+                          $reason = "reason".$a;
+                          $dana = "dana".$a;
+                          $date = date('Y-m-28');
+                          $scan = $BERAU[$a-1];
                        @endphp
                         @if(empty($d->$stats))
                         <tr>
@@ -305,7 +311,8 @@
                             <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                             <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                             <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>  
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>  
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$d->$reason}}</td>    
                           @elseif($d->$stats == "rejected")
@@ -314,7 +321,8 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                             <td class="table-danger" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                             <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>       
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>       
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$d->$reason}}</td>   
                           @endif
@@ -324,7 +332,8 @@
                             <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                             <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                             <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>     
                             <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                             <td class="table-warning" id="reason">{{$d ->$reason}}</td>
                             <td scope="col">
@@ -464,6 +473,7 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
+                            $dana = "dana".$a;
                             $date = date('Y-m-28');
                             $scan = $BANJARMASIN[$a-1];
                        @endphp
@@ -479,7 +489,8 @@
                             <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                             <td class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                             <td class="table-success" id="namafile">{{$names[$a-1]}}</td> 
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>      
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>      
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$b->$reason}}</td>
                           @elseif ($b->$stats == "rejected")
@@ -488,7 +499,8 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                             <td class="table-danger" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                             <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>    
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>    
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$b->$reason}}</td>
                           @endif
@@ -498,7 +510,8 @@
                             <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                             <td class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                             <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>     
                             <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                             <td class="table-warning" id="reason">{{$b ->$reason}}</td>
                             <td scope="col">
@@ -619,6 +632,7 @@
                         $time_upload ="time_upload".$a;
                         $stats ="status".$a;
                         $reason = "reason".$a;
+                        $dana = "dana".$a;
                         $date = date('Y-m-28');
                         $scan = $SAMARINDA[$a-1];
                       @endphp
@@ -634,7 +648,8 @@
                             <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                             <td class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                             <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>  
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>  
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$s->$reason}}</td>
                           @elseif ($s->$stats == "rejected")
@@ -643,7 +658,8 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                             <td class="table-danger" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                             <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>    
+                            <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>    
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$s->$reason}}</td>
                           @endif
@@ -653,7 +669,8 @@
                           <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                           <td class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                           <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                          <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>     
                           <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                           <td class="table-warning" id="reason">{{$s ->$reason}}</td>
                             <td scope="col">
@@ -800,6 +817,7 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
+                            $dana = "dana".$a;
                             $date = date('Y-m-28');
                             $scan = $JAKARTA[$a-1];
                         @endphp
@@ -816,7 +834,8 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>     
+                                <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>     
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
                                 <td class="table-light">
@@ -922,7 +941,8 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>  
+                                <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>  
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$jkt->$reason}}</td>
                             </tr>
@@ -933,7 +953,8 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                                <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>    
+                                <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>    
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
                             </tr>

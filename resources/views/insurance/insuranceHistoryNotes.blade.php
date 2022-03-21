@@ -1,6 +1,6 @@
 @extends('../layouts.base')
 
-@section('title', 'Insurance-Check-Spgr')
+@section('title', 'Insurance-Check-Spgr-Notes')
 
 @section('container')
 <x-guest-layout>

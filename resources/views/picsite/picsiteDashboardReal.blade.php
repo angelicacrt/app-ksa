@@ -1,17 +1,38 @@
-@if(Auth::user()->hasRole('picSite'))
 @extends('../layouts.base')
 
-@section('title', 'Picsite Document Records Fund Request')
+@section('title', 'Dashboard Realisasi dana')
 
 @section('container')
 <div class="row">
     @include('picsite.sidebarpic')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        
         <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="display-4"><strong>Document Records Fund Request</strong></h1>
-            <p class="lead">This Page is for Past-Date document RPK & fund request form...
-              </p>
-              <hr class="rounded">
+            <h2>Welcome back, {{ Auth::user()->name }} !</h2>
+            <h4>Cabang : {{ Auth::user()->cabang }}</h4>
+            <h3>
+                <div id="txt"></div>
+
+                <script>
+                    function startTime() {
+                    const today = new Date();
+                    let h = today.getHours();
+                    let m = today.getMinutes();
+                    let s = today.getSeconds();
+                    m = checkTime(m);
+                    s = checkTime(s);
+                    document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+                    setTimeout(startTime, 1000);
+                    }
+                    
+                    function checkTime(i) {
+                    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+                        return i;
+                    }
+                </script>
+                <hr class="rounded">
+            </h3>    
+            
             <style>{
                 {{-- /* Rounded border */ --}}
                 hr.rounded {
@@ -20,20 +41,23 @@
                 }
             }
             </style>
-
-            <br>
-
-            <form method="GET" action="/picsite/search-record" role="search">
+            
+            <form method="GET" action="/picsite/dashboard/realisasi-search" role="search">
+                <div class="form-inline">
+                    <div class="form-check mb-2 mr-sm-2">
+                        <a class="btn btn-outline-danger" href="/picsite/dashboard/rpk">Change to RPK</a>
+                    </div>
+                    <div class="form-check mb-2 mr-sm-2">
+                        <a class="btn btn-outline-danger" href="/dashboard">Change to Fund Request</a>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col">
-                        <a class="btn btn-outline-danger" style="right: 50%" href="/picsite/Record-Document-RPK">Change to RPK</a>
-                    </div>
-                    
-                    <div class="col">
                         @if (Auth::user()->cabang == 'Babelan')
-                        <div class="d-flex justify-content-end">
-                            {{ $document->links() }}
-                        </div>
+                            <div class="d-flex justify-content-end">
+                                {{ $document->links() }}
+                            </div>
                         @endif
                         @if (Auth::user()->cabang == 'Berau')
                             <div class="d-flex justify-content-end">
@@ -56,7 +80,6 @@
                             </div>
                         @endif
                     </div>
-
                     <div class="col">
                         <label class="sr-only" for="search_kapal">Nama Kapal</label>
                         <div class="input-group">
@@ -73,7 +96,7 @@
                             </button>
                         </div>
                     </div>
-                    {{-- in progress --}}
+                    {{-- still in progress --}}
                     {{-- <div class="auto-cols-auto">
                         <div class="col-sm-3 my-1" style="margin-left:-1%" >
                             <select name="search_status" id="search_status" class="form-control" >
@@ -96,10 +119,7 @@
                         <th class="table-info">Periode (Y-M-D)</th>
                         <th class="table-info">Nama File</th>
                         <th class="table-info">Jenis File</th>
-                        <th class="table-info">Dana diajukan</th>
-                        <th class="table-info">Status</th>
-                        <th class="table-info">Reason</th>
-                        <th class="table-info">Action</th>
+                        <th class="center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -139,19 +159,16 @@
                                 <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                 <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                 <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
-                                <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
-                                <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                                <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>       
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                         <input type="hidden" name='result' value={{$doc->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                     
@@ -162,19 +179,16 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td>    
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td> 
-                                <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                                <td class="table-success" id="reason">{{$doc ->$reason}}</td>                                        
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>                                       
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                         <input type="hidden" name='result' value={{$doc->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>
@@ -185,19 +199,16 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>   
-                                <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                                <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>   
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                         <input type="hidden" name='result' value={{$doc->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>    
@@ -220,30 +231,29 @@
                         @forelse($documentberau as $d )
                         @for ( $a = 1 ; $a <= 34 ; $a++)
                         @php
-                            $BERAU = array('pnbp_sertifikat_konstruksi','jasa_urus_sertifikat',
-                                            'pnbp_sertifikat_perlengkapan','pnbp_sertifikat_radio','pnbp_sertifikat_ows',
-                                            'pnbp_garis_muat','pnbp_pemeriksaan_endorse_sl','pemeriksaan_sertifikat',
-                                            'marine_inspektor','biaya_clearance','pnbp_master_cable', 
-                                            'cover_deck_logbook','cover_engine_logbook','exibitum_dect_logbook',
-                                            'exibitum_engine_logbook','pnbp_deck_logbook','pnbp_engine_logbook',
-                                            'biaya_docking','lain-lain','biaya_labuh_tambat',
-                                            'biaya_rambu','pnbp_pemeriksaan','sertifikat_bebas_sanitasi&p3k',
-                                            'sertifikat_garis_muat','pnpb_sscec','ijin_sekali_jalan', 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat' ,
-                                            'Lain_Lain1' , 'Lain_Lain2' , 'Lain_Lain3' , 'Lain_Lain4' , 'Lain_Lain5');
+                        $BERAU = array('pnbp_sertifikat_konstruksi','jasa_urus_sertifikat',
+                                        'pnbp_sertifikat_perlengkapan','pnbp_sertifikat_radio','pnbp_sertifikat_ows',
+                                        'pnbp_garis_muat','pnbp_pemeriksaan_endorse_sl','pemeriksaan_sertifikat',
+                                        'marine_inspektor','biaya_clearance','pnbp_master_cable', 
+                                        'cover_deck_logbook','cover_engine_logbook','exibitum_dect_logbook',
+                                        'exibitum_engine_logbook','pnbp_deck_logbook','pnbp_engine_logbook',
+                                        'biaya_docking','lain-lain','biaya_labuh_tambat',
+                                        'biaya_rambu','pnbp_pemeriksaan','sertifikat_bebas_sanitasi&p3k',
+                                        'sertifikat_garis_muat','pnpb_sscec','ijin_sekali_jalan', 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat' ,
+                                        'Lain_Lain1' , 'Lain_Lain2' , 'Lain_Lain3' , 'Lain_Lain4' , 'Lain_Lain5');
 
-                            $names = array('PNBP Sertifikat Konstruksi','Jasa Urus Sertifikat','PNBP Sertifikat Perlengkapan',
-                                            'PNBP Sertifikat Radio','PNBP Sertifikat OWS','PNBP Garis Muat',
-                                            'PNBP Pemeriksaan Endorse SL','Pemeriksaan Sertifikat','Marine Inspektor',
-                                            'Biaya Clearance','PNBP Master Cable','Cover Deck LogBook',
-                                            'Cover Engine LogBook','Exibitum Dect LogBook','Exibitum Engine LogBook',
-                                            'PNBP Deck Logbook','PNBP Engine Logbook','Biaya Docking',
-                                            'Lain-lain','Biaya Labuh Tambat','Biaya Rambu',
-                                            'PNBP Pemeriksaan','Sertifikat Bebas Sanitasi & P3K','Sertifikat Garis Muat',
-                                            'PNBP SSCEC','Ijin Sekali Jalan','BKI Lambung', 'BKI Mesin', 'BKI Garis Muat' ,
-                                            'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
+                        $names = array('PNBP Sertifikat Konstruksi','Jasa Urus Sertifikat','PNBP Sertifikat Perlengkapan',
+                                        'PNBP Sertifikat Radio','PNBP Sertifikat OWS','PNBP Garis Muat',
+                                        'PNBP Pemeriksaan Endorse SL','Pemeriksaan Sertifikat','Marine Inspektor',
+                                        'Biaya Clearance','PNBP Master Cable','Cover Deck LogBook',
+                                        'Cover Engine LogBook','Exibitum Dect LogBook','Exibitum Engine LogBook',
+                                        'PNBP Deck Logbook','PNBP Engine Logbook','Biaya Docking',
+                                        'Lain-lain','Biaya Labuh Tambat','Biaya Rambu',
+                                        'PNBP Pemeriksaan','Sertifikat Bebas Sanitasi & P3K','Sertifikat Garis Muat',
+                                        'PNBP SSCEC','Ijin Sekali Jalan','BKI Lambung', 'BKI Mesin', 'BKI Garis Muat' ,
+                                        'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
-                            $dana = "dana".$a;
                             $reason = "reason".$a;
                             $date = date('Y-m-28');
                             $scan = $BERAU[$a-1];
@@ -260,19 +270,16 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                 <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                 <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>     
-                                <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
-                                <td class="table-warning" id="reason">{{$d ->$reason}}</td>
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>     
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                         <input type="hidden" name='result' value={{$d->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>    
@@ -283,19 +290,16 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>  
-                                <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
-                                <td class="table-success" id="reason">{{$d->$reason}}</td>    
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>      
                                 <td class="table-success">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                         <input type="hidden" name='result' value={{$d->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                        
@@ -306,19 +310,16 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>       
-                                <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
-                                <td class="table-danger" id="reason">{{$d->$reason}}</td>   
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>      
                                 <td class="table-danger">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                         <input type="hidden" name='result' value={{$d->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>     
@@ -368,7 +369,6 @@
                         $time_upload ="time_upload".$a;
                         $stats ="status".$a;
                         $reason = "reason".$a;
-                        $dana = "dana".$a;
                         $date = date('Y-m-28');
                         $scan = $BANJARMASIN[$a-1];
                     @endphp
@@ -384,19 +384,16 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                 <td class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                 <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>     
-                                <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
-                                <td class="table-warning" id="reason">{{$b ->$reason}}</td>
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>     
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                         <input type="hidden" name='result' value={{$b->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                          
@@ -407,19 +404,16 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td> 
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>      
-                                <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
-                                <td class="table-success" id="reason">{{$b->$reason}}</td>
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>    
                                 <td class="table-success">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                         <input type="hidden" name='result' value={{$b->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                          
@@ -430,19 +424,16 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>    
-                                <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
-                                <td class="table-danger" id="reason">{{$b->$reason}}</td>
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>   
                                 <td class="table-danger">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                         <input type="hidden" name='result' value={{$b->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>        
@@ -500,7 +491,6 @@
                             $stats ="status".$a;
                             $reason = "reason".$a;
                             $date = date('Y-m-28');
-                            $dana = "dana".$a;
                             $scan = $SAMARINDA[$a-1];
                             $tipefile = 'DANA'
                         @endphp
@@ -516,19 +506,16 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                 <td class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                 <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>     
-                                <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
-                                <td class="table-warning" id="reason">{{$s ->$reason}}</td>   
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>        
                                 <td class="table-warning">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                         <input type="hidden" name='result' value={{$s->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                                                   
@@ -539,19 +526,16 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>  
-                                <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
-                                <td class="table-success" id="reason">{{$s->$reason}}</td>    
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>      
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                         <input type="hidden" name='result' value={{$s->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                                      
@@ -562,19 +546,16 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>    
-                                <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
-                                <td class="table-danger" id="reason">{{$s->$reason}}</td>    
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>       
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                         <input type="hidden" name='result' value={{$s->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                  
@@ -628,11 +609,9 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
-                            $dana = "dana".$a;
                             $date = date('Y-m-28');
                             $scan = $JAKARTA[$a-1];
                         @endphp
-                            <input type="hidden" name='status' value={{$stats}}>
                             @if(empty($jkt->$stats))
                             <tr>
                                 {{-- agar tidak keluar hasil kosong --}}
@@ -643,19 +622,17 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                    <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                    <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>      
-                                    <td class="table-warning" id="status"><strong>{{$jkt->$stats}}</td>                                      
+                                    <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>
                                     <td class="table-warning" id="reason">{{$jkt->$reason}}</td>   
                                     <td class="table-warning">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picsite/realisasi/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
+                                            <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$jkt->$scan}} />
-                                            <input type="hidden" name = 'tipefile' value='DANA'>
+                                            <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                             <button type="submit" name="views3" class="btn btn-dark">view</button>
                                         </form>
                                     </td>                                                                   
@@ -666,19 +643,16 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>   
-                                <td class="table-success" id="status"><strong>{{$jkt->$stats}}</td>                                      
-                                <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>       
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                         <input type="hidden" name='result' value={{$jkt->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                                                      
@@ -689,19 +663,16 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>     
-                                <td class="table-danger" id="status"><strong>{{$jkt->$stats}}</td>                                      
-                                <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
+                                <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>         
                                 <td class="table-info">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
+                                    <form method="post" action="/picsite/realisasi/view" target="_blank">
                                         @csrf
-                                        <input type="hidden" name='type_upload' value="Fund_Req" />
+                                        <input type="hidden" name='type_upload' value="Fund_Real" />
                                         <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                         <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                         <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                         <input type="hidden" name='result' value={{$jkt->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
+                                        <input type="hidden" name = 'tipefile' value='Fund_Real'>
                                         <button type="submit" name="views3" class="btn btn-dark">view</button>
                                     </form>
                                 </td>                  
@@ -730,7 +701,4 @@
         }
         setInterval(refreshDiv, 60000);
     </script>
-@endsection
-@else
-    @include('../layouts/notAuthorized')
-@endif
+@endsection 

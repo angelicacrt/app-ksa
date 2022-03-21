@@ -19,9 +19,9 @@
                     <span data-feather="file-plus" style="color: black"></span>
                     History Note SPGR
                 </a>
-                <a class="nav-link" aria-current="" href="/insurance/HistoryRekapulasiDana">
-                    <span data-feather="file-plus" style="color: black"></span>
-                    History Rekapitulasi Dana
+                <a class="nav-link" aria-current="" href="/insurance/Realisasi-Dana">
+                    <span data-feather="archive" style="color: black"></span>
+                    History Realisasi Dana
                 </a>
             </li>
         </ul>

@@ -31,7 +31,7 @@
                 </script>
             </h3>
             <div class="jumbotron jumbotron-fluid" >
-                <h1 class="Header-1" style="margin-top: -3%; margin-left: 44%;">Overview</h1>
+                <h1 class="Header-1" style="margin-top: -3%;">Overview - Fund Request</h1>
                 <hr class="my-4">
                 <form method="GET" action="/dashboard/search" role="search">
                 <div class="row">
@@ -53,36 +53,39 @@
                     </div>
                     <div class="col">
                         <select name="search" id="cabangfilter"class="form-select" >
-                        <option selected disabled hidden='true' value="">Pilih Cabang</option>
-                        <option value="All">Semua Cabang</option>
-                        <option value="Babelan">Babelan</option>
-                        <option value="Berau">Berau</option>
-                        <option value="Samarinda">Samarinda</option>
-                        <option value="Banjarmasin">Banjarmasin</option>
-                        <option value="Jakarta">Jakarta</option>
-                        <option value="Kendari">Kendari</option>
-                        <option value="Morosi">Morosi</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/dashboard-RPK">Change to RPK</a>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-end">
-                      @if($searchresult == 'Babelan')
-                        {{$document->links()}}
-                      @elseif($searchresult == 'Berau')
-                        {{$documentberau->links()}}
-                      @elseif($searchresult == 'Banjarmasin')
-                        {{$documentbanjarmasin->links()}}
-                      @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
-                        {{$documentsamarinda->links()}}
-                      @elseif($searchresult == 'Jakarta')
-                        {{$documentjakarta->links()}}
-                      @endif
+                            <option selected disabled hidden='true' value="">Pilih Cabang</option>
+                            <option value="All">Semua Cabang</option>
+                            <option value="Babelan">Babelan</option>
+                            <option value="Berau">Berau</option>
+                            <option value="Samarinda">Samarinda</option>
+                            <option value="Banjarmasin">Banjarmasin</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Kendari">Kendari</option>
+                            <option value="Morosi">Morosi</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                        @if($searchresult == 'Babelan')
+                            {{$document->links()}}
+                        @elseif($searchresult == 'Berau')
+                            {{$documentberau->links()}}
+                        @elseif($searchresult == 'Banjarmasin')
+                            {{$documentbanjarmasin->links()}}
+                        @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
+                            {{$documentsamarinda->links()}}
+                        @elseif($searchresult == 'Jakarta')
+                            {{$documentjakarta->links()}}
+                        @endif
+                        </div>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/dashboard-Realisasi">Change to Realisasi Dana</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger"  href="/picadmin/dashboard-RPK">Change to RPK</a>
                     </div>
                 </div>
-            </div>
             </form>
                 
                 @if($errors->any())
@@ -109,6 +112,7 @@
                         <th>Periode (Y-M-D)</th>
                         <th>Nama File</th>
                         <th>Jenis File</th>
+                        <th>Dana diajukan</th>
                         <th>status</th>
                         <th>Reason</th>
                         <th>Action</th>
@@ -136,6 +140,7 @@
                           $stats ="status".$a;
                           $reason = "reason".$a;
                           $date = date('Y-m-28');
+                          $dana = "dana".$a;
                           $scan = $BABELAN[$a-1];
                       @endphp
                     @if(empty($doc->$stats))
@@ -150,7 +155,8 @@
                             <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                             <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                             <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
+                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
                             <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                             <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
                             <td class="table-warning">
@@ -172,7 +178,8 @@
                             <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                             <td class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                             <td class="table-success" id="namafile">{{$names[$a-1]}}</td>    
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>   
+                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>   
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$doc ->$reason}}</td>                                        
                             <td class="table-success">
@@ -194,7 +201,8 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                             <td class="table-danger" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                             <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>     
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>  
+                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>  
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
                             <td class="table-danger">
@@ -245,6 +253,7 @@
                     $stats ="status".$a;
                     $reason = "reason".$a;
                     $date = date('Y-m-28');
+                    $dana = "dana".$a;
                     $scan = $BERAU[$a-1];
                 @endphp
                 <input type="hidden" name='status' value={{$stats}}>
@@ -260,7 +269,8 @@
                         <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                         <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                         <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
+                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                        <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
                         <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-warning" id="reason">{{$d ->$reason}}</td>
                         <td class="table-warning">
@@ -282,7 +292,8 @@
                         <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                         <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                         <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>  
+                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                        <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>  
                         <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-success" id="reason">{{$d->$reason}}</td>    
                         <td class="table-success">
@@ -304,7 +315,8 @@
                         <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                         <td class="table-danger" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                         <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>
-                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>       
+                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                        <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>       
                         <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-danger" id="reason">{{$d->$reason}}</td>   
                         <td class="table-danger">
@@ -357,6 +369,7 @@
                 $stats ="status".$a;
                 $reason = "reason".$a;
                 $date = date('Y-m-28');
+                $dana = "dana".$a;
                 $scan = $BANJARMASIN[$a-1];
             @endphp
             <input type="hidden" name='status' value={{$stats}}>
@@ -371,7 +384,8 @@
                         <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                         <td class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                         <td class="table-success" id="namafile">{{$names[$a-1]}}</td> 
-                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>      
+                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                        <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>      
                         <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                         <td class="table-success" id="reason">{{$b->$reason}}</td>
                         <td class="table-success">
@@ -393,7 +407,8 @@
                         <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                         <td class="table-danger" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                         <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>    
+                        <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                        <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>    
                         <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                         <td class="table-danger" id="reason">{{$b->$reason}}</td>
                         <td class="table-danger">
@@ -454,6 +469,7 @@
                   $stats ="status".$a;
                   $reason = "reason".$a;
                   $date = date('Y-m-28');
+                  $dana = "dana".$a;
                   $scan = $SAMARINDA[$a-1];
                 @endphp
                     <input type="hidden" name='status' value={{$stats}}>
@@ -468,7 +484,8 @@
                             <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                             <td class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                             <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>  
+                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>  
                             <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                             <td class="table-success" id="reason">{{$s->$reason}}</td>    
                             <td class="table-success">
@@ -490,7 +507,8 @@
                             <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                             <td class="table-danger" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                             <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>    
+                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                            <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>    
                             <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                             <td class="table-danger" id="reason">{{$s->$reason}}</td>    
                             <td class="table-danger">
@@ -550,6 +568,7 @@
                             $stats ="status".$a;
                             $reason = "reason".$a;
                             $date = date('Y-m-28');
+                            $dana = "dana".$a;
                             $scan = $JAKARTA[$a-1];
                         @endphp
                             <input type="hidden" name='status' value={{$stats}}>
@@ -565,7 +584,8 @@
                                 <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>     
+                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                                <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
                                 <td class="table-warning">
@@ -587,7 +607,8 @@
                                 <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>  
+                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>  
                                 <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
                                 <td class="table-success">
@@ -609,7 +630,8 @@
                                 <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                 <td class="table-danger" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                 <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>    
+                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
+                                <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>    
                                 <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
                                 <td class="table-danger">
@@ -637,6 +659,9 @@
         </div>
     </main>
 </div>
+    <style>
+        h1 {text-align: center;}
+    </style>
     <script type="text/javascript">
         function refreshDiv(){
             $('#content').load(location.href + ' #content')

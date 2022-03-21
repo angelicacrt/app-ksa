@@ -191,6 +191,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
             ->update([
                 $request->status => 'rejected',
                 $request->reason => $request->reasonbox ,
@@ -206,6 +207,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
             ->update([
                 $request->status => 'rejected',
                 $request->reason => $request->reasonbox ,
@@ -221,6 +223,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
             ->update([
                 $request->status => 'rejected',
                 $request->reason => $request->reasonbox ,
@@ -236,6 +239,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
             ->update([
                 $request->status => 'rejected',
                 $request->reason => $request->reasonbox ,
@@ -251,6 +255,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
             ->update([
                 $request->status => 'rejected',
                 $request->reason => $request->reasonbox ,
@@ -263,7 +268,7 @@ class picAdminController extends Controller
     public function approve(Request $request){
         $datetime = date('Y-m-d');
         // dd($request);
-        //no reason needed for banjarmasin
+        //no approval reason needed for banjarmasin
         if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
             $filename = $request->viewdoc;
             $result = $request->result;
@@ -273,6 +278,7 @@ class picAdminController extends Controller
             documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
             ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->update([
                 $request->status => 'approved',
@@ -289,6 +295,7 @@ class picAdminController extends Controller
                 
                 documents::where($filename, 'Like', '%' . $result . '%')
                 ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->update([
                     $request->status => 'approved',
@@ -303,6 +310,7 @@ class picAdminController extends Controller
                 documentberau::where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
                     $request->reason => $request->reasonbox ,
@@ -318,6 +326,7 @@ class picAdminController extends Controller
                 ->where('cabang', $cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
                     $request->reason => $request->reasonbox ,
@@ -332,6 +341,7 @@ class picAdminController extends Controller
                 ->where('cabang', $request->cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
                     $request->reason => $request->reasonbox ,
@@ -416,6 +426,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documents::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -427,6 +438,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentberau::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -439,6 +451,7 @@ class picAdminController extends Controller
                 $viewer = documentbanjarmasin::whereNotNull ($filename)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -451,6 +464,7 @@ class picAdminController extends Controller
                 $viewer = documentsamarinda::whereNotNull ($filename)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -462,6 +476,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentJakarta::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -540,45 +555,189 @@ class picAdminController extends Controller
         }
     }
     
-    private $excel;
-    public function __construct(Excel $excel){
-        $this->excel = $excel;
-    }
-    //export Rekap PDF page
-    public function exportPDF(Request $request) {
-        $date = Carbon::now();
-        $monthName = $date->format('F');
-        $identify = $request->cabang_rekap;
-        // dd($identify);
-        return (new RekapAdminExport($identify))->download('RekapulasiDanaPicAdmin'. '-' . $monthName . '-' .'.pdf' , \Maatwebsite\Excel\Excel::DOMPDF);
-    }
-    //export Rekap Excel page
-    public function exportEXCEL(Request $request) {
-        $date = Carbon::now();
-        $monthName = $date->format('F');
-        $identify = $request->cabang_rekap;
-        return Excel::download(new RekapAdminExport($identify), 'RekapulasiDanaPicAdmin'. '-' . $monthName . '-' . '.xlsx');
-    }
-    // RekapulasiDana page
-    public function RekapulasiDana(Request $request){
+    // Realisasi Dana page
+    public function AdminRealisasiDana(Request $request){
         $datetime = date('Y-m-d');
         $searchresult = $request->search;
         if ($searchresult == 'All') {
-            $rekapdana= Rekapdana::latest()
-            ->paginate(25);
-            return view('picadmin.picAdminRekapulasiDana' , compact('rekapdana' , 'searchresult'));
-        }elseif ($request->filled('search')) {
-            $rekapdana= Rekapdana::latest()
-            ->where('Cabang', $request->search)
-            ->paginate(25);
-            return view('picadmin.picAdminRekapulasiDana' , compact('rekapdana' , 'searchresult'));
+            $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10);
+            return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }elseif($request->filled('search_kapal')) {
+            //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+            $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }elseif ($request->filled('search')){
+             $document = documents::where('cabang', $request->search)
+             ->where('upload_type','Fund_Real')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10);
+ 
+             $documentberau = documentberau::where('cabang', $request->search)
+             ->where('upload_type','Fund_Real')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10);
+ 
+             $documentbanjarmasin = documentbanjarmasin::where('cabang', $request->search)
+             ->where('cabang', Auth::user()->cabang)
+             ->where('upload_type','Fund_Real')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10);
+ 
+             $documentsamarinda = documentsamarinda::where('cabang', $request->search)
+             ->where('cabang', Auth::user()->cabang)
+             ->where('upload_type','Fund_Real')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10);
+ 
+             $documentjakarta = documentJakarta::where('cabang', $request->search)
+             ->where('upload_type','Fund_Real')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10);
+ 
+             return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }elseif ($request->filled('search_kapal') && $request->filled('search')){
+            $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Real')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10);
+
+            return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }else{
-            //get DocRPK Data as long as the periode_akhir(column database)
-            $rekapdana= Rekapdana::latest()
-            ->paginate(25);
-            return view('picadmin.picAdminRekapulasiDana', compact('rekapdana' , 'searchresult'));
+            $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10);
+            return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }    
+        return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+    }
+
+    public function AdminRealisasiDana_view(Request $request){
+        $year = date('Y');
+        $month = date('m');
+            // realisasi Fund Request view ----------------------------------------------------------
+            if($request->tipefile == 'Fund_Real' && $request->type_upload == 'Fund_Real'){
+            if ($request->cabang == 'Babelan'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documents::whereNotNull($filename)
+                ->where('upload_type','Fund_Real')
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('babelan/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Berau'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentberau::whereNotNull($filename)
+                ->where('upload_type','Fund_Real')
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentbanjarmasin::whereNotNull($filename)
+                ->where('upload_type','Fund_Real')
+                ->where('cabang' , $request->cabang)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('banjarmasin/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentsamarinda::whereNotNull($filename)
+                ->where('upload_type','Fund_Real')
+                ->where('cabang' , $request->cabang)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Jakarta'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentJakarta::whereNotNull($filename)
+                ->where('upload_type','Fund_Real')
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('jakarta/' . $year . "/". $month . "/" . $viewer);
+            }
         }
-        return view('picadmin.picAdminRekapulasiDana', compact('rekapdana' , 'searchresult'));
     }
 
     // RecordDocuments page
@@ -714,6 +873,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documents::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
@@ -726,6 +886,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentberau::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
@@ -738,6 +899,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentbanjarmasin::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
                     ->where('cabang' , $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -751,6 +913,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentsamarinda::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
                     ->where('cabang' , $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -764,6 +927,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentJakarta::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];

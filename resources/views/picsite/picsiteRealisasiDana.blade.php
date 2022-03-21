@@ -1,6 +1,6 @@
 @extends('../layouts.base')
 
-@section('title', 'Picsite Upload Form')
+@section('title', 'PicSite Realisasi Dana')
 
 @section('container')
 <div class="row">
@@ -34,7 +34,7 @@
                        
                         <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
-                            <input type="hidden" name='type_upload' value="Fund_Req" />
+                            <input type="hidden" name='type_upload' value="Fund_Real" />
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Nama Kapal</label>
@@ -64,16 +64,15 @@
                                     <input type="date" class="form-control" name="tgl_akhir" required placeholder="Periode Akhir">
                                 </div>
                         
-                                <table class="table"style="margin-top: 1%">
-                                <thead class="thead-dark" >
-                                    <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Nama File</th>
-                                        <th scope="col">Dana Yang Diajukan</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <table class="table"style="margin-top: 1%">
+                            <thead class="thead-dark" >
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nama File</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 {{--Babelan ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                                     @if (Auth::user()->cabang == 'Babelan')
                                     @for ($a = 1 ; $a <= 24 ; $a++)
@@ -94,14 +93,6 @@
                                         <tr>
                                             <td class=table-primary>{{ $a }}</td>
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                            <td class=table-primary>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">RP.</span>
-                                                    </div>
-                                                        <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
-                                                    </div>
-                                            </td>
                                             <td class=table-light>
                                                 <div class="input-group mb-3">
                                                     <input type="file" class="form-control" name={{$ufile}} id="ufile">
@@ -239,14 +230,6 @@
                                         <tr>
                                             <td class=table-primary>{{ $a }}</td>
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                            <td class=table-primary>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">RP.</span>
-                                                    </div>
-                                                        <input type="text" class="form-control" name={{$dana}} placeholder="maks. 15 Digit" id="currency-field">
-                                                    </div>
-                                            </td>
                                             <td class=table-light>
                                                 <div class="input-group mb-3">
                                                     <input type="file" class="form-control" name={{$jktfile}} id="jktfile">
@@ -271,31 +254,6 @@
                             }, 5000 ); // 5 secs
                         </script>
                         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                        <script>
-                            function updateTextView(_obj){
-                            var num = getNumber(_obj.val());
-                                if(num==0){
-                                    _obj.val('');
-                                }else{
-                                    _obj.val(num.toLocaleString());
-                                }
-                            }
-                            function getNumber(_str){
-                                var arr = _str.split('');
-                                var out = new Array();
-                                for(var cnt=0;cnt<arr.length;cnt++){
-                                    if(isNaN(arr[cnt])==false){
-                                    out.push(arr[cnt]);
-                                    }
-                                }
-                                return Number(out.join(''));
-                            }
-                            $(document).ready(function(){
-                                $('input[type=text]').on('keyup',function(){
-                                    updateTextView($(this));
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
             </div>   

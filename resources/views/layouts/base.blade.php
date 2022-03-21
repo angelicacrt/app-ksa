@@ -53,26 +53,29 @@
                 </div>
             </div>
         @endif
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <div class="row">
-                    <div class="col">
-                        <a  class="nav-link px-3 bg-dark border-0" style="margin-right: 25px" href="https://drive.google.com/drive/folders/1echqZO5WURy25x3CD0Aj19Kt6Hnrq8lj?usp=sharing" target="_blank" >
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span data-feather="help-circle"></span>
-                            Help   
-                        </a>
-                    </div>
-                    <div class="col">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="nav-link px-3 bg-dark border-0" style="margin-right: 25px"><i
-                                    class="bi bi-box-arrow-right"></i>
-                                    <span data-feather="log-out"></span>
-                                    Logout</button>
-                        </form>
-                    </div>
-                </div>
+        {{-- navbar logut and help --}}
+        {{-- <div class="navbar-nav">
+        </div>
+        <div class="nav-item text-nowrap">
+        </div> --}}
+        <div class="btn-group dropleft">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+            </button>
+            <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenu2">
+                <a  class="nav-link px-20 border-0" style="color:white" href="https://drive.google.com/drive/folders/1echqZO5WURy25x3CD0Aj19Kt6Hnrq8lj?usp=sharing" target="_blank" >
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span data-feather="help-circle"></span>
+                    Help   
+                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" style="color:white" class="nav-link bg-dark px-20 border-0"><i
+                            class="bi bi-box-arrow-right"></i>
+                            <span data-feather="log-out"></span>
+                            Logout</button>
+                </form>
+                {{-- <button class="dropdown-item" type="button">Something else here</button> --}}
             </div>
         </div>
     </header>
