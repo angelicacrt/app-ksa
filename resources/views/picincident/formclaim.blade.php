@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label style="margin-top: 2%; margin-left: 1%">Tug</label>
-                                        <input list="Nama_kapals" name="TugBoat" id="nama_kapal" placeholder="Nama tug" :value="old('TugBoat')" class="col-lg-full custom-select custom-select-md" autofocus>
+                                        <input list="Nama_kapals" name="TugBoat" id="nama_kapal" placeholder="Nama tug" value="{{old('TugBoat')}}" class="col-lg-full custom-select custom-select-md" autofocus>
                                         <datalist id="Nama_kapals">
                                             @foreach ($tug as $t)
                                                 <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
@@ -51,7 +51,7 @@
                                         </datalist>
 
                                         <label style="margin-top: 2%; margin-left: 1%">Barge</label>
-                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" :value="old('barge')"  placeholder="Nama Barge" name="barge" id="Nama_Barge" autofocus>
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" value="{{old('barge')}}"  placeholder="Nama Barge" name="barge" id="Nama_Barge" autofocus>
                                         <datalist id="nama_tug_barges">
                                             @foreach ($barge as $b)
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
