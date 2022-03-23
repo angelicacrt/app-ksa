@@ -15,15 +15,19 @@
                     History FCI
                 </a>
                 <a class="nav-link" aria-current="page" href="/picincident/spgr">
-                    <span data-feather="file-plus" style="color: black"></span>
+                    <span data-feather="file-plus"></span>
                     Request Extend SPGR
                 </a>
                 <a class="nav-link" aria-current="page" href="/picincident/NoteSpgr">
-                    <span data-feather="file-plus" style="color: black"></span>
+                    <span data-feather="file-plus"></span>
                     Note Spgr
                 </a>
-                
             </li>
         </ul>
     </div>
 </nav>
+<style>
+    a{
+        font-size: 17px;
+    } 
+</style> 

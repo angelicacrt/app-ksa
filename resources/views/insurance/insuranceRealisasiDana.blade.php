@@ -609,7 +609,6 @@
                                         <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                         <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
                                         <td class="table-dark" id="jenisfile"><strong>Realisasi DANA</strong></td>
-                                        <td class="table-warning" id="reason">{{$jkt->$reason}}</td>   
                                         <td class="table-warning">
                                             <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                                 @csrf

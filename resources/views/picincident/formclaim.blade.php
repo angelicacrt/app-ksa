@@ -18,6 +18,7 @@
                         
                             <form method="POST" action="/picincident/formclaim/submitform">
                                 @csrf
+                                {{-- bagian atas --}}
                                 <div class="form-row">
                                     <div class="col-lg-3" style="margin-right:2%">
                                         <x-label for="name" :value="__('Name : ')" style="margin-top: 2%; margin-left: 1%" />
@@ -41,11 +42,27 @@
                                         
                                     </div>
                                     <div class="col-lg-3">
-                                        <x-label for="barge" :value="__('barge : ')" style="margin-top: 2%; margin-left: 1%" />
+                                        <label style="margin-top: 2%; margin-left: 1%">Tug</label>
+                                        <input list="Nama_kapals" name="TugBoat" id="nama_kapal" placeholder="Nama tug" :value="old('TugBoat')" class="col-lg-full custom-select custom-select-md" autofocus>
+                                        <datalist id="Nama_kapals">
+                                            @foreach ($tug as $t)
+                                                <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
+                                            @endforeach
+                                        </datalist>
+
+                                        <label style="margin-top: 2%; margin-left: 1%">Barge</label>
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" :value="old('barge')"  placeholder="Nama Barge" name="barge" id="Nama_Barge" autofocus>
+                                        <datalist id="nama_tug_barges">
+                                            @foreach ($barge as $b)
+                                                <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
+                                            @endforeach
+                                        </datalist>
+                                        
+                                        {{-- <x-label for="barge" :value="__('barge : ')" style="margin-top: 2%; margin-left: 1%" />
                                         <x-input id="barge" class="block mt-1 w-full" type="text" name="barge" placeholder="Enter barge" :value="old('barge')"  autofocus />
     
                                         <x-label for="TugBoat" :value="__('TugBoat : ')" style="margin-top: 2%; margin-left: 1%" />
-                                        <x-input id="TugBoat" class="block mt-1 w-full" type="text" name="TugBoat" placeholder="Enter TugBoat Name" :value="old('TugBoat')"  autofocus />
+                                        <x-input id="TugBoat" class="block mt-1 w-full" type="text" name="TugBoat" placeholder="Enter TugBoat Name" :value="old('TugBoat')"  autofocus /> --}}
 
                                         <x-label for="TSI_TugBoat" :value="__('TSI TugBoat : ')" style="margin-top: 2%; margin-left: 1%"  />
                                           <div class="input-group mb-1">
@@ -53,7 +70,7 @@
                                                   <option selected value="USD" id="">USD</option>
                                                   <option value="IDR" id="">IDR</option>
                                               </select>
-                                              <input id="TSI_TugBoat" type="number" class="form-control" name="TSI_TugBoat" placeholder="Enter TSI TugBoat" value="{{ old('TSI_TugBoat') }}"   autofocus>
+                                              <input id="TSI_TugBoat" type="text" class="form-control" name="TSI_TugBoat" placeholder="Enter TSI TugBoat" value="{{ old('TSI_TugBoat') }}"   autofocus>
                                             </div>
                                         <x-label for="TSI_barge" :value="__('TSI Barge : ')" style="margin-top: 2%; margin-left: 1%"  />
                                           <div class="input-group mb-1">
@@ -61,7 +78,7 @@
                                                   <option selected value="USD" id="">USD</option>
                                                   <option value="IDR" id="">IDR</option>
                                               </select>
-                                              <input id="TSI_barge" type="number" class="form-control" name="TSI_barge" placeholder="Enter TSI barge" value="{{ old('TSI_barge') }}"   autofocus/>
+                                              <input id="TSI_barge" type="text" class="form-control" name="TSI_barge" placeholder="Enter TSI barge" value="{{ old('TSI_barge') }}"   autofocus/>
                                             </div>
                                             {{-- <x-label for="TSI_barge" :value="__('TSI barge : ')" style="margin-top: 2%; margin-left: 1%"  /> --}}
                                     </div>
@@ -69,7 +86,7 @@
 
                                 <br>
                                 <br>
-                                
+                                {{-- bagian bawah --}}
                                 <div class="form-row">
                                     <div class="col-lg-3">
                                         <x-label for="jenisincident" :value="__('Jenis Incident : ')" style="margin-top: 2%; margin-left: 1%" />
@@ -84,10 +101,10 @@
                                     
                                     <div class="col-lg-3" style="margin-right:2%">
                                         <x-label for="Deductible" :value="__('Deductible : ')" style="margin-top: 2%; margin-left: 1%" />
-                                        <x-input id="Deductible" class="block mt-1 w-full" type="number" name="Deductible" placeholder="Enter Deductible" :value="old('Deductible')" onfocus="this.value=''" autofocus />
+                                        <input id="Deductible" class="form-control" type="text" name="Deductible" placeholder="Enter Deductible" value="{{old('Deductible')}}" autofocus />
     
                                         <x-label for="Amount" :value="__('Amount : ')" style="margin-top: 2%; margin-left: 1%" />
-                                        {{-- <x-input id="Amount" class="block mt-1 w-full" type="number" name="Amount" placeholder="Enter Amount" :value="old('Amount')" required autofocus /> --}}
+                                        {{-- <x-input id="Amount" class="block mt-1 w-full" type="text" name="Amount" placeholder="Enter Amount" :value="old('Amount')" required autofocus /> --}}
                                         <div class="input-group mb-1">
                                             <select class="btn btn-outline-secondary" name="mata_uang_amount">
                                                 <option selected value="USD" id="">USD</option>
@@ -95,7 +112,7 @@
                                                 <option value="SGD" id="">SGD</option>
                                                 <option value="EURO" id="">EURO</option>
                                             </select>
-                                            <input id="Amount" type="number" class="form-control" name="Amount" placeholder="Enter Amount" value="{{ old('Amount') }}"  required autofocus>
+                                            <input id="Amount" type="text" class="form-control" name="Amount" placeholder="Enter Amount" value="{{ old('Amount') }}"  required autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +172,7 @@
                                         <td class="table-info">{{$loop->index+1}}</td>
                                         <td class="table-info">{{$temp->jenis_incident}}</td>
                                         <td class="table-info">{{$temp->item}}</td>
-                                        <td class="table-info">{{$temp->mata_uang_TSI}}.{{$temp->deductible}}</td>
+                                        <td class="table-info">{{$temp->deductible}}</td>
                                         <td class="table-info">{{Str::limit($temp->description , 20)}}</td>
                                         <td class="table-info">{{$temp->mata_uang_amount}}.{{$temp->amount}}</td>
                                         <td class="table-info">
@@ -177,6 +194,48 @@
                             }, 3000 ); // 3 secs
                         </script>
                         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                        <script>
+                            // to separate the number every 3 digits
+                            function updateTextView(_obj){
+                                var num = getNumber(_obj.val());
+                                if(num==0){
+                                    _obj.val('');
+                                }else{
+                                    _obj.val(num.toLocaleString());
+                                }
+                            }
+                            function getNumber(_str){
+                                var arr = _str.split('');
+                                var out = new Array();
+                                for(var cnt=0;cnt<arr.length;cnt++){
+                                    if(isNaN(arr[cnt])==false){
+                                    out.push(arr[cnt]);
+                                    }
+                                }
+                                return Number(out.join(''));
+                            }
+
+                            // call only for certain inputs
+                            var amount = document.getElementById('Amount');
+                            amount.addEventListener('keyup', function(){
+                                updateTextView($(amount));
+                            });
+
+                            var barge = document.getElementById('TSI_barge');
+                            barge.addEventListener('keyup', function(){
+                                updateTextView($(barge));
+                            });
+
+                            var Deductible = document.getElementById('Deductible');
+                            Deductible.addEventListener('keyup', function(){
+                                updateTextView($(Deductible));
+                            });
+
+                            var tug = document.getElementById('TSI_TugBoat');
+                            tug.addEventListener('keyup', function(){
+                                updateTextView($(tug));
+                            });
+                        </script>
                     </div>
                 </div>  
             </div>

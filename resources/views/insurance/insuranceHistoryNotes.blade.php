@@ -3,7 +3,6 @@
 @section('title', 'Insurance-Check-Spgr-Notes')
 
 @section('container')
-<x-guest-layout>
 <div class="row">
     @include('insurance.insuranceSidebar')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -62,7 +61,7 @@
         </div>   
     </main>
 </div>
-</x-guest-layout>
+
 <script type="text/javascript">
     function refreshDiv(){
         $('#content').load(location.href + ' #content')

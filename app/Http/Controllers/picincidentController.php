@@ -6,8 +6,9 @@ use Storage;
 use Response;
 use validator;
 use Carbon\Carbon;
-use App\Mail\Gmail;
+use App\Models\Tug;
 use App\Models\User;
+use App\Models\Barge;
 use App\Models\NoteSpgr;
 use App\Models\spgrfile;
 use App\Models\tempcart;
@@ -20,7 +21,6 @@ use App\Models\headerformclaim;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -30,7 +30,9 @@ class picincidentController extends Controller
     public function formclaim(){
         $tempcarts = tempcart::where('user_id', Auth::user()->id)->get();
         $latestcarts = tempcart::where('user_id', Auth::user()->id)->first();
-        return view('picincident.formclaim' , compact('tempcarts' , 'latestcarts'));
+        $tug=Tug::latest()->get();
+        $barge=Barge::latest()->get();
+        return view('picincident.formclaim' , compact('tug' , 'barge','tempcarts' , 'latestcarts'));
     }
    
     // addtoCart 

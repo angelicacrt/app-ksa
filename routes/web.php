@@ -381,8 +381,8 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/Record-Document-RPK',[PicsiteController::class, 'DocRecordRPK']);
         Route::get('/search-record', [PicsiteController::class , 'searchDocRecord']);
         Route::get('/search-record-RPK', [PicsiteController::class , 'searchDocRecordRPK']);
-        Route::post('/rpk/view', [PicsiteController::class, 'viewRecord']);
-        Route::post('/dana/view', [PicsiteController::class, 'viewRecord']);
+        Route::post('/rpk_record/view', [PicsiteController::class, 'viewRecord']);
+        Route::post('/dana_record/view', [PicsiteController::class, 'viewRecord']);
         
         //rpk dashboard
         Route::get('/dashboard/rpk', [PicsiteController::class , 'DashboardRPK']);

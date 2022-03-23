@@ -3,10 +3,9 @@
 @section('title', 'insurance-history-FCI')
 
 @section('container')
-<x-guest-layout>
 <div class="row">
     @include('insurance.insuranceSidebar')
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-10">
         <div class="col" style="margin-top: 15px">
             <div class="jumbotron jumbotron-fluid" >
                 <div class="container">
@@ -74,7 +73,6 @@
     </div>
     </main>
 </div>
-</x-guest-layout>
 <script type="text/javascript">
     function refreshDiv(){
         $('#content').load(location.href + ' #content')

@@ -40,14 +40,14 @@
                                     <label>Nama Kapal</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Tug</span>
-                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md" required>
+                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
                                         <datalist id="Nama_kapals">
                                             @foreach ($tug as $t)
                                                 <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
                                             @endforeach
                                         </datalist>
                                         <span class="input-group-text">Barge</span>
-                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" required id="Nama_Barge" >
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" id="Nama_Barge" >
                                         <datalist id="nama_tug_barges">
                                             @foreach ($barge as $b)
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
@@ -99,8 +99,8 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">RP.</span>
                                                     </div>
-                                                        <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
-                                                    </div>
+                                                    <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                </div>
                                             </td>
                                             <td class=table-light>
                                                 <div class="input-group mb-3">
@@ -133,6 +133,14 @@
                                         <tr>
                                             <td class=table-primary>{{$a}}</td>   
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
+                                            <td class=table-primary>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">RP.</span>
+                                                    </div>
+                                                    <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                </div>
+                                            </td>
                                             <td class=table-light>
                                                 <div class="input-group mb-3">
                                                     <input type="file" class="form-control" name="{{$beraufile}}" id="beraufile">
@@ -166,11 +174,19 @@
                                     <tr>   
                                         <td class=table-primary>{{ $a }}</td>
                                         <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                            <td class=table-light>
-                                                <div class="input-group mb-3">
-                                                    <input type="file" class="form-control" name="{{$banjarmasinfile}}" id="banjarmasinfile">
+                                        <td class=table-primary>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">RP.</span>
                                                 </div>
-                                            </td>  
+                                                <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                            </div>
+                                        </td>
+                                        <td class=table-light>
+                                            <div class="input-group mb-3">
+                                                <input type="file" class="form-control" name="{{$banjarmasinfile}}" id="banjarmasinfile">
+                                            </div>
+                                        </td>  
                                     </tr>      
                                 @endfor
                             @endif
@@ -202,11 +218,19 @@
                                         <tr>
                                             <td class=table-primary>{{ $a }}</td>   
                                             <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
-                                                <td class=table-light>
-                                                    <div class="input-group mb-3">
-                                                        <input type="file" class="form-control" name="{{$samarindafile}}" id="samarindafile">
+                                            <td class=table-primary>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">RP.</span>
                                                     </div>
-                                                </td>  
+                                                    <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                </div>
+                                            </td>
+                                            <td class=table-light>
+                                                <div class="input-group mb-3">
+                                                    <input type="file" class="form-control" name="{{$samarindafile}}" id="samarindafile">
+                                                </div>
+                                            </td>  
                                         </tr>     
                                         @endfor
                                     @endif
@@ -244,8 +268,8 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">RP.</span>
                                                     </div>
-                                                        <input type="text" class="form-control" name={{$dana}} placeholder="maks. 15 Digit" id="currency-field">
-                                                    </div>
+                                                    <input type="text" class="form-control" name={{$dana}} placeholder="maks. 15 Digit" id="currency-field">
+                                                </div>
                                             </td>
                                             <td class=table-light>
                                                 <div class="input-group mb-3">

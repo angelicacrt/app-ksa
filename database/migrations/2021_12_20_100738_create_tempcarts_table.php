@@ -31,7 +31,7 @@ class CreateTempcartsTable extends Migration
             $table->string('barge')->nullable();
             $table->string('tugBoat')->nullable();
             $table->string('item')->nullable();
-            $table->decimal('deductible', 14, 2)->nullable();
+            $table->string('deductible', 25)->nullable();
             $table->string('amount', 25)->nullable();
             $table->longText('description')->nullable();
 

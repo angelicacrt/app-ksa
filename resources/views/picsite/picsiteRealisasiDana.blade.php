@@ -10,11 +10,8 @@
             <div class="col" style="margin-top: 15px">
                 <div class="jumbotron jumbotron-fluid" >
                     <div class="container">
-                      <h1 class="display-4">Upload your Fund Request Form</h1>
-                        <p class="lead">please only upload file with .PDF format only and size is not more than 3 MB.
-                          <br>
-                            Please upload your document request & fund request form  !
-                        </p>
+                      <h1 class="display-4">Upload Realisasi Fund Form</h1>
+                        <p class="lead">please only upload file with .PDF format only and size is not more than 3 MB.</p>
                         <br>
                         <button class="btn btn-danger" id="topsubmit" style="margin-left: 80%; width: 20%;" onClick="">Submit</button>
 
@@ -40,14 +37,14 @@
                                     <label>Nama Kapal</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Tug</span>
-                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md" required>
+                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
                                         <datalist id="Nama_kapals">
                                             @foreach ($tug as $t)
                                                 <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
                                             @endforeach
                                         </datalist>
                                         <span class="input-group-text">Barge</span>
-                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" required id="Nama_Barge" >
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" id="Nama_Barge" >
                                         <datalist id="nama_tug_barges">
                                             @foreach ($barge as $b)
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>

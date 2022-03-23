@@ -19,6 +19,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
     <link href="/css/dashboard.css" rel="stylesheet">
+    <style>
+        /* Modify the background color */
+         
+        .navbar-custom {
+            background-color: #86062a;
+        }
+        .bg-custom {
+            background-color: #86052a;
+        }
+
+        .a{
+            font-weight: bold; 
+            font-size: 16px;
+        }
+        /* Modify brand and text color */
+         
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-text {
+            color: white;
+        }
+    </style>
 </head>
 
 <body onload="startTime();">
@@ -36,8 +57,8 @@
             'Batu Licin' => 'BTL' ,
         ];
     @endphp
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/dashboard" style="font-weight: bold; font-size: 14px;">PT. KSA - {{ Auth::user()->roles->first()->display_name}} - {{ $cabang_arr[Auth::user()->cabang] }}</a>
+    <header class="navbar navbar-custom sticky-top bg-custom flex-md-nowrap p-0">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/dashboard" style="font-weight: bold; font-size: 16px;">PT. KSA - {{ Auth::user()->roles->first()->display_name}} - {{ $cabang_arr[Auth::user()->cabang] }}</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -54,30 +75,38 @@
             </div>
         @endif
         {{-- navbar logut and help --}}
-        {{-- <div class="navbar-nav">
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a  class="nav-link px-20 border-0" style="color:white; font-size: 18px;" href="https://drive.google.com/drive/folders/1echqZO5WURy25x3CD0Aj19Kt6Hnrq8lj?usp=sharing" target="_blank" >
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span style="color:white; width: 22px; height: 22px;" data-feather="help-circle"></span>
+                    Help   
+                </a>
+            </div>
         </div>
-        <div class="nav-item text-nowrap">
-        </div> --}}
         <div class="btn-group dropleft">
-            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn navbar-custom dropdown-toggle" style="color:white; font-size: 18px;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Menu
             </button>
-            <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenu2">
-                <a  class="nav-link px-20 border-0" style="color:white" href="https://drive.google.com/drive/folders/1echqZO5WURy25x3CD0Aj19Kt6Hnrq8lj?usp=sharing" target="_blank" >
+            <div class="dropdown-menu navbar-custom" aria-labelledby="dropdownMenu2">
+                <a  class="nav-link px-20 border-0" style="color:white; font-size: 18px;" href="#" >
                     <i class="bi bi-box-arrow-right"></i>
-                    <span data-feather="help-circle"></span>
-                    Help   
+                    <span style="color:white; width: 22px; height: 22px;" data-feather="user"></span>
+                    Profile   
+                </a>
+                <a  class="nav-link px-20 border-0" style="color:white; font-size: 16px;" href="#" >
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span style="color:white; width: 22px; height: 22px;" data-feather="key"></span>
+                    Change Password   
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" style="color:white" class="nav-link bg-dark px-20 border-0"><i
+                    <button type="submit" style="color:white; font-size: 18px;" class="nav-link navbar-custom px-20 border-0"><i
                             class="bi bi-box-arrow-right"></i>
-                            <span data-feather="log-out"></span>
+                            <span data-feather="log-out" style="color:white; width: 22px; height: 22px"></span>
                             Logout</button>
                 </form>
-                {{-- <button class="dropdown-item" type="button">Something else here</button> --}}
             </div>
-        </div>
     </header>
 
     <div class="container-fluid" id="testing">

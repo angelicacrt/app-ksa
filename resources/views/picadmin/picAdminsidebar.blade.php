@@ -22,3 +22,8 @@
         </ul>
     </div>
 </nav>
+<style>
+    a{
+        font-size: 17px;
+    } 
+</style>

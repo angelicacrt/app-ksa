@@ -320,7 +320,7 @@ class PicsiteController extends Controller
         
             return view('picsite.picsiteRealisasiDana', compact('tug' , 'barge'));
         }
-    //dashboard Realisasi Dana page
+    //dashboard Realisasi Dana page and search func
         public function Dashboard_Realisasisearch(Request $request){
             if(Auth::user()->cabang == "Babelan" and $request->filled('search_kapal')) {
                 //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
@@ -546,8 +546,8 @@ class PicsiteController extends Controller
                     'dana22' => 'nullable|string|min:4|max:15' ,
                     'dana23' => 'nullable|string|min:4|max:15' ,
                     'dana24' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
             
             $year = date('Y');
@@ -1878,8 +1878,8 @@ class PicsiteController extends Controller
                     'dana32' => 'nullable|string|min:4|max:15' ,
                     'dana33' => 'nullable|string|min:4|max:15' ,
                     'dana34' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
 
             $year = date('Y');
@@ -3703,8 +3703,8 @@ class PicsiteController extends Controller
                     'dana37' => 'nullable|string|min:4|max:15' ,
                     'dana38' => 'nullable|string|min:4|max:15' ,
                     'dana39' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
             $year = date('Y');
             $month = date('m');
@@ -5758,8 +5758,8 @@ class PicsiteController extends Controller
                     'dana46' => 'nullable|string|min:4|max:15' ,
                     'dana47' => 'nullable|string|min:4|max:15' ,
                     'dana48' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
             $year = date('Y');
             $month = date('m');
@@ -8160,8 +8160,8 @@ class PicsiteController extends Controller
                     'dana45' => 'nullable|string|min:4|max:15' ,
                     'dana46' => 'nullable|string|min:4|max:15' ,
                     'dana47' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
 
             $year = date('Y');
