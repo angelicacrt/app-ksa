@@ -32,10 +32,10 @@
                                     </div>
                                     <div class="col-lg-3" style="margin-right:2%">
                                         <x-label for="dateclaim" :value="__('Tgl.Form Claim : ')" style="margin-top: 2%; margin-left: 1%" />
-                                        <x-input id="dateclaim" class="block mt-1 w-full" type="date" name="dateclaim"  autofocus />
+                                        <input id="dateclaim" class="form-control" value="{{old('dateclaim')}}" type="date" name="dateclaim"  autofocus />
                                         
                                         <x-label for="dateincident" :value="__('Tgl Incident : ')" style="margin-top: 2%; margin-left: 1%" />
-                                        <x-input id="dateincident" class="block mt-1 w-full" type="date" name="dateincident"  autofocus />
+                                        <x-input id="dateincident" class="form-control" value="{{old('dateincident')}}" type="date" name="dateincident"  autofocus />
                                         
                                         <x-label for="Surveyor" :value="__('Surveyor : ')" style="margin-top: 2%; margin-left: 1%" />
                                         <x-input id="Surveyor" class="block mt-1 w-full" type="text" name="Surveyor" placeholder="Enter Surveyor's Name" :value="old('Surveyor')"  autofocus />
