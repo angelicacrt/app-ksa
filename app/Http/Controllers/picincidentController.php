@@ -102,6 +102,7 @@ class picincidentController extends Controller
         $headerid = headerformclaim::create([
             'user_id' => Auth::user()->id,
             'nama_file'=> $temphead ,
+            'status'=> 'on review'
         ]);
 
         foreach( $temp as $temp){
@@ -153,6 +154,22 @@ class picincidentController extends Controller
         $replaced = Str::replace('/', '_', $name);
         $identify = $request->file_id;
         return $this->excel::download(new FCIexport($identify), date("d-m-Y"). ' - ' .'FCI'. ' - ' . $replaced . '.xlsx');
+    }
+
+    //download Approved FCI
+    public function download_FCI(Request $request) {
+        // dd($request);
+        $year = date('Y');
+        $month = date('m');
+        $identify = $request->file_id;
+        $nameForm = $request->file_name;
+        
+        $viewer = headerformclaim:: where('id', $identify)
+        ->where('nama_file', $nameForm)
+        ->where('status', 'Approved')
+        ->pluck('approved_file')[0];
+        // dd($viewer);
+        return Storage::disk('s3')->response('FormClaim/' . $year . "/". $month . "/" . $viewer);
     
     }
 

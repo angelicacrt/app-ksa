@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -438,10 +438,11 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::delete('/formclaim/destroy/{temp}', [picincidentController::class , 'destroy']);
         
         //FCI History page
-        Route::post('/create-history', 'picincidentController@createformclaim');
         Route::get('/history', 'picincidentController@formclaimhistory');
+        Route::post('/create-history', 'picincidentController@createformclaim');
         Route::delete('/history/destroy/{claims}', [picincidentController::class , 'DestroyExcel']);
-        Route::post('/formclaimDownload', 'picincidentController@export');
+        Route::post('/FormclaimExport', 'picincidentController@export');
+        Route::post('/formclaimDownload', 'picincidentController@download_FCI');
         
         // SPGR Upload page
         Route::get('/spgr', 'picincidentController@spgr');
@@ -471,8 +472,9 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
 
         //Review history formclaim page
         Route::get('/historyFormclaim', 'InsuranceController@historyFormclaim');
+        Route::post('/historyFormclaimExport', 'InsuranceController@historyFormclaimExport');
+        Route::post('/Approved_Formclaim_download', 'InsuranceController@historyFormclaim_approve');
         Route::post('/historyFormclaimdownload', 'InsuranceController@historyFormclaimDownload');
-        Route::delete('/historyFormclaim/destroy/{claims}', 'InsuranceController@historyFormclaimDelete');
 
         //Realisasi Dana history page
         Route::get('/Realisasi-Dana', 'InsuranceController@insuranceRealisasiDana');

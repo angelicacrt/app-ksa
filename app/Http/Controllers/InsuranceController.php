@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\spgrfile;
 use App\Models\documents;
 use App\Exports\FCIexport;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\documentberau;
 use App\Models\documentJakarta;
@@ -109,19 +110,63 @@ class InsuranceController extends Controller
         $Headclaim = headerformclaim::latest()->paginate(25);
         return view('insurance.insuranceHistoryFormclaim', compact('Headclaim'));
     }
-   
-    
 
+    public function historyFormclaim_approve(Request $request){
+        $year = date('Y');
+        $month = date('m');
+
+        $request->validate([
+            'FCI_file' => 'mimes:pdf,xlsx|max:3072'
+        ]);
+
+        if ($request->hasFile('FCI_file')) {
+            $file = $request->File('FCI_file');
+            $nameForm = $request->file_name;
+            $identify = $request->file_id;
+            $name_s3 = $nameForm .'-'. Auth::user()->name . '-' . $file->getClientOriginalName();
+            $replaced = Str::replace('/', '_', $name_s3);
+            $path = $request->file('FCI_file')->storeas('FormClaim/'. $year . "/". $month , $replaced, 's3');
+
+            $up = headerformclaim::where('id', $identify)
+            ->where('nama_file', $nameForm)
+            ->update([
+                'status'=> 'Approved',
+                'approved_file'=> basename($path)
+            ]);
+            // dd($nameForm);
+            return redirect()->back()->with('success', 'FormClaim Uploaded Successfully');
+        }else{
+            return redirect()->back()->with('failed', 'No FormClaim was Uploaded');
+        }
+        
+        
+    }
+   
     //History form claim download func
     private $excel;
     public function __construct(Excel $excel){
         $this->excel = $excel;
     }
-    public function historyFormclaimDownload(Request $request) {
+    public function historyFormclaimExport(Request $request) {
         // dd($request);
         $name = $request->file_name;
         $identify = $request->file_id;
-        return $this->excel::download(new FCIexport($identify), 'FCI'.$name.'.xlsx');
+        $replaced = Str::replace('/', '_', $name);
+        return $this->excel::download(new FCIexport($identify), date("d-m-Y"). ' - ' .'FCI'. ' - ' . $replaced . '.xlsx');
+    }
+    public function historyFormclaimDownload(Request $request) {
+        $year = date('Y');
+        $month = date('m');
+        // dd($request);
+        // $replaced = Str::replace('/', '_', $name);
+        $nameForm = $request->file_name;
+        $identify = $request->file_id;
+        $viewer = headerformclaim:: where('id', $identify)
+        ->where('nama_file', $nameForm)
+        ->where('status', 'Approved')
+        ->pluck('approved_file')[0];
+        // dd($viewer);
+        return Storage::disk('s3')->response('FormClaim/' . $year . "/". $month . "/" . $viewer);
     }
     
 

@@ -22,33 +22,91 @@
                     </div>
                 @endif
 
+                @if ($failed = Session::get('failed'))
+                    <div class="center">
+                        <div class="alert alert-danger alert-block" id="message">
+                            <strong>{{ $failed }}</strong>
+                        </div>
+                    </div>
+                @endif
+
                     <table id="content" class="table" style="margin-top: 1%">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Nama File</th>
-                                <th scope="col">Upload Time</th>
-                                <th scope="col">Action</th>
+                                <th style="text-align: center" scope="col">No.</th>
+                                <th style="text-align: center" scope="col">Nama File</th>
+                                <th style="text-align: center" scope="col">Upload Time</th>
+                                <th style="text-align: center" scope="col">Status</th>
+                                <th style="text-align: center"scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ( $Headclaim as $claims )
                             <tr>
-                                <td class="table-info">{{$loop->index+1}}</td>
-                                <td class="table-info">{{$claims->nama_file}}</td>
-                                <td class="table-info">{{$claims->created_at}}</td>
-                                <td class="table-info">
-                                    <div class="form-row">
-                                        <div class="col-md-auto">
-                                            <form method="POST" action="/insurance/historyFormclaimdownload">
-                                                @csrf
-                                                    <input type="hidden" name ="file_id" value="{{$claims->id}}"/>
-                                                    <input type="hidden" name ="file_name" value="{{$claims->nama_file}}"/>
-                                                    <button class="btn btn-outline-success" id="downloadexcel">Download</button>
-                                            </form>
+                                @if ($claims->status == 'Approved')
+                                    <td class="table-success">{{$loop->index+1}}</td>
+                                    <td class="table-success">{{$claims->nama_file}}</td>
+                                    <td class="table-success">{{$claims->created_at}}</td>
+                                    <td class="table-info"><strong>{{$claims->status}}</strong></td>
+                                    <td class="table-success">
+                                        <div class="form-row">
+                                            <div class="col-md-auto">
+                                                <form method="POST" action="/insurance/historyFormclaimdownload">
+                                                    @csrf
+                                                        <input type="hidden" name ="file_id" value="{{$claims->id}}"/>
+                                                        <input type="hidden" name ="file_name" value="{{$claims->nama_file}}"/>
+                                                        <button class="btn btn-outline-dark" id="downloadexcel">Download</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                @else
+                                    <td class="table-warning">{{$loop->index+1}}</td>
+                                    <td class="table-warning">{{$claims->nama_file}}</td>
+                                    <td class="table-warning">{{$claims->created_at}}</td>
+                                    <td class="table-info"><strong>{{$claims->status}}</strong></td>
+                                    <td class="table-warning" >
+                                        <div class="form-row">
+                                            <div class="col-md-auto">
+                                                <form method="POST" action="/insurance/historyFormclaimExport">
+                                                    @csrf
+                                                        <input type="hidden" name ="file_id" value="{{$claims->id}}"/>
+                                                        <input type="hidden" name ="file_name" value="{{$claims->nama_file}}"/>
+                                                        <button class="btn btn-outline-dark" id="downloadexcel">Download</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-auto">
+                                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#approved_file_upload-{{$claims->id}}">Approve</button>
+                                                <!-- Modal approve upload-->
+                                                <div class="modal fade" id="approved_file_upload-{{$claims->id}}" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-dark">
+                                                        <h5 class="modal-title" style="color: white" id="staticBackdropLabel">Upload Approved Form Claim</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="POST" enctype="multipart/form-data" action="/insurance/Approved_Formclaim_download">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                Ensure that the File is >= 3MB and it is a PDF/Excel file.
+                                                                <br>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="hidden" name ="file_id" value="{{$claims->id}}"/>
+                                                                    <input type="hidden" name ="file_name" value="{{$claims->nama_file}}"/>
+                                                                    <input type="file" placeholder="Upload The Approved FormClaim" class="form-control" name=FCI_file >
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary">Upload</button>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
                             @empty
                                 <tr>
@@ -59,24 +117,33 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <script>
-                        setTimeout(function(){
-                        $("div.alert").remove();
-                        }, 5000 ); // 5 secs
-                    </script>
-                    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                    </form>
-                </div>
+                </form>
             </div>
-        </div>   
         </div>
-    </div>
-    </main>
+    </div>   
+</main>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    setTimeout(function(){
+    $("div.alert").remove();
+    }, 5000 ); // 5 secs
+</script>
 <script type="text/javascript">
     function refreshDiv(){
         $('#content').load(location.href + ' #content')
     }
-    setInterval(refreshDiv, 60000);
+    setInterval(refreshDiv, 120000);
 </script>
+<style>
+    td {
+        text-align: center;
+        font-size: 16px
+    }
+    .modal-backdrop {
+          height: 100%;
+          width: 100%;
+      }
+</style>
 @endsection
