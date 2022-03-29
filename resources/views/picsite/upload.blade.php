@@ -127,6 +127,7 @@
                                         $beraufile = 'beraufile'.$a;
                                         $time_upload ="time_upload".$a;
                                         $stats ="status".$a;
+                                        $dana ="dana".$a;
                                         $reason ="reason".$a;
                                         $date = date('Y-m-28');
                                     @endphp
@@ -169,6 +170,7 @@
                                         $time_upload ="time_upload".$a;
                                         $stats ="status".$a;
                                         $reason ="reason".$a;
+                                        $dana ="dana".$a;
                                         $date = date('Y-m-28');
                                     @endphp
                                     <tr>   
@@ -213,6 +215,7 @@
                                         $time_upload ="time_upload".$a;
                                         $stats ="status".$a;
                                         $reason ="reason".$a;
+                                        $dana ="dana".$a;
                                         $date = date('Y-m-28');
                                     @endphp
                                         <tr>

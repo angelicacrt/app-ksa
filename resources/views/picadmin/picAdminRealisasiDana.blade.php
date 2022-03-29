@@ -107,6 +107,7 @@
                     <thead class="thead-dark" >
                         <tr>
                             <th class="table-info">Time Uploaded</th>
+                            <th class="table-info">Cabang</th>
                             <th class="table-info">Nama Kapal</th>
                             <th class="table-info">Periode (Y-M-D)</th>
                             <th class="table-info">Nama File</th>
@@ -116,7 +117,6 @@
                     </thead>
                     <tbody>
                     {{-- Babelan --}}
-                        @if (Auth::user()->cabang == "Babelan")
                             @forelse($document as $doc )
                             @for ( $a = 1 ; $a <= 24 ; $a++)
                             @php
@@ -148,6 +148,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $doc->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -217,9 +218,7 @@
                                     <td>Babelan Fund Request Data Not Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
                     {{-- Berau --}}
-                        @if (Auth::user()->cabang == "Berau")
                             @forelse($documentberau as $d )
                             @for ( $a = 1 ; $a <= 34 ; $a++)
                             @php
@@ -259,6 +258,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $d->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $d->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -328,10 +328,8 @@
                                     <td>Berau Fund Request Data Not Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
     
                     {{-- BANJARMASIN --}}
-                        @if (Auth::user()->cabang == 'Banjarmasin')
                         @forelse($documentbanjarmasin as $b )
                         @for ( $a = 1 ; $a <= 39 ; $a++)
                         @php
@@ -373,6 +371,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $b->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $b->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -442,10 +441,8 @@
                                 <td>No Banjarmasin Fund Request Data Found</td>
                             </tr> --}}
                             @endforelse
-                        @endif
     
                     {{-- Samarinda --}}
-                        @if (Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Morosi')
                             @forelse($documentsamarinda as $s )
                             @for ( $a = 1 ; $a <= 48 ; $a++)
                             @php
@@ -495,6 +492,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $s->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $s->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -564,7 +562,6 @@
                                     <td>No Samarinda Fund Request Data Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
                     {{-- Jakarta --}}
                             @if (Auth::user()->cabang == 'Jakarta')
                             @forelse($documentjakarta as $jkt )
@@ -611,6 +608,7 @@
                                 @elseif ($jkt->$stats == 'on review')
                                     <tr>
                                         <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
+                                        <td class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
                                         <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                         <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                         <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  

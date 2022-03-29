@@ -99,12 +99,12 @@
                   <thead class="thead-dark">
                       <tr>
                         <th>Time Uploaded</th>
-                        <th>cabang</th>
+                        <th>Cabang</th>
                         <th>Nama Kapal</th>
                         <th>Periode (Y-M-D)</th>
                         <th>Nama File</th>
                         <th>Jenis File</th>
-                        <th>status</th>
+                        <th>Status</th>
                         <th>Reason</th>
                         <th>Action</th>
                       </tr>

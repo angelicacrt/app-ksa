@@ -19,6 +19,7 @@ class CreateRpkdocumentsTable extends Migration
             $table->string('cabang')->nullable();
 
             $table->string('nama_kapal',100)->nullable();
+            $table->string('approved_by',20)->nullable();
             $table->date('periode_awal')->nullable();
             $table->date('periode_akhir')->nullable();
             

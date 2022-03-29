@@ -97,7 +97,6 @@
                     </thead>
                     <tbody>
                     {{-- Babelan --}}
-                        @if (Auth::user()->cabang == "Babelan")
                             @forelse($document as $doc )
                             @for ( $a = 1 ; $a <= 24 ; $a++)
                             @php
@@ -137,7 +136,7 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
@@ -160,7 +159,7 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$doc ->$reason}}</td>                                        
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
@@ -183,7 +182,7 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
@@ -207,9 +206,9 @@
                                     <td>Babelan Fund Request Data Not Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
+
                     {{-- Berau --}}
-                        @if (Auth::user()->cabang == "Berau")
+                       
                             @forelse($documentberau as $d )
                             @for ( $a = 1 ; $a <= 34 ; $a++)
                             @php
@@ -258,7 +257,7 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$d ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
@@ -281,7 +280,7 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$d->$reason}}</td>    
                                     <td class="table-success">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
@@ -304,7 +303,7 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$d->$reason}}</td>   
                                     <td class="table-danger">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
@@ -328,10 +327,8 @@
                                     <td>Berau Fund Request Data Not Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
 
                     {{-- BANJARMASIN --}}
-                        @if (Auth::user()->cabang == 'Banjarmasin')
                         @forelse($documentbanjarmasin as $b )
                         @for ( $a = 1 ; $a <= 39 ; $a++)
                         @php
@@ -382,7 +379,7 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$b ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
@@ -405,7 +402,7 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$b->$reason}}</td>
                                     <td class="table-success">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
@@ -428,7 +425,7 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$b->$reason}}</td>
                                     <td class="table-danger">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
@@ -452,10 +449,8 @@
                                 <td>No Banjarmasin Fund Request Data Found</td>
                             </tr> --}}
                             @endforelse
-                        @endif
 
                     {{-- Samarinda --}}
-                        @if (Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Morosi')
                             @forelse($documentsamarinda as $s )
                             @for ( $a = 1 ; $a <= 48 ; $a++)
                             @php
@@ -514,7 +509,7 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$s ->$reason}}</td>   
                                     <td class="table-warning">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
@@ -537,7 +532,7 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$s->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
@@ -560,7 +555,7 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$s->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
@@ -584,9 +579,7 @@
                                     <td>No Samarinda Fund Request Data Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
                     {{-- Jakarta --}}
-                            @if (Auth::user()->cabang == 'Jakarta')
                             @forelse($documentjakarta as $jkt )
                             @for ( $a = 1 ; $a <= 47 ; $a++)
                             @php
@@ -641,7 +634,7 @@
                                         <td class="table-warning" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                         <td class="table-warning" id="reason">{{$jkt->$reason}}</td>   
                                         <td class="table-warning">
-                                            <form method="post" action="/dashboard/dana/view" target="_blank">
+                                            <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                                 @csrf
                                                 <input type="hidden" name='type_upload' value="Fund_Req" />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
@@ -664,7 +657,7 @@
                                     <td class="table-success" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
@@ -687,7 +680,7 @@
                                     <td class="table-danger" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
@@ -711,7 +704,6 @@
                                     <td>No Jakarta Fund Request Data Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
                     </tbody>
                 </table>
             </div>

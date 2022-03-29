@@ -392,7 +392,7 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/realisasiDana',[PicsiteController::class, 'realisasiDana']);
         Route::get('/dashboard/realisasi', [PicsiteController::class , 'Dashboard_Realisasi']);
         Route::post('/realisasi/view', [PicsiteController::class , 'view_Realisasi']);
-        Route::get('/dashboard/realisasi-search', [PicsiteController::class , 'Dashboard_Realisasi']);
+        Route::get('/dashboard/realisasi-search', [PicsiteController::class , 'Dashboard_Realisasisearch']);
         
     });
 
@@ -420,8 +420,8 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         //record page
         Route::get('/RecordDocuments',[picAdminController::class, 'RecordDocuments']);
         Route::get('/RecordDocumentsRPK',[picAdminController::class, 'RecordDocumentsRPK']);
-        Route::get('/RecordDocuments/search',[picAdminController::class, 'RecordDocuments']);
-        Route::get('/RecordDocumentsRPK/search',[picAdminController::class, 'RecordDocumentsRPK']);
+        Route::get('/RecordDocuments/search',[picAdminController::class, 'RecordDocuments_search']);
+        Route::get('/RecordDocumentsRPK/search',[picAdminController::class, 'RecordDocumentsRPK_search']);
         Route::post('/RecordDocuments/dana/view',[picAdminController::class, 'viewRecordDocuments']);
         Route::post('/RecordDocuments/RPK/view',[picAdminController::class, 'viewRecordDocuments']);
 

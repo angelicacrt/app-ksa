@@ -11,12 +11,11 @@ use App\Models\documentrpk;
 use Illuminate\Http\Request;
 use App\Models\documentberau;
 use App\Models\documentJakarta;
-use App\Exports\RekapAdminExport;
 use App\Models\documentsamarinda;
 use Illuminate\Support\Facades\DB;
 use App\Models\documentbanjarmasin;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
+
 
 class picAdminController extends Controller
 {
@@ -67,75 +66,85 @@ class picAdminController extends Controller
         //pakai umn agar munculkan data dari pembuatan sampai bulan akhir periode
         $searchresult = $request->search;
         if ($searchresult == 'All') {
-            $document = DB::table('documents')->latest()->get();
-            $documentberau = DB::table('beraudb')->latest()->get();
-            $documentbanjarmasin = DB::table('banjarmasindb')->latest()->get();
-            $documentsamarinda = DB::table('samarindadb')->latest()->get();
-            $documentjakarta = documentJakarta::latest()->get();
+            $document = DB::table('documents')->where('upload_type','Fund_Req')->latest()->get();
+            $documentberau = DB::table('beraudb')->where('upload_type','Fund_Req')->latest()->get();
+            $documentbanjarmasin = DB::table('banjarmasindb')->where('upload_type','Fund_Req')->latest()->get();
+            $documentsamarinda = DB::table('samarindadb')->where('upload_type','Fund_Req')->latest()->get();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get();
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' ,'documentjakarta' , 'searchresult'));
         }
         elseif ($request->filled('search')) {
-            $document = DB::table('documents')->where('cabang', $request->search)->latest()->paginate(1);
-            $documentberau = DB::table('beraudb')->where('cabang', $request->search)->latest()->paginate(1);
-            $documentbanjarmasin = DB::table('banjarmasindb')->where('cabang', $request->search)->latest()->paginate(1);
-            $documentsamarinda = DB::table('samarindadb')->where('cabang', $request->search)->latest()->paginate(1);
-            $documentjakarta = documentJakarta::where('cabang', $request->search)->latest()->paginate(1);
+            $document = DB::table('documents')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(1);
+            $documentberau = DB::table('beraudb')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(1);
+            $documentbanjarmasin = DB::table('banjarmasindb')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(1);
+            $documentsamarinda = DB::table('samarindadb')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(1);
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(1);
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' ,'documentjakarta' , 'searchresult'));
         }elseif ($request->filled('search_kapal')) {
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->get();
 
             //berau search bar
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->get();
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->get();
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->get();
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->get();
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')){
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(1);
 
             //berau search bar
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(1);
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(1);
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(1);
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(1);
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult'));
         }else{
-            $document = documents::latest()->get();
-            $documentberau = documentberau::latest()->get();
-            $documentbanjarmasin = documentbanjarmasin::latest()->get();
-            $documentsamarinda = documentsamarinda::latest()->get();
-            $documentjakarta = documentJakarta::latest()->get();
+            $document = documents::where('upload_type','Fund_Req')->latest()->get();
+            $documentberau = documentberau::where('upload_type','Fund_Req')->latest()->get();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->latest()->get();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->latest()->get();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get();
             
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult')); 
         }
@@ -282,6 +291,7 @@ class picAdminController extends Controller
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->update([
                 $request->status => 'approved',
+                'approved_by' => Auth::user()->name,
             ]);
         }else{
             $request->validate([
@@ -299,6 +309,7 @@ class picAdminController extends Controller
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->update([
                     $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
                     $request->reason => $request->reasonbox ,
                 ]);
             }
@@ -313,6 +324,7 @@ class picAdminController extends Controller
                 ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
                     $request->reason => $request->reasonbox ,
                 ]);
             }
@@ -329,6 +341,7 @@ class picAdminController extends Controller
                 ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
                     $request->reason => $request->reasonbox ,
                 ]);
             }
@@ -344,6 +357,7 @@ class picAdminController extends Controller
                 ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
                     $request->reason => $request->reasonbox ,
                 ]);
             }
@@ -367,6 +381,7 @@ class picAdminController extends Controller
             ->whereNotNull($filename)
             ->update([
                 $request->status => 'approved',
+                'approved_by' => Auth::user()->name,
             ]);
         }else{
             $request->validate([
@@ -383,6 +398,7 @@ class picAdminController extends Controller
             ->whereNotNull($filename)
             ->update([
                 $request->status => 'approved',
+                'approved_by' => Auth::user()->name,
                 $request->reason => $request->reasonbox ,
             ]);
         }
@@ -407,6 +423,7 @@ class picAdminController extends Controller
         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
         ->update([
             $request->status => 'rejected',
+            'approved_by' => Auth::user()->name ,
             $request->reason => $request->reasonbox ,
         ]);
 
@@ -663,6 +680,7 @@ class picAdminController extends Controller
             $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10);
             $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10);
             $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10);
+            // dd($documentbanjarmasin);
             $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10);
             $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10);
             return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
@@ -744,89 +762,113 @@ class picAdminController extends Controller
     public function RecordDocuments(Request $request){
         $datetime = date('Y-m-d');
         $searchresult = $request->search;
+        $document = documents::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+        $documentberau = documentberau::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+        $documentbanjarmasin = DB::table('banjarmasindb')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+        $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+        $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+        // dd($documentbanjarmasin);
+        return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+    }
+    public function RecordDocumentsRPK(Request $request){
+        $datetime = date('Y-m-d');
+        //get DocRPK Data as long as the periode_akhir(column database)
+        $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(5);
+        return view('picadmin.picAdminRecordDocRPK', compact('docrpk'));
+    }
+    public function RecordDocuments_search(Request $request){
+        $datetime = date('Y-m-d');
+        $searchresult = $request->search;
         if ($searchresult == 'All'){
-            $document = documents::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentberau = documentberau::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentbanjarmasin = documentbanjarmasin::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentsamarinda = documentsamarinda::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentjakarta = documentJakarta::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            $document = documents::with('user')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+            $documentberau = documentberau::with('user')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+            $documentbanjarmasin = DB::table('banjarmasindb')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+            $documentsamarinda = documentsamarinda::with('user')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+            $documentjakarta = documentJakarta::with('user')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
         }elseif($request->filled('search')){
-            $document = documents::with('user')->where('cabang',$request->search)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentberau = documentberau::with('user')->where('cabang',$request->search)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentbanjarmasin = documentbanjarmasin::with('user')->where('cabang',$request->search)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentsamarinda = documentsamarinda::with('user')->where('cabang',$request->search)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentjakarta = documentJakarta::with('user')->where('cabang',$request->search)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            $document = documents::with('user')->where('cabang',$request->search)->where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentberau = documentberau::with('user')->where('cabang',$request->search)->where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentbanjarmasin = documentbanjarmasin::with('user')->where('cabang',$request->search)->where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentsamarinda = documentsamarinda::with('user')->where('cabang',$request->search)->where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentjakarta = documentJakarta::with('user')->where('cabang',$request->search)->where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
         }else if($request->filled('search_kapal')){
                 //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
                 $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                 ->whereDate('periode_akhir', '<', $datetime)
+                ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
                 ->latest()->paginate(1);
     
                 $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                 ->whereDate('periode_akhir', '<', $datetime)
+                ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
                 ->latest()->paginate(1);
     
                 $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                 ->whereDate('periode_akhir', '<', $datetime)
+                ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
                 ->latest()->paginate(1);
 
                 $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                 ->whereDate('periode_akhir', '<', $datetime)
+                ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
                 ->latest()->paginate(1);
 
                 $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
                 ->whereDate('periode_akhir', '<', $datetime)
+                ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
                 ->latest()->paginate(1);
-                return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif($request->filled('search_kapal') && $request->filled('search')){
              //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
              $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
              ->whereDate('periode_akhir', '<', $datetime)
              ->where('cabang',$request->search)
+             ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
              ->latest()->paginate(1);
  
              $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
              ->whereDate('periode_akhir', '<', $datetime)
              ->where('cabang',$request->search)
+             ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
              ->latest()->paginate(1);
  
              $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
              ->whereDate('periode_akhir', '<', $datetime)
              ->where('cabang',$request->search)
+             ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
              ->latest()->paginate(1);
 
              $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
              ->whereDate('periode_akhir', '<', $datetime)
              ->where('cabang',$request->search)
+             ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
              ->latest()->paginate(1);
 
              $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
              ->whereDate('periode_akhir', '<', $datetime)
              ->where('cabang',$request->search)
+             ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
              ->latest()->paginate(1);
-             return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }else{
-            $document = documents::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentberau = documentberau::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentbanjarmasin = documentbanjarmasin::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentsamarinda = documentsamarinda::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            $documentjakarta = documentJakarta::with('user')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-            return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            $document = documents::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentberau = documentberau::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentbanjarmasin = DB::table('banjarmasindb')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
         }
+        // dd($documentbanjarmasin);
+        return view('picadmin.picAdminRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
     }
-    public function RecordDocumentsRPK(Request $request){
+    public function RecordDocumentsRPK_search(Request $request){
         $datetime = date('Y-m-d');
         $searchresult = $request->search;
         if ($searchresult == 'All'){

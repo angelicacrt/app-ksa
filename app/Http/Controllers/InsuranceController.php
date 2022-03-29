@@ -49,7 +49,7 @@ class InsuranceController extends Controller
         ->where('no_formclaim', 'Like', '%' . $claim . '%')
         ->where($filename, 'Like', '%' . $result . '%')
         ->update([
-            $request->status => 'approved'
+            $request->status => 'approved by' . Auth::user()->name
         ]);
         return redirect('/insurance/CheckSpgr');
     }
@@ -70,7 +70,7 @@ class InsuranceController extends Controller
         ->where('no_formclaim', 'Like', '%' . $claim . '%')
         ->where($filename, 'Like', '%' . $result . '%')
         ->update([
-            $request->status => 'rejected',
+            $request->status => 'rejected by' . Auth::user()->name,
             $request->reason => $request->reasonbox ,
         ]);
 
@@ -130,7 +130,7 @@ class InsuranceController extends Controller
             $up = headerformclaim::where('id', $identify)
             ->where('nama_file', $nameForm)
             ->update([
-                'status'=> 'Approved',
+                'status'=> 'Approved by' . Auth::user()->name,
                 'approved_file'=> basename($path)
             ]);
             // dd($nameForm);

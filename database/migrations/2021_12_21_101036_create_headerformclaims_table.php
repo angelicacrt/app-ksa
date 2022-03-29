@@ -19,7 +19,7 @@ class CreateHeaderformclaimsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_file')->nullable();
             $table->string('approved_file', 150)->nullable();
-            $table->string('status', 10)->nullable();
+            $table->string('status', 70)->nullable();
 
             $table->timestamps();
         });

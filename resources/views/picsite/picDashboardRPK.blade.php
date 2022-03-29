@@ -52,7 +52,7 @@
                             <a class="btn btn-outline-danger" style="right: 50%" href="/dashboard">Change to Dana</a>
                         </div>
                         <div class="form-check mb-2 mr-sm-2">
-                            <a class="btn btn-outline-danger" href="/dashboard">Change to Fund Request</a>
+                            <a class="btn btn-outline-danger" href="/dashboard">Change to Fund Realization</a>
                         </div>
                     </div>
                 @endif
