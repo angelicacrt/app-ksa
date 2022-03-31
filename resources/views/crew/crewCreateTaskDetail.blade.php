@@ -203,7 +203,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival (POD)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival to (POD)</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="arrivalPODGeneral" id="arrivalPODGeneral" value="{{ $ot -> arrivalPODGeneral != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODGeneral)) : '' }}">
@@ -328,7 +328,7 @@
 
                                             <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                 <div class="card-body">
-                                                    <h5 class="card-title text-center text-danger font-weight-bold">Arrival POL</h5>
+                                                    <h5 class="card-title text-center text-danger font-weight-bold">Arrival to POL</h5>
                                                     <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                     <div class="form-group mt-3">
                                                         <input class="form-control" type="datetime-local" name="arrivalPOL" id="arrivalPOL" value="{{ $ot -> arrivalPOL != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPOL)) : '' }}">
@@ -484,7 +484,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure (POD)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Departure to (POD)</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="departurePOD" id="departurePOD" value="{{ $ot -> departurePOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departurePOD)) : '' }}">
@@ -493,7 +493,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival (POD)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival to (POD)</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="arrivalPODGeneral" id="arrivalPODGeneral" value="{{ $ot -> arrivalPODGeneral != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODGeneral)) : '' }}">

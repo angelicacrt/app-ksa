@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Barge;
-use App\Models\OperationalBoatData;
 use App\Models\Tug;
+use App\Models\Barge;
+use Illuminate\Http\Request;
 use App\Exports\DailyReportsExport;
+use App\Models\OperationalBoatData;
+use Illuminate\Support\Facades\Auth;
 
 class AdminOperationalController extends Controller
 {   
@@ -202,7 +203,16 @@ class AdminOperationalController extends Controller
             'callSign' => 'required|string',
         ]);
 
-        Tug::create($validated);
+        Tug::create([
+            "tugName" => $request->tugName,
+            "gt" => $request->gt,
+            "nt" => $request->nt,
+            "master" => $request->master,
+            "flag" => $request->flag,
+            "IMONumber" => $request->IMONumber,
+            "callSign" => $request->callSign,
+            'user_id' => Auth::user()->id,
+        ]);
 
         return redirect()->back()->with('status', 'Added Successfully');
     }
@@ -247,7 +257,13 @@ class AdminOperationalController extends Controller
             'flag' => 'required|string',
         ]);
 
-        Barge::create($validated);
+        Barge::create([
+            'user_id' => Auth::user()->id,
+            "bargeName" => $request->bargeName,
+            "gt" => $request->gt,
+            "nt" => $request->nt,
+            "flag" => $request->flag,
+        ]);
 
         return redirect()->back()->with('status', 'Added Successfully');
     }
