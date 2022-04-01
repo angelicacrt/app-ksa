@@ -567,11 +567,11 @@ class DashboardController extends Controller
                         ->whereDate('periode_akhir', '>=', $datetime)
                         ->where('upload_type','Fund_Req')->where('cabang', Auth::user()->cabang)
                         ->orderBy('id', 'DESC')
-                        ->latest()->paginate(2);
+                        ->latest()->paginate(2)->withQueryString();
         
                         return view('picsite.picDashboard', compact('documentsamarinda'));
                     }else{
-                        $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->where('cabang', Auth::user()->cabang)->latest()->paginate(10);
+                        $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->where('cabang', Auth::user()->cabang)->latest()->paginate(10)->withQueryString();
                         return view('picsite.picDashboard', compact('documentsamarinda'));
                     }
                 }
