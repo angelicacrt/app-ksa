@@ -25,14 +25,16 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
     Route::post('/dashboard/dana/view', [DashboardController::class, 'index']);
     Route::post('/dashboard/rpk/view', [DashboardController::class, 'index']);
     Route::post('/dashboard/spgr/view', [DashboardController::class, 'index']);
+    Route::get('change-password', 'ChangePasswordController@index');
+    Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
     Route::prefix('crew')->name('crew.')->group(function(){
         // Dashboard Page
