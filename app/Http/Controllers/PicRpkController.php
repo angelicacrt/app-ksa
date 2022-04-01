@@ -289,8 +289,8 @@ class PicRpkController extends Controller
                 'brfile5' => 'mimes:pdf|max:1024' ,
                 'brfile6' => 'mimes:pdf|max:1024' ,
                 'brfile7' => 'mimes:pdf|max:1024' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
             
             $year = date('Y');
@@ -541,8 +541,8 @@ class PicRpkController extends Controller
                 'bjrfile5' => 'mimes:pdf|max:1024' ,
                 'bjrfile6' => 'mimes:pdf|max:1024' ,
                 'bjrfile7' => 'mimes:pdf|max:1024' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
             $year = date('Y');
             $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
@@ -786,8 +786,8 @@ class PicRpkController extends Controller
                 'smrfile5' => 'mimes:pdf|max:1024' ,
                 'smrfile6' => 'mimes:pdf|max:1024' ,
                 'smrfile7' => 'mimes:pdf|max:1024' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
             $year = date('Y');
             $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
@@ -1035,8 +1035,8 @@ class PicRpkController extends Controller
                 'jktfile5' => 'mimes:pdf|max:1024' ,
                 'jktfile6' => 'mimes:pdf|max:1024' ,
                 'jktfile7' => 'mimes:pdf|max:1024' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
 
             // dd($request);
