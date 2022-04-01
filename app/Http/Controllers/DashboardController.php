@@ -274,6 +274,52 @@ class DashboardController extends Controller
             $total_fleets = $total_tugs + $total_barges;
 
             return view('adminOperational.adminOperationalDashboard', compact('total_barges', 'total_tugs', 'on_sailing_count', 'loading_activity_count', 'discharge_activity_count', 'standby_count', 'repair_count', 'tug_docking_count', 'barge_docking_count', 'tug_standby_docking_count', 'barge_standby_docking_count', 'grounded_barge_count', 'waiting_schedule_count', 'percentage_ship_activity', 'total_lost_time'));
+        }elseif(Auth::user()->hasRole('StaffOperasional')){
+             // Sum The DAYS Of Each Condition, Not The Count Of The Ship
+             $docking_days = OperationalBoatData::where('status', 'On Going')->sum('dockingDays');
+             $standby_docking_days = OperationalBoatData::where('status', 'On Going')->sum('standbyDockingDays');
+             $standby_days = OperationalBoatData::where('status', 'On Going')->sum('standbyDays');
+             $grounded_barge_days = OperationalBoatData::where('status', 'On Going')->sum('groundedBargeDays');
+             $repair_days = OperationalBoatData::where('status', 'On Going')->sum('repairDays');
+             $waiting_schedule_days = OperationalBoatData::where('status', 'On Going')->sum('waitingScheduleDays');
+ 
+             // Ship Count
+             $on_sailing_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'On Sailing')->count();
+             $loading_activity_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Loading Activity')->count();
+             $discharge_activity_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Discharge Activity')->count();
+             $standby_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Standby')->count();
+             $repair_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Repair')->count();
+             $grounded_barge_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Grounded Barge')->count();
+             $waiting_schedule_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Waiting Schedule')->count();
+ 
+             // Get Each Amount Of Tug & Barges (Non Operational Only)
+             $tug_docking_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Docking')->count();
+             $barge_docking_count = OperationalBoatData::where('status', 'On Going')->whereNotNull('bargeName')->where('condition', 'Docking')->count();
+ 
+             $tug_standby_docking_count = OperationalBoatData::where('status', 'On Going')->where('condition', 'Standby Docking')->count();
+             $barge_standby_docking_count = OperationalBoatData::where('status', 'On Going')->whereNotNull('bargeName')->where('condition', 'Standby Docking')->count();
+ 
+             // formula => Total lost time : docking + standby docking + standby + grounded barge + repair + waiting schedule
+             $total_lost_time = $docking_days + $standby_docking_days + $standby_days + $grounded_barge_days + $repair_days + $waiting_schedule_days;
+ 
+             // formula => AKTIF : 
+             //  (31*total barge)-Total lost time:
+             $total_barges = Barge::count();
+             $aktif = (31 * $total_barges) - $total_lost_time;
+             
+             // formula => percentage ship's activity :
+             // Aktif / (31*total barge) * 100
+             $percentage_ship_activity = 0;
+             if($total_barges > 0){
+                 $percentage_ship_activity = $aktif / (31 * $total_barges) * 100;
+             }
+ 
+             // Total fleets => all tugs + barges
+             $total_tugs = Tug::count();
+ 
+             $total_fleets = $total_tugs + $total_barges;
+ 
+             return view('adminOperational.adminOperationalDashboard', compact('total_barges', 'total_tugs', 'on_sailing_count', 'loading_activity_count', 'discharge_activity_count', 'standby_count', 'repair_count', 'tug_docking_count', 'barge_docking_count', 'tug_standby_docking_count', 'barge_standby_docking_count', 'grounded_barge_count', 'waiting_schedule_count', 'percentage_ship_activity', 'total_lost_time'));
         }elseif(Auth::user()->hasRole('picSite')){
             $datetime = date('Y-m-d');
             $year = date('Y');

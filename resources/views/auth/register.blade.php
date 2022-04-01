@@ -97,6 +97,7 @@
                     <option value="logistic" id="logistic" @if (old('role_id') == 'logistic') selected="selected" @endif>Logistic</option>
                     <option value="supervisorLogistic" id="supervisorLogistic" @if (old('role_id') == 'supervisorLogistic') selected="selected" @endif>Supervisor Logistic</option> -->
                     <option value="crew" id="crew" @if (old('role_id') == 'crew') selected="selected" @endif>Crew</option>
+                    <option value="StaffOperasional" id="StaffOperasional" @if (old('role_id') == 'StaffOperasional') selected="selected" @endif>Staff operasional</option>
                 </select>
             </div>
 
@@ -164,11 +165,13 @@
                 var insiden = document.getElementById("picIncident") 
                 var doc = document.getElementById("picSite")
                 var crew = document.getElementById("crew")
+                var StaffOperasional = document.getElementById("StaffOperasional")
                 var departmentChooseOption = document.getElementById("department")
 
                 insiden.style.display = 'none'
                 doc.style.display = 'none'
                 crew.style.display = 'none'
+                StaffOperasional.style.display = 'none'
 
                 departmentChooseOption.onchange = function (event){
                     
@@ -176,6 +179,7 @@
                         selectdep ('picSite');
 
                         crew.style.display = 'none'
+                        StaffOperasional.style.display = 'none'
 
                         insiden.style.display = ''
                         doc.style.display = ''
@@ -185,10 +189,12 @@
                         insiden.style.display = 'none'
                         doc.style.display = 'none'
                         crew.style.display = ''
+                        StaffOperasional.style.display = ''
                     }else{
                         document.getElementById("picIncident").hidden = false;
                         document.getElementById("picSite").hidden = false;
                         document.getElementById("crew").hidden = false;
+                        document.getElementById("StaffOperasional").hidden = false;
                     }
                 }
 

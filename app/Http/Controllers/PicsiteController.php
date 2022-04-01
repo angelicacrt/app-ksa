@@ -563,7 +563,7 @@ class PicsiteController extends Controller
             if ($request->hasFile('ufile1')) {
                 $file1 = $request->file('ufile1');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
-                $tujuan_upload = 'babelan/sertifikat_keselamatan';
+                $tujuan_upload = 'babelan/' . $year . "/". $month;
                 $path = $request->file('ufile1')->storeas('babelan/'. $year . "/". $month , $name1, 's3');
                 if (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
@@ -1567,6 +1567,7 @@ class PicsiteController extends Controller
             if ($request->hasFile('ufile20')){
                 $file1 = $request->file('ufile20');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
+                $tujuan_upload = 'babelan/' . $year . "/". $month;
                 $path = $request->file('ufile20')->storeas('babelan/'. $year . "/". $month , $name1, 's3');
                 if (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
@@ -1616,6 +1617,7 @@ class PicsiteController extends Controller
             if ($request->hasFile('ufile21')) {
                 $file1 = $request->file('ufile21');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
+                $tujuan_upload = 'babelan/' . $year . "/". $month;
                 $path = $request->file('ufile21')->storeas('babelan/'. $year . "/". $month , $name1, 's3');
                 if (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
@@ -1665,6 +1667,7 @@ class PicsiteController extends Controller
             if ($request->hasFile('ufile22')) {
                 $file1 = $request->file('ufile22');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
+                $tujuan_upload = 'babelan/' . $year . "/". $month;
                 $path = $request->file('ufile22')->storeas('babelan/'. $year . "/". $month , $name1, 's3');
                 if (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
@@ -1714,6 +1717,7 @@ class PicsiteController extends Controller
             if ($request->hasFile('ufile23')) {
                 $file1 = $request->file('ufile23');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
+                $tujuan_upload = 'babelan/' . $year . "/". $month;
                 $path = $request->file('ufile23')->storeas('babelan/'. $year . "/". $month , $name1, 's3');
                 if (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
@@ -1763,6 +1767,7 @@ class PicsiteController extends Controller
             if ($request->hasFile('ufile24')) {
                 $file1 = $request->file('ufile24');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
+                $tujuan_upload = 'babelan/' . $year . "/". $month;
                 $path = $request->file('ufile24')->storeas('babelan/'. $year . "/". $month , $name1, 's3');
                 if (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like', '%' . $request->nama_kapal . '%')->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([

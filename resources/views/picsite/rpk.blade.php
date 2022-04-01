@@ -37,14 +37,14 @@
                                     <label>Nama Kapal</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Tug</span>
-                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md" required>
+                                        <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
                                         <datalist id="Nama_kapals">
                                             @foreach ($tug as $t)
                                                 <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
                                             @endforeach
                                         </datalist>
                                         <span class="input-group-text">Barge</span>
-                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" required id="Nama_Barge" >
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="Nama_Barge" id="Nama_Barge" >
                                         <datalist id="nama_tug_barges">
                                             @foreach ($barge as $b)
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>

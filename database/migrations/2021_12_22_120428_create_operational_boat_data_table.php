@@ -34,8 +34,8 @@ class CreateOperationalBoatDataTable extends Migration
             $table->string('status', 15)->default('On Going');
 
             // Secondary Data
-            $table->string('from', 30)->nullable();
-            $table->string('to', 30)->nullable();
+            $table->string('from', 35)->nullable();
+            $table->string('to', 35)->nullable();
             $table->string('MotherVessel', 50)->nullable();
             $table->string('condition', 50)->nullable();
             $table->string('estimatedTime', 30)->nullable();

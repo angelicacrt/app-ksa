@@ -68,6 +68,10 @@ return [
         'adminOperational' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
+        ],
+        'StaffOperasional' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
         ]
     ],
 

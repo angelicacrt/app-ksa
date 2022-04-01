@@ -1,4 +1,4 @@
-@if(Auth::user()->hasRole('adminOperational'))
+@if(Auth::user()->hasRole('adminOperational') or Auth::user()->hasRole('StaffOperasional'))
     @extends('../layouts.base')
 
     @section('title', 'Admin Operational Dashboard')

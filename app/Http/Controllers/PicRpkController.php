@@ -40,8 +40,8 @@ class PicRpkController extends Controller
                 'rfile5' => 'mimes:pdf|max:1024' ,
                 'rfile6' => 'mimes:pdf|max:1024' ,
                 'rfile7' => 'mimes:pdf|max:1024' ,
-                'nama_kapal' => 'required',
-                'Nama_Barge' => 'required',
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
             ]);
 
             $year = date('Y');
