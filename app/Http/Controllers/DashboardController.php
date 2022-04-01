@@ -567,7 +567,7 @@ class DashboardController extends Controller
                         ->whereDate('periode_akhir', '>=', $datetime)
                         ->where('upload_type','Fund_Req')->where('cabang', Auth::user()->cabang)
                         ->orderBy('id', 'DESC')
-                        ->latest()->paginate(10);
+                        ->latest()->paginate(2);
         
                         return view('picsite.picDashboard', compact('documentsamarinda'));
                     }else{
