@@ -41,16 +41,16 @@ class PicsiteController extends Controller
     // record page
     public function DocRecord(Request $request){
         $datetime = date('Y-m-d');
-        $document = documents::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-        $documentberau = documentberau::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-        $documentbanjarmasin = documentbanjarmasin::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-        $documentsamarinda = documentsamarinda::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
-        $documentjakarta = documentJakarta::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+        $document = documents::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
+        $documentberau = documentberau::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
+        $documentbanjarmasin = documentbanjarmasin::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
+        $documentsamarinda = documentsamarinda::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
+        $documentjakarta = documentJakarta::with('user')->where('upload_type','Fund_Req')->where('cabang',Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
         return view('picsite.picSiteDocRecord', compact('document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
     }
     public function DocRecordRPK(Request $request){
         $datetime = date('Y-m-d');
-        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
         return view('picsite.picSiteDocRecordRPK', compact('docrpk'));
     }
     public function searchDocRecordRPK(Request $request){
@@ -62,12 +62,12 @@ class PicsiteController extends Controller
             ->where('nama_kapal', 'Like',  $request->search_kapal . '%')
             ->whereDate('periode_akhir', '<', $datetime)
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(1);
+            ->latest()->paginate(10)->withQueryString();
             
             return view('picsite.picSiteDocRecordRPK', compact('docrpk'));
          }else{
             //get DocRPK Data as long as the periode_akhir(column database)
-            $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(1);
+            $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
             return view('picsite.picSiteDocRecordRPK', compact('docrpk'));
         }
         return view('picsite.picSiteDocRecordRPK', compact('docrpk'));
@@ -81,11 +81,11 @@ class PicsiteController extends Controller
                 ->whereDate('periode_akhir', '<', $datetime)
                 ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
-                ->latest()->paginate(1);
+                ->latest()->paginate(10)->withQueryString();
     
                 return view('picsite.picSiteDocRecord', compact('document'));
             }else{
-                $document = documents::whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+                $document = documents::whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
                 return view('picsite.picSiteDocRecord', compact('document'));
             }
         }
@@ -96,11 +96,11 @@ class PicsiteController extends Controller
                 ->whereDate('periode_akhir', '<', $datetime)
                 ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
-                ->latest()->paginate(1);
+                ->latest()->paginate(10)->withQueryString();
 
                 return view('picsite.picSiteDocRecord', compact('documentberau'));
             }else{
-                $documentberau = documentberau::whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+                $documentberau = documentberau::whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
                 return view('picsite.picSiteDocRecord', compact('documentberau'));
             }
         }
@@ -111,11 +111,11 @@ class PicsiteController extends Controller
                 ->whereDate('periode_akhir', '<', $datetime)->where('cabang', Auth::user()->cabang)
                 ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
-                ->latest()->paginate(1);
+                ->latest()->paginate(10)->withQueryString();
 
                 return view('picsite.picSiteDocRecord', compact('documentbanjarmasin'));
             }else{
-                $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '<', $datetime)->where('cabang', Auth::user()->cabang)->where('upload_type','Fund_Req')->latest()->paginate(1);
+                $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '<', $datetime)->where('cabang', Auth::user()->cabang)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
                 return view('picsite.picSiteDocRecord', compact('documentbanjarmasin'));
             }
         }
@@ -126,11 +126,11 @@ class PicsiteController extends Controller
                 ->whereDate('periode_akhir', '<', $datetime)->where('cabang', Auth::user()->cabang)
                 ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
-                ->latest()->paginate(1);
+                ->latest()->paginate(10)->withQueryString();
 
                 return view('picsite.picSiteDocRecord', compact('documentsamarinda'));
             }else{
-                $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '<', $datetime)->where('cabang', Auth::user()->cabang)->where('upload_type','Fund_Req')->latest()->paginate(1);
+                $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '<', $datetime)->where('cabang', Auth::user()->cabang)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
                 return view('picsite.picSiteDocRecord', compact('documentsamarinda'));
             }
         }
@@ -140,11 +140,11 @@ class PicsiteController extends Controller
                 ->whereDate('periode_akhir', '<', $datetime)
                 ->where('upload_type','Fund_Req')
                 ->orderBy('id', 'DESC')
-                ->latest()->paginate(1);
+                ->latest()->paginate(10)->withQueryString();
                 
                 return view('picsite.picSiteDocRecord', compact('documentjakarta'));
             }else{
-                $documentjakarta = documentJakarta::whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(1);
+                $documentjakarta = documentJakarta::whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
                 return view('picsite.picSiteDocRecord', compact('documentjakarta'));
             }
         }
@@ -292,7 +292,7 @@ class PicsiteController extends Controller
     // RPK dashboard
     public function DashboardRPK(Request $request){
         $datetime = date('Y-m-d');
-        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+        $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
         return view('picsite.picDashboardRPK', compact('docrpk'));
     }
     public function DashboardRPKsearch(Request $request){
@@ -304,12 +304,12 @@ class PicsiteController extends Controller
             ->where('nama_kapal', 'Like',  $request->search_kapal . '%')
             ->whereDate('periode_akhir', '>=', $datetime)
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(1);
+            ->latest()->paginate(10)->withQueryString();
             
             return view('picsite.picDashboardRPK', compact('docrpk'));
         }else{
             //get DocRPK Data as long as the periode_akhir(column database)
-            $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(1);
+            $docrpk = DB::table('rpkdocuments')->where('cabang', Auth::user()->cabang)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
             return view('picsite.picDashboardRPK', compact('docrpk'));
         }
         return view('picsite.picDashboardRPK', compact('docrpk'));
