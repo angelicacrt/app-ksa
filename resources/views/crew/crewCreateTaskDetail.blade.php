@@ -831,16 +831,10 @@
                                             <button class="btn btn-success text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
                                             <button class="btn btn-success text-white" type="button" data-toggle="modal" id="return cargo" data-target="#Towing-cargo-{{ $ot -> id }}" style="width: 40%">Continue Towing</button>
                                         </div>
-                                        <div class="d-flex justify-content-center mt-3">
-                                            <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
-                                        </div>
                                     @elseif ($ot -> taskType == 'Operational Transhipment')
                                         <div class="d-flex justify-content-around mt-3">
                                                 <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 40%">Cancel Task</button>
                                                 <button class="btn btn-warning text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
-                                            </div>
-                                            <div class="d-flex justify-content-center mt-3">
-                                                <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
                                             </div>
                                     @endif
                                     @if($ot -> taskType == 'Towing Cargo' && $ot -> user -> cabang == 'Babelan')
