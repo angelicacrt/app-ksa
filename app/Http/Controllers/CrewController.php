@@ -446,6 +446,7 @@ class CrewController extends Controller
                 'DOBPOD' => 'nullable|date',
     
                 // Operational Transhipment
+                'Arrival_at' => 'nullable|date',
                 'faVessel' => 'nullable|date',
                 'arrivalPOL' => 'nullable|date',
                 'startAsideMVTranshipment' => 'nullable|date',
