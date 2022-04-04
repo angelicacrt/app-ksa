@@ -327,7 +327,7 @@ class DashboardController extends Controller
             // Fund Request view ----------------------------------------------------------
             if($request->tipefile == 'DANA' && $request->type_upload == 'Fund_Req'){
                     if ($request->cabang == 'Babelan'){
-                        dd($month);
+                        // dd($month);
                         $filename = $request->viewdoc;
                         $kapal_id = $request->kapal_nama;
                         $result = $request->result;
