@@ -411,7 +411,7 @@ class CrewController extends Controller
 
                 // Return Cargo
                 'depart_towing' => 'nullable|date',
-                'Arrival_at' => 'nullable|date',
+                'Arrival_at_towing' => 'nullable|date',
                 
             ]);
         }elseif($operationalData -> taskType == 'Operational Shipment' || $operationalData -> taskType == 'Operational Transhipment'){
@@ -585,21 +585,21 @@ class CrewController extends Controller
                 // (double) $dischTime + (double) $maneuver + (double) $sailingToMV + (double) $unberthing + (double) $ldgTime + (double) $prepareLdg + (double) $berthing + (double) $sailingToJetty : 
                 // (double) 0;
 
-            $calculation['sailingToJetty'] = number_format((double) $sailingToJetty, 2);
-            $calculation['Waiting_Doc_Boat'] = number_format((double) $Waiting_Doc_Boat, 2);
-            $calculation['StandBy_POL'] = number_format((double) $StandBy_POL, 2);
-            $calculation['StandBy_POD'] = number_format((double) $StandBy_POD, 2);
-            $calculation['sailingTimeMsk'] = number_format((double) $Sailing_time_MSK, 2);
-            $calculation['sailingTimeKlr'] = number_format((double) $Sailing_time_KLR, 2);
-            $calculation['prepareLdg'] = number_format((double) $prepareLdg, 2);
-            if(Auth::user()->cabang == 'Batu Licin'){
-                $calculation['ldgTime'] = number_format((double) $ldgTimeBL, 2);
-            }else{
-                $calculation['ldgTime'] = number_format((double) $ldgTime, 2);
-            }
+                $calculation['Waiting_Doc_Boat'] = number_format((double) $Waiting_Doc_Boat, 2);
+                $calculation['StandBy_POL'] = number_format((double) $StandBy_POL, 2);
+                $calculation['StandBy_POD'] = number_format((double) $StandBy_POD, 2);
+                $calculation['sailingTimeMsk'] = number_format((double) $Sailing_time_MSK, 2);
+                $calculation['sailingTimeKlr'] = number_format((double) $Sailing_time_KLR, 2);
+                $calculation['prepareLdg'] = number_format((double) $prepareLdg, 2);
+                if(Auth::user()->cabang == 'Batu Licin'){
+                    $calculation['ldgTime'] = number_format((double) $ldgTimeBL, 2);
+                }else{
+                    $calculation['sailingToJetty'] = number_format((double) $sailingToJetty, 2);
+                    $calculation['ldgTime'] = number_format((double) $ldgTime, 2);
+                    $calculation['unberthing'] = number_format((double) $unberthing, 2);
+                }
             $calculation['ldgRate'] = $ldgRate;
             $calculation['berthing'] = number_format((double) $berthing, 2);
-            $calculation['unberthing'] = number_format((double) $unberthing, 2);
             $calculation['sailingToMV'] = number_format((double) $sailingToMV, 2);
             $calculation['dischTime'] = number_format((double) $dischTime, 2);
             $calculation['dischRate'] = $dischRate;
@@ -825,6 +825,7 @@ class CrewController extends Controller
         // Then Redirect To Create Task Page
         return redirect('/crew/create-task')->with('status', 'Task Deleted Successfully');
     }
+
     public function cancelTowingOngoingTask(Request $request){
         // Update Tug & Barge Availability
         Tug::where('tugName', $request -> tugName)->update([

@@ -696,7 +696,7 @@
                                                     <h5 class="card-title text-center text-danger font-weight-bold">Arrival At </h5>
                                                     <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                     <div class="form-group mt-3">
-                                                        <input class="form-control" type="datetime-local" name="Arrival_at" id="Arrival_at" value="{{ $ot -> Arrival_at != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsideMVCargo)) : '' }}">
+                                                        <input class="form-control" type="datetime-local" name="Arrival_at_towing" id="Arrival_at_towing" value="{{ $ot -> Arrival_at_towing != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsideMVCargo)) : '' }}">
                                                     </div>
                                                 </div>
                                             </div>

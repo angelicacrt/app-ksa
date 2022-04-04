@@ -56,7 +56,7 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
             ->whereMonth('operational_boat_data.created_at', $this -> month)
             ->whereYear('operational_boat_data.created_at', $this -> year)
             ->select('tugName', 'bargeName', 'from', 'to', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'cargoAmountEnd', 'cargoAmountEndCargo', 'portOfLoading', 'portOfDischarge', 'faVessel',
-                    'departureJetty','Arrival_at' , 'depart_towing' ,'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+                    'departureJetty','Arrival_at', 'Arrival_at_towing' , 'depart_towing' ,'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
                     'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo',
                     'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'StandBy_POL' , 'StandBy_POD', 'Waiting_Doc_Boat' , 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
         }elseif($this -> taskType == 'Operational Transhipment'){
@@ -72,7 +72,7 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
             ->whereMonth('operational_boat_data.created_at', $this -> month)
             ->whereYear('operational_boat_data.created_at', $this -> year)
             ->select('tugName', 'bargeName', 'from', 'to', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'cargoAmountEnd', 'cargoAmountEndCargo', 'portOfLoading', 'portOfDischarge', 'faVessel',
-                    'departureJetty','Arrival_at' , 'depart_towing' , 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+                    'departureJetty','Arrival_at', 'Arrival_at_towing' , 'depart_towing' , 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
                     'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo',
                     'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'StandBy_POL' , 'StandBy_POD', 'Waiting_Doc_Boat', 'sailingToJetty', 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
         }elseif($this -> taskType == 'Non Operational'){
@@ -111,7 +111,7 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
                 [' '],
                 // Table Data
                 ['Tug', 'Barge', 'From', 'To', 'Shipment', 'Quantity Transhipment', 'Quantity Return Cargo', 'Port Of Loading', 'Port Of Discharge', 
-                'F/A Vessel (Arrival Pangkalan)', 'Departure To Jetty', 'Pengolongan Naik', 'Arrival POL', 
+                'F/A Vessel (Arrival Pangkalan)', 'Departure To Jetty', 'Arrival_at', 'Arrival_at_towing' , 'depart_towing' , 'Pengolongan Naik', 'Arrival POL', 
                 'Start Aside (L)', 'Aside (L)', 'Commence Loading (L)', 'Complete Loading (L)', 'Cast Off (L)', 'Pengolongan Turun', 'Mooring Area',
                 'D.O.H', 'D.O.B', 'Departure POD', 'Arrival POD Transhipment', 'Arrival POD Return Cargo', 'Start Aside (MV) Transhipment', 'Start Aside (MV) Return Cargo', 'Aside (MV) Transhipment', 'Aside (MV) Cargo', 'Commence Loading (MV) Transhipment', 'Commence Loading (MV) Cargo', 'Complete Loading (MV) Transhipment', 'Complete Loading (MV) Cargo', 'Cast Off (MV) Transhipment', 'Cast Off (MV) Cargo', 'Departure To (Departure Pangkalan)', 'Departure To (Cargo)',
                 'sailing Time Masuk' , 'sailing Time Keluar' ,'Sailing To Jetty','Standby (Batu Licin)', 'Berthing', 'Prepare Ldg', 'Ldg Time', 'Ldg Rate', 'Unberthing', 'Document', 'Sailing To MV Transhipment', 'Sailing To MV Cargo', 'Maneuver Transhipment', 'Maneuver Cargo', 'Disch Time Transhipment', 'Disch Time Cargo', 'Disch Rate / Day Transhipment', 'Disch Rate / Day Cargo', 'Cycle Time Transhipment', 'Cycle Time Cargo']
