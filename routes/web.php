@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -60,7 +60,9 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/ongoing-task', [CrewController::class, 'updateOngoingTask']);
         Route::patch('/ongoing-task', [CrewController::class, 'finalizeOngoingTask']);
         Route::patch('/ongoing-task/return-cargo', [CrewController::class, 'continueReturnCargo']);
+        Route::patch('/ongoing-task/towing-cargo', [CrewController::class, 'continueTowingCargo']);
         Route::delete('/ongoing-task', [CrewController::class, 'cancelOngoingTask']);
+        Route::patch('/ongoing-task-Towing', [CrewController::class, 'cancelTowingOngoingTask']);
         Route::get('/ongoing-task', [CrewController::class, 'ongoingTaskPage'])->name('ongoingTaskPage');
 
         // Order Page

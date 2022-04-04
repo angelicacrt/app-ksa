@@ -159,8 +159,8 @@ class picincidentController extends Controller
     //download Approved FCI
     public function download_FCI(Request $request) {
         // dd($request);
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
         $identify = $request->file_id;
         $nameForm = $request->file_name;
         

@@ -80,8 +80,8 @@ class InsuranceController extends Controller
     public function viewspgr(Request $request){
         // view spgr
         if($request->tipefile == 'SPGR'){
-            $year = date('Y');
-            $month = date('m');
+            $year = $request->created_at_Year;
+            $month = $request->created_at_month;
 
             $cabang = $request->cabang;
             $filename = $request->viewspgrfile;
@@ -130,7 +130,7 @@ class InsuranceController extends Controller
             $up = headerformclaim::where('id', $identify)
             ->where('nama_file', $nameForm)
             ->update([
-                'status'=> 'Approved by' . Auth::user()->name,
+                'status'=> 'Approved by ' . Auth::user()->name,
                 'approved_file'=> basename($path)
             ]);
             // dd($nameForm);
@@ -155,8 +155,8 @@ class InsuranceController extends Controller
         return $this->excel::download(new FCIexport($identify), date("d-m-Y"). ' - ' .'FCI'. ' - ' . $replaced . '.xlsx');
     }
     public function historyFormclaimDownload(Request $request) {
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
         // dd($request);
         // $replaced = Str::replace('/', '_', $name);
         $nameForm = $request->file_name;
@@ -172,8 +172,8 @@ class InsuranceController extends Controller
 
       // Realisasi Dana page
     public function insuranceRealisasiDana_view(Request $request) {
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
             // realisasi Fund Request view ----------------------------------------------------------
             if($request->tipefile == 'Fund_Real' && $request->type_upload == 'Fund_Real'){
             if ($request->cabang == 'Babelan'){
@@ -245,69 +245,69 @@ class InsuranceController extends Controller
         $datetime = date('Y-m-d');
         $searchresult = $request->search;
         if ($searchresult == 'All') {
-            $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
             return view('insurance.insuranceRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif($request->filled('search_kapal')) {
             //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', Auth::user()->cabang)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', Auth::user()->cabang)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             return view('insurance.insuranceRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif ($request->filled('search')){
              $document = documents::where('cabang', $request->search)
              ->where('upload_type','Fund_Real')
              ->orderBy('id', 'DESC')
-             ->latest()->paginate(10);
+             ->latest()->paginate(10)->withQueryString();
  
              $documentberau = documentberau::where('cabang', $request->search)
              ->where('upload_type','Fund_Real')
              ->orderBy('id', 'DESC')
-             ->latest()->paginate(10);
+             ->latest()->paginate(10)->withQueryString();
  
              $documentbanjarmasin = documentbanjarmasin::where('cabang', $request->search)
              ->where('cabang', Auth::user()->cabang)
              ->where('upload_type','Fund_Real')
              ->orderBy('id', 'DESC')
-             ->latest()->paginate(10);
+             ->latest()->paginate(10)->withQueryString();
  
              $documentsamarinda = documentsamarinda::where('cabang', $request->search)
              ->where('cabang', Auth::user()->cabang)
              ->where('upload_type','Fund_Real')
              ->orderBy('id', 'DESC')
-             ->latest()->paginate(10);
+             ->latest()->paginate(10)->withQueryString();
  
              $documentjakarta = documentJakarta::where('cabang', $request->search)
              ->where('upload_type','Fund_Real')
              ->orderBy('id', 'DESC')
-             ->latest()->paginate(10);
+             ->latest()->paginate(10)->withQueryString();
  
              return view('insurance.insuranceRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')){
@@ -315,41 +315,41 @@ class InsuranceController extends Controller
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('cabang', Auth::user()->cabang)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('cabang', Auth::user()->cabang)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Real')
             ->orderBy('id', 'DESC')
-            ->latest()->paginate(10);
+            ->latest()->paginate(10)->withQueryString();
 
             return view('insurance.insuranceRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }else{
-            $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10);
-            $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10);
+            $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
             return view('insurance.insuranceRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }    
         return view('insurance.insuranceRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));

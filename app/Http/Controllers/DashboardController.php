@@ -322,12 +322,12 @@ class DashboardController extends Controller
              return view('adminOperational.adminOperationalDashboard', compact('total_barges', 'total_tugs', 'on_sailing_count', 'loading_activity_count', 'discharge_activity_count', 'standby_count', 'repair_count', 'tug_docking_count', 'barge_docking_count', 'tug_standby_docking_count', 'barge_standby_docking_count', 'grounded_barge_count', 'waiting_schedule_count', 'percentage_ship_activity', 'total_lost_time'));
         }elseif(Auth::user()->hasRole('picSite')){
             $datetime = date('Y-m-d');
-            $year = date('Y');
-            $month = date('m');
-            
+            $year = $request->created_at_Year;
+            $month = $request->created_at_month;
             // Fund Request view ----------------------------------------------------------
-                if($request->tipefile == 'DANA' && $request->type_upload == 'Fund_Req'){
+            if($request->tipefile == 'DANA' && $request->type_upload == 'Fund_Req'){
                     if ($request->cabang == 'Babelan'){
+                        dd($month);
                         $filename = $request->viewdoc;
                         $kapal_id = $request->kapal_nama;
                         $result = $request->result;
@@ -382,6 +382,7 @@ class DashboardController extends Controller
                         return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/" . $viewer);
                     }
                     if ($request->cabang == 'Jakarta'){
+                        // dd($request);
                         $filename = $request->viewdoc;
                         $kapal_id = $request->kapal_nama;
                         $result = $request->result;
@@ -591,8 +592,9 @@ class DashboardController extends Controller
                 }
         }elseif(Auth::user()->hasRole('picAdmin')){
             $datetime = date('Y-m-d');
-            $year = date('Y');
-            $month = date('m');
+            $date = $request->created_at_time;
+            $year = $request->created_at_Year;
+            $month = $request->created_at_month;
             // Dana view ----------------------------------------------------------
             if($request->tipefile == 'DANA'){
                 if ($request->cabang == 'Babelan'){
@@ -830,7 +832,6 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasRole('AsuransiIncident')){
             $datetime = date('Y-m-d');
             $year = date('Y');
-            $month = date('m');
             $uploadspgr = spgrfile::where('cabang', 'Jakarta')->whereYear('created_at', date('Y'))->latest()->get();
             
             //Search bar
@@ -843,8 +844,8 @@ class DashboardController extends Controller
 
             // view spgr
             if($request->tipefile == 'SPGR'){
-                $year = date('Y');
-                $month = date('m');
+                $year1 = $request->created_at_Year;
+                $month = $request->created_at_month;
 
                 $cabang = $request->cabang;
                 $result = $request->result;
@@ -858,14 +859,14 @@ class DashboardController extends Controller
                 ->pluck($filename)[0];
                 // dd($request);
                 // dd($viewer);
-                return Storage::disk('s3')->response('spgr/' . $year . "/". $month . "/" . $viewer);
+                return Storage::disk('s3')->response('spgr/' . $year1 . "/". $month . "/" . $viewer);
             }
             
             return view('picincident.dashboardincident', compact('uploadspgr'));
         }elseif(Auth::user()->hasRole('InsuranceManager')){
             $datetime = date('Y-m-d');
-            $year = date('Y');
-            $month = date('m');
+            $year = $request->created_at_Year;
+            $month = $request->created_at_month;
             $uploadspgr = spgrfile::where('cabang', 'Jakarta')->latest()->paginate(7);
             
             //Search bar
@@ -877,9 +878,7 @@ class DashboardController extends Controller
 
             // view spgr
                 if($request->tipefile == 'SPGR'){
-                    $year = date('Y');
-                    $month = date('m');
-
+                   
                     $cabang = $request->cabang;
                     $result = $request->result;
                     $filename = $request->viewspgrfile;
@@ -890,8 +889,7 @@ class DashboardController extends Controller
                     ->where('no_formclaim', 'Like', '%' . $claim . '%')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->pluck($filename)[0];
-                    // dd($request);
-                    // dd($viewer);
+
                     return Storage::disk('s3')->response('spgr/' . $year . "/". $month . "/" . $viewer);
                 }
             return view('insurance.Dashboardinsurance', ['uploadspgr' => $uploadspgr]);

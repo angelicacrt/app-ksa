@@ -98,6 +98,7 @@
                     <option value="supervisorLogistic" id="supervisorLogistic" @if (old('role_id') == 'supervisorLogistic') selected="selected" @endif>Supervisor Logistic</option> -->
                     <option value="crew" id="crew" @if (old('role_id') == 'crew') selected="selected" @endif>Crew</option>
                     <option value="StaffOperasional" id="StaffOperasional" @if (old('role_id') == 'StaffOperasional') selected="selected" @endif>Staff operasional</option>
+                    <option value="StaffLegal" id="StaffLegal" @if (old('role_id') == 'StaffLegal') selected="selected" @endif>Staff Legal</option>
                 </select>
             </div>
 
@@ -166,11 +167,13 @@
                 var doc = document.getElementById("picSite")
                 var crew = document.getElementById("crew")
                 var StaffOperasional = document.getElementById("StaffOperasional")
+                var StaffLegal = document.getElementById("StaffLegal")
                 var departmentChooseOption = document.getElementById("department")
 
                 insiden.style.display = 'none'
                 doc.style.display = 'none'
                 crew.style.display = 'none'
+                StaffLegal.style.display = 'none'
                 StaffOperasional.style.display = 'none'
 
                 departmentChooseOption.onchange = function (event){
@@ -182,12 +185,14 @@
                         StaffOperasional.style.display = 'none'
 
                         insiden.style.display = ''
+                        StaffLegal.style.display = ''
                         doc.style.display = ''
                     }else if(departmentChooseOption.value == "operasional"){
                         selectdep ('crew');
 
                         insiden.style.display = 'none'
                         doc.style.display = 'none'
+                        StaffLegal.style.display = 'none'
                         crew.style.display = ''
                         StaffOperasional.style.display = ''
                     }else{
@@ -195,6 +200,7 @@
                         document.getElementById("picSite").hidden = false;
                         document.getElementById("crew").hidden = false;
                         document.getElementById("StaffOperasional").hidden = false;
+                        document.getElementById("StaffLegal").hidden = false;
                     }
                 }
 

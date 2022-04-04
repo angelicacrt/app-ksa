@@ -46,6 +46,8 @@
                                             <div class="col-md-auto">
                                                 <form method="POST" action="/picincident/formclaimDownload">
                                                     @csrf
+                                                        <input type="hidden" name='created_at_Year' value={{$claims->created_at->format('Y')}} />
+                                                        <input type="hidden" name='created_at_month' value={{$claims->created_at->format('m')}} />
                                                         <input type="hidden" name ="file_id" value="{{$claims->id}}"/>
                                                         <input type="hidden" name ="file_name" value="{{$claims->nama_file}}"/>
                                                         <button class="btn btn-outline-success" id="downloadexcel"><span class="text-center" data-feather="download" style="color: black"></span></button>

@@ -152,8 +152,8 @@ class PicsiteController extends Controller
     }
     public function viewRecord(Request $request){
         $datetime = date('Y-m-d');
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
         // Fund Request view ----------------------------------------------------------
             if($request->tipefile == 'DANA'){
                 if ($request->cabang == 'Babelan'){
@@ -399,8 +399,8 @@ class PicsiteController extends Controller
             return view('picsite.picsiteDashboardReal', compact('document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }
         public function view_Realisasi(Request $request){
-            $year = date('Y');
-            $month = date('m');
+            $year = $request->created_at_Year;
+            $month = $request->created_at_month;
                 // realisasi Fund Request view ----------------------------------------------------------
                 if($request->tipefile == 'Fund_Real' && $request->type_upload == 'Fund_Real'){
                 if ($request->cabang == 'Babelan'){
@@ -1573,13 +1573,13 @@ class PicsiteController extends Controller
                         'dana20' => $request->dana20,  
                         'status20' => 'on review',
                         'time_upload20' => date("Y-m-d h:i:s"),
-                        'Lain_Lain1' => basename($path),]);
+                        'Sertifikat_Konstruksi_Kapal_Barang' => basename($path),]);
                 }elseif (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                     documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana20' => $request->dana20,
                         'status20' => 'on review',
                         'time_upload20' => date("Y-m-d h:i:s"),
-                        'Lain_Lain1' => basename($path),]);
+                        'Sertifikat_Konstruksi_Kapal_Barang' => basename($path),]);
                 }elseif($request->type_upload == 'Fund_Real'){
                     documents::create([
                         'upload_type' => 'Fund_Real',
@@ -1593,7 +1593,7 @@ class PicsiteController extends Controller
             
                         'status20' => 'on review',
                         'time_upload20' => date("Y-m-d h:i:s"),
-                        'Lain_Lain1' => basename($path),
+                        'Sertifikat_Konstruksi_Kapal_Barang' => basename($path),
                     ]);
                 }
                 else{
@@ -1609,7 +1609,7 @@ class PicsiteController extends Controller
             
                         'status20' => 'on review',
                         'time_upload20' => date("Y-m-d h:i:s"),
-                        'Lain_Lain1' => basename($path),
+                        'Sertifikat_Konstruksi_Kapal_Barang' => basename($path),
                     ]);
                 }
             }
@@ -1622,13 +1622,13 @@ class PicsiteController extends Controller
                         'dana21' => $request->dana21,  
                         'status21' => 'on review',
                         'time_upload21' => date("Y-m-d h:i:s"),
-                        'Lain_Lain2' => basename($path),]);
+                        'Sertifikat_Radio_Kapal_Barang' => basename($path),]);
                 }elseif (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                     documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana21' => $request->dana21,
                         'status21' => 'on review',
                         'time_upload21' => date("Y-m-d h:i:s"),
-                        'Lain_Lain2' => basename($path),]);
+                        'Sertifikat_Radio_Kapal_Barang' => basename($path),]);
                 }elseif($request->type_upload == 'Fund_Real'){
                     documents::create([
                         'upload_type' => 'Fund_Real',
@@ -1642,7 +1642,7 @@ class PicsiteController extends Controller
             
                         'status21' => 'on review',
                         'time_upload21' => date("Y-m-d h:i:s"),
-                        'Lain_Lain2' => basename($path),
+                        'Sertifikat_Radio_Kapal_Barang' => basename($path),
                     ]);
                 }
                 else{
@@ -1658,7 +1658,7 @@ class PicsiteController extends Controller
             
                         'status21' => 'on review',
                         'time_upload21' => date("Y-m-d h:i:s"),
-                        'Lain_Lain2' => basename($path),
+                        'Sertifikat_Radio_Kapal_Barang' => basename($path),
                     ]);
                 }
             }
@@ -1671,13 +1671,13 @@ class PicsiteController extends Controller
                         'dana22' => $request->dana22,  
                         'status22' => 'on review',
                         'time_upload22' => date("Y-m-d h:i:s"),
-                        'Lain_Lain3' => basename($path),]);
+                        'PNBP_Safe_Maning' => basename($path),]);
                 }elseif (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                     documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana22' => $request->dana22,
                         'status22' => 'on review',
                         'time_upload22' => date("Y-m-d h:i:s"),
-                        'Lain_Lain3' => basename($path),]);
+                        'PNBP_Safe_Maning' => basename($path),]);
                 }elseif($request->type_upload == 'Fund_Real'){
                     documents::create([
                         'upload_type' => 'Fund_Real',
@@ -1691,7 +1691,7 @@ class PicsiteController extends Controller
             
                         'status22' => 'on review',
                         'time_upload22' => date("Y-m-d h:i:s"),
-                        'Lain_Lain3' => basename($path),
+                        'PNBP_Safe_Maning' => basename($path),
                     ]);
                 }
                 else{
@@ -1707,7 +1707,7 @@ class PicsiteController extends Controller
             
                         'status22' => 'on review',
                         'time_upload22' => date("Y-m-d h:i:s"),
-                        'Lain_Lain3' => basename($path),
+                        'PNBP_Safe_Maning' => basename($path),
                     ]);
                 }
             }
@@ -1720,13 +1720,13 @@ class PicsiteController extends Controller
                         'dana23' => $request->dana23,  
                         'status23' => 'on review',
                         'time_upload23' => date("Y-m-d h:i:s"),
-                        'Lain_Lain4' => basename($path),]);
+                        'Lain_Lain1' => basename($path),]);
                 }elseif (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                     documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana23' => $request->dana23,
                         'status23' => 'on review',
                         'time_upload23' => date("Y-m-d h:i:s"),
-                        'Lain_Lain4' => basename($path),]);
+                        'Lain_Lain1' => basename($path),]);
                 }elseif($request->type_upload == 'Fund_Real'){
                     documents::create([
                         'upload_type' => 'Fund_Real',
@@ -1740,7 +1740,7 @@ class PicsiteController extends Controller
             
                         'status23' => 'on review',
                         'time_upload23' => date("Y-m-d h:i:s"),
-                        'Lain_Lain4' => basename($path),
+                        'Lain_Lain1' => basename($path),
                     ]);
                 }
                 else{
@@ -1756,7 +1756,7 @@ class PicsiteController extends Controller
             
                         'status23' => 'on review',
                         'time_upload23' => date("Y-m-d h:i:s"),
-                        'Lain_Lain4' => basename($path),
+                        'Lain_Lain1' => basename($path),
                     ]);
                 }
             }
@@ -1769,13 +1769,13 @@ class PicsiteController extends Controller
                         'dana24' => $request->dana24,  
                         'status24' => 'on review',
                         'time_upload24' => date("Y-m-d h:i:s"),
-                        'Lain_Lain5' => basename($path),]);
+                        'Lain_Lain2' => basename($path),]);
                 }elseif (documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                     documents::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana24' => $request->dana24,
                         'status24' => 'on review',
                         'time_upload24' => date("Y-m-d h:i:s"),
-                        'Lain_Lain5' => basename($path),]);
+                        'Lain_Lain2' => basename($path),]);
                 }elseif($request->type_upload == 'Fund_Real'){
                     documents::create([
                         'upload_type' => 'Fund_Real',
@@ -1789,7 +1789,7 @@ class PicsiteController extends Controller
             
                         'status24' => 'on review',
                         'time_upload24' => date("Y-m-d h:i:s"),
-                        'Lain_Lain5' => basename($path),
+                        'Lain_Lain2' => basename($path),
                     ]);
                 }
                 else{
@@ -1805,7 +1805,7 @@ class PicsiteController extends Controller
             
                         'status24' => 'on review',
                         'time_upload24' => date("Y-m-d h:i:s"),
-                        'Lain_Lain5' => basename($path),
+                        'Lain_Lain2' => basename($path),
                     ]);
                 }
             }

@@ -92,6 +92,8 @@
                                         @csrf
                                         <input type="hidden" name='result' value={{$upspgr->$scan}} />
                                         <input type="hidden" name = 'tipefile' value='SPGR'>
+                                        <input type="hidden" name='created_at_Year' value={{$upspgr->created_at->format('Y')}} />
+                                        <input type="hidden" name='created_at_month' value={{$upspgr->created_at->format('m')}} />
                                         <input type="hidden" name = 'no_claim' value={{$upspgr->no_formclaim}}>
                                         <input type="hidden" name = 'cabang' value={{$upspgr->cabang}}>
                                         <input type="hidden" name='viewspgrfile' value={{$viewspgrfile[$r-1]}} />
@@ -113,6 +115,8 @@
                                         @csrf
                                         <input type="hidden" name='result' value={{$upspgr->$scan}} />
                                         <input type="hidden" name = 'tipefile' value='SPGR'>
+                                        <input type="hidden" name='created_at_Year' value={{$upspgr->created_at->format('Y')}} />
+                                        <input type="hidden" name='created_at_month' value={{$upspgr->created_at->format('m')}} />
                                         <input type="hidden" name = 'no_claim' value={{$upspgr->no_formclaim}}>
                                         <input type="hidden" name = 'cabang' value={{$upspgr->cabang}}>
                                         <input type="hidden" name='viewspgrfile' value={{$viewspgrfile[$r-1]}} />
@@ -134,6 +138,8 @@
                                         @csrf
                                         <input type="hidden" name='result' value={{$upspgr->$scan}} />
                                         <input type="hidden" name = 'tipefile' value='SPGR'>
+                                        <input type="hidden" name='created_at_Year' value={{$upspgr->created_at->format('Y')}} />
+                                        <input type="hidden" name='created_at_month' value={{$upspgr->created_at->format('m')}} />
                                         <input type="hidden" name = 'no_claim' value={{$upspgr->no_formclaim}}>
                                         <input type="hidden" name = 'cabang' value={{$upspgr->cabang}}>
                                         <input type="hidden" name='viewspgrfile' value={{$viewspgrfile[$r-1]}} />

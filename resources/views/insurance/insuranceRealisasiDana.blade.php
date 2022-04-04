@@ -120,13 +120,13 @@
                                 'biaya_laporan_dok','pnpb_sertifikat_keselamatan','pnpb_sertifikat_garis_muat',
                                 'pnpb_surat_laut','sertifikat_snpp','sertifikat_anti_teritip',    
                                 'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec' , 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat' 
-                                ,'Lain_Lain1' , 'Lain_Lain2' , 'Lain_Lain3' , 'Lain_Lain4' , 'Lain_Lain5');
+                                'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain1' , 'Lain_Lain2');
     
                                 $names = array('Sertifikat Keselamatan' , 'Sertifikat Garis Muat' , 'Penerbitan 1 Kali Jalan' , 'Sertifikat Safe Manning' ,
                                 'Endorse Surat Laut' , 'Perpanjangan Sertifikat SSCEC' , 'Perpanjangan Sertifikat P3K' , 'Biaya Laporan Dok' , 
                                 'PNPB Sertifikat Keselamatan' , 'PNPB Sertifikat Garis Muat' , 'PNPB Surat Laut'  , 'Sertifikat SNPP' ,
                                 'Sertifikat Anti Teritip' , 'PNBP SNPP & SNAT', 'Biaya Survey' , 'PNPB SSCEC', 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat' ,
-                                'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
+                                'Sertifikat Konstruksi Kapal Barang' , 'Sertifikat Radio Kapal Barang' , 'PNBP Safe Maning' , 'File extra 1' , 'File extra 2');
                                 $time_upload ="time_upload".$a;
                                 $stats ="status".$a;
                                 $reason = "reason".$a;
@@ -150,6 +150,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -170,6 +172,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -190,6 +194,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -261,6 +267,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -281,6 +289,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -301,6 +311,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -375,6 +387,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -395,6 +409,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -415,6 +431,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -497,6 +515,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -517,6 +537,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -537,6 +559,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -613,6 +637,8 @@
                                             <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                                 @csrf
                                                 <input type="hidden" name='type_upload' value="Fund_Real" />
+                                                <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                                <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                                 <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                                 <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -633,6 +659,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -653,6 +681,8 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />

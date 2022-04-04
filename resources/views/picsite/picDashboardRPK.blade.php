@@ -145,6 +145,8 @@
                             <form method="post" action="/dashboard/rpk/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                 <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                 <input type="hidden" name = 'tipefile' value='RPK'>
                                 <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
@@ -166,6 +168,8 @@
                                 <form method="post" action="/dashboard/rpk/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                    <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                     <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                     <input type="hidden" name = 'tipefile' value='RPK'>
                                     <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
@@ -187,6 +191,8 @@
                                 <form method="post" action="/dashboard/rpk/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                    <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                     <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                     <input type="hidden" name = 'tipefile' value='RPK'>
                                     <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />

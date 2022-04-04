@@ -53,7 +53,10 @@ class CreateOperationalBoatDataTable extends Migration
             $table->dateTime('commenceLoadL')->nullable();
             $table->dateTime('completedLoadingL')->nullable();
             $table->dateTime('cOffL')->nullable();
+            
             $table->dateTime('StandByB')->nullable();
+            $table->dateTime('depart_towing')->nullable();
+            $table->dateTime('Arrival_at')->nullable();
 
             $table->dateTime('DOH')->nullable();
             $table->dateTime('DOB')->nullable();
@@ -70,6 +73,7 @@ class CreateOperationalBoatDataTable extends Migration
             // Operational Transhipment
             $table->dateTime('faVessel')->nullable();
             $table->dateTime('arrivalPOL')->nullable();
+            $table->dateTime('Arrival_at')->nullable();
             // => startAsideL
             // => asideL
             // => commenceLoadL
@@ -122,7 +126,9 @@ class CreateOperationalBoatDataTable extends Migration
 
             // Calculation Data
             $table->double('sailingToMV')->nullable();
-            $table->double('standbyBL')->nullable();
+            $table->double('Waiting_Doc_Boat')->nullable();
+            $table->double('StandBy_POL')->nullable();
+            $table->double('StandBy_POD')->nullable();
             $table->double('sailingTimeMsk')->nullable();
             $table->double('sailingTimeKlr')->nullable();
             $table->double('sailingToJetty')->nullable();

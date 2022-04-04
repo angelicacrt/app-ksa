@@ -56,9 +56,9 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
             ->whereMonth('operational_boat_data.created_at', $this -> month)
             ->whereYear('operational_boat_data.created_at', $this -> year)
             ->select('tugName', 'bargeName', 'from', 'to', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'cargoAmountEnd', 'cargoAmountEndCargo', 'portOfLoading', 'portOfDischarge', 'faVessel',
-                    'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+                    'departureJetty','Arrival_at' , 'depart_towing' ,'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
                     'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo',
-                    'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'sailingToJetty', 'standbyBL' , 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
+                    'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'StandBy_POL' , 'StandBy_POD', 'Waiting_Doc_Boat' , 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
         }elseif($this -> taskType == 'Operational Transhipment'){
             $operationalData = OperationalBoatData::
             where('status', 'Finalized')
@@ -72,9 +72,9 @@ class DailyReportsExport implements FromQuery, WithHeadings, ShouldAutoSize, Wit
             ->whereMonth('operational_boat_data.created_at', $this -> month)
             ->whereYear('operational_boat_data.created_at', $this -> year)
             ->select('tugName', 'bargeName', 'from', 'to', DB::raw('CONCAT(MONTHNAME(operational_boat_data.created_at),"/",YEAR(operational_boat_data.created_at)) as Shipment'), 'cargoAmountEnd', 'cargoAmountEndCargo', 'portOfLoading', 'portOfDischarge', 'faVessel',
-                    'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
+                    'departureJetty','Arrival_at' , 'depart_towing' , 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOH', 'DOB',
                     'departurePOD', 'arrivalPODGeneral', 'arrivalPODCargo', 'startAsideMVTranshipment', 'startAsideMVCargo', 'asideMVTranshipment', 'asideMVCargo', 'commMVTranshipment', 'commMVCargo', 'compMVTranshipment', 'compMVCargo', 'cOffMVTranshipment', 'cOffMVCargo',
-                    'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'sailingToJetty', 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
+                    'departureTimeTranshipment', 'departureTime', 'sailingTimeMsk' , 'sailingTimeKlr' , 'StandBy_POL' , 'StandBy_POD', 'Waiting_Doc_Boat', 'sailingToJetty', 'berthing', 'prepareLdg', 'ldgTime', 'ldgRate', 'unberthing','document', 'sailingToMV', 'sailingToMVCargo', 'maneuver', 'maneuverCargo', 'dischTime', 'dischTimeCargo', 'dischRate', 'dischRateCargo', 'cycleTime', 'cycleTimeCargo');
         }elseif($this -> taskType == 'Non Operational'){
             $operationalData = OperationalBoatData::
             where('status', 'Finalized')

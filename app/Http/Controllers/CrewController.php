@@ -401,6 +401,19 @@ class CrewController extends Controller
                 
                 'departureTime' => 'nullable|date'
             ]);
+        }elseif ($operationalData -> taskType == 'Towing Cargo') {
+            $validated = $request -> validate([
+                'from' => 'required|string',
+                'to' => 'required|string',
+                'condition' => 'nullable|string',
+                'cargoAmountEndCargo' => 'nullable|numeric|min:1',
+                'description' => 'nullable',
+
+                // Return Cargo
+                'depart_towing' => 'nullable|date',
+                'Arrival_at' => 'nullable|date',
+                
+            ]);
         }elseif($operationalData -> taskType == 'Operational Shipment' || $operationalData -> taskType == 'Operational Transhipment'){
             // Validate All The Fields
             $validated = $request -> validate([
@@ -507,17 +520,21 @@ class CrewController extends Controller
 
             $calculation['totalTime'] = $totalTime;
         }elseif($operationalData -> taskType == 'Operational Transhipment'){
-            // Sailing To Jetty = (Arrival POL - F/A Vessel)
-            $sailingToJetty = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> faVessel) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> faVessel))->format('%h.%i') : (double) 0;
-            
+
             // StandBy = (Arrival POL - prepare alongside) , note: prepare alongside is startAsideL
-            $StandBy = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> startAsideL) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> startAsideL))->format('%h.%i') : (double) 0;
+            $StandBy_POL = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> startAsideL) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> startAsideL))->format('%h.%i') : (double) 0;
             
-            // Sailing time masuk = Departure POD - Departure To
-            $Sailing_time_MSK = !empty($operationalData -> departurePOD) && !empty($operationalData -> arrivalPOL) ? date_diff(new DateTime($operationalData -> departurePOD), new DateTime($operationalData -> arrivalPOL))->format('%h.%i') : (double) 0;
+            // StandBy_POD = (prepare alongside - Arrival POD) , note: prepare alongside is startAsideL
+            $StandBy_POD = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> arrivalPODGeneral) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> arrivalPODGeneral))->format('%h.%i') : (double) 0;
             
-            // Sailing time keluar  = Departure To - arrival  POL
-            $Sailing_time_KLR = !empty($operationalData -> departureTimeTranshipment) && !empty($operationalData -> arrivalPOL) ? date_diff(new DateTime($operationalData -> departureTimeTranshipment), new DateTime($operationalData -> arrivalPOL))->format('%h.%i') : (double) 0;
+            // Waiting_Doc_Boat = (DOB - cOffL)
+            $Waiting_Doc_Boat = !empty($operationalData -> DOB) && !empty($operationalData -> cOffL) ? date_diff(new DateTime($operationalData -> DOB), new DateTime($operationalData -> cOffL))->format('%h.%i') : (double) 0;
+           
+            // Sailing time masuk = Departure POD - Arrival At
+            $Sailing_time_MSK = !empty($operationalData -> departurePOD) && !empty($operationalData -> Arrival_at) ? date_diff(new DateTime($operationalData -> departurePOD), new DateTime($operationalData -> Arrival_at))->format('%h.%i') : (double) 0;
+            
+            // Sailing time keluar  = arrival POD -  Departure POD
+            $Sailing_time_KLR = !empty($operationalData -> arrivalPODGeneral) && !empty($operationalData -> departurePOD) ? date_diff(new DateTime($operationalData -> arrivalPODGeneral), new DateTime($operationalData -> departurePOD))->format('%h.%i') : (double) 0;
            
             // Prepare Ldg = (Commence Load (L) -Aside (L))
             $prepareLdg = !empty($operationalData -> commenceLoadL) && !empty($operationalData -> asideL) ? date_diff(new DateTime($operationalData -> commenceLoadL), new DateTime($operationalData -> asideL))->format('%h.%i') : (double) 0;
@@ -529,19 +546,22 @@ class CrewController extends Controller
                 // Ldg Rate = Quantity : Actual Ldg Time
                 $ldgRate = $operationalData -> cargoAmountEnd != (double) 0 && (double) $ldgTimeBL > (double) 0 ? (double) $operationalData -> cargoAmountEnd / (double) $ldgTimeBL : (double) 0;
             }else{
+                 // Sailing To Jetty = (Arrival POL - F/A Vessel)
+                $sailingToJetty = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> faVessel) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> faVessel))->format('%h.%i') : (double) 0;
+
                 // Ldg Time = (C/Off (L) - Commence Load (L))
                 $ldgTime = !empty($operationalData -> cOffL) && !empty($operationalData -> commenceLoadL) ? date_diff(new DateTime($operationalData -> cOffL), new DateTime($operationalData -> commenceLoadL))->format('%h.%i') : (double) 0;
                 
                 // Ldg Rate = Quantity : Actual Ldg Time
                 $ldgRate = $operationalData -> cargoAmountEnd != (double) 0 && (double) $ldgTime > (double) 0 ? (double) $operationalData -> cargoAmountEnd / (double) $ldgTime : (double) 0;
+                
+                
+                // Unberthing = DOH - C/OFF (L)
+                $unberthing = !empty($operationalData -> DOH) && !empty($operationalData -> cOffL) ? date_diff(new DateTime($operationalData -> DOH), new DateTime($operationalData -> cOffL))->format('%h.%i') : (double) 0;
             }
-
             // Berthing = (Aside (L) - Start Aside (L))
             $berthing = !empty($operationalData -> asideL) && !empty($operationalData -> startAsideL) ? date_diff(new DateTime($operationalData -> asideL), new DateTime($operationalData -> startAsideL))->format('%h.%i') : (double) 0;
-
-            // Unberthing = DOH - C/OFF (L)
-            $unberthing = !empty($operationalData -> DOH) && !empty($operationalData -> cOffL) ? date_diff(new DateTime($operationalData -> DOH), new DateTime($operationalData -> cOffL))->format('%h.%i') : (double) 0;
-
+            
             // Sailing to MV = (Arrival POD - Departure POD)
             $sailingToMV = !empty($operationalData -> arrivalPODGeneral) && !empty($operationalData -> departurePOD) ? date_diff(new DateTime($operationalData -> arrivalPODGeneral), new DateTime($operationalData -> departurePOD))->format('%h.%i') : (double) 0;
 
@@ -556,7 +576,7 @@ class CrewController extends Controller
             
             
                 // Cycle Time = Disch Time + Manuever + Sailing to MV + Unberthing + Ldg Time + Prepare Ldg + Berthing + Sailing to Jetty + time sailing masuk dan keluar
-                $cycleTime = !empty($dischTime) && !empty($maneuver) && !empty($sailingToMV) && !empty($unberthing) && !empty($ldgTime) && !empty($prepareLdg) && !empty($berthing) && !empty($sailingToJetty) && !empty($StandBy) && !empty($Sailing_time_MSK)  && !empty($Sailing_time_KLR)? 
+                $cycleTime = !empty($dischTime) && !empty($maneuver) && !empty($sailingToMV) && !empty($unberthing) && !empty($ldgTime) && !empty($prepareLdg) && !empty($berthing) && !empty($sailingToJetty) && !empty($StandBy) && !empty($Sailing_time_MSK)  && !empty($Sailing_time_KLR) && !empty($StandBy_POL) && !empty($StandBy_POD) && !empty($Waiting_Doc_Boat)? 
                 (double) $dischTime + (double) $maneuver + (double) $sailingToMV + (double) $unberthing + (double) $ldgTime + (double) $prepareLdg + (double) $berthing + (double) $sailingToJetty + (double) ($Sailing_time_MSK)  + (double) ($Sailing_time_KLR) : 
                 (double) 0 ;
             
@@ -566,7 +586,9 @@ class CrewController extends Controller
                 // (double) 0;
 
             $calculation['sailingToJetty'] = number_format((double) $sailingToJetty, 2);
-            $calculation['standbyBL'] = number_format((double) $StandBy, 2);
+            $calculation['Waiting_Doc_Boat'] = number_format((double) $Waiting_Doc_Boat, 2);
+            $calculation['StandBy_POL'] = number_format((double) $StandBy_POL, 2);
+            $calculation['StandBy_POD'] = number_format((double) $StandBy_POD, 2);
             $calculation['sailingTimeMsk'] = number_format((double) $Sailing_time_MSK, 2);
             $calculation['sailingTimeKlr'] = number_format((double) $Sailing_time_KLR, 2);
             $calculation['prepareLdg'] = number_format((double) $prepareLdg, 2);
@@ -757,6 +779,34 @@ class CrewController extends Controller
         return redirect()->back()->with('status', 'Task Updated Successfully');
     }
 
+    public function continueTowingCargo(Request $request){
+        // Validate The Task Type
+        if($request -> taskType != 'Operational Transhipment') {
+            return redirect()->back()->with('error', 'Wrong Task');
+        }
+
+        // Helper Var
+        if($request -> cabang == 'Babelan'){
+            $operationTranshipment_loops = ['MotherVessel','condition', 'StandByB', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+        }
+        
+        $data = OperationalBoatData::where('id', $request -> taskId)->first();
+
+        // Then Validate Empty Fields
+        foreach($operationTranshipment_loops as $ot){
+            if($data -> $ot == NULL){
+                return redirect()->back()->with('error', 'Input Field Must Not Be Empty');
+            }
+        };
+
+        // Then Change The Task Type Into Return Cargo
+        $data->update([
+            'taskType' => 'Towing Cargo'
+        ]);
+
+        return redirect()->back()->with('status', 'Task Updated Successfully');
+    }
+
     public function cancelOngoingTask(Request $request){
         // Update Tug & Barge Availability
         Tug::where('tugName', $request -> tugName)->update([
@@ -774,6 +824,26 @@ class CrewController extends Controller
 
         // Then Redirect To Create Task Page
         return redirect('/crew/create-task')->with('status', 'Task Deleted Successfully');
+    }
+    public function cancelTowingOngoingTask(Request $request){
+        // Update Tug & Barge Availability
+        Tug::where('tugName', $request -> tugName)->update([
+            'tugAvailability' => true
+        ]);
+
+        if($request -> bargeName !== ''){
+            Barge::where('bargeName', $request -> bargeName)->update([
+                'bargeAvailability' => true
+            ]);
+        }
+
+        // Find The Task, Then change It
+        OperationalBoatData::where('id', $request -> taskId)->update([
+            'taskType' => 'Operational Transhipment'
+        ]);
+
+        // Then Redirect To Create Task Page
+        return redirect('/crew/create-task')->with('status', 'Towing Cancelled Successfully');
     }
 
     //job request

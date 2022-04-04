@@ -145,31 +145,31 @@ class CreateDocumentsTable extends Migration
             $table->string('reason20')->nullable();
             $table->string('status20' , 30)->nullable();
             $table->string('dana20' , 15)->nullable();
-            $table->string('Lain_Lain1')->nullable();
+            $table->string('Sertifikat_Konstruksi_Kapal_Barang')->nullable();
             
             $table->dateTime('time_upload21')->nullable();
             $table->string('reason21')->nullable();
             $table->string('status21' , 30)->nullable();
             $table->string('dana21' , 15)->nullable();
-            $table->string('Lain_Lain2')->nullable();
+            $table->string('Sertifikat_Radio_Kapal_Barang')->nullable();
 
             $table->dateTime('time_upload22')->nullable();
             $table->string('reason22')->nullable();
             $table->string('status22' , 30)->nullable();
             $table->string('dana22' , 15)->nullable();
-            $table->string('Lain_Lain3')->nullable();
+            $table->string('PNBP_Safe_Maning')->nullable();
             
             $table->dateTime('time_upload23')->nullable();
             $table->string('reason23')->nullable();
             $table->string('status23' , 30)->nullable();
             $table->string('dana23' , 15)->nullable();
-            $table->string('Lain_Lain4')->nullable();
+            $table->string('Lain_Lain1')->nullable();
             
             $table->dateTime('time_upload24')->nullable();
             $table->string('reason24')->nullable();
             $table->string('status24' , 30)->nullable();
             $table->string('dana24' , 15)->nullable();
-            $table->string('Lain_Lain5')->nullable();
+            $table->string('Lain_Lain2')->nullable();
 
             $table->timestamps();
         });

@@ -72,6 +72,10 @@ return [
         'StaffOperasional' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
+        ],
+        'StaffLegal' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
         ]
     ],
 

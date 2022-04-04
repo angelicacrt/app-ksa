@@ -78,27 +78,6 @@
                         <tr>
                              {{-- agar tidak keluar hasil kosong --}}
                         </tr>
-                    {{-- @elseif ($upspgr->$stats == 'on review')
-                        <tr>
-                            <td class="table-warning" id="time">{{$upspgr->$time_upload}}</td>                                        
-                            <td class="table-warning">{{$upspgr->no_formclaim}}</td>
-                            <td class="table-warning" id="nama">{{$name[$r-1]}}</td>                                        
-                            <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$upspgr->$stats}}</td>                                      
-                            <td class="table-warning" id="reason">{{$upspgr->$reason}}</td>
-                            <td>
-                                <div class="col-md-auto">
-                                    <form method="post" action="/dashboard/spgr/view" target="_blank">
-                                        @csrf
-                                        <input type="hidden" name='result' value={{$upspgr->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='SPGR'>
-                                        <input type="hidden" name = 'no_claim' value={{$upspgr->no_formclaim}}>
-                                        <input type="hidden" name = 'cabang' value={{$upspgr->cabang}}>
-                                        <input type="hidden" name='viewspgrfile' value={{$viewspgrfile[$r-1]}} />
-                                        <button type="submit" name="views3" class="btn btn-dark">view</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr> --}}
                     @elseif ($upspgr->$stats == 'approved')
                         <tr>
                             <td class="table-success" id="time">{{$upspgr->$time_upload}}</td>                                        
@@ -112,6 +91,8 @@
                                         @csrf
                                         <input type="hidden" name='result' value={{$upspgr->$scan}} />
                                         <input type="hidden" name = 'tipefile' value='SPGR'>
+                                        <input type="hidden" name='created_at_Year' value={{$upspgr->created_at->format('Y')}} />
+                                        <input type="hidden" name='created_at_month' value={{$upspgr->created_at->format('m')}} />
                                         <input type="hidden" name = 'no_claim' value={{$upspgr->no_formclaim}}>
                                         <input type="hidden" name = 'cabang' value={{$upspgr->cabang}}>
                                         <input type="hidden" name='viewspgrfile' value={{$viewspgrfile[$r-1]}} />
@@ -133,6 +114,7 @@
                                         @csrf
                                         <input type="hidden" name='result' value={{$upspgr->$scan}} />
                                         <input type="hidden" name = 'tipefile' value='SPGR'>
+                                        <input type="hidden" name='created_at_month' value={{$upspgr->created_at->format('m')}} />
                                         <input type="hidden" name = 'no_claim' value={{$upspgr->no_formclaim}}>
                                         <input type="hidden" name = 'cabang' value={{$upspgr->cabang}}>
                                         <input type="hidden" name='viewspgrfile' value={{$viewspgrfile[$r-1]}} />

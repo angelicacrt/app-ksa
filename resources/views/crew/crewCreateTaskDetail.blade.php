@@ -230,7 +230,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Load (POD)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Unloading</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="commenceLoadPOD" id="commenceLoadPOD" value="{{ $ot -> commenceLoadPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commenceLoadPOD)) : '' }}">
@@ -239,7 +239,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Completed Loading (POD)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Completed Unloading</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="completedLoadingPOD" id="completedLoadingPOD" value="{{ $ot -> completedLoadingPOD != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> completedLoadingPOD)) : '' }}">
@@ -379,7 +379,7 @@
                                             @if ($ot -> user -> cabang == 'Batu Licin')
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commance Unloading</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commance Loading</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="commenceLoadL" id="commenceLoadL" value="{{ $ot -> commenceLoadL != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commenceLoadL)) : '' }}">
@@ -388,7 +388,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Completed Unloading</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Completed Loading</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="completedLoadingL" id="completedLoadingL" value="{{ $ot -> completedLoadingL != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> completedLoadingL)) : '' }}">
@@ -398,7 +398,7 @@
                                             @else
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Load (L)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Loading (L)</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="commenceLoadL" id="commenceLoadL" value="{{ $ot -> commenceLoadL != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commenceLoadL)) : '' }}">
@@ -543,7 +543,7 @@
 
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Discharge (MV)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Commence Unloading (MV)</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="commMVTranshipment" id="commMVTranshipment" value="{{ $ot -> commMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> commMVTranshipment)) : '' }}">
@@ -552,7 +552,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Complete Discharge (MV)</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Complete Unloading (MV)</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="compMVTranshipment" id="compMVTranshipment" value="{{ $ot -> compMVTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> compMVTranshipment)) : '' }}">
@@ -579,6 +579,15 @@
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="departureTimeTranshipment" id="departureTimeTranshipment" value="{{ $ot -> departureTimeTranshipment != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departureTimeTranshipment)) : '' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Arrival At</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                        <div class="form-group mt-3">
+                                                            <input class="form-control" type="datetime-local" name="Arrival_at" id="Arrival_at" value="{{ $ot -> Arrival_at != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> Arrival_at)) : '' }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -668,6 +677,26 @@
                                                     <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                     <div class="form-group mt-3">
                                                         <input class="form-control" type="datetime-local" name="departureTime" id="departureTime" value="{{ $ot -> departureTime != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> departureTime)) : '' }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if($ot -> taskType == 'Towing Cargo')
+                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center text-danger font-weight-bold">Departure To</h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                    <div class="form-group mt-3">
+                                                        <input class="form-control" type="datetime-local" name="depart_towing" id="depart_towing" value="{{ $ot -> depart_towing != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> arrivalPODCargo)) : '' }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center text-danger font-weight-bold">Arrival At </h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
+                                                    <div class="form-group mt-3">
+                                                        <input class="form-control" type="datetime-local" name="Arrival_at" id="Arrival_at" value="{{ $ot -> Arrival_at != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> startAsideMVCargo)) : '' }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -797,13 +826,28 @@
                                     <div class="d-flex justify-content-center mt-3">
                                         <button class="btn btn-primary" type="button" data-toggle="modal" id="finalize" data-target="#finalize-{{ $ot -> id }}" style="width: 90%">Finalize</button>
                                     </div>
-                                    <div class="d-flex justify-content-around mt-3">
-                                        <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 40%">Cancel Task</button>
-                                        @if($ot -> taskType == 'Operational Transhipment')
-                                            <button class="btn btn-warning text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
-                                        @endif
-                                    </div>
-                                </div>
+                                    @if($ot -> taskType == 'Operational Transhipment' && $ot -> user -> cabang == 'Babelan')
+                                        <div class="d-flex justify-content-around mt-3">
+                                            <button class="btn btn-success text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
+                                            <button class="btn btn-success text-white" type="button" data-toggle="modal" id="return cargo" data-target="#Towing-cargo-{{ $ot -> id }}" style="width: 40%">Continue Towing</button>
+                                        </div>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
+                                        </div>
+                                    @elseif ($ot -> taskType == 'Operational Transhipment')
+                                        <div class="d-flex justify-content-around mt-3">
+                                                <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 40%">Cancel Task</button>
+                                                <button class="btn btn-warning text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-3">
+                                                <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
+                                            </div>
+                                    @endif
+                                    @if($ot -> taskType == 'Towing Cargo' && $ot -> user -> cabang == 'Babelan')
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-return-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
+                                        </div>
+                                    @endif
                             </div>
                         </form>
 
@@ -840,39 +884,105 @@
                             </div>
                         </div>
 
-                        @if($ot -> taskType == 'Operational Transhipment')
-                            {{-- Modal Return Cargo --}}
-                            <div class="modal fade" id="return-cargo-{{ $ot -> id }}" tabindex="-1" role="dialog" aria-labelledby="updateTitle"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-danger">
-                                            <h5 class="modal-title" id="updateTitle" style="color: white">Continue To Return Cargo</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                        {{-- Modal Cancel Task --}}
+                        <div class="modal fade" id="cancel-return-{{ $ot -> id }}" tabindex="-1" role="dialog" aria-labelledby="updateTitle"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger">
+                                        <h5 class="modal-title" id="updateTitle" style="color: white">Cancel Task</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body"> 
+                                        <div class="d-flex flex-column justify-content-center align-items-center">
+                                            <span class="text-danger" data-feather="alert-circle" style="height: 15%; width: 15%;"></span>
+                                            <h5 class="font-weight-bold mt-3">Are You Sure To Cancel This Task and Return to Transhipment?</h5>
                                         </div>
-                                        <div class="modal-body"> 
-                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                <span class="text-info" data-feather="arrow-right" style="height: 15%; width: 15%;"></span>
-                                                <h5 class="font-weight-bold mt-3">Are You Sure Want To Continue To Return Cargo ?</h5>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form action="/crew/ongoing-task/return-cargo" method="POST">
-                                                @csrf
-                                                @method('patch')
-                                                <input type="hidden" name="taskId" value="{{ $ot -> id }}">
-                                                <input type="hidden" name="taskType" value="{{ $ot -> taskType }}">
-                                                <input type="hidden" name="cabang" value="{{ $ot -> user -> cabang }}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="/crew/ongoing-task-Towing" method="POST">
+                                            @csrf
+                                            @method('patch')
+                                            <input type="hidden" name="taskId" value="{{ $ot -> id }}">
+                                            <input type="hidden" name="tugName" value="{{ $ot -> tugName }}">
+                                            <input type="hidden" name="bargeName" value="{{ $ot -> bargeName }}">
 
-                                                <button type="button" class="btn btn-danger mr-3" data-dismiss="modal" aria-label="Close">No</button>
-                                                <button type="submit" class="btn btn-primary" href="">Yes</button>
-                                            </form>
-                                        </div>
+                                            <button type="button" class="btn btn-danger mr-3" data-dismiss="modal" aria-label="Close">No</button>
+                                            <button type="submit" class="btn btn-primary" href="">Yes</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        @if($ot -> taskType == 'Operational Transhipment')
+                            {{-- Modal Return Cargo --}}
+                                <div class="modal fade" id="return-cargo-{{ $ot -> id }}" tabindex="-1" role="dialog" aria-labelledby="updateTitle"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger">
+                                                <h5 class="modal-title" id="updateTitle" style="color: white">Continue To Return Cargo</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body"> 
+                                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                                    <span class="text-info" data-feather="arrow-right" style="height: 15%; width: 15%;"></span>
+                                                    <h5 class="font-weight-bold mt-3">Are You Sure Want To Continue To Return Cargo ?</h5>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="/crew/ongoing-task/return-cargo" method="POST">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="hidden" name="taskId" value="{{ $ot -> id }}">
+                                                    <input type="hidden" name="taskType" value="{{ $ot -> taskType }}">
+                                                    <input type="hidden" name="cabang" value="{{ $ot -> user -> cabang }}">
+
+                                                    <button type="button" class="btn btn-danger mr-3" data-dismiss="modal" aria-label="Close">No</button>
+                                                    <button type="submit" class="btn btn-primary" href="">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {{-- Modal towing Cargo --}}
+                                <div class="modal fade" id="Towing-cargo-{{ $ot -> id }}" tabindex="-1" role="dialog" aria-labelledby="updateTitle"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger">
+                                                <h5 class="modal-title" id="updateTitle" style="color: white">Continue To Towing Cargo</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body"> 
+                                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                                    <span class="text-info" data-feather="arrow-right" style="height: 15%; width: 15%;"></span>
+                                                    <h5 class="font-weight-bold mt-3">Are You Sure Want To Continue To Towing Cargo ?</h5>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="/crew/ongoing-task/towing-cargo" method="POST">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="hidden" name="taskId" value="{{ $ot -> id }}">
+                                                    <input type="hidden" name="taskType" value="{{ $ot -> taskType }}">
+                                                    <input type="hidden" name="cabang" value="{{ $ot -> user -> cabang }}">
+
+                                                    <button type="button" class="btn btn-danger mr-3" data-dismiss="modal" aria-label="Close">No</button>
+                                                    <button type="submit" class="btn btn-primary" href="">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         @endif
     
                         {{-- Modal Finalize Task --}}

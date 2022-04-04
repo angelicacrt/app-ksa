@@ -83,7 +83,7 @@
                                                         'Biaya Laporan Dok','PNPB Sertifikat Keselamatan','PNPB Sertifikat Garis Muat',
                                                         'PNPB Surat Laut','Sertifikat SNPP','Sertifikat Anti Teritip',
                                                         'PNBP SNPP & SNAT','Biaya Survey','PNPB SSCEC' , 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat' ,
-                                                        'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
+                                                        'Sertifikat Konstruksi Kapal Barang' , 'Sertifikat Radio Kapal Barang' , 'PNBP Safe Maning' , 'File extra 1' , 'File extra 2');
                                             $ufile = 'ufile'.$a;
                                             $time_upload ="time_upload".$a;
                                             $stats ="status".$a;

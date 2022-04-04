@@ -84,28 +84,28 @@ class picAdminController extends Controller
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->latest()->get();
+            ->latest()->paginate(10)->withQueryString();
 
             //berau search bar
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->latest()->get();
+            ->latest()->paginate(10)->withQueryString();
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->latest()->get();
+            ->latest()->paginate(10)->withQueryString();
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->latest()->get();
+            ->latest()->paginate(10)->withQueryString();
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->latest()->get();
+            ->latest()->paginate(10)->withQueryString();
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')){
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
@@ -861,7 +861,7 @@ class picAdminController extends Controller
         }else{
             $document = documents::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
             $documentberau = documentberau::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
-            $documentbanjarmasin = DB::table('banjarmasindb')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+            $documentbanjarmasin = DB::table('banjarmasindb')->whereDate('periode_akhir', '<', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
             $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
             $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
         }
