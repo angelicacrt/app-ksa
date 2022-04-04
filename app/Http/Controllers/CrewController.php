@@ -526,7 +526,7 @@ class CrewController extends Controller
             $StandBy_POL = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> startAsideL) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> startAsideL))->format('%h.%i') : (double) 0;
             
             // StandBy_POD = (prepare alongside - Arrival POD) , note: prepare alongside is startAsideL
-            $StandBy_POD = !empty($operationalData -> arrivalPOL) && !empty($operationalData -> arrivalPODGeneral) ? date_diff(new DateTime($operationalData -> arrivalPOL), new DateTime($operationalData -> arrivalPODGeneral))->format('%h.%i') : (double) 0;
+            $StandBy_POD = !empty($operationalData -> startAsideL) && !empty($operationalData -> arrivalPODGeneral) ? date_diff(new DateTime($operationalData -> startAsideL), new DateTime($operationalData -> arrivalPODGeneral))->format('%h.%i') : (double) 0;
             
             // Waiting_Doc_Boat = (DOB - cOffL)
             $Waiting_Doc_Boat = !empty($operationalData -> DOB) && !empty($operationalData -> cOffL) ? date_diff(new DateTime($operationalData -> DOB), new DateTime($operationalData -> cOffL))->format('%h.%i') : (double) 0;
@@ -578,7 +578,7 @@ class CrewController extends Controller
             
                 // Cycle Time = Disch Time + Manuever + Sailing to MV + Unberthing + Ldg Time + Prepare Ldg + Berthing + Sailing to Jetty + time sailing masuk dan keluar
                 $cycleTime = !empty($dischTime) && !empty($maneuver) && !empty($sailingToMV) && !empty($unberthing) && !empty($ldgTime) && !empty($prepareLdg) && !empty($berthing) && !empty($sailingToJetty) && !empty($StandBy) && !empty($Sailing_time_MSK)  && !empty($Sailing_time_KLR) && !empty($StandBy_POL) && !empty($StandBy_POD) && !empty($Waiting_Doc_Boat)? 
-                (double) $dischTime + (double) $maneuver + (double) $sailingToMV + (double) $unberthing + (double) $ldgTime + (double) $prepareLdg + (double) $berthing + (double) $sailingToJetty + (double) ($Sailing_time_MSK)  + (double) ($Sailing_time_KLR) : 
+                (double) $dischTime + (double) $maneuver + (double) $sailingToMV + (double) $unberthing + (double) $ldgTime + (double) $prepareLdg + (double) $berthing + (double) $sailingToJetty + (double) ($Sailing_time_MSK)  + (double) ($Sailing_time_KLR) + (double) ($StandBy_POL) + (double) ($StandBy_POD) + (double) ($Waiting_Doc_Boat) : 
                 (double) 0 ;
             
                 // // Cycle Time = Disch Time + Manuever + Sailing to MV + Unberthing + Ldg Time + Prepare Ldg + Berthing + Sailing to Jetty
