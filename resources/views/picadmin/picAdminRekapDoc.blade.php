@@ -68,6 +68,11 @@
                         </div>
                     @else
                         <div class="col">
+                            <input type="hidden" name="cabangdownload" value="Babelan"/>
+                            <input type="hidden" name="cabangdownload" value="Berau"/>
+                            <input type="hidden" name="cabangdownload" value="Banjarmasin"/>
+                            <input type="hidden" name="cabangdownload" value="Samarinda"/>
+                            <input type="hidden" name="cabangdownload" value="Jakarta"/>
                             <div class="text-md-right">
                                 <button class="btn btn-outline-success" id="top" data-toggle="modal" data-target="#Download">Download</button>
                             </div>
@@ -88,17 +93,6 @@
                                     <div class="form-group">
                                         <form method="POST" action="/picadmin/exportExcel" target="_blank">
                                             @csrf
-                                            @if($searchresult == 'Babelan')
-                                                <input type="hidden" name="cabangdownload" value="Babelan"/>
-                                            @elseif($searchresult == 'Berau')
-                                                <input type="hidden" name="cabangdownload" value="Berau"/>
-                                            @elseif($searchresult == 'Banjarmasin')
-                                                <input type="hidden" name="cabangdownload" value="Banjarmasin"/>
-                                            @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
-                                                <input type="hidden" name="cabangdownload" value="Samarinda"/>
-                                            @elseif($searchresult == 'Jakarta')
-                                                <input type="hidden" name="cabangdownload" value="Jakarta"/>
-                                            @endif
                                             <label for="downloadExcel">Download As Excel :</label>
                                             <button  name='downloadExcel' id="downloadExcel" class="btn btn-outline-dark">Download Excel</button>
                                         </form>

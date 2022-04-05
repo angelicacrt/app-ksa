@@ -9,6 +9,7 @@ class documentrpk extends Model
 {
     use HasFactory;
     protected $table = "rpkdocuments";
+    protected $dates = ['created_at'];
     protected $guarded = [
         'id'
     ];
