@@ -37,10 +37,9 @@ class RekapDocument implements FromQuery , ShouldAutoSize , WithHeadings , WithE
     * @return \Illuminate\Support\Collection
     */
 
-    public function __construct($id)
+    public function __construct($cabang_download)
     {
-        $this->identify = $id;
-        
+        $this->cabang = $cabang_download;
     }
 
     public function headings(): array
@@ -49,25 +48,47 @@ class RekapDocument implements FromQuery , ShouldAutoSize , WithHeadings , WithE
             //title
             [
                'Rekap Document fund Request'
-            ],
-            [''],
-            // table data
-            ['Nama TugBoat:',$this->tugBoat , ' '  , 'TGL Permintaan :' , $this->jrDate],
-            ['Nama Barge:',$this->barge , ' ' , 'Lokasi Permintaan :' , $this->lokasi],
-            [''],
+            ],           
             [
             'No.',
-            'Uraian',
-            'Quantity' ,
+            'cabang', 
+            'Nama Upload',	
+            'nama kapal',	
+            'approved by',	
+            'periode awal',	
+            'periode akhir',	
+            'time upload', 
+            'reason',
+            'status',
+            'dana',	
+            'Nama Sertifikat',
             ]
         ];
     }
 
     public function query()
     {
-        //
+        if ($this->cabang == 'Babelan') {
+            # code...
+        }
+        elseif ($this->cabang == 'Berau') {
+            # code...
+        }
+        elseif ($this->cabang == 'Banjarmasin') {
+            # code...
+        }
+        elseif ($this->cabang == 'Samarinda' or $this->cabang == 'Kendari' or $this->cabang == 'Morosi') {
+            # code...
+        }
+        elseif ($this->cabang == 'Jakarta') {
+            # code...
+        }
+        DB::statement(DB::raw('set @row:=0'));
+        $rekap = documents::where('header_id', $this->file_id)
+        ->selectRaw('*, @row:=@row+1 as id')->get();
+        return $formclaim;
     }
-    
+
     public function registerEvents(): array
     {
         return [

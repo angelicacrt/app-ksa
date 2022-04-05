@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <select name="search" id="cabangfilter"class="form-select" >
+                                <select name="search" id="search"class="form-select" value="{{old('search')}}">
                                     <option selected disabled hidden='true' value="">Pilih Cabang</option>
                                     <option value="All">Semua Cabang</option>
                                     <option value="Babelan">Babelan</option>
@@ -60,11 +60,19 @@
                             </div>
                         </div>
                     </form>
-                    <div class="col">
-                        <div class="text-md-right">
-                            <button class="btn btn-outline-success"  id="top" data-toggle="modal" data-target="#Download">Download</button>
+                    @if ($searchresult == null)
+                        <div class="col">
+                            <div class="text-md-right">
+                                <button class="btn btn-success" onclick="return confirm('Silakan Pilih Cabang !')" readonly id="top" data-toggle="modal" >Download</button>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col">
+                            <div class="text-md-right">
+                                <button class="btn btn-outline-success" id="top" data-toggle="modal" data-target="#Download">Download</button>
+                            </div>
+                        </div>
+                    @endif
     
                     {{-- Modal download --}}
                         <div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="Download" aria-hidden="true">
@@ -78,19 +86,19 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <form method="POST" action="/picadmin/exportPDF">
+                                        <form method="POST" action="/picadmin/exportExcel" target="_blank">
                                             @csrf
-                                            <label for="downloadPDF">Download As PDF :</label>
-                                            {{-- <input type="hidden" name="cabangdownload" value="{{$search}}"/> --}}
-                                            <button  name='downloadPDF' id="downloadPDF" class="btn btn-outline-dark">Download PDF</button>
-                                        </form>
-                                        
-                                        <br>
-                                        <br>
-                                        
-                                        <form method="POST" action="/picadmin/exportExcel">
-                                            @csrf
-                                            {{-- <input type="hidden" name="cabangdownload" value="{{$search}}"/> --}}
+                                            @if($searchresult == 'Babelan')
+                                                <input type="hidden" name="cabangdownload" value="Babelan"/>
+                                            @elseif($searchresult == 'Berau')
+                                                <input type="hidden" name="cabangdownload" value="Berau"/>
+                                            @elseif($searchresult == 'Banjarmasin')
+                                                <input type="hidden" name="cabangdownload" value="Banjarmasin"/>
+                                            @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
+                                                <input type="hidden" name="cabangdownload" value="Samarinda"/>
+                                            @elseif($searchresult == 'Jakarta')
+                                                <input type="hidden" name="cabangdownload" value="Jakarta"/>
+                                            @endif
                                             <label for="downloadExcel">Download As Excel :</label>
                                             <button  name='downloadExcel' id="downloadExcel" class="btn btn-outline-dark">Download Excel</button>
                                         </form>
@@ -103,7 +111,6 @@
                     <table class="table" style="margin-top: 1%">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col" style="text-align: center">No.</th>
                                 <th scope="col" style="text-align: center">Time Uploaded</th>
                                 <th scope="col" style="text-align: center">Cabang</th>
                                 <th scope="col" style="text-align: center">Nama Kapal</th>
@@ -146,21 +153,18 @@
                             </tr>
                         @elseif($doc->$stats == 'approved')
                             <tr>
-                                <td class="table-success"><strong>{{ $loop->index }}</strong></td>
-                                <td class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
-                                <td class="table-success"><strong>{{ $doc->cabang }}</strong></td>
-                                <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
-                                <td class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
-                                <td class="table-success" id="namafile">{{$names[$a-1]}}</td>    
-                                <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>   
-                                <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}} By {{$doc->approved_by}}</td>                                      
-                                <td class="table-success" id="reason">{{$doc ->$reason}}</td>
+                                <td style="text-align: center" class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
+                                <td style="text-align: center" class="table-success"><strong>{{ $doc->cabang }}</strong></td>
+                                <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
+                                <td style="text-align: center" class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
+                                <td style="text-align: center" class="table-success" id="namafile">{{$names[$a-1]}}</td>    
+                                <td style="text-align: center" class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>   
+                                <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}} By {{$doc->approved_by}}</td>                                      
+                                <td style="text-align: center" class="table-success" id="reason">{{$doc ->$reason}}</td>
                             </tr>
                         @endif
                         @endfor
-                            <tr>
-                                <td> </td>
-                            </tr>
+                           
                         @empty
                         @endforelse
 {{-- Berau----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
@@ -202,21 +206,18 @@
                         </tr>
                         @elseif($d->$stats == 'approved')
                             <tr>
-                                <td class="table-success"><strong>{{ $loop->index }}</strong></td>
-                                <td class="table-success"><strong>{{ $d->$time_upload }}</strong></td>
-                                <td class="table-success"><strong>{{ $d->cabang }}</strong></td>
-                                <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
-                                <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
-                                <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>  
-                                <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}} By {{$d->approved_by}}</td>                                      
-                                <td class="table-success" id="reason">{{$d->$reason}}</td>    
+                                <td style="text-align: center" class="table-success"><strong>{{ $d->$time_upload }}</strong></td>
+                                <td style="text-align: center" class="table-success"><strong>{{ $d->cabang }}</strong></td>
+                                <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
+                                <td style="text-align: center" class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
+                                <td style="text-align: center" class="table-success" id="namafile">{{$names[$a-1]}}</td>     
+                                <td style="text-align: center" class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>  
+                                <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}} By {{$d->approved_by}}</td>                                      
+                                <td style="text-align: center" class="table-success" id="reason">{{$d->$reason}}</td>    
                             </tr>
                         @endif
                         @endfor
-                            <tr>
-                                <td> </td>
-                            </tr>
+                            
                         @empty
                         @endforelse
 {{-- Banjarmasin---------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
@@ -260,21 +261,18 @@
                             </tr>
                             @elseif($b->$stats == 'approved')
                                 <tr>
-                                    <td class="table-success"><strong>{{ $loop->index }}</strong></td>
-                                    <td class="table-success"><strong>{{ $b->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $b->cabang }}</strong></td>
-                                    <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
-                                    <td class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
-                                    <td class="table-success" id="namafile">{{$names[$a-1]}}</td> 
-                                    <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>      
-                                    <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}} By {{$b->approved_by}}</td>                                      
-                                    <td class="table-success" id="reason">{{$b->$reason}}</td>
+                                    <td style="text-align: center" class="table-success"><strong>{{ $b->$time_upload }}</strong></td>
+                                    <td style="text-align: center" class="table-success"><strong>{{ $b->cabang }}</strong></td>
+                                    <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
+                                    <td style="text-align: center" class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
+                                    <td style="text-align: center" class="table-success" id="namafile">{{$names[$a-1]}}</td> 
+                                    <td style="text-align: center" class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>      
+                                    <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}} By {{$b->approved_by}}</td>                                      
+                                    <td style="text-align: center" class="table-success" id="reason">{{$b->$reason}}</td>
                                 </tr>
                             @endif
                             @endfor
-                                <tr>
-                                    <td> </td>
-                                </tr>
+                                
                             @empty
                             @endforelse
 {{-- Samarinda------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}}
@@ -326,21 +324,18 @@
                                 </tr>
                                 @elseif($s->$stats == 'approved')
                                     <tr>
-                                        <td class="table-success"><strong>{{ $loop->index }}</strong></td>
-                                        <td class="table-success"><strong>{{ $s->$time_upload }}</strong></td>
-                                        <td class="table-success"><strong>{{ $s->cabang }}</strong></td>
-                                        <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
-                                        <td class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
-                                        <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                        <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>  
-                                        <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}} By {{$s->approved_by}}</td>                                      
-                                        <td class="table-success" id="reason">{{$s->$reason}}</td>    
+                                        <td style="text-align: center" class="table-success"><strong>{{ $s->$time_upload }}</strong></td>
+                                        <td style="text-align: center" class="table-success"><strong>{{ $s->cabang }}</strong></td>
+                                        <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
+                                        <td style="text-align: center" class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
+                                        <td style="text-align: center" class="table-success" id="namafile">{{$names[$a-1]}}</td>     
+                                        <td style="text-align: center" class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>  
+                                        <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}} By {{$s->approved_by}}</td>                                      
+                                        <td style="text-align: center" class="table-success" id="reason">{{$s->$reason}}</td>    
                                     </tr>
                                     @endif
                                     @endfor
-                                        <tr>
-                                            <td> </td>
-                                        </tr>
+                                       
                                     @empty
                                         
                                     @endforelse
@@ -391,21 +386,18 @@
                                     </tr>
                                     @elseif($jkt->$stats == 'approved')
                                         <tr>
-                                            <td class="table-success"><strong>{{ $loop->index }}</strong></td>
-                                            <td class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                            <td class="table-success"><strong>{{ $jkt->cabang }}</strong></td>
-                                            <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
-                                            <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
-                                            <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
-                                            <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>  
-                                            <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}} By {{$jkt->approved_by}}</td>                                      
-                                            <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
+                                            <td style="text-align: center" class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
+                                            <td style="text-align: center" class="table-success"><strong>{{ $jkt->cabang }}</strong></td>
+                                            <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
+                                            <td style="text-align: center" class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
+                                            <td style="text-align: center" class="table-success" id="namafile">{{$names[$a-1]}}</td>     
+                                            <td style="text-align: center" class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>  
+                                            <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}} By {{$jkt->approved_by}}</td>                                      
+                                            <td style="text-align: center" class="table-success" id="reason">{{$jkt->$reason}}</td>    
                                         </tr>
                                     @endif
                                 @endfor
-                                    <tr>
-                                        <td> </td>
-                                    </tr>
+                                    
                                 @empty
                                 @endforelse
                         </tbody>

@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -436,7 +436,7 @@ Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], f
 
         //rekap Document
         Route::get('/rekapitulasi-Documents',[picAdminController::class, 'RekapDoc']);
-        Route::get('/rekapitulasi-Documents-search',[picAdminController::class, 'RekapDoc']);
+        Route::get('/rekapitulasi-Documents-search',[picAdminController::class, 'RekapDoc_search']);
         Route::post('/exportPDF',[picAdminController::class, 'exportPDF']);
         Route::post('/exportExcel',[picAdminController::class, 'exportEXCEL']);
     });
