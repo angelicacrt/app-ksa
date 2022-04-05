@@ -156,6 +156,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -176,6 +178,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -196,6 +200,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -266,6 +272,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -286,6 +294,8 @@
                                     <td class="table-success">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -306,6 +316,8 @@
                                     <td class="table-danger">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -379,6 +391,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -399,6 +413,8 @@
                                     <td class="table-success">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -419,6 +435,8 @@
                                     <td class="table-danger">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -500,6 +518,8 @@
                                     <td class="table-warning">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -520,6 +540,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -540,6 +562,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -616,6 +640,8 @@
                                         <td class="table-warning">
                                             <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                                 @csrf
+                                                <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                                <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                                 <input type="hidden" name='type_upload' value="Fund_Real" />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                                 <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -636,6 +662,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -656,6 +684,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
+                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>

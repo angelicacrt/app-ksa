@@ -354,6 +354,8 @@
                                 <div class="col-md-auto">
                                   <form method="post" action="/picadmin/dana/view" target="_blank">
                                     @csrf
+                                      <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                      <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                       <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                       <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                       <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -538,6 +540,8 @@
                                 <div class="col-md-auto">
                                   <form method="post" action="/picadmin/dana/view" target="_blank">
                                     @csrf
+                                    <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
+                                      <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
                                     <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                     <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                     <input type="hidden" name='result' value={{$b->$scan}} />
@@ -693,7 +697,9 @@
                                 <div class="col-md-auto">
                                   <form method="post" action="/picadmin/dana/view" target="_blank">
                                     @csrf
-                                    <input type="hidden" name = 'cabang' value={{$s->cabang}}>
+                                        <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
+                                        <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                        <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                         <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                         <input type="hidden" name='result' value={{$s->$scan}} />
                                         <input type="hidden" name = 'tipefile' value='DANA'>
@@ -858,6 +864,8 @@
                                       <div class="col-md-auto">
                                         <form method="post" action="/picadmin/dana/view" target="_blank">
                                           @csrf
+                                          <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
+                                          <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                           <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                           <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                           <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />

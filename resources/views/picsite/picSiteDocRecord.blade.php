@@ -676,7 +676,7 @@
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                        <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />

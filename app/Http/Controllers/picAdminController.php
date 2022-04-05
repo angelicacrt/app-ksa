@@ -433,8 +433,8 @@ class picAdminController extends Controller
     //view for dokumen fund at Admin page 
     public function view(Request $request){
         $datetime = date('Y-m-d');
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
         
         if($request->tipefile == 'DANA'){
             if ($request->cabang == 'Babelan'){
@@ -505,8 +505,8 @@ class picAdminController extends Controller
     //view for rpk at Admin page 
     public function viewrpk(Request $request){ 
         $datetime = date('Y-m-d');
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
 
         if($request->tipefile == 'RPK'){
             if ($request->cabang == 'Babelan'){
@@ -689,8 +689,8 @@ class picAdminController extends Controller
     }
 
     public function AdminRealisasiDana_view(Request $request){
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
             // realisasi Fund Request view ----------------------------------------------------------
             if($request->tipefile == 'Fund_Real' && $request->type_upload == 'Fund_Real'){
             if ($request->cabang == 'Babelan'){
@@ -905,8 +905,8 @@ class picAdminController extends Controller
 
     public function viewRecordDocuments(Request $request){
         $datetime = date('Y-m-d');
-        $year = date('Y');
-        $month = date('m');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
         // Fund Request view ----------------------------------------------------------
             if($request->tipefile == 'DANA'){
                 if ($request->cabang == 'Babelan'){
