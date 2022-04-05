@@ -6,15 +6,16 @@ use Storage;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\documents;
-use App\Models\Rekapdana;
 use App\Models\documentrpk;
 use Illuminate\Http\Request;
 use App\Models\documentberau;
 use App\Models\documentJakarta;
 use App\Models\documentsamarinda;
-use Illuminate\Support\Facades\DB;
 use App\Models\documentbanjarmasin;
+use App\Exports\RekapDocument;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class picAdminController extends Controller
@@ -687,11 +688,10 @@ class picAdminController extends Controller
         }    
         return view('picadmin.picAdminRealisasiDana', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
     }
-
     public function AdminRealisasiDana_view(Request $request){
         $year = $request->created_at_Year;
         $month = $request->created_at_month;
-            // realisasi Fund Request view ----------------------------------------------------------
+        // realisasi Fund Request view ----------------------------------------------------------
             if($request->tipefile == 'Fund_Real' && $request->type_upload == 'Fund_Real'){
             if ($request->cabang == 'Babelan'){
                 $filename = $request->viewdoc;
@@ -902,7 +902,6 @@ class picAdminController extends Controller
             return view('picadmin.picAdminRecordDocRPK', compact('docrpk'));
         }
     }
-
     public function viewRecordDocuments(Request $request){
         $datetime = date('Y-m-d');
         $year = $request->created_at_Year;
@@ -1047,4 +1046,140 @@ class picAdminController extends Controller
             }
     }
 
+    
+    public function RekapDoc(Request $request) {
+        $searchresult = $request->search;
+        if ($searchresult == 'All') {
+            $document = documents::where('upload_type','Fund_Req')->latest()->paginate(10);
+            $documentberau = documentberau::where('upload_type','Fund_Req')->latest()->paginate(10);
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->latest()->paginate(10);
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->latest()->paginate(10);
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->paginate(10);
+            return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }elseif($request->filled('search_kapal')) {
+            //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+            $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }elseif ($request->filled('search')){
+             $document = documents::where('cabang', $request->search)
+             ->where('upload_type','Fund_Req')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10)->withQueryString();
+ 
+             $documentberau = documentberau::where('cabang', $request->search)
+             ->where('upload_type','Fund_Req')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10)->withQueryString();
+ 
+             $documentbanjarmasin = documentbanjarmasin::where('cabang', $request->search)
+             ->where('cabang', Auth::user()->cabang)
+             ->where('upload_type','Fund_Req')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10)->withQueryString();
+ 
+             $documentsamarinda = documentsamarinda::where('cabang', $request->search)
+             ->where('cabang', Auth::user()->cabang)
+             ->where('upload_type','Fund_Req')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10)->withQueryString();
+ 
+             $documentjakarta = documentJakarta::where('cabang', $request->search)
+             ->where('upload_type','Fund_Req')
+             ->orderBy('id', 'DESC')
+             ->latest()->paginate(10)->withQueryString();
+ 
+             return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }elseif ($request->filled('search_kapal') && $request->filled('search')){
+            $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('cabang', Auth::user()->cabang)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }else{
+            $document = documents::where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+            $documentberau = documentberau::where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+            // dd($documentbanjarmasin);
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+            return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        }    
+        
+        return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+    }
+
+    private $excel;
+    public function __construct(Excel $excel){
+        $this->excel = $excel;
+    }
+
+    //export Rekap PDF page
+    public function exportPDF(Request $request) {
+        $date = Carbon::now();
+        $monthName = $date->format('F');
+        $cabang_download = $request->search;
+        dd($cabang_download);
+
+        return (new RekapDocument)->download('Rekapitulasi-Document ' . '-' . $monthName .'.pdf' , \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+    //export Rekap Excel page
+    public function exportEXCEL(Request $request) {
+        $date = Carbon::now();
+        $monthName = $date->format('F');
+        return Excel::download(new RekapDocument, 'Rekapitulasi-Document ' . '-' . $monthName . '.xlsx');
+    }
 }

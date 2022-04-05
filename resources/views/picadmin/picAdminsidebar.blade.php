@@ -18,6 +18,10 @@
                     <span data-feather="clock"></span>
                     Record Documents
                 </a>
+                <a class="nav-link" aria-current="page" href="/picadmin/rekapitulasi-Documents">
+                    <span data-feather="check-square"></span>
+                    Rekapitulasi Documents
+                </a>
             </li>
         </ul>
     </div>

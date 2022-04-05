@@ -592,7 +592,6 @@ class DashboardController extends Controller
                 }
         }elseif(Auth::user()->hasRole('picAdmin')){
             $datetime = date('Y-m-d');
-            $date = $request->created_at_time;
             $year = $request->created_at_Year;
             $month = $request->created_at_month;
             // Dana view ----------------------------------------------------------
