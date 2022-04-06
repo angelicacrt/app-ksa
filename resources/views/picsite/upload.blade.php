@@ -34,10 +34,12 @@
                        <br>
                         <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
+                            {{-- no.permohonan tidak di specify typenya karena secara default sudah text --}}
+                            {{-- baca script di paling bawah --}}
                             <div class="col-md-6" style="margin-left: -1%">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">No.Permohonan</span>
-                                    <input type="text" class="form-control" name="no.mohon" placeholder="No.Permohonan">
+                                    <input class="form-control" name="no.mohon" placeholder="No.Permohonan">
                                 </div>
                             </div>
                             <input type="hidden" name='type_upload' value="Fund_Req" />
@@ -313,6 +315,7 @@
     }, 5000 ); // 5 secs
 </script>
 <script>
+    // set comma every 3 digits & receieve no alphabets
     function updateTextView(_obj){
     var num = getNumber(_obj.val());
         if(num==0){
@@ -321,6 +324,7 @@
             _obj.val(num.toLocaleString());
         }
     }
+    // cek panjang text
     function getNumber(_str){
         var arr = _str.split('');
         var out = new Array();
@@ -331,11 +335,11 @@
         }
         return Number(out.join(''));
     }
-
-     // call only for certain inputs
-     var dana_num = document.getElementById('dana_num');
-     dana_num.addEventListener('keyup', function(){
-        updateTextView($(dana_num));
+    // cari semua input type=text
+    $(document).ready(function(){
+        $('input[type=text]').on('keyup',function(){
+            updateTextView($(this));
+        });
     });
 </script>
 @endsection
