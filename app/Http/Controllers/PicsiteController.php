@@ -3132,18 +3132,18 @@ class PicsiteController extends Controller
             if ($request->hasFile('beraufile25')) {
                 $file1 = $request->file('beraufile25');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
-                $tujuan_upload = 'berau/ijin_sekali_jalan';
+                $tujuan_upload = 'berau/pnpb_sscec';
                 $path = $request->file('beraufile25')->storeas('berau/'. $year . "/". $month , $name1, 's3');
                 if (documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'dana25' => $request->dana25,                   
-                        'ijin_sekali_jalan' => basename($path),
+                        'pnpb_sscec' => basename($path),
                         'status25' => 'on review',
                         'time_upload25' => date("Y-m-d h:i:s"),]);
                 }elseif (documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                 documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana25' => $request->dana25,
-                        'ijin_sekali_jalan' => basename($path),
+                        'pnpb_sscec' => basename($path),
                         'status25' => 'on review',
                         'time_upload25' => date("Y-m-d h:i:s"),]);
                 }elseif($request->type_upload == 'Fund_Real'){
@@ -3157,7 +3157,7 @@ class PicsiteController extends Controller
                         'user_id' => Auth::user()->id,
                         
                         'dana25' => $request->dana25,
-                        'ijin_sekali_jalan' => basename($path),
+                        'pnpb_sscec' => basename($path),
                         'status25' => 'on review',
                         'time_upload25' => date("Y-m-d h:i:s"),
                     ]);
@@ -3173,7 +3173,7 @@ class PicsiteController extends Controller
                         'user_id' => Auth::user()->id,
                         
                         'dana25' => $request->dana25,
-                        'ijin_sekali_jalan' => basename($path),
+                        'pnpb_sscec' => basename($path),
                         'status25' => 'on review',
                         'time_upload25' => date("Y-m-d h:i:s"),
                     ]);
@@ -3182,18 +3182,18 @@ class PicsiteController extends Controller
             if ($request->hasFile('beraufile26')) {
                 $file1 = $request->file('beraufile26');
                 $name1 = Auth::user()->cabang . '-'. $file1->getClientOriginalName();
-                $tujuan_upload = 'berau/pnpb_sscec';
+                $tujuan_upload = 'berau/ijin_sekali_jalan';
                 $path = $request->file('beraufile26')->storeas('berau/'. $year . "/". $month , $name1, 's3');
                 if (documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
                 documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'dana26' => $request->dana26,                   
-                        'pnpb_sscec' => basename($path),
+                        'ijin_sekali_jalan' => basename($path),
                         'status26' => 'on review',
                         'time_upload26' => date("Y-m-d h:i:s"),]);
                 }elseif (documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
                 documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana26' => $request->dana26,
-                        'pnpb_sscec' => basename($path),
+                        'ijin_sekali_jalan' => basename($path),
                         'status26' => 'on review',
                         'time_upload26' => date("Y-m-d h:i:s"),]);
                 }elseif($request->type_upload == 'Fund_Real'){
@@ -3207,7 +3207,7 @@ class PicsiteController extends Controller
                         'user_id' => Auth::user()->id,
                         
                         'dana26' => $request->dana26,
-                        'pnpb_sscec' => basename($path),
+                        'ijin_sekali_jalan' => basename($path),
                         'status26' => 'on review',
                         'time_upload26' => date("Y-m-d h:i:s"),
                     ]);
@@ -3223,7 +3223,7 @@ class PicsiteController extends Controller
                         'user_id' => Auth::user()->id,
                         
                         'dana26' => $request->dana26,
-                        'pnpb_sscec' => basename($path),
+                        'ijin_sekali_jalan' => basename($path),
                         'status26' => 'on review',
                         'time_upload26' => date("Y-m-d h:i:s"),
                     ]);

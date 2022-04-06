@@ -31,13 +31,18 @@
                                 <strong>{{ $message }}</strong>
                             </div>
                         @endif
-                       
+                       <br>
                         <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
+                            <div class="col-md-5" style="center">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">No.Permohonan</span>
+                                    <input type="text" class="form-control" name="tgl_akhir" required placeholder="No.Permohonan">
+                                </div>
+                            </div>
                             <input type="hidden" name='type_upload' value="Fund_Req" />
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Nama Kapal</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Tug</span>
                                         <input list="Nama_kapals" name="nama_kapal" id="nama_kapal" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
@@ -57,15 +62,16 @@
                                         </datalist>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <label>from</label>
-                                    <input type="date" class="form-control" name="tgl_awal"  required placeholder="Periode Awal">
+                                <div class="col-md-6">
+                                    <div class="input-group mb-6">
+                                        <span class="input-group-text">From</span>
+                                        <input type="date" class="form-control" name="tgl_awal"  required placeholder="Periode Awal">
+    
+                                        <span class="input-group-text">To</span>
+                                        <input type="date" class="form-control" name="tgl_akhir" required placeholder="Periode Akhir">
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <label>to</label>
-                                    <input type="date" class="form-control" name="tgl_akhir" required placeholder="Periode Akhir">
-                                </div>
-                        
+                                
                                 <table class="table"style="margin-top: 1%">
                                 <thead class="thead-dark" >
                                     <tr>
@@ -273,7 +279,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">RP.</span>
                                                     </div>
-                                                    <input type="text" class="form-control" name={{$dana}} placeholder="maks. 15 Digit" id="currency-field">
+                                                    <input type="text" class="form-control" id="dana_num" name={{$dana}} placeholder="maks. 15 Digit" id="currency-field">
                                                 </div>
                                             </td>
                                             <td class=table-light>
@@ -288,48 +294,53 @@
                         </table>
                     </form>
                         <button class="btn btn-danger" id="realsubmit" style="margin-left: 50%; display: none;" type="submit" name="Submit" value="Upload" onClick="">Submit</button>
-                        <script>
-                            //tombol submit
-                            document.getElementById('topsubmit').addEventListener('click', openDialog);
-                            function openDialog() {
-                                document.getElementById('realsubmit').click();
-                            }
-                            // timeout notification
-                            setTimeout(function(){
-                            $("div.alert").remove();
-                            }, 5000 ); // 5 secs
-                        </script>
-                        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                        <script>
-                            function updateTextView(_obj){
-                            var num = getNumber(_obj.val());
-                                if(num==0){
-                                    _obj.val('');
-                                }else{
-                                    _obj.val(num.toLocaleString());
-                                }
-                            }
-                            function getNumber(_str){
-                                var arr = _str.split('');
-                                var out = new Array();
-                                for(var cnt=0;cnt<arr.length;cnt++){
-                                    if(isNaN(arr[cnt])==false){
-                                    out.push(arr[cnt]);
-                                    }
-                                }
-                                return Number(out.join(''));
-                            }
-                            $(document).ready(function(){
-                                $('input[type=text]').on('keyup',function(){
-                                    updateTextView($(this));
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
             </div>   
-            </div>
         </div>
     </main>
 </div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    //tombol submit
+    document.getElementById('topsubmit').addEventListener('click', openDialog);
+    function openDialog() {
+        document.getElementById('realsubmit').click();
+    }
+    // timeout notification
+    setTimeout(function(){
+    $("div.alert").remove();
+    }, 5000 ); // 5 secs
+</script>
+<script>
+    function updateTextView(_obj){
+    var num = getNumber(_obj.val());
+        if(num==0){
+            _obj.val('');
+        }else{
+            _obj.val(num.toLocaleString());
+        }
+    }
+    function getNumber(_str){
+        var arr = _str.split('');
+        var out = new Array();
+        for(var cnt=0;cnt<arr.length;cnt++){
+            if(isNaN(arr[cnt])==false){
+            out.push(arr[cnt]);
+            }
+        }
+        return Number(out.join(''));
+    }
+
+     // call only for certain inputs
+     var dana_num = document.getElementById('dana_num');
+    amount.addEventListener('keyup', function(){
+        updateTextView($(dana_num));
+    });
+
+    var barge = document.getElementById('TSI_barge');
+    barge.addEventListener('keyup', function(){
+        updateTextView($(barge));
+    });
+</script>
 @endsection
