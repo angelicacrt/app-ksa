@@ -1173,6 +1173,6 @@ class picAdminController extends Controller
         $monthName = $date->format('F');
         $cabang_download = $request->select_download;
         // dd($cabang_download);
-        return Excel::download(new Export_RekapDocument($cabang_download), 'Rekapitulasi-Document ' . '-' . $monthName . '.xlsx');
+        return Excel::download(new Export_RekapDocument($cabang_download), 'Rekapitulasi-Document ' . $cabang_download . '-' . $monthName . '.xlsx');
     }
 }
