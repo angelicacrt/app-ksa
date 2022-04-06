@@ -236,7 +236,7 @@
                         document.getElementById("Kendari").disabled = false;
                         document.getElementById("Morosi").disabled = false;
                         document.getElementById("Batu_Licin").disabled = false;
-                    }else if(dropdown.value == "AsuransiIncident"){
+                    }else if(dropdown.value == "AsuransiIncident" || dropdown.value == "StaffLegal"){
                         selectopt('Jakarta');
                         document.getElementById("Banjarmasin").disabled = true;
                         document.getElementById("Samarinda").disabled = true;
