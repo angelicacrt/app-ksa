@@ -34,10 +34,10 @@
                        <br>
                         <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
-                            <div class="col-md-5" style="center">
+                            <div class="col-md-6" style="margin-left: -1%">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">No.Permohonan</span>
-                                    <input type="text" class="form-control" name="tgl_akhir" required placeholder="No.Permohonan">
+                                    <input type="text" class="form-control" name="no.mohon" required placeholder="No.Permohonan">
                                 </div>
                             </div>
                             <input type="hidden" name='type_upload' value="Fund_Req" />
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="input-group mb-6">
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text">From</span>
                                         <input type="date" class="form-control" name="tgl_awal"  required placeholder="Periode Awal">
     
@@ -107,7 +107,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">RP.</span>
                                                     </div>
-                                                    <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                    <input type="text" name={{$dana}} id="dana_num" class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
                                                 </div>
                                             </td>
                                             <td class=table-light>
@@ -147,7 +147,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">RP.</span>
                                                     </div>
-                                                    <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                    <input type="text" name={{$dana}} id="dana_num" class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
                                                 </div>
                                             </td>
                                             <td class=table-light>
@@ -189,7 +189,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">RP.</span>
                                                 </div>
-                                                <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                <input type="text" name={{$dana}} id="dana_num" class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
                                             </div>
                                         </td>
                                         <td class=table-light>
@@ -234,7 +234,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">RP.</span>
                                                     </div>
-                                                    <input type="text" name={{$dana}} class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
+                                                    <input type="text" name={{$dana}} id="dana_num" class="form-control" placeholder="maks. 15 Digit" id="currency-field" >
                                                 </div>
                                             </td>
                                             <td class=table-light>
@@ -334,13 +334,8 @@
 
      // call only for certain inputs
      var dana_num = document.getElementById('dana_num');
-    amount.addEventListener('keyup', function(){
+     dana_num.addEventListener('keyup', function(){
         updateTextView($(dana_num));
-    });
-
-    var barge = document.getElementById('TSI_barge');
-    barge.addEventListener('keyup', function(){
-        updateTextView($(barge));
     });
 </script>
 @endsection
