@@ -68,11 +68,6 @@
                         </div>
                     @else
                         <div class="col">
-                            <input type="hidden" name="cabangdownload" value="Babelan"/>
-                            <input type="hidden" name="cabangdownload" value="Berau"/>
-                            <input type="hidden" name="cabangdownload" value="Banjarmasin"/>
-                            <input type="hidden" name="cabangdownload" value="Samarinda"/>
-                            <input type="hidden" name="cabangdownload" value="Jakarta"/>
                             <div class="text-md-right">
                                 <button class="btn btn-outline-success" id="top" data-toggle="modal" data-target="#Download">Download</button>
                             </div>
@@ -93,6 +88,18 @@
                                     <div class="form-group">
                                         <form method="POST" action="/picadmin/exportExcel" target="_blank">
                                             @csrf
+                                            <select name="select_download" id="select_download" required class="form-select">
+                                                <option selected disabled hidden='true' value="">Pilih Cabang</option>
+                                                <option value="All">Semua Cabang</option>
+                                                <option value="Babelan">Babelan</option>
+                                                <option value="Berau">Berau</option>
+                                                <option value="Samarinda">Samarinda</option>
+                                                <option value="Banjarmasin">Banjarmasin</option>
+                                                <option value="Jakarta">Jakarta</option>
+                                                <option value="Kendari">Kendari</option>
+                                                <option value="Morosi">Morosi</option>
+                                            </select>
+                                            <br>
                                             <label for="downloadExcel">Download As Excel :</label>
                                             <button  name='downloadExcel' id="downloadExcel" class="btn btn-outline-dark">Download Excel</button>
                                         </form>
@@ -118,7 +125,7 @@
                         </thead>
                         <tbody>
 {{-- Babelan------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}} 
-                        @forelse($document as $doc )
+                        @foreach($document as $doc )
                         @for ( $a = 1 ; $a <= 24 ; $a++)
                         @php
                             $BABELAN = array('sertifikat_keselamatan',
@@ -127,7 +134,7 @@
                                 'biaya_laporan_dok','pnpb_sertifikat_keselamatan','pnpb_sertifikat_garis_muat',
                                 'pnpb_surat_laut','sertifikat_snpp','sertifikat_anti_teritip',    
                                 'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec', 'bki_lambung', 'bki_mesin', 'bki_Garis_muat',
-                                'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain`' , 'Lain_Lain2');
+                                'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain1' , 'Lain_Lain2');
 
                             $names = array('Sertifikat Keselamatan' , 'Sertifikat Garis Muat' , 'Penerbitan 1 Kali Jalan' , 'Sertifikat Safe Manning' ,
                                 'Endorse Surat Laut' , 'Perpanjangan Sertifikat SSCEC' , 'Perpanjangan Sertifikat P3K' , 'Biaya Laporan Dok' , 
@@ -137,7 +144,6 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
-                            $date = date('Y-m-28');
                             $dana = "dana".$a;
                             $scan = $BABELAN[$a-1];
                         @endphp
@@ -158,11 +164,9 @@
                             </tr>
                         @endif
                         @endfor
-                           
-                        @empty
-                        @endforelse
+                        @endforeach
 {{-- Berau----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
-                        @forelse($documentberau as $d )
+                        @foreach($documentberau as $d )
                         @for ( $a = 1 ; $a <= 34 ; $a++)
                         @php
                             $BERAU = array('pnbp_sertifikat_konstruksi','jasa_urus_sertifikat',
@@ -189,7 +193,6 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
-                            $date = date('Y-m-28');
                             $dana = "dana".$a;
                             $scan = $BERAU[$a-1];
                         @endphp
@@ -211,11 +214,9 @@
                             </tr>
                         @endif
                         @endfor
-                            
-                        @empty
-                        @endforelse
+                        @endforeach
 {{-- Banjarmasin---------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
-                        @forelse($documentbanjarmasin as $b )
+                        @foreach($documentbanjarmasin as $b )
                         @for ( $a = 1 ; $a <= 39 ; $a++)
                         @php
                             $BANJARMASIN = array('perjalanan','sertifikat_keselamatan','sertifikat_anti_fauling','surveyor',
@@ -244,7 +245,6 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
-                            $date = date('Y-m-28');
                             $dana = "dana".$a;
                             $scan = $BANJARMASIN[$a-1];
                         @endphp
@@ -266,11 +266,9 @@
                                 </tr>
                             @endif
                             @endfor
-                                
-                            @empty
-                            @endforelse
+                            @endforeach
 {{-- Samarinda------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}}
-                            @forelse($documentsamarinda as $s )
+                            @foreach($documentsamarinda as $s )
                             @for ( $a = 1 ; $a <= 48 ; $a++)
                             @php
                             $SAMARINDA = array('sertifikat_keselamatan(perpanjangan)','perubahan_ok_13_ke_ok_1',
@@ -307,7 +305,6 @@
                             $time_upload ="time_upload".$a;
                             $stats ="status".$a;
                             $reason = "reason".$a;
-                            $date = date('Y-m-28');
                             $dana = "dana".$a;
                             $scan = $SAMARINDA[$a-1];
                             @endphp
@@ -329,12 +326,9 @@
                                     </tr>
                                     @endif
                                     @endfor
-                                       
-                                    @empty
-                                        
-                                    @endforelse
+                                    @endforeach
 {{-- Jakarta------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}}          
-                                @forelse($documentjakarta as $jkt )
+                                @foreach($documentjakarta as $jkt )
                                 @for ( $a = 1 ; $a <= 47 ; $a++)
                                 @php
                                     $JAKARTA = array('pnbp_rpt','pps','pnbp_spesifikasi_kapal'
@@ -369,7 +363,6 @@
                                     $time_upload ="time_upload".$a;
                                     $stats ="status".$a;
                                     $reason = "reason".$a;
-                                    $date = date('Y-m-28');
                                     $dana = "dana".$a;
                                     $scan = $JAKARTA[$a-1];
                                 @endphp
@@ -391,27 +384,25 @@
                                         </tr>
                                     @endif
                                 @endfor
-                                    
-                                @empty
-                                @endforelse
+                                @endforeach
                         </tbody>
                     </table>
-                    <style>
-                        .modal-backdrop {
-                              height: 100%;
-                              width: 100%;
-                          }
-                      </style>
-                    <script>
-                        setTimeout(function(){
-                        $("div.alert").remove();
-                        }, 5000 ); // 5 secs
-                    </script>
-                    <script 
-                        src="https://code.jquery.com/jquery-3.2.1.min.js">
-                    </script>
             </div>
         </div>   
     </main>
 </div>
+<style>
+    .modal-backdrop {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+<script>
+    setTimeout(function(){
+    $("div.alert").remove();
+    }, 5000 ); // 5 secs
+</script>
+<script 
+    src="https://code.jquery.com/jquery-3.2.1.min.js">
+</script>
 @endsection

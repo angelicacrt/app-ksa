@@ -125,7 +125,7 @@
                                 'endorse_surat_laut','perpanjangan_sertifikat_sscec','perpanjangan_sertifikat_p3k' ,
                                 'biaya_laporan_dok','pnpb_sertifikat_keselamatan','pnpb_sertifikat_garis_muat',
                                 'pnpb_surat_laut','sertifikat_snpp','sertifikat_anti_teritip',    
-                                'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec' , 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat' 
+                                'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec' , 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat'  ,
                                 'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain1' , 'Lain_Lain2');
     
                                 $names = array('Sertifikat Keselamatan' , 'Sertifikat Garis Muat' , 'Penerbitan 1 Kali Jalan' , 'Sertifikat Safe Manning' ,
@@ -156,8 +156,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -178,8 +178,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -200,8 +200,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
@@ -272,8 +272,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -294,8 +294,8 @@
                                     <td class="table-success">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -316,8 +316,8 @@
                                     <td class="table-danger">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
@@ -391,8 +391,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -413,8 +413,8 @@
                                     <td class="table-success">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -435,8 +435,8 @@
                                     <td class="table-danger">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -518,8 +518,8 @@
                                     <td class="table-warning">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -540,8 +540,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -562,8 +562,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
@@ -640,8 +640,8 @@
                                         <td class="table-warning">
                                             <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                                 @csrf
-                                                <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                                <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                                <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
+                                                <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                                 <input type="hidden" name='type_upload' value="Fund_Real" />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                                 <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -662,8 +662,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
@@ -684,8 +684,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/picadmin/RealisasiDana-view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>

@@ -12,7 +12,7 @@ use App\Models\documentberau;
 use App\Models\documentJakarta;
 use App\Models\documentsamarinda;
 use App\Models\documentbanjarmasin;
-use App\Exports\RekapDocument;
+use App\Exports\Export_RekapDocument;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -1042,76 +1042,78 @@ class picAdminController extends Controller
 
     
     public function RekapDoc(Request $request) {
+        $year = date('Y');
         $searchresult = $request->search;
-        $document = documents::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-        $documentberau = documentberau::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-        $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-        $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-        $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+        $document = documents::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+        $documentberau = documentberau::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+        $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+        $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+        $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
         return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
     }
     public function RekapDoc_search(Request $request) {
         $searchresult = $request->search;
+        $year = date('Y');
         if ($searchresult == 'All') {
-            $document = documents::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentberau = documentberau::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $document = documents::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentberau = documentberau::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
             return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif($request->filled('search_kapal')) {
             //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif ($request->filled('search')){
              $document = documents::where('cabang', $request->search)
              ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
-             ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+             ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
  
              $documentberau = documentberau::where('cabang', $request->search)
              ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
-             ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+             ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
  
              $documentbanjarmasin = documentbanjarmasin::where('cabang', $request->search)
              ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
-             ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+             ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
  
              $documentsamarinda = documentsamarinda::where('cabang', $request->search)
              ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
-             ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+             ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
  
              $documentjakarta = documentJakarta::where('cabang', $request->search)
              ->where('upload_type','Fund_Req')
              ->orderBy('id', 'DESC')
-             ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+             ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
  
              return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')){
@@ -1119,40 +1121,40 @@ class picAdminController extends Controller
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
             ->where('upload_type','Fund_Req')
             ->orderBy('id', 'DESC')
-            ->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
 
             return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }else{
-            $document = documents::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentberau = documentberau::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $document = documents::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentberau = documentberau::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
             // dd($documentbanjarmasin);
-            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
-            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->paginate(10)->withQueryString();
             return view('picadmin.picAdminRekapDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }    
         
@@ -1166,10 +1168,11 @@ class picAdminController extends Controller
 
     //export Rekap Excel page
     public function exportEXCEL(Request $request) {
+        $searchresult = $request->search;
         $date = Carbon::now();
         $monthName = $date->format('F');
-        $cabang_download = $request->search;
-        dd($cabang_download);
-        return Excel::download(new RekapDocument, 'Rekapitulasi-Document ' . '-' . $monthName . '.xlsx');
+        $cabang_download = $request->select_download;
+        // dd($cabang_download);
+        return Excel::download(new Export_RekapDocument($cabang_download), 'Rekapitulasi-Document ' . '-' . $monthName . '.xlsx');
     }
 }

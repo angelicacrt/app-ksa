@@ -171,8 +171,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -196,8 +196,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -221,8 +221,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$doc->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$doc->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -298,8 +298,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -323,8 +323,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -348,8 +348,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -427,8 +427,8 @@
                                     <td class="table-info">
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -451,8 +451,8 @@
                                     <td class="table-success">
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -475,8 +475,8 @@
                                     <td class="table-danger">
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='created_at_Year' value={{$b->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$b->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -563,8 +563,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -588,8 +588,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -613,8 +613,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$s->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$s->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -696,8 +696,8 @@
                                             <form method="post" action="/dashboard/dana/view" target="_blank">
                                                 @csrf
                                                 <input type="hidden" name='type_upload' value="Fund_Req" />
-                                                <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                                <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                                 <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                                 <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -721,8 +721,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -746,8 +746,8 @@
                                         <form method="post" action="/dashboard/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Req" />
-                                            <input type="hidden" name='created_at_Year' value={{$jkt->created_at->format('Y')}} />
-                                            <input type="hidden" name='created_at_month' value={{$jkt->created_at->format('m')}} />
+                                            <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
+                                            <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
