@@ -647,7 +647,7 @@ class DashboardController extends Controller
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
-                    dd($viewer);
+                    // dd($viewer);
                     return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/" . $viewer);
                 }
                 if ($request->cabang == 'Jakarta'){
