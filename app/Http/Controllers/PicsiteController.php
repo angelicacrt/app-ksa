@@ -3135,13 +3135,13 @@ class PicsiteController extends Controller
                 $tujuan_upload = 'berau/pnpb_sscec';
                 $path = $request->file('beraufile25')->storeas('berau/'. $year . "/". $month , $name1, 's3');
                 if (documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->exists()){
-                documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
+                    documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '>=' ,date('Y-m-d'))->update([
                         'dana25' => $request->dana25,                   
                         'pnpb_sscec' => basename($path),
                         'status25' => 'on review',
                         'time_upload25' => date("Y-m-d h:i:s"),]);
                 }elseif (documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->exists()){
-                documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
+                    documentberau::where('upload_type','Fund_Req')->where('nama_kapal', 'Like',  $request->nama_kapal )->where('periode_akhir', $request->tgl_akhir)->whereDate('periode_akhir' , '<' ,date('Y-m-d'))->update([
                         'dana25' => $request->dana25,
                         'pnpb_sscec' => basename($path),
                         'status25' => 'on review',
