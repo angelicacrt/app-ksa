@@ -12,6 +12,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\PicsiteController;
 use App\Http\Controllers\PicRpkController;
 use App\Http\Controllers\picAdminController;
+use App\Http\Controllers\StaffLegalController;
 use App\Http\Controllers\picincidentController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\DashboardAjaxController;
@@ -465,6 +466,18 @@ Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], f
         Route::post('/rpk/view',[StaffLegalController::class, 'viewrpk']);
         Route::post('/dashboard-staff-Real/view',[StaffLegalController::class, 'Dashboard_fund_Real_view']);
         Route::post('/dashboard-staff-Rpk/view',[StaffLegalController::class, 'Dashboard_staffrpk_view']);
+
+        //RPK page
+        Route::get('/upload-rpk', [StaffLegalController::class , 'staffrpk_page']);
+        Route::post('/uploadrpk', [StaffLegalController::class , 'staff_upload_RPK']);
+
+        //Fund Request page
+        Route::get('/upload-dana', [StaffLegalController::class , 'stafffund_page']);
+        Route::post('/upload',[StaffLegalController::class, 'staff_upload_fund']);
+
+        //Fund Real page
+        Route::get('/upload-realisasiDana', [StaffLegalController::class , 'staffReal_page']);
+        Route::post('/uploadReal',[StaffLegalController::class, 'staff_upload_fund']);
     });
 
     Route::prefix('picincident')->name('picincident.')->group(function(){

@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use Storage;
 use Carbon\Carbon;
+use App\Models\Tug;
 use App\Models\User;
+use App\Models\Barge;
 use App\Models\documents;
 use App\Models\documentrpk;
 use Illuminate\Http\Request;
 use App\Models\documentberau;
 use App\Models\documentJakarta;
 use App\Models\documentsamarinda;
-use App\Models\documentbanjarmasin;
-use App\Exports\Export_RekapDocument;
 use Illuminate\Support\Facades\DB;
+use App\Models\documentbanjarmasin;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Export_RekapDocument;
 
 class StaffLegalController extends Controller
 {
