@@ -59,6 +59,21 @@ class CreateRpkdocumentsTable extends Migration
             $table->string('reason7')->nullable();
             $table->string('surat_kapal')->nullable();
             
+            $table->dateTime('time_upload8') ->nullable();
+            $table->string('status8')->nullable();
+            $table->string('reason8')->nullable();
+            $table->string('RPK')->nullable();
+
+            $table->string('status9')->nullable();
+            $table->string('reason9')->nullable();
+            $table->string('Penambahan_pelabuhan_singgah')->nullable();
+            $table->dateTime('time_upload9') ->nullable();
+            
+            $table->string('status10')->nullable();
+            $table->string('reason10')->nullable();
+            $table->string('Penambahan_urgensi_muatan')->nullable();
+            $table->dateTime('time_upload10') ->nullable();
+            
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

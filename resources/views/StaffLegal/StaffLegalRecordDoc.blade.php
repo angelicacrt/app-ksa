@@ -1,122 +1,90 @@
-@if (Auth::user()->cabang != "Bunati" and Auth::user()->hasRole('picSite') or Auth::user()->cabang != 'Batu Licin' and Auth::user()->hasRole('picSite'))
-    @extends('../layouts.base')
+@extends('../layouts.base')
 
-    @section('title', 'Picsite Dashboard')
+@section('title', 'PicAdmin Record Dana Documents')
 
-    @section('container')
-    <div class="row">
-        @include('picsite.sidebarpic')
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            
-            <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h2>Welcome back, {{ Auth::user()->name }} !</h2>
-                <h4>Cabang : {{ Auth::user()->cabang }}</h4>
-                <h3>
-                    <div id="txt"></div>
-
-                    <script>
-                        function startTime() {
-                        const today = new Date();
-                        let h = today.getHours();
-                        let m = today.getMinutes();
-                        let s = today.getSeconds();
-                        m = checkTime(m);
-                        s = checkTime(s);
-                        document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-                        setTimeout(startTime, 1000);
-                        }
-                        
-                        function checkTime(i) {
-                        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-                            return i;
-                        }
-                    </script>
-                    <hr class="rounded">
-                </h3>    
-                
-                <style>{
-                    {{-- /* Rounded border */ --}}
-                    hr.rounded {
-                    border-top: 8px solid rgb(32, 13, 13);
-                    border-radius: 5px;
-                    }
-                }
-                </style>
-                
-                <form method="GET" action="/dashboard/search" role="search">
-                    <div class="form-inline">
-                        <div class="form-check mb-2 mr-sm-2">
-                            <a class="btn btn-outline-danger" href="/picsite/dashboard/rpk">Change to RPK</a>
-                        </div>
-                        <div class="form-check mb-2 mr-sm-2">
-                            <a class="btn btn-outline-danger" href="/picsite/dashboard/realisasi">Change to Fund Realization</a>
-                        </div>
-                    </div>
+@section('container')
+<div class="row">
+    @include('picadmin.picAdminsidebar')
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="jumbotron jumbotron-fluid" >
+                <div class="Header-1">
+                    <h1 class="text-center">Record Fund Request Documents</h1>
+                </div>
+                <hr class="my-4">
                     
-                    <div class="row">
-                        <div class="col">
-                            @if (Auth::user()->cabang == 'Babelan')
-                                <div class="d-flex justify-content-end">
-                                    {{ $document->links() }}
-                                </div>
-                            @endif
-                            @if (Auth::user()->cabang == 'Berau')
-                                <div class="d-flex justify-content-end">
-                                    {{ $documentberau->links() }}
-                                </div>
-                            @endif
-                            @if (Auth::user()->cabang == 'Banjarmasin')
-                                <div class="d-flex justify-content-end">
-                                    {{ $documentbanjarmasin->links() }}
-                                </div>
-                            @endif
-                            @if (Auth::user()->cabang == 'Samarinda')
-                                <div class="d-flex justify-content-end">
-                                    {{ $documentsamarinda->links() }}
-                                </div>
-                            @endif
-                            @if (Auth::user()->cabang == 'Jakarta')
-                                <div class="d-flex justify-content-end">
-                                    {{ $documentjakarta->links() }}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col">
-                            <label class="sr-only" for="search_kapal">Nama Kapal</label>
-                            <div class="input-group">
+                <form method="GET" action="/picadmin/RecordDocuments/search" role="search">
+                <div class="row">
+                    <div class="col">
+                        <div class="auto-cols-auto">
+                            <div class="col" style="margin-left:-1%" >
+                                <div class="input-group">
                                 <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg>
-                                </div>
                                 </div>
                                 <input type="text" style="text-transform: uppercase;" name="search_kapal" id="search_kapal" class="form-control" placeholder="Search Nama Kapal" autofocus>
                                 <button type="submit" class="btn btn-info">
-                                    <span class="glyphicon glyphicon-search"></span> Search 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
                                 </button>
+                                </div>
                             </div>
                         </div>
-                        {{-- still in progress --}}
-                        {{-- <div class="auto-cols-auto">
-                            <div class="col-sm-3 my-1" style="margin-left:-1%" >
-                                <select name="search_status" id="search_status" class="form-control" >
-                                    <option value="" hidden>Choose Status</option>
-                                    <option value="">All</option>
-                                    <option value="on review">On Review</option>
-                                    <option value="approved">Approved</option>
-                                    <option value="rejected">Rejected</option>
-                                </select>
-                            </div>
-                        </div> --}}
                     </div>
+                    <div class="col">
+                        <select name="search" id="cabangfilter"class="form-select" :value="old('cabangfilter')" >
+                            <option selected disabled hidden='true' value="">Pilih Cabang</option>
+                            <option value="All">Semua Cabang</option>
+                            <option value="Babelan">Babelan</option>
+                            <option value="Berau">Berau</option>
+                            <option value="Samarinda">Samarinda</option>
+                            <option value="Banjarmasin">Banjarmasin</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bunati">Bunati</option>
+                            <option value="Kendari">Kendari</option>
+                            <option value="Morosi">Morosi</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/RecordDocumentsRPK">Change to RPK</a>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                          @if($searchresult == 'Babelan')
+                            {{$document->links()}}
+                          @elseif($searchresult == 'Berau')
+                            {{$documentberau->links()}}
+                          @elseif($searchresult == 'Banjarmasin' or $searchresult == 'Bunati')
+                            {{$documentbanjarmasin->links()}}
+                          @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
+                            {{$documentsamarinda->links()}}
+                          @elseif($searchresult == 'Jakarta')
+                            {{$documentjakarta->links()}}
+                          @endif
+                        </div>
+                    </div>
+                </div>
                 </form>
 
-                <table id="content" class="table"style="margin-top: 1%">
+                @if($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert error alert-danger" id="error">{{ $error }}
+                            <strong> No data found</strong>
+                        </div>
+                    @endforeach
+                @endif
+
+                  <script>
+                    setTimeout(function(){
+                    $("div.alert").remove();
+                    }, 5000 ); // 5 secs
+                  </script>
+                 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+                 <table id="content" class="table"style="margin-top: 1%">
                     <thead class="thead-dark" >
                         <tr>
                             <th class="table-info">Time Uploaded</th>
-                            <th class="table-info">No.Permohonan</th>
                             <th class="table-info">Nama Kapal</th>
                             <th class="table-info">Periode (Y-M-D)</th>
                             <th class="table-info">Nama File</th>
@@ -129,7 +97,6 @@
                     </thead>
                     <tbody>
                     {{-- Babelan --}}
-                        @if (Auth::user()->cabang == "Babelan")
                             @forelse($document as $doc )
                             @for ( $a = 1 ; $a <= 24 ; $a++)
                             @php
@@ -138,14 +105,14 @@
                                 'endorse_surat_laut','perpanjangan_sertifikat_sscec','perpanjangan_sertifikat_p3k' ,
                                 'biaya_laporan_dok','pnpb_sertifikat_keselamatan','pnpb_sertifikat_garis_muat',
                                 'pnpb_surat_laut','sertifikat_snpp','sertifikat_anti_teritip',    
-                                'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec' , 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat' 
-                                ,'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain1' , 'Lain_Lain2');
+                                'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec' , 'BKI_Lambung', 'BKI_Mesin', 'BKI_Garis_Muat' ,
+                                'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain1' , 'Lain_Lain2');
 
                                 $names = array('Sertifikat Keselamatan' , 'Sertifikat Garis Muat' , 'Penerbitan 1 Kali Jalan' , 'Sertifikat Safe Manning' ,
                                 'Endorse Surat Laut' , 'Perpanjangan Sertifikat SSCEC' , 'Perpanjangan Sertifikat P3K' , 'Biaya Laporan Dok' , 
                                 'PNPB Sertifikat Keselamatan' , 'PNPB Sertifikat Garis Muat' , 'PNPB Surat Laut'  , 'Sertifikat SNPP' ,
                                 'Sertifikat Anti Teritip' , 'PNBP SNPP & SNAT', 'Biaya Survey' , 'PNPB SSCEC', 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat' ,
-                                'Sertifikat Konstruksi Kapal Barang' , 'Sertifikat Radio Kapal Barang' , 'PNBP_Safe_Maning' , 'File extra 1' , 'File extra 2');
+                                'Sertifikat Konstruksi Kapal Barang' , 'Sertifikat Radio Kapal Barang' , 'PNBP Safe Maning' , 'File extra 1' , 'File extra 2');
                                 $time_upload ="time_upload".$a;
                                 $stats ="status".$a;
                                 $reason = "reason".$a;
@@ -161,7 +128,6 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
-                                    <td class="table-warning"><strong>{{ $doc->no_mohon }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -170,11 +136,11 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -187,7 +153,6 @@
                             @elseif($doc->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $doc->no_mohon }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>    
@@ -196,11 +161,11 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$doc ->$reason}}</td>                                        
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -213,7 +178,6 @@
                                 @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $doc->$time_upload }}</strong></td>
-                                    <td class="table-danger"><strong>{{ $doc->no_mohon }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>     
@@ -222,11 +186,11 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$doc ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -248,9 +212,9 @@
                                     <td>Babelan Fund Request Data Not Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
+
                     {{-- Berau --}}
-                        @if (Auth::user()->cabang == "Berau")
+                       
                             @forelse($documentberau as $d )
                             @for ( $a = 1 ; $a <= 34 ; $a++)
                             @php
@@ -291,7 +255,6 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $d->$time_upload }}</strong></td>
-                                    <td class="table-warning"><strong>{{ $d->no_mohon }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -300,11 +263,11 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$d ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -317,7 +280,6 @@
                             @elseif($d->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $d->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $d->no_mohon }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -326,11 +288,11 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$d->$reason}}</td>    
                                     <td class="table-success">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -343,7 +305,6 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $d->$time_upload }}</strong></td>
-                                    <td class="table-danger"><strong>{{ $d->no_mohon }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>
@@ -352,11 +313,11 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$d->$reason}}</td>   
                                     <td class="table-danger">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
@@ -378,10 +339,8 @@
                                     <td>Berau Fund Request Data Not Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
 
                     {{-- BANJARMASIN --}}
-                        @if (Auth::user()->cabang == 'Banjarmasin')
                         @forelse($documentbanjarmasin as $b )
                         @for ( $a = 1 ; $a <= 39 ; $a++)
                         @php
@@ -424,7 +383,6 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $b->$time_upload }}</strong></td>
-                                    <td class="table-warning"><strong>{{ $b->no_mohon }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -433,10 +391,11 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$b ->$reason}}</td>
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -449,7 +408,6 @@
                             @elseif($b->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $b->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $b->no_mohon }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td> 
@@ -458,10 +416,11 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$b->$reason}}</td>
                                     <td class="table-success">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -474,7 +433,6 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $b->$time_upload }}</strong></td>
-                                    <td class="table-danger"><strong>{{ $b->no_mohon }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
@@ -483,10 +441,11 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$b->$reason}}</td>
                                     <td class="table-danger">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
@@ -508,10 +467,8 @@
                                 <td>No Banjarmasin Fund Request Data Found</td>
                             </tr> --}}
                             @endforelse
-                        @endif
 
                     {{-- Samarinda --}}
-                        @if (Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Morosi')
                             @forelse($documentsamarinda as $s )
                             @for ( $a = 1 ; $a <= 48 ; $a++)
                             @php
@@ -562,7 +519,6 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $s->$time_upload }}</strong></td>
-                                    <td class="table-warning"><strong>{{ $s->no_mohon }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -571,11 +527,11 @@
                                     <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                     <td class="table-warning" id="reason">{{$s ->$reason}}</td>   
                                     <td class="table-warning">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -588,7 +544,6 @@
                             @elseif($s->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $s->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $s->no_mohon }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -597,11 +552,11 @@
                                     <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$s->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -614,7 +569,6 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $s->$time_upload }}</strong></td>
-                                    <td class="table-danger"><strong>{{ $s->no_mohon }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
@@ -623,11 +577,11 @@
                                     <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$s->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -649,9 +603,7 @@
                                     <td>No Samarinda Fund Request Data Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
                     {{-- Jakarta --}}
-                            @if (Auth::user()->cabang == 'Jakarta')
                             @forelse($documentjakarta as $jkt )
                             @for ( $a = 1 ; $a <= 47 ; $a++)
                             @php
@@ -698,7 +650,6 @@
                                 @elseif ($jkt->$stats == 'on review')
                                     <tr>
                                         <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                        <td class="table-warning"><strong>{{ $jkt->no_mohon }}</strong></td>
                                         <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                         <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                         <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -707,11 +658,11 @@
                                         <td class="table-warning" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                         <td class="table-warning" id="reason">{{$jkt->$reason}}</td>   
                                         <td class="table-warning">
-                                            <form method="post" action="/dashboard/dana/view" target="_blank">
+                                            <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                                 @csrf
-                                                <input type="hidden" name='type_upload' value="Fund_Req" />
                                                 <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
                                                 <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
+                                                <input type="hidden" name='type_upload' value="Fund_Req" />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                                 <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                                 <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -724,7 +675,6 @@
                             @elseif($jkt->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $jkt->no_mohon }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -733,11 +683,11 @@
                                     <td class="table-success" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                     <td class="table-success" id="reason">{{$jkt->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -750,7 +700,6 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                    <td class="table-danger"><strong>{{ $jkt->no_mohon }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
@@ -759,11 +708,11 @@
                                     <td class="table-danger" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                     <td class="table-danger" id="reason">{{$jkt->$reason}}</td>    
                                     <td class="table-info">
-                                        <form method="post" action="/dashboard/dana/view" target="_blank">
+                                        <form method="post" action="/picadmin/RecordDocuments/dana/view" target="_blank">
                                             @csrf
-                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
+                                            <input type="hidden" name='type_upload' value="Fund_Req" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
@@ -785,19 +734,16 @@
                                     <td>No Jakarta Fund Request Data Found</td>
                                 </tr> --}}
                             @endforelse
-                        @endif
                     </tbody>
                 </table>
             </div>
-        </main>
-    </div>
-        <script type="text/javascript">
-            function refreshDiv(){
-                $('#content').load(location.href + ' #content')
-            }
-            setInterval(refreshDiv, 60000);
-        </script>
-    @endsection
-@else
-    @include('../layouts/notAuthorized')
-@endif
+        </div>
+    </main>
+</div>
+    <script type="text/javascript">
+        function refreshDiv(){
+            $('#content').load(location.href + ' #content')
+        }
+        setInterval(refreshDiv, 60000);
+    </script>
+@endsection 

@@ -21,7 +21,8 @@ class CreateDocumentJakartasTable extends Migration
             
             $table->string('nama_kapal',60)->nullable();
             $table->string('upload_type',10)->nullable();
-            $table->string('approved_by',20)->nullable();
+            // $table->string('approved_by',20)->nullable();
+            // $table->string('no_mohon',25)->nullable();
             $table->date('periode_awal')->nullable();
             $table->date('periode_akhir')->nullable();
 

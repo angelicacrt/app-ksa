@@ -1279,6 +1279,7 @@ class PicRpkController extends Controller
             return redirect('picsite/rpk')->with('success', 'Upload Success! Silahkan di cek  ke bagian "DASHBOARD !');
         }
 
+
         //email to user
     // $details = [
     //         'title' => 'Thank you for receiving this email', 

@@ -21,6 +21,7 @@ class CreateSamarindadb extends Migration
             $table->string('nama_kapal',70)->nullable();
             $table->string('upload_type',9)->nullable();
             $table->string('approved_by',20)->nullable();
+            // $table->string('no_mohon',25)->nullable();
             $table->date('periode_awal')->nullable();
             $table->date('periode_akhir')->nullable();
            

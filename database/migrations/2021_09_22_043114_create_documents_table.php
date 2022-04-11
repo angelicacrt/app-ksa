@@ -21,9 +21,10 @@ class CreateDocumentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             
-            $table->string('nama_kapal',100)->nullable();
+            $table->string('nama_kapal',80)->nullable();
             $table->string('upload_type',10)->nullable();
-            $table->string('approved_by',20)->nullable();
+            $table->string('approved_by',25)->nullable();
+            $table->string('no_mohon',25)->nullable();
             $table->date('periode_awal')->nullable();
             $table->date('periode_akhir')->nullable();
             

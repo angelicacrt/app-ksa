@@ -528,32 +528,9 @@ class PicsiteController extends Controller
                 'dana22' => 'nullable|string|min:4|max:15' ,
                 'dana23' => 'nullable|string|min:4|max:15' ,
                 'dana24' => 'nullable|string|min:4|max:15' ,
-                'dana1' => 'nullable|string|min:4|max:15' ,
-                    'dana2' => 'nullable|string|min:4|max:15' ,
-                    'dana3' => 'nullable|string|min:4|max:15' ,
-                    'dana4' => 'nullable|string|min:4|max:15' ,
-                    'dana5' => 'nullable|string|min:4|max:15' , 
-                    'dana6' => 'nullable|string|min:4|max:15' ,
-                    'dana7' => 'nullable|string|min:4|max:15' ,
-                    'dana8' => 'nullable|string|min:4|max:15' ,
-                    'dana9' => 'nullable|string|min:4|max:15' ,
-                    'dana10' => 'nullable|string|min:4|max:15' ,
-                    'dana11' => 'nullable|string|min:4|max:15' ,
-                    'dana12' => 'nullable|string|min:4|max:15' ,
-                    'dana13' => 'nullable|string|min:4|max:15' ,
-                    'dana14' => 'nullable|string|min:4|max:15' ,
-                    'dana15' => 'nullable|string|min:4|max:15' ,
-                    'dana16' => 'nullable|string|min:4|max:15' ,
-                    'dana17' => 'nullable|string|min:4|max:15' ,
-                    'dana18' => 'nullable|string|min:4|max:15' ,
-                    'dana19' => 'nullable|string|min:4|max:15' ,
-                    'dana20' => 'nullable|string|min:4|max:15' ,
-                    'dana21' => 'nullable|string|min:4|max:15' ,
-                    'dana22' => 'nullable|string|min:4|max:15' ,
-                    'dana23' => 'nullable|string|min:4|max:15' ,
-                    'dana24' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'nullable|string',
-                'Nama_Barge' => 'nullable|string',
+            'nama_kapal' => 'nullable|string',
+            'Nama_Barge' => 'nullable|string',
+            'no_mohon' => 'required|string',
             ]);
             
             $year = date('Y');
@@ -598,6 +575,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'cabang' => Auth::user()->cabang ,
                     'user_id' => Auth::user()->id,   
                         
@@ -651,6 +629,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -704,6 +683,7 @@ class PicsiteController extends Controller
                 else {
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -757,6 +737,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -810,6 +791,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -863,6 +845,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -916,6 +899,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -970,6 +954,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1023,6 +1008,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1076,6 +1062,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1129,6 +1116,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1182,6 +1170,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1235,6 +1224,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1288,6 +1278,7 @@ class PicsiteController extends Controller
                 else {
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1341,6 +1332,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1394,6 +1386,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1446,6 +1439,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1498,6 +1492,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1550,6 +1545,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1599,6 +1595,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1648,6 +1645,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1697,6 +1695,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1746,6 +1745,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1795,6 +1795,7 @@ class PicsiteController extends Controller
                 else{
                     documents::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'cabang' => Auth::user()->cabang ,
                         'user_id' => Auth::user()->id,
                         
@@ -1886,6 +1887,7 @@ class PicsiteController extends Controller
                     'dana34' => 'nullable|string|min:4|max:15' ,
                 'nama_kapal' => 'nullable|string',
                 'Nama_Barge' => 'nullable|string',
+                'no_mohon' => 'required|string',
             ]);
 
             $year = date('Y');
@@ -1931,6 +1933,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -1983,6 +1986,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2035,6 +2039,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2087,6 +2092,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2139,6 +2145,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2191,6 +2198,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2243,6 +2251,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2295,6 +2304,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2347,6 +2357,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2399,6 +2410,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2451,6 +2463,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2503,6 +2516,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2555,6 +2569,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2607,6 +2622,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2659,6 +2675,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2711,6 +2728,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2763,6 +2781,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2815,6 +2834,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2865,6 +2885,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2915,6 +2936,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -2965,6 +2987,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3015,6 +3038,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3065,6 +3089,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3115,6 +3140,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3165,6 +3191,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3215,6 +3242,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3265,6 +3293,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3315,6 +3344,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3365,6 +3395,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3414,6 +3445,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3463,6 +3495,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3512,6 +3545,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3561,6 +3595,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3610,6 +3645,7 @@ class PicsiteController extends Controller
                 else{
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -3711,6 +3747,7 @@ class PicsiteController extends Controller
                     'dana39' => 'nullable|string|min:4|max:15' ,
                 'nama_kapal' => 'nullable|string',
                 'Nama_Barge' => 'nullable|string',
+                'no_mohon' => 'required|string',
             ]);
             $year = date('Y');
             $month = date('m');
@@ -3751,6 +3788,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana1' => $request->dana1,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3800,6 +3838,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana2' => $request->dana2,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3849,6 +3888,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana3' => $request->dana3,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3898,6 +3938,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana4' => $request->dana4,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3947,6 +3988,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana5' => $request->dana5,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3996,6 +4038,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana6' => $request->dana6,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4045,6 +4088,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana7' => $request->dana7,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4094,6 +4138,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana8' => $request->dana8,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4143,6 +4188,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana9' => $request->dana9,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4192,6 +4238,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana10' => $request->dana10,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4241,6 +4288,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana11' => $request->dana11,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4290,6 +4338,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana12' => $request->dana12,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4339,6 +4388,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana13' => $request->dana13,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4388,6 +4438,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana14' => $request->dana14,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4437,6 +4488,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana15' => $request->dana15,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4486,6 +4538,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana16' => $request->dana16,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4535,6 +4588,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana17' => $request->dana17,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4584,6 +4638,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana18' => $request->dana18,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4633,6 +4688,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana19' => $request->dana19,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4682,6 +4738,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana20' => $request->dana20,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4731,6 +4788,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana21' => $request->dana21,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4780,6 +4838,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana22' => $request->dana22,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4829,6 +4888,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana23' => $request->dana23,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4878,6 +4938,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana24' => $request->dana24,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4927,6 +4988,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana25' => $request->dana25,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -4976,6 +5038,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana26' => $request->dana26,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5025,6 +5088,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana27' => $request->dana27,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5074,6 +5138,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana28' => $request->dana28,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5123,6 +5188,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana29' => $request->dana29,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5172,6 +5238,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana30' => $request->dana30,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5221,6 +5288,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana31' => $request->dana31,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5270,6 +5338,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana32' => $request->dana32,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5319,6 +5388,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana33' => $request->dana33,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5368,6 +5438,7 @@ class PicsiteController extends Controller
                     else{
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'dana34' => $request->dana34,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -5727,6 +5798,7 @@ class PicsiteController extends Controller
                     'dana48' => 'nullable|string|min:4|max:15' ,
                 'nama_kapal' => 'nullable|string',
                 'Nama_Barge' => 'nullable|string',
+                'no_mohon' => 'required|string',
             ]);
             $year = date('Y');
             $month = date('m');
@@ -5767,6 +5839,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -5815,6 +5888,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -5863,6 +5937,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -5911,6 +5986,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -5959,6 +6035,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6007,6 +6084,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6055,6 +6133,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6103,6 +6182,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6151,6 +6231,7 @@ class PicsiteController extends Controller
                     else{
                         documentsamarinda::create([
                             'upload_type' => 'Fund_Req',
+                            'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
                             'periode_akhir' => $request->tgl_akhir,
@@ -6199,6 +6280,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6247,6 +6329,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6295,6 +6378,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6343,6 +6427,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6391,6 +6476,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6439,6 +6525,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6487,6 +6574,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6535,6 +6623,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6583,6 +6672,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6631,6 +6721,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6679,6 +6770,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6727,6 +6819,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -6775,6 +6868,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6823,6 +6917,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6871,6 +6966,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6919,6 +7015,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -6967,6 +7064,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -7015,6 +7113,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7063,6 +7162,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -7111,6 +7211,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -7159,6 +7260,7 @@ class PicsiteController extends Controller
                 else{
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -7207,6 +7309,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7255,6 +7358,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7303,6 +7407,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7351,6 +7456,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7399,6 +7505,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7447,6 +7554,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7495,6 +7603,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7543,6 +7652,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7590,6 +7700,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7637,6 +7748,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7684,6 +7796,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7731,6 +7844,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7778,6 +7892,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7825,6 +7940,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7872,6 +7988,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7919,6 +8036,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -7966,6 +8084,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8013,6 +8132,7 @@ class PicsiteController extends Controller
                 else{
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8129,6 +8249,7 @@ class PicsiteController extends Controller
                     'dana47' => 'nullable|string|min:4|max:15' ,
                 'nama_kapal' => 'nullable|string',
                 'Nama_Barge' => 'nullable|string',
+                'no_mohon' => 'required|string',
             ]);
 
             $year = date('Y');
@@ -8170,6 +8291,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8218,6 +8340,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8266,6 +8389,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8314,6 +8438,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8362,6 +8487,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8410,6 +8536,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8458,6 +8585,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8506,6 +8634,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8554,6 +8683,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8602,6 +8732,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8650,6 +8781,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8698,6 +8830,7 @@ class PicsiteController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
                             'periode_akhir' => $request->tgl_akhir,
@@ -8746,6 +8879,7 @@ class PicsiteController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
                             'periode_akhir' => $request->tgl_akhir,
@@ -8794,6 +8928,7 @@ class PicsiteController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
                             'periode_akhir' => $request->tgl_akhir,
@@ -8842,6 +8977,7 @@ class PicsiteController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
                             'periode_akhir' => $request->tgl_akhir,
@@ -8890,6 +9026,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8938,6 +9075,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -8986,6 +9124,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9034,6 +9173,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9080,6 +9220,7 @@ class PicsiteController extends Controller
                 }else{
                 documentJakarta::create([
                     'upload_type' => 'Fund_Req',
+                    'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
                     'periode_akhir' => $request->tgl_akhir,
@@ -9127,6 +9268,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9174,6 +9316,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9221,6 +9364,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9268,6 +9412,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9315,6 +9460,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9362,6 +9508,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9409,6 +9556,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9456,6 +9604,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9503,6 +9652,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9550,6 +9700,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9597,6 +9748,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9644,6 +9796,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9691,6 +9844,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9738,6 +9892,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9785,6 +9940,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9832,6 +9988,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9879,6 +10036,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9926,6 +10084,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -9973,6 +10132,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10020,6 +10180,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10067,6 +10228,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10114,6 +10276,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10161,6 +10324,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10208,6 +10372,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10255,6 +10420,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10302,6 +10468,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,
@@ -10349,6 +10516,7 @@ class PicsiteController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
                         'periode_akhir' => $request->tgl_akhir,

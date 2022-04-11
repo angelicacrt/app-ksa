@@ -1,13 +1,13 @@
 @extends('../layouts.base')
 
-@section('title', 'PicAdmin Dashboard')
+@section('title', 'StaffLegal Dashboard')
 
 @section('container')
 <div class="row">
-    @include('picadmin.picAdminsidebar')
+    @include('StaffLegal.StaffLegalSidebar')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>Welcome back, {{ Auth::user()->name }} ! - Admin</h2>
+            <h2>Welcome back, {{ Auth::user()->name }} ! - Staff-Legal</h2>
             <h2>Cabang : {{ Auth::user()->cabang }}</h2>
             <h3>
                 <div id="txt"></div>
@@ -80,10 +80,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/dashboard-Realisasi">Change to Realisasi Dana</a>
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/StaffLegal/dashboard-StaffLegal-Realisasi">Change to Realisasi Dana</a>
                     </div>
                     <div class="col">
-                        <a class="btn btn-outline-danger"  href="/picadmin/dashboard-RPK">Change to RPK</a>
+                        <a class="btn btn-outline-danger"  href="/StaffLegal/dashboard-StaffLegal-RPK">Change to RPK</a>
                     </div>
                 </div>
             </form>
@@ -91,7 +91,7 @@
                 @if($errors->any())
                     @foreach ($errors->all() as $error)
                         <div class="alert error alert-danger" id="error">{{ $error }}
-                            <strong> No data found</strong>
+                            <strong>Oops! Something went wrong , Contact your IT Department</strong>
                         </div>
                     @endforeach
                 @endif
@@ -148,30 +148,6 @@
                         <tr>
                             {{-- agar tidak keluar hasil kosong --}}
                         </tr>
-                    {{-- @elseif ($doc->$stats == 'on review')
-                        <tr>
-                            hasil on review
-                            <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
-                            <td class="table-warning"><strong>{{ $doc->cabang }}</strong></td>
-                            <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
-                            <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
-                            <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                            <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                            <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
-                            <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                            <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
-                            <td class="table-warning">
-                                <form method="post" action="/dashboard/dana/view" target="_blank">
-                                    @csrf
-                                    <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
-                                    <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
-                                    <input type="hidden" name='result' value={{$doc->$scan}} />
-                                    <input type="hidden" name = 'tipefile' value='DANA'>
-                                    <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
-                                    <button type="submit" name="views3" class="btn btn-dark">view</button>
-                                </form>
-                            </td>                                     
-                        </tr> --}}
                     @elseif($doc->$stats == 'approved')
                         <tr>
                             <td class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
@@ -601,30 +577,6 @@
                             <tr>
                                 {{-- agar tidak keluar hasil kosong --}}
                             </tr>
-                            {{-- @elseif ($jkt->$stats == 'on review')
-                            <tr>
-                                hasil on review
-                                <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                <td class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
-                                <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
-                                <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
-                                <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                                <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
-                                <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
-                                <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
-                                <td class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
-                                <td class="table-warning">
-                                    <form method="post" action="/dashboard/dana/view" target="_blank">
-                                        @csrf
-                                        <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
-                                        <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
-                                        <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
-                                        <input type="hidden" name='result' value={{$jkt->$scan}} />
-                                        <input type="hidden" name = 'tipefile' value='DANA'>
-                                        <button type="submit" name="views3" class="btn btn-dark">view</button>
-                                    </form>
-                                </td>                                                                   
-                            </tr> --}}
                         @elseif($jkt->$stats == 'approved')
                             <tr>
                                 <td class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>

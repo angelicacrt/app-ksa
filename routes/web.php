@@ -25,8 +25,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -415,7 +415,7 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/dana/view',[picAdminController::class, 'view']);
         Route::post('/rpk/view',[picAdminController::class, 'viewrpk']);
         
-        //Admin RPK page
+        //Admin Review RPK page
         Route::get('/rpk', [picAdminController::class , 'checkrpk']);
         Route::get('/RPK/search', [picAdminController::class , 'checkrpk']);
         Route::post('/rpk/update-status',[picAdminController::class, 'approverpk']);
@@ -439,6 +439,32 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/rekapitulasi-Documents-search',[picAdminController::class, 'RekapDoc_search']);
         Route::post('/exportPDF',[picAdminController::class, 'exportPDF']);
         Route::post('/exportExcel',[picAdminController::class, 'exportEXCEL']);
+    });
+    
+    Route::prefix('Staff_Legal')->name('Staff_Legal.')->group(function(){
+        // dashboard
+        Route::get('/dashboard-StaffLegal-RPK',[StaffLegalController::class, 'Dashboard_staffrpk_page']);
+        Route::get('/dashboard-StaffLegal-RPK/search',[StaffLegalController::class, 'dashboardAdminRPK']);
+        Route::get('/dashboard-StaffLegal-Realisasi',[StaffLegalController::class, 'Dashboard_fund_Real_page']);
+        Route::get('/dashboard-StaffLegal-Realisasi/search',[StaffLegalController::class, 'dashboardAdminRPK']);
+
+        // admin review funds page
+        Route::get('/dana', 'StaffLegalController@checkform');
+        Route::get('/dana/search', 'StaffLegalController@checkform');
+        Route::post('/dana/rejectdana',[StaffLegalController::class, 'reject']);
+        Route::post('/dana/approvedana',[StaffLegalController::class, 'approve']);
+
+        //Admin Review RPK page
+        Route::get('/rpk', [StaffLegalController::class , 'checkrpk']);
+        Route::get('/RPK/search', [StaffLegalController::class , 'checkrpk']);
+        Route::post('/rpk/update-status',[StaffLegalController::class, 'approverpk']);
+        Route::post('/rpk/rejectrpk',[StaffLegalController::class, 'rejectrpk']);
+
+        //view route for RPK and Funds page
+        Route::post('/dana/view',[StaffLegalController::class, 'view']);
+        Route::post('/rpk/view',[StaffLegalController::class, 'viewrpk']);
+        Route::post('/dashboard-staff-Real/view',[StaffLegalController::class, 'Dashboard_fund_Real_view']);
+        Route::post('/dashboard-staff-Rpk/view',[StaffLegalController::class, 'Dashboard_staffrpk_view']);
     });
 
     Route::prefix('picincident')->name('picincident.')->group(function(){

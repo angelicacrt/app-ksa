@@ -828,6 +828,171 @@ class DashboardController extends Controller
                     $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
                     return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 };
+        }elseif(Auth::user()->hasRole('StaffLegal')){
+            $datetime = date('Y-m-d');
+            $year = $request->created_at_Year;
+            $month = $request->created_at_month;
+            // Dana view ----------------------------------------------------------
+             if($request->tipefile == 'DANA'){
+                if ($request->cabang == 'Babelan'){
+                    $filename = $request->viewdoc;
+                    $kapal_id = $request->kapal_nama;
+                    $result = $request->result;
+                    $viewer = documents::whereDate('periode_akhir', '>=', $datetime)
+                    ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
+                    ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                    ->pluck($filename)[0];
+                    // dd($viewer);
+                    return Storage::disk('s3')->response('babelan/' . $year . "/". $month . "/" . $viewer);
+                }
+                if ($request->cabang == 'Berau'){
+                    $filename = $request->viewdoc;
+                    $kapal_id = $request->kapal_nama;
+                    $result = $request->result;
+                    $viewer = documentberau::whereDate('periode_akhir', '>=', $datetime)
+                    ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
+                    ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                    ->pluck($filename)[0];
+                    // dd($viewer);
+                    return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/" . $viewer);
+                }
+                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                    $filename = $request->viewdoc;
+                    $kapal_id = $request->kapal_nama;
+                    $result = $request->result;
+                    $viewer = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)
+                    ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', $request->cabang)
+                    ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                    ->pluck($filename)[0];
+                    // dd($viewer);
+                    return Storage::disk('s3')->response('banjarmasin/' . $year . "/". $month . "/" . $viewer);
+                }
+                if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+                    $filename = $request->viewdoc;
+                    $kapal_id = $request->kapal_nama;
+                    $result = $request->result;
+                    $viewer = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)
+                    ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', $request->cabang)
+                    ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                    ->pluck($filename)[0];
+                    // dd($viewer);
+                    return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/" . $viewer);
+                }
+                if ($request->cabang == 'Jakarta'){
+                    $filename = $request->viewdoc;
+                    $kapal_id = $request->kapal_nama;
+                    $result = $request->result;
+                    $viewer = documentJakarta::whereDate('periode_akhir', '>=', $datetime)
+                    ->whereNotNull ($filename)
+                    ->where('upload_type','Fund_Req')
+                    ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                    ->pluck($filename)[0];
+                    // dd($viewer);
+                    // dd($request);
+                    return Storage::disk('s3')->response('jakarta/' . $year . "/". $month . "/" . $viewer);
+                }
+            }
+            //Search bar --------------------------------------------------
+                $searchresult = $request->search;
+                if ($searchresult == 'All') {
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
+                }elseif ($request->filled('search')) {
+                    $document = DB::table('documents')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentberau = DB::table('beraudb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentbanjarmasin = DB::table('banjarmasindb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentsamarinda = DB::table('samarindadb')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentjakarta = documentJakarta::where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda','documentjakarta'));
+                }else if($request->filled('search_kapal')){
+                    //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+                    //pakai whereColumn untuk membandingkan antar 2 value column agar munculkan data dari pembuatan sampai bulan akhir periode
+                    $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(10)->withQueryString();
+
+                    //berau search bar
+                    $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(10)->withQueryString();
+
+                    $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(10)->withQueryString();
+
+                    $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(10)->withQueryString();
+
+                    $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->orderBy('id', 'DESC')
+                    ->latest()->paginate(10)->withQueryString();
+                    return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda', 'documentjakarta'));
+                }elseif($request->filled('search_kapal') && $request->filled('search')){
+                    $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(10)->withQueryString();
+
+                    //berau search bar
+                    $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(10)->withQueryString();
+
+                    $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(10)->withQueryString();
+
+                    $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(10)->withQueryString();
+
+                    $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+                    ->whereDate('periode_akhir', '>=', $datetime)
+                    ->where('upload_type','Fund_Req')
+                    ->where('cabang', request('search'))
+                    ->latest()->paginate(10)->withQueryString();
+                    return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
+                }else{
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
+                };
         }elseif(Auth::user()->hasRole('AsuransiIncident')){
             $datetime = date('Y-m-d');
             $year = date('Y');
