@@ -161,7 +161,7 @@ class picAdminController extends Controller
         }elseif($request->filled('search')){
             $docrpk = DB::table('rpkdocuments')->where('cabang', $request->search)
             ->latest()->paginate(10)->withQueryString();
-            return view('picadmin.picAdminRpk', compact('docrpk'));
+            return view('picadmin.picAdminRpk', compact('docrpk','searchresult'));
         }elseif($request->filled('search_kapal')) {
             //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
             //get DocRPK Data as long as the periode_akhir and search based (column database)
@@ -169,19 +169,19 @@ class picAdminController extends Controller
             ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
-            return view('picadmin.picAdminRpk', compact('docrpk'));
+            return view('picadmin.picAdminRpk', compact('docrpk','searchresult'));
         }elseif($request->filled('search_kapal') && $request->filled('search')){
             $docrpk = DB::table('rpkdocuments')
             ->where('cabang',$request->search)
             ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
-            return view('picadmin.picAdminRpk', compact('docrpk'));
+            return view('picadmin.picAdminRpk', compact('docrpk','searchresult'));
         }else{
             //get DocRPK Data as long as the periode_akhir(column database)
             $docrpk = DB::table('rpkdocuments')->latest()->get();
         }
-        return view('picadmin.picAdminRpk', compact('docrpk'));
+        return view('picadmin.picAdminRpk', compact('docrpk','searchresult'));
     }
 
     //reject for Fund request picAdmin page

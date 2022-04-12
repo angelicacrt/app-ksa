@@ -52,11 +52,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="d-flex justify-content-end">
-                            {{ $docrpk->links() }}
+                    @if($searchresult == null)
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                            
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                                {{ $docrpk->links() }}
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 </form>
                 
