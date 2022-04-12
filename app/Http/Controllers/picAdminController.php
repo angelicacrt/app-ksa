@@ -29,10 +29,10 @@ class picAdminController extends Controller
 
         if ($searchresult == 'All') {
             $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-            return view('picadmin.picAdminDashboardRPK' , compact('docrpk'));
+            return view('picadmin.picAdminDashboardRPK' , compact('docrpk','searchresult'));
         }elseif ($request->filled('search')) {
             $docrpk = DB::table('rpkdocuments')->where('cabang', $request->search)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
-            return view('picadmin.picAdminDashboardRPK' , compact('docrpk'));
+            return view('picadmin.picAdminDashboardRPK' , compact('docrpk','searchresult'));
         }elseif($request->filled('search_kapal')){
              //get DocRPK Data as long as the periode_akhir(column database)
              $docrpk = DB::table('rpkdocuments')
@@ -40,7 +40,7 @@ class picAdminController extends Controller
              ->whereDate('periode_akhir', '>=', $datetime)
              ->orderBy('id', 'DESC')
              ->latest()->paginate(10)->withQueryString();
-             return view('picadmin.picAdminDashboardRPK', compact('docrpk'));
+             return view('picadmin.picAdminDashboardRPK', compact('docrpk','searchresult'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')) {
             //get DocRPK Data as long as the periode_akhir(column database) with cabang
             $docrpk = DB::table('rpkdocuments')
@@ -49,11 +49,11 @@ class picAdminController extends Controller
             ->whereDate('periode_akhir', '>=', $datetime)
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
-            return view('picadmin.picAdminDashboardRPK', compact('docrpk'));
+            return view('picadmin.picAdminDashboardRPK', compact('docrpk','searchresult'));
         }else{
             //get DocRPK Data as long as the periode_akhir(column database)
             $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-            return view('picadmin.picAdminDashboardRPK', compact('docrpk'));
+            return view('picadmin.picAdminDashboardRPK', compact('docrpk','searchresult'));
         }
     }
 
