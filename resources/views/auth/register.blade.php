@@ -99,6 +99,7 @@
                     <option value="crew" id="crew" @if (old('role_id') == 'crew') selected="selected" @endif>Crew</option>
                     <option value="StaffOperasional" id="StaffOperasional" @if (old('role_id') == 'StaffOperasional') selected="selected" @endif>Staff operasional</option>
                     <option value="StaffLegal" id="StaffLegal" @if (old('role_id') == 'StaffLegal') selected="selected" @endif>Staff Legal</option>
+                    <option value="maintenance" id="maintenance" @if (old('role_id') == 'maintenance') selected="selected" @endif>Maintenance</option>
                 </select>
             </div>
 

@@ -125,18 +125,18 @@
                     @for ( $a = 1 ; $a <= 24 ; $a++)
                       @php
                           $BABELAN = array('sertifikat_keselamatan',
-                            'sertifikat_garis_muat','penerbitan_sekali_jalan','sertifikat_safe_manning',
-                            'endorse_surat_laut','perpanjangan_sertifikat_sscec','perpanjangan_sertifikat_p3k' ,
-                            'biaya_laporan_dok','pnpb_sertifikat_keselamatan','pnpb_sertifikat_garis_muat',
-                            'pnpb_surat_laut','sertifikat_snpp','sertifikat_anti_teritip',    
-                            'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec', 'bki_lambung', 'bki_mesin', 'bki_Garis_muat',
-                            'Sertifikat_Konstruksi_Kapal_Barang' , 'Sertifikat_Radio_Kapal_Barang' , 'PNBP_Safe_Maning' , 'Lain_Lain1' , 'Lain_Lain2');
+                                'sertifikat_garis_muat','penerbitan_sekali_jalan','sertifikat_safe_manning',
+                                'endorse_surat_laut','perpanjangan_sertifikat_sscec','perpanjangan_sertifikat_p3k' ,
+                                'biaya_laporan_dok','pnpb_sertifikat_keselamatan','pnpb_sertifikat_garis_muat',
+                                'pnpb_surat_laut','sertifikat_snpp','sertifikat_anti_teritip',    
+                                'pnbp_snpp&snat','biaya_survey' ,'pnpb_sscec', 'bki_lambung', 'bki_mesin', 'bki_Garis_muat',
+                                'Lain_Lain1' , 'Lain_Lain2' , 'Lain_Lain3' , 'Lain_Lain4' , 'Lain_Lain5');
 
-                          $names = array('Sertifikat Keselamatan' , 'Sertifikat Garis Muat' , 'Penerbitan 1 Kali Jalan' , 'Sertifikat Safe Manning' ,
-                            'Endorse Surat Laut' , 'Perpanjangan Sertifikat SSCEC' , 'Perpanjangan Sertifikat P3K' , 'Biaya Laporan Dok' , 
-                            'PNPB Sertifikat Keselamatan' , 'PNPB Sertifikat Garis Muat' , 'PNPB Surat Laut'  , 'Sertifikat SNPP' ,
-                            'Sertifikat Anti Teritip' , 'PNBP SNPP & SNAT', 'Biaya Survey' , 'PNPB SSCEC', 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat',
-                            'Sertifikat Konstruksi Kapal Barang' , 'Sertifikat Radio Kapal Barang' , 'PNBP Safe Maning' , 'File extra 1' , 'File extra 2');
+                            $names = array('Sertifikat Keselamatan' , 'Sertifikat Garis Muat' , 'Penerbitan 1 Kali Jalan' , 'Sertifikat Safe Manning' ,
+                                'Endorse Surat Laut' , 'Perpanjangan Sertifikat SSCEC' , 'Perpanjangan Sertifikat P3K' , 'Biaya Laporan Dok' , 
+                                'PNPB Sertifikat Keselamatan' , 'PNPB Sertifikat Garis Muat' , 'PNPB Surat Laut'  , 'Sertifikat SNPP' ,
+                                'Sertifikat Anti Teritip' , 'PNBP SNPP & SNAT', 'Biaya Survey' , 'PNPB SSCEC', 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat',
+                                'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
                           $time_upload ="time_upload".$a;
                           $stats ="status".$a;
                           $reason = "reason".$a;

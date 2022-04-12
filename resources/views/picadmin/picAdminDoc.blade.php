@@ -157,6 +157,8 @@
                                 <form method="post" action="/picadmin/dana/view" target="_blank">
                                   @csrf
                                   <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
+                                      <input type="hidden" name='created_at_Year' value={{$d->created_at->format('Y')}} />
+                                      <input type="hidden" name='created_at_month' value={{$d->created_at->format('m')}} />
                                       <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                       <input type="hidden" name='result' value={{$doc->$scan}} />
                                       <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
