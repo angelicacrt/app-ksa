@@ -80,10 +80,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/StaffLegal/dashboard-StaffLegal-Realisasi">Change to Realisasi Dana</a>
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/Staff_Legal/dashboard-StaffLegal-Realisasi">Change to Realisasi Dana</a>
                     </div>
                     <div class="col">
-                        <a class="btn btn-outline-danger"  href="/StaffLegal/dashboard-StaffLegal-RPK">Change to RPK</a>
+                        <a class="btn btn-outline-danger"  href="/Staff_Legal/dashboard-StaffLegal-RPK">Change to RPK</a>
                     </div>
                 </div>
             </form>

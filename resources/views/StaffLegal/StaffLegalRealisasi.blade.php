@@ -10,7 +10,7 @@
             <div class="col" style="margin-top: 15px">
                 <div class="jumbotron jumbotron-fluid" >
                     <div class="container">
-                      <h1 class="display-4">Upload your Fund Request Form</h1>
+                      <h1 class="display-4">Upload your Realised Document</h1>
                         <p class="lead">please only upload file with .PDF format only and size is not more than 3 MB.
                           <br>
                             Please upload your document request & fund request form  !
@@ -32,7 +32,7 @@
                             </div>
                         @endif
                        <br>
-                        <form action="/Staff_Legal/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
+                        <form action="/Staff_Legal/uploadReal" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
                             {{-- no.permohonan tidak di specify typenya karena secara default sudah text --}}
                             {{-- baca script di paling bawah --}}

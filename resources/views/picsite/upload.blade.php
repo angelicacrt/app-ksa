@@ -42,6 +42,12 @@
                                     <input class="form-control" required name="no_mohon" placeholder="No.Permohonan">
                                 </div>
                             </div>
+                            <div class="col-md-6" style="margin-left: -1%">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">No.PR</span>
+                                    <input class="form-control" required name="no_PR" placeholder="No.Permohonan">
+                                </div>
+                            </div>
                             <input type="hidden" name='type_upload' value="Fund_Req" />
                             <div class="row">
                                 <div class="col-md-6">
@@ -93,7 +99,7 @@
                                                         'Biaya Laporan Dok','PNPB Sertifikat Keselamatan','PNPB Sertifikat Garis Muat',
                                                         'PNPB Surat Laut','Sertifikat SNPP','Sertifikat Anti Teritip',
                                                         'PNBP SNPP & SNAT','Biaya Survey','PNPB SSCEC' , 'BKI Lambung', 'BKI Mesin', 'BKI Garis Muat' ,
-                                                        'Sertifikat Konstruksi Kapal Barang' , 'Sertifikat Radio Kapal Barang' , 'PNBP Safe Maning' , 'File extra 1' , 'File extra 2');
+                                                        'File extra 1' , 'File extra 2' , 'File extra 3' , 'File extra 4' , 'File extra 5');
                                             $ufile = 'ufile'.$a;
                                             $time_upload ="time_upload".$a;
                                             $stats ="status".$a;

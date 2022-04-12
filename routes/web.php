@@ -445,9 +445,9 @@ Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], f
     Route::prefix('Staff_Legal')->name('Staff_Legal.')->group(function(){
         // dashboard
         Route::get('/dashboard-StaffLegal-RPK',[StaffLegalController::class, 'Dashboard_staffrpk_page']);
-        Route::get('/dashboard-StaffLegal-RPK/search',[StaffLegalController::class, 'dashboardAdminRPK']);
+        Route::get('/dashboard-StaffLegal-RPK/search',[StaffLegalController::class, 'Dashboard_staffrpk_page']);
         Route::get('/dashboard-StaffLegal-Realisasi',[StaffLegalController::class, 'Dashboard_fund_Real_page']);
-        Route::get('/dashboard-StaffLegal-Realisasi/search',[StaffLegalController::class, 'dashboardAdminRPK']);
+        Route::get('/dashboard-StaffLegal-Realisasi/search',[StaffLegalController::class, 'Dashboard_fund_Real_page']);
 
         // admin review funds page
         Route::get('/dana', 'StaffLegalController@checkform');

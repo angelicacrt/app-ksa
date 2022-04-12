@@ -48,7 +48,7 @@ class StaffLegalController extends Controller
             $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Real')->latest()->paginate(10);
             $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10);
             $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10);
-            return view('StaffLegal.StaffLegalRealisasi', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            return view('StaffLegal.StaffLegalDashboardReal', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif($request->filled('search_kapal')) {
             //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
@@ -76,7 +76,7 @@ class StaffLegalController extends Controller
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
 
-            return view('StaffLegal.StaffLegalRealisasi', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            return view('StaffLegal.StaffLegalDashboardReal', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif ($request->filled('search')){
              $document = documents::where('cabang', $request->search)
              ->where('upload_type','Fund_Real')
@@ -103,7 +103,7 @@ class StaffLegalController extends Controller
              ->orderBy('id', 'DESC')
              ->latest()->paginate(10)->withQueryString();
  
-             return view('StaffLegal.StaffLegalRealisasi', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+             return view('StaffLegal.StaffLegalDashboardReal', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')){
             $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->where('cabang', $request->search)
@@ -135,7 +135,7 @@ class StaffLegalController extends Controller
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
 
-            return view('StaffLegal.StaffLegalRealisasi', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            return view('StaffLegal.StaffLegalDashboardReal', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }else{
             $document = documents::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
             $documentberau = documentberau::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
@@ -143,9 +143,8 @@ class StaffLegalController extends Controller
             // dd($documentbanjarmasin);
             $documentsamarinda = documentsamarinda::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
             $documentjakarta = documentJakarta::where('upload_type','Fund_Real')->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StaffLegalRealisasi', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+            return view('StaffLegal.StaffLegalDashboardReal', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
         }    
-        return view('StaffLegal.StaffLegalDashboardReal', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
     }
     public function Dashboard_fund_Real_view(Request $request){
         $year = $request->created_at_Year;

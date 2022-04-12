@@ -1,7 +1,13 @@
+<table class="table">
+    <thead>
+        <th scope="col" style="text-align: center">No.PR</th>
+    </thead>
+</table>
 <table>
     <thead>
         <tr>
             <th scope="col" style="text-align: center">Time Uploaded</th>
+            <th scope="col" style="text-align: center">No.Permohonan</th>
             <th scope="col" style="text-align: center">Cabang</th>
             <th scope="col" style="text-align: center">Nama Kapal</th>
             <th scope="col" style="text-align: center">Periode (Y-M-D)</th>
@@ -40,6 +46,7 @@
             @elseif($doc->$stats == 'approved')
                 <tr>
                     <td>{{ $doc->$time_upload }}</td>
+                    <td>{{ $doc->no_mohon }}</td>
                     <td>{{ $doc->cabang }}</td>
                     <td>{{$doc->nama_kapal}}</td>                                        
                     <td>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</td>                                   
@@ -87,6 +94,7 @@
         @elseif($d->$stats == 'approved')
             <tr>
                 <td>{{ $d->$time_upload }}</td>
+                <td>{{ $d->no_mohon }}</td>
                 <td>{{ $d->cabang }}</td>
                 <td>{{$d->nama_kapal}}</td>                                        
                 <td>{{$d->periode_awal}} To {{$d->periode_akhir}}</td>                                   
@@ -136,6 +144,7 @@
         @elseif($b->$stats == 'approved')
             <tr>
                 <td>{{ $b->$time_upload }}</td>
+                <td>{{ $b->no_mohon }}</td>
                 <td>{{ $b->cabang }}</td>
                 <td>{{$b->nama_kapal}}</td>                                        
                 <td>{{$b->periode_awal}} To {{$b->periode_akhir}}</td>                                   
@@ -193,6 +202,7 @@
             @elseif($s->$stats == 'approved')
                 <tr>
                     <td>{{ $s->$time_upload }}</td>
+                    <td>{{ $s->no_mohon }}</td>
                     <td>{{ $s->cabang }}</td>
                     <td>{{$s->nama_kapal}}</td>                                        
                     <td>{{$s->periode_awal}} To {{$s->periode_akhir}}</td>                                   
@@ -249,6 +259,7 @@
                 @elseif($jkt->$stats == 'approved')
                     <tr>
                         <td>{{ $jkt->$time_upload }}</td>
+                        <td>{{ $jkt->no_mohon }}</td>
                         <td>{{ $jkt->cabang }}</td>
                         <td>{{$jkt->nama_kapal}}</td>                                        
                         <td>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</td>                                   
