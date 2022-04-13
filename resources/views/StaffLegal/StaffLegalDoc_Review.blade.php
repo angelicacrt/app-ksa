@@ -1,17 +1,17 @@
 @extends('../layouts.base')
 
-@section('title', 'Pic-admin-page')
+@section('title', 'Fund-Review-page')
 
 @section('container')
 <div class="row">
-    @include('picadmin.picAdminsidebar')
+    @include('StaffLegal.StaffLegalSidebar')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="row">
             <div class="jumbotron">
                 <h1 class="Header-5">Document & Fund Request Review</h1>
                 <hr class="my-4">
 
-                <form method="GET" action="/picadmin/dana/search" role="search">
+                <form method="GET" action="/Staff_Legal/dana/search" role="search">
                 <div class="form-row">
                   {{-- cabang filter --}}
                   <div class="col-md-auto">
@@ -178,7 +178,7 @@
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <form method="POST" action="/picadmin/dana/approvedana">
+                                    <form method="POST" action="/Staff_Legal/dana/approvedana">
                                       @csrf
                                       <div class="modal-body">
                                         <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -211,7 +211,7 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        <form method="POST" action="/picadmin/dana/rejectdana">
+                                        <form method="POST" action="/Staff_Legal/dana/rejectdana">
                                           @csrf
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$doc->$scan}} />
@@ -337,7 +337,7 @@
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <form method="POST" action="/picadmin/dana/approvedana">
+                                    <form method="POST" action="/Staff_Legal/dana/approvedana">
                                       @csrf
                                       <div class="modal-body">
                                         <input type="hidden" name='status' value={{$stats}}>
@@ -370,7 +370,7 @@
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <form method="POST" action="/picadmin/dana/rejectdana">
+                                    <form method="POST" action="/Staff_Legal/dana/rejectdana">
                                         @csrf
                                         <div class="modal-body">
                                           <input type="hidden" name='reason' value={{$reason}}>
@@ -461,7 +461,7 @@
                               <div class="form-row">
                               {{-- approve button --}}
                                 <div class="col-md-auto">
-                                  <form method="POST" action="/picadmin/dana/approvedana">
+                                  <form method="POST" action="/Staff_Legal/dana/approvedana">
                                     @csrf
                                     <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                     <input type="hidden" name='result' value={{$b->$scan}} />
@@ -504,7 +504,7 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      <form method="POST" action="/picadmin/dana/rejectdana">
+                                      <form method="POST" action="/Staff_Legal/dana/rejectdana">
                                         @csrf
                                           <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                           <input type="hidden" name='result' value={{$b->$scan}} />
@@ -639,7 +639,7 @@
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form method="POST" action="/picadmin/dana/approvedana">
+                                        <form method="POST" action="/Staff_Legal/dana/approvedana">
                                           @csrf
                                           <div class="modal-body">
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
@@ -673,7 +673,7 @@
                                           </button>
                                         </div>
                                         <div class="modal-body">
-                                          <form method="POST" action="/picadmin/dana/rejectdana">
+                                          <form method="POST" action="/Staff_Legal/dana/rejectdana">
                                             @csrf
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$s->$scan}} />
@@ -808,7 +808,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                               </button>
                                             </div>
-                                            <form method="POST" action="/picadmin/dana/approvedana">
+                                            <form method="POST" action="/Staff_Legal/dana/approvedana">
                                               @csrf
                                               <div class="modal-body">
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
@@ -842,7 +842,7 @@
                                           </button>
                                         </div>
                                         <div class="modal-body">
-                                          <form method="POST" action="/picadmin/dana/rejectdana">
+                                          <form method="POST" action="/Staff_Legal/dana/rejectdana">
                                             @csrf
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>

@@ -77,11 +77,9 @@
                             <tbody>
                     {{-- Jakarta --}}
                                 @if (Auth::user()->cabang == 'Jakarta')
-                                @for ($a = 1 ; $a <= 7 ; $a++)
+                                @for ($a = 8 ; $a <= 10 ; $a++)
                                 @php
-                                    $name = array('Surat Keterangan Asal Barang','Cargo Manifest','Voyage Report/ Term Sheet'
-                                                    ,'Bill of Lading','Ijin Olah Gerak Kapal',
-                                                    'Docking','Surat Keterangan Persiapan Kapal');
+                                    $name = array('RPK' , 'Penambahan pelabuhan singgah' , 'Penambahan urgensi muatan');
                                     $jktfile = 'jktfile'.$a;
                                     $time_upload ="time_upload".$a;
                                     $stats ="status".$a;

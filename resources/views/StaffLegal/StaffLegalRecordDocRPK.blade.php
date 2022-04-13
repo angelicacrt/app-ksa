@@ -45,7 +45,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/RecordDocuments">Change to Dana</a>
+                    <a class="btn btn-outline-danger" style="margin-left:40%" href="/Staff_Legal/RecordDocuments">Change to Dana</a>
                 </div>
                 <div class="col">
                     <div class="d-flex justify-content-end">

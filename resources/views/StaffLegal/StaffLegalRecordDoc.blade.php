@@ -46,7 +46,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/picadmin/RecordDocumentsRPK">Change to RPK</a>
+                        <a class="btn btn-outline-danger" style="margin-left:40%" href="/Staff_Legal/RecordDocumentsRPK">Change to RPK</a>
                     </div>
                     <div class="col">
                         <div class="d-flex justify-content-end">

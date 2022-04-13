@@ -1,17 +1,17 @@
 @extends('../layouts.base')
 
-@section('title', 'Pic-admin-page')
+@section('title', 'RPK-Review-page')
 
 @section('container')
 <div class="row">
-    @include('picadmin.picAdminsidebar')
+    @include('StaffLegal.StaffLegalSidebar')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="row">
             <div class="jumbotron">
                 <h1 class="Header-5">RPK Review</h1>
                 <hr class="my-4">
                 
-                <form method="GET" action="/picadmin/RPK/search" role="search">
+                <form method="GET" action="/Staff_Legal/RPK/search" role="search">
                 <div class="form-row">
                     {{-- cabang filter --}}
                     <div class="col-md-auto">
@@ -92,7 +92,7 @@
                     @forelse($docrpk as $d )
                     @for ( $r = 1 ; $r <= 10 ; $r++)
                     @php
-                     $RPK = array('surat_barang', 'cargo_manifest',
+                    $RPK = array('surat_barang', 'cargo_manifest',
                                 'voyage','bill_lading',
                                 'gerak_kapal','docking',
                                 'surat_kapal' , 'RPK' , 'Penambahan_pelabuhan_singgah' , 'Penambahan_urgensi_muatan');
@@ -146,7 +146,7 @@
                                 {{-- check if cabang is banjarmasin --}}
                                 @if($d->cabang == 'Banjarmasin' or $d->cabang == 'Bunati')
                                 <div class="col-md-auto">
-                                    <form method="POST" action="/picadmin/rpk/update-status">
+                                    <form method="POST" action="/Staff_Legal/rpk/update-status">
                                         @csrf
                                         <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />
@@ -196,7 +196,7 @@
                                     </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="/picadmin/rpk/update-status">
+                                        <form method="POST" action="/Staff_Legal/rpk/update-status">
                                             @csrf
                                             <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />
@@ -226,7 +226,7 @@
                                     </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="/picadmin/rpk/rejectrpk">
+                                        <form method="POST" action="/Staff_Legal/rpk/rejectrpk">
                                             @csrf
                                             <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />

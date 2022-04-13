@@ -26,8 +26,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -460,6 +460,19 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::get('/RPK/search', [StaffLegalController::class , 'checkrpk']);
         Route::post('/rpk/update-status',[StaffLegalController::class, 'approverpk']);
         Route::post('/rpk/rejectrpk',[StaffLegalController::class, 'rejectrpk']);
+
+        // rekapitulasi page
+        Route::get('/rekapitulasi-Documents',[StaffLegalController::class, 'Rekap_staff_page']);
+        Route::get('/rekapitulasi-Documents-search',[StaffLegalController::class, 'Rekap_staff_search']);
+
+        //record page
+        Route::get('/RecordDocuments',[StaffLegalController::class, 'RecordDocuments']);
+        Route::get('/RecordDocumentsRPK',[StaffLegalController::class, 'RecordDocumentsRPK']);
+        Route::get('/RecordDocuments/search',[StaffLegalController::class, 'RecordDocuments_search']);
+        Route::get('/RecordDocumentsRPK/search',[StaffLegalController::class, 'RecordDocumentsRPK_search']);
+        Route::post('/RecordDocuments/dana/view',[StaffLegalController::class, 'viewRecordDocuments']);
+        Route::post('/RecordDocuments/RPK/view',[StaffLegalController::class, 'viewRecordDocuments']);
+
 
         //view route for RPK and Funds page
         Route::post('/dana/view',[StaffLegalController::class, 'view']);

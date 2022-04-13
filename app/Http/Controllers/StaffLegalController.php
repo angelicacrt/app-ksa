@@ -321,6 +321,377 @@ class StaffLegalController extends Controller
         }
     }
 
+    //Review Fund Request page for picAdmin
+    public function checkform(Request $request){
+        $datetime = date('Y-m-d');
+        //cabang filter
+        //Search bar
+        //check if search-bar is filled or not
+        //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+        //pakai umn agar munculkan data dari pembuatan sampai bulan akhir periode
+        $searchresult = $request->search;
+        if ($searchresult == 'All') {
+            $document = DB::table('documents')->where('upload_type','Fund_Req')->latest()->get();
+            $documentberau = DB::table('beraudb')->where('upload_type','Fund_Req')->latest()->get();
+            $documentbanjarmasin = DB::table('banjarmasindb')->where('upload_type','Fund_Req')->latest()->get();
+            $documentsamarinda = DB::table('samarindadb')->where('upload_type','Fund_Req')->latest()->get();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get();
+            return view('StaffLegal.StaffLegalDoc_Review' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' ,'documentjakarta' , 'searchresult'));
+        }
+        elseif ($request->filled('search')) {
+            $document = DB::table('documents')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(10)->withQueryString();
+            $documentberau = DB::table('beraudb')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(10)->withQueryString();
+            $documentbanjarmasin = DB::table('banjarmasindb')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(10)->withQueryString();
+            $documentsamarinda = DB::table('samarindadb')->where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(10)->withQueryString();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->where('cabang', $request->search)->latest()->paginate(10)->withQueryString();
+            return view('StaffLegal.StaffLegalDoc_Review' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' ,'documentjakarta' , 'searchresult'));
+        }elseif ($request->filled('search_kapal')) {
+            $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            //berau search bar
+            $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+            return view('StaffLegal.StaffLegalDoc_Review' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult'));
+        }elseif ($request->filled('search_kapal') && $request->filled('search')){
+            $document = documents::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            //berau search bar
+            $documentberau = documentberau::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentbanjarmasin = documentbanjarmasin::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentsamarinda = documentsamarinda::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+
+            $documentjakarta = documentJakarta::where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->where('cabang', $request->search)
+            ->where('upload_type','Fund_Req')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+            return view('StaffLegal.StaffLegalDoc_Review' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult'));
+        }else{
+            $document = documents::where('upload_type','Fund_Req')->latest()->get();
+            $documentberau = documentberau::where('upload_type','Fund_Req')->latest()->get();
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->latest()->get();
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->latest()->get();
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get();
+            
+            return view('StaffLegal.StaffLegalDoc_Review' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult')); 
+        }
+    }
+    
+    //review RPK page for picAdmin
+    public function checkrpk(Request $request){
+        $datetime = date('Y-m-d');
+        $searchresult = $request->search;
+        if ($searchresult == 'All'){
+            $docrpk = DB::table('rpkdocuments')
+            ->latest()->get();
+        }elseif($request->filled('search')){
+            $docrpk = DB::table('rpkdocuments')->where('cabang', $request->search)
+            ->latest()->paginate(10)->withQueryString();
+            return view('StaffLegal.StaffLegalRPK_Review', compact('docrpk','searchresult'));
+        }elseif($request->filled('search_kapal')) {
+            //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
+            //get DocRPK Data as long as the periode_akhir and search based (column database)
+            $docrpk = DB::table('rpkdocuments')
+            ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+            return view('StaffLegal.StaffLegalRPK_Review', compact('docrpk','searchresult'));
+        }elseif($request->filled('search_kapal') && $request->filled('search')){
+            $docrpk = DB::table('rpkdocuments')
+            ->where('cabang',$request->search)
+            ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
+            ->orderBy('id', 'DESC')
+            ->latest()->paginate(10)->withQueryString();
+            return view('StaffLegal.StaffLegalRPK_Review', compact('docrpk','searchresult'));
+        }else{
+            //get DocRPK Data as long as the periode_akhir(column database)
+            $docrpk = DB::table('rpkdocuments')->latest()->get();
+        }
+        return view('StaffLegal.StaffLegalRPK_Review', compact('docrpk','searchresult'));
+    }
+
+    //reject for Fund request picAdmin page
+    public function reject(Request $request){
+        $datetime = date('Y-m-d');
+        $request->validate([
+            'reasonbox' => 'required|max:180',
+        ]);
+
+        if ($request->cabang == 'Babelan'){
+            //  dd($request);
+            $filename = $request->viewdoc;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+
+            documents::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
+            ->update([
+                $request->status => 'rejected',
+                $request->reason => $request->reasonbox ,
+            ]);
+        }
+        if ($request->cabang == 'Berau'){
+            //  dd($request);
+            $filename = $request->viewdoc;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+
+            documentberau::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
+            ->update([
+                $request->status => 'rejected',
+                $request->reason => $request->reasonbox ,
+            ]);
+        }
+        if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+            //  dd($request);
+            $filename = $request->viewdoc;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+
+            documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
+            ->update([
+                $request->status => 'rejected',
+                $request->reason => $request->reasonbox ,
+            ]);
+        }
+        if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+            // dd($request);
+            $filename = $request->viewdoc;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+
+            documentsamarinda::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
+            ->update([
+                $request->status => 'rejected',
+                $request->reason => $request->reasonbox ,
+            ]);
+        }
+        if ($request->cabang == 'Jakarta'){
+            //  dd($request);
+            $filename = $request->viewdoc;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+
+            documentJakarta::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
+            ->update([
+                $request->status => 'rejected',
+                $request->reason => $request->reasonbox ,
+            ]);
+        }
+        return redirect('/picadmin/dana');
+    }
+    //approval for Fund request picAdmin page
+    public function approve(Request $request){
+        $datetime = date('Y-m-d');
+        // dd($request);
+        //no approval reason needed for banjarmasin
+        if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+            $filename = $request->viewdoc;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+            $cabang = $request->cabang;
+            
+            documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->whereNotNull($filename)
+            ->where('upload_type','Fund_Req')
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->update([
+                $request->status => 'approved',
+                'approved_by' => Auth::user()->name,
+            ]);
+        }else{
+            $request->validate([
+                'reasonbox' => 'required|max:255',
+            ]);
+            
+            if ($request->cabang == 'Babelan'){
+                $filename = $request->viewdoc;
+                $result = $request->result;
+                $kapal_id = $request->kapal_nama;
+                
+                documents::where($filename, 'Like', '%' . $result . '%')
+                ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->update([
+                    $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
+                    $request->reason => $request->reasonbox ,
+                ]);
+            }
+            if ($request->cabang == 'Berau'){
+                $filename = $request->viewdoc;
+                $result = $request->result;
+                $kapal_id = $request->kapal_nama;
+                
+                documentberau::where($filename, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
+                ->update([
+                    $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
+                    $request->reason => $request->reasonbox ,
+                ]);
+            }
+            if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+                $filename = $request->viewdoc;
+                $result = $request->result;
+                $kapal_id = $request->kapal_nama;
+                $cabang = $request->cabang;
+
+                documentsamarinda::where($filename, 'Like', '%' . $result . '%')
+                ->where('cabang', $cabang)
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
+                ->update([
+                    $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
+                    $request->reason => $request->reasonbox ,
+                ]);
+            }
+            if ($request->cabang == 'Jakarta'){
+                $filename = $request->viewdoc;
+                $result = $request->result;
+                $kapal_id = $request->kapal_nama;
+
+                documentJakarta::where($filename, 'Like', '%' . $result . '%')
+                ->where('cabang', $request->cabang)
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->whereNotNull($filename)
+                ->where('upload_type','Fund_Req')
+                ->update([
+                    $request->status => 'approved',
+                    'approved_by' => Auth::user()->name,
+                    $request->reason => $request->reasonbox ,
+                ]);
+            }
+        }
+        return redirect('/picadmin/dana');
+    }
+    //approval for RPK review picAdmin page
+    public function approverpk(Request $request){
+        $datetime = date('Y-m-d');
+        // dd($request);
+        //check if cabang is banjarmasin
+        if ($request->cabang == 'Banjarmasin') {
+            $filename = $request->viewdocrpk;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+
+            documentrpk::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->update([
+                $request->status => 'approved',
+                'approved_by' => Auth::user()->name,
+            ]);
+        }else{
+            $request->validate([
+                'reasonbox' => 'required|max:255',
+            ]);
+
+            $filename = $request->viewdocrpk;
+            $result = $request->result;
+            $kapal_id = $request->kapal_nama;
+            
+            documentrpk::where($filename, 'Like', '%' . $result . '%')
+            ->where('cabang', $request->cabang)
+            ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+            ->whereNotNull($filename)
+            ->update([
+                $request->status => 'approved',
+                'approved_by' => Auth::user()->name,
+                $request->reason => $request->reasonbox ,
+            ]);
+        }
+        return redirect('/picadmin/rpk');
+    }
+    //reject for RPK review picAdmin page
+    public function rejectrpk(Request $request){
+        $datetime = date('Y-m-d');
+        // dd($request);
+        $request->validate([
+            'reasonbox' => 'required|max:255',
+        ]);
+
+        $filename = $request->viewdocrpk;
+        $result = $request->result;
+        $kapal_id = $request->kapal_nama;
+
+        documentrpk::where($filename, 'Like', '%' . $result . '%')
+        ->where('cabang', $request->cabang)
+        ->whereNotNull($filename)
+        ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+        ->update([
+            $request->status => 'rejected',
+            'approved_by' => Auth::user()->name ,
+            $request->reason => $request->reasonbox ,
+        ]);
+
+        return redirect('/picadmin/rpk');
+    }
+
     // RecordDocuments page
     public function RecordDocuments(Request $request){
         $datetime = date('Y-m-d');

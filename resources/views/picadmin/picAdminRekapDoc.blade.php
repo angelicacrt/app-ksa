@@ -92,22 +92,6 @@
                                 @foreach($documentjakarta as $jkt )
                                     <option value="{{$jkt->no_PR}}">{{$jkt->no_PR}}</option>
                                 @endforeach
-                            @else
-                                @foreach($document as $doc )
-                                    <option value="{{$doc->no_PR}}">{{$doc->no_PR}}</option>
-                                @endforeach
-                                @foreach($documentberau as $d )
-                                    <option value="{{$d->no_PR}}">{{$d->no_PR}}</option>
-                                @endforeach
-                                @foreach($documentbanjarmasin as $b )
-                                    <option value="{{$b->no_PR}}">{{$b->no_PR}}</option>
-                                @endforeach
-                                @foreach($documentsamarinda as $s )
-                                    <option value="{{$s->no_PR}}">{{$s->no_PR}}</option>
-                                @endforeach
-                                @foreach($documentjakarta as $jkt )
-                                    <option value="{{$jkt->no_PR}}">{{$jkt->no_PR}}</option>
-                                @endforeach
                             @endif
                         </select>
                         <br>

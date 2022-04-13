@@ -122,14 +122,14 @@
                 @forelse($docrpk as $d )
                 @for ( $r = 1 ; $r <= 7 ; $r++)
                 @php
-                $RPK = array('surat_barang', 'cargo_manifest',
-                            'voyage','bill_lading',
-                            'gerak_kapal','docking',
-                            'surat_kapal');
-                $names = array('Surat Keterangan Asal Barang', 'Cargo Manifest',
-                                'Voyage Report/ Term Sheet','Bill of Lading',
-                                'Ijin Olah Gerak Kapal','Docking',
-                                'Surat Keterangan Persiapan Kapal');
+                 $RPK = array('surat_barang', 'cargo_manifest',
+                                'voyage','bill_lading',
+                                'gerak_kapal','docking',
+                                'surat_kapal' , 'RPK' , 'Penambahan_pelabuhan_singgah' , 'Penambahan_urgensi_muatan');
+                    $names = array('Surat Keterangan Asal Barang', 'Cargo Manifest',
+                                    'Voyage Report/ Term Sheet','Bill of Lading',
+                                    'Ijin Olah Gerak Kapal','Docking',
+                                    'Surat Keterangan Persiapan Kapal' , 'RPK' , 'Penambahan pelabuhan singgah' , 'Penambahan urgensi muatan');
                 $time_upload ="time_upload".$r;
                 $stats ="status".$r;
                 $reason = "reason".$r;
