@@ -800,7 +800,7 @@ class StaffLegalController extends Controller
         $datetime = date('Y-m-d');
         //get DocRPK Data as long as the periode_akhir(column database)
         $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
-        return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+        return view('StaffLegal.StaffLegalRecordDocRPK', compact('docrpk'));
     }
     public function RecordDocumentsRPK_search(Request $request){
         $datetime = date('Y-m-d');
@@ -809,12 +809,12 @@ class StaffLegalController extends Controller
             $docrpk = DB::table('rpkdocuments')
             ->whereDate('periode_akhir', '<', $datetime)
             ->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+            return view('StaffLegal.StaffLegalRecordDocRPK', compact('docrpk'));
         }elseif($request->filled('search')){
             $docrpk = DB::table('rpkdocuments')->where('cabang', $request->search)
             ->whereDate('periode_akhir', '<', $datetime)
             ->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+            return view('StaffLegal.StaffLegalRecordDocRPK', compact('docrpk'));
         }elseif($request->filled('search_kapal')) {
             //search for nama kapal in picsite dashboard page dan show sesuai yang mendekati
             //get DocRPK Data as long as the periode_akhir and search based (column database)
@@ -822,18 +822,18 @@ class StaffLegalController extends Controller
             ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+            return view('StaffLegal.StaffLegalRecordDocRPK', compact('docrpk'));
         }elseif($request->filled('search_kapal') && $request->filled('search')){
             $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '<', $datetime)
             ->where('cabang',$request->search)
             ->where('nama_kapal', 'Like', '%' . $request->search_kapal . '%')
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+            return view('StaffLegal.StaffLegalRecordDocRPK', compact('docrpk'));
         }else{
             //get DocRPK Data as long as the periode_akhir(column database)
             $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+            return view('StaffLegal.StaffLegalRecordDocRPK', compact('docrpk'));
         }
     }
     public function viewRecordDocuments(Request $request){
