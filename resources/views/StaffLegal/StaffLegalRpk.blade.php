@@ -77,10 +77,10 @@
                             <tbody>
                     {{-- Jakarta --}}
                                 @if (Auth::user()->cabang == 'Jakarta')
-                                @for ($a = 8 ; $a <= 10 ; $a++)
+                                @for ($a = 1 ; $a <= 3 ; $a++)
                                 @php
                                     $name = array('RPK' , 'Penambahan pelabuhan singgah' , 'Penambahan urgensi muatan');
-                                    $jktfile = 'jktfile'.$a;
+                                    $Staff_file = 'Staff_file'.$a;
                                     $time_upload ="time_upload".$a;
                                     $stats ="status".$a;
                                     $reason ="reason".$a;
@@ -88,10 +88,10 @@
                                 @endphp
                                 <tr>
                                     <td class=table-primary>{{ $a }}</td>
-                                    <td class=table-primary id="nama"><strong>{{$name[$a]}}</td>
+                                    <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
                                     <td class=table-light>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" name="{{$jktfile}}" id="rfile">
+                                            <input type="file" class="form-control" name="{{$Staff_file}}" id="rfile">
                                           </div>
                                     </td>
                                      
