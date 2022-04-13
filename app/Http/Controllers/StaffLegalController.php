@@ -702,13 +702,7 @@ class StaffLegalController extends Controller
         $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
         $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
         // dd($documentbanjarmasin);
-        return view('StaffLegal.StafflegalRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
-    }
-    public function RecordDocumentsRPK(Request $request){
-        $datetime = date('Y-m-d');
-        //get DocRPK Data as long as the periode_akhir(column database)
-        $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
-        return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
+        return view('StaffLegal.StaffLegalRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
     }
     public function RecordDocuments_search(Request $request){
         $datetime = date('Y-m-d');
@@ -800,7 +794,13 @@ class StaffLegalController extends Controller
             $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
         }
         // dd($documentbanjarmasin);
-        return view('StaffLegal.StafflegalRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+        return view('StaffLegal.StaffLegalRecordDoc', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
+    }
+    public function RecordDocumentsRPK(Request $request){
+        $datetime = date('Y-m-d');
+        //get DocRPK Data as long as the periode_akhir(column database)
+        $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '<', $datetime)->latest()->paginate(10)->withQueryString();
+        return view('StaffLegal.StafflegalRecordDocRPK', compact('docrpk'));
     }
     public function RecordDocumentsRPK_search(Request $request){
         $datetime = date('Y-m-d');

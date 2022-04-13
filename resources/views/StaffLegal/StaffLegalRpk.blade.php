@@ -88,7 +88,7 @@
                                 @endphp
                                 <tr>
                                     <td class=table-primary>{{ $a }}</td>
-                                    <td class=table-primary id="nama"><strong>{{$name[$a-1]}}</td>
+                                    <td class=table-primary id="nama"><strong>{{$name[$a]}}</td>
                                     <td class=table-light>
                                         <div class="input-group mb-3">
                                             <input type="file" class="form-control" name="{{$jktfile}}" id="rfile">
