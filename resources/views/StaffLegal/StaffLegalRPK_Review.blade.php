@@ -152,7 +152,7 @@
                                     </div>
                                 {{-- View button --}}
                                     <div class="col-md-auto">
-                                        <form method="post" action="/picadmin/rpk/view" target="_blank">
+                                        <form method="post" action="/Staff_Legal/rpk/view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='created_at_Year' value={{ Carbon\Carbon::parse($d->created_at)->format('Y') }} />
                                             <input type="hidden" name='created_at_month' value={{ Carbon\Carbon::parse($d->created_at)->format('m') }} />

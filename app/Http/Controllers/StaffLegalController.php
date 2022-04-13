@@ -633,7 +633,7 @@ class StaffLegalController extends Controller
         $datetime = date('Y-m-d');
         // dd($request);
         //check if cabang is banjarmasin
-        if ($request->cabang == 'Banjarmasin') {
+        if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati') {
             $filename = $request->viewdocrpk;
             $result = $request->result;
             $kapal_id = $request->kapal_nama;
@@ -690,6 +690,148 @@ class StaffLegalController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    //view for dokumen fund at Admin page 
+    public function view(Request $request){
+        $datetime = date('Y-m-d');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
+        
+        if($request->tipefile == 'DANA'){
+            if ($request->cabang == 'Babelan'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documents::whereNotNull ($filename)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('babelan/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Berau'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentberau::whereNotNull ($filename)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentbanjarmasin::whereNotNull ($filename)
+                ->where('cabang' , $request->cabang)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('banjarmasin/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentsamarinda::whereNotNull ($filename)
+                ->where('cabang' , $request->cabang)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/" . $viewer);
+            }
+            if ($request->cabang == 'Jakarta'){
+                $filename = $request->viewdoc;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentJakarta::whereNotNull ($filename)
+                ->where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filename)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('jakarta/' . $year . "/". $month . "/" . $viewer);
+            }
+        }
+    }
+
+    //view for rpk at Admin page 
+    public function viewrpk(Request $request){ 
+        $datetime = date('Y-m-d');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
+
+        if($request->tipefile == 'RPK'){
+            if ($request->cabang == 'Babelan'){
+                $filenameRPK = $request->viewdocrpk;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->whereNotNull ($filenameRPK)
+                ->where($filenameRPK, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filenameRPK)[0];
+                // dd($viewer);
+                return Storage::disk('s3')->response('babelan/' . $year . "/". $month . "/RPK" . "/" . $viewer);
+            }
+            if ($request->cabang == 'Berau'){
+                $filenameRPK = $request->viewdocrpk;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->whereNotNull ($filenameRPK)
+                ->where($filenameRPK, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filenameRPK)[0]; 
+                // dd($viewer);
+                return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/RPK" . "/" . $viewer);
+            }
+            if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                $filenameRPK = $request->viewdocrpk;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->whereNotNull ($filenameRPK)
+                ->where($filenameRPK, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filenameRPK)[0]; 
+                // dd($viewer);
+                return Storage::disk('s3')->response('banjarmasin/' . $year . "/". $month . "/RPK" . "/" . $viewer);
+            }
+            if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+                $filenameRPK = $request->viewdocrpk;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->whereNotNull ($filenameRPK)
+                ->where($filenameRPK, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
+                ->pluck($filenameRPK)[0]; 
+                // dd($viewer);
+                return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/RPK" . "/" . $viewer);
+            }
+            if ($request->cabang == 'Jakarta'){
+                $filenameRPK = $request->viewdocrpk;
+                $kapal_id = $request->kapal_nama;
+                $result = $request->result;
+                $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->whereNotNull ($filenameRPK)
+                ->where($filenameRPK, 'Like', '%' . $result . '%')
+                ->where('nama_kapal', 'Like', '%' . $kapal_id . '%') 
+                ->pluck($filenameRPK)[0]; 
+                // dd($viewer);
+                return Storage::disk('s3')->response('jakarta/' . $year . "/". $month . "/RPK" . "/" . $viewer);
+            }
+        }
     }
 
     // RecordDocuments page

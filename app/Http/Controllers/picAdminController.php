@@ -371,7 +371,7 @@ class picAdminController extends Controller
         $datetime = date('Y-m-d');
         // dd($request);
         //check if cabang is banjarmasin
-        if ($request->cabang == 'Banjarmasin') {
+        if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati') {
             $filename = $request->viewdocrpk;
             $result = $request->result;
             $kapal_id = $request->kapal_nama;

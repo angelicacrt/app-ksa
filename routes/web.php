@@ -475,8 +475,8 @@ Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], f
 
 
         //view route for RPK and Funds page
-        // Route::post('/dana/view',[StaffLegalController::class, 'view']);
-        // Route::post('/rpk/view',[StaffLegalController::class, 'viewrpk']);
+        Route::post('/dana/view',[StaffLegalController::class, 'view']);
+        Route::post('/rpk/view',[StaffLegalController::class, 'viewrpk']);
         Route::post('/dashboard-staff-Real/view',[StaffLegalController::class, 'Dashboard_fund_Real_view']);
         Route::post('/dashboard-staff-Rpk/view',[StaffLegalController::class, 'Dashboard_staffrpk_view']);
 
