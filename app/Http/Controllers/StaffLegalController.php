@@ -535,7 +535,7 @@ class StaffLegalController extends Controller
                 $request->reason => $request->reasonbox ,
             ]);
         }
-        return redirect('/picadmin/dana');
+        return redirect()->back();
     }
     //approval for Fund request picAdmin page
     public function approve(Request $request){
@@ -626,7 +626,7 @@ class StaffLegalController extends Controller
                 ]);
             }
         }
-        return redirect('/picadmin/dana');
+        return redirect()->back();
     }
     //approval for RPK review picAdmin page
     public function approverpk(Request $request){
@@ -665,7 +665,7 @@ class StaffLegalController extends Controller
                 $request->reason => $request->reasonbox ,
             ]);
         }
-        return redirect('/picadmin/rpk');
+        return redirect()->back();
     }
     //reject for RPK review picAdmin page
     public function rejectrpk(Request $request){
@@ -689,7 +689,7 @@ class StaffLegalController extends Controller
             $request->reason => $request->reasonbox ,
         ]);
 
-        return redirect('/picadmin/rpk');
+        return redirect()->back();
     }
 
     // RecordDocuments page

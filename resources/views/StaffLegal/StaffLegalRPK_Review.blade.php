@@ -89,7 +89,7 @@
                   </thead>
                   
                   <tbody>
-                    @forelse($docrpk as $d )
+                    @foreach($docrpk as $d )
                     @for ( $r = 1 ; $r <= 10 ; $r++)
                     @php
                     $RPK = array('surat_barang', 'cargo_manifest',
@@ -112,25 +112,6 @@
                         </tr>
                     @else
                     <tr>
-                        @if ($d->$stats == "rejected")
-                            <td class="table-danger">{{ $d->created_at }}</td>
-                            <td class="table-danger"><strong>{{ $d->cabang }}</strong></td>
-                            <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
-                            <td class="table-danger" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
-                            <td class="table-danger" id="namafile">{{$names[$r-1]}}</td>   
-                            <td class="table-secondary" id="jenisfile"><strong>RPK</strong></td>    
-                            <td class="table-danger" id="status">{{$d->$stats}}</td>                                      
-                            <td class="table-danger" id="reason">{{$d->$reason}}</td>
-                        @elseif ($d->$stats == "approved")
-                            <td class="table-success">{{ $d->created_at }}</td>
-                            <td class="table-success"><strong>{{ $d->cabang }}</strong></td>
-                            <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
-                            <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
-                            <td class="table-success" id="namafile">{{$names[$r-1]}}</td>     
-                            <td class="table-secondary" id="jenisfile"><strong>RPK</strong></td>     
-                            <td class="table-success" id="status">{{$d->$stats}}</td>                                      
-                            <td class="table-success" id="reason">{{$d->$reason}}</td>
-                        @endif
                         @if ($d->$stats == "on review")
                         <td class="table-warning"><strong>{{ $d->created_at }}</strong></td>
                         <td class="table-warning"><strong>{{ $d->cabang }}</strong></td>
@@ -248,7 +229,7 @@
                             </div>
                         </td>
                         @else
-                            <td> </td>
+                        
                         @endif
                         </tr>
                         @endif
@@ -256,8 +237,7 @@
                             <tr>
                                 <td> </td>
                             </tr>
-                        @empty
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
               </div>

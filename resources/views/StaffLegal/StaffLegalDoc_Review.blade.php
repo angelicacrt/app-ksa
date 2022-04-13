@@ -233,10 +233,8 @@
                                 </div>
                             </td>
                         </tr>
-                          @else
-                          <tr>
-                            
-                          </tr>
+                        @else
+                          
                       @endif
                       @endfor
                         <tr>
@@ -393,9 +391,7 @@
                           </td>
                         </tr>
                         @else
-                          <tr>
-                            {{-- agar tidak keluar hasil kosong --}}
-                          </tr>
+                          
                         @endif
                         @endfor
                           <tr>
@@ -527,9 +523,7 @@
                             </td>
                         </tr>
                         @else
-                        <tr>
-                          {{-- agar tidak keluar hasil kosong --}}
-                        </tr>
+                        
                         @endif
                         @endfor
                           <tr>
@@ -696,9 +690,7 @@
                             </td>
                           </tr>
                         @else
-                        <tr>
-                          {{-- agar tidak keluar hasil kosong --}}
-                        </tr>
+                        
                         @endif
                         @endfor
                           <tr>
@@ -866,9 +858,7 @@
                                 </td>                                                                   
                             </tr>
                         @else
-                          <tr>
-                            {{-- agar tidak keluar hasil kosong --}}
-                          </tr>
+                          
                         @endif
                         @endfor
                           <tr>
