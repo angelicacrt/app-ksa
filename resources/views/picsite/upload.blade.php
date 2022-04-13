@@ -38,14 +38,14 @@
                             {{-- baca script di paling bawah --}}
                             <div class="col-md-6" style="margin-left: -1%">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">No.Permohonan</span>
-                                    <input class="form-control" required name="no_mohon" placeholder="No.Permohonan">
+                                    <span class="input-group-text">No.PR</span>
+                                    <input class="form-control" required name="no_PR" placeholder="No.PR">
                                 </div>
                             </div>
                             <div class="col-md-6" style="margin-left: -1%">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">No.PR</span>
-                                    <input class="form-control" required name="no_PR" placeholder="No.PR">
+                                    <span class="input-group-text">No.Permohonan</span>
+                                    <input class="form-control" required name="no_mohon" placeholder="No.Permohonan">
                                 </div>
                             </div>
                             <input type="hidden" name='type_upload' value="Fund_Req" />
