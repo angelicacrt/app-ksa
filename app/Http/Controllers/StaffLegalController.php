@@ -1378,6 +1378,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1427,6 +1428,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1476,6 +1478,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1525,6 +1528,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1574,6 +1578,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1623,6 +1628,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1672,6 +1678,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1721,6 +1728,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1770,6 +1778,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1819,6 +1828,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1868,6 +1878,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -1917,6 +1928,7 @@ class StaffLegalController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_PR' => $request->no_PR,
                             'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
@@ -1966,6 +1978,7 @@ class StaffLegalController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_PR' => $request->no_PR,
                             'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
@@ -2015,6 +2028,7 @@ class StaffLegalController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_PR' => $request->no_PR,
                             'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
@@ -2064,6 +2078,7 @@ class StaffLegalController extends Controller
                     else{
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
+                            'no_PR' => $request->no_PR,
                             'no_mohon' => $request->no_mohon,
                             'nama_kapal' => $mergenama_kapal,
                             'periode_awal' => $request->tgl_awal,
@@ -2113,6 +2128,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2162,6 +2178,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2211,6 +2228,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2260,6 +2278,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2307,6 +2326,7 @@ class StaffLegalController extends Controller
                 }else{
                 documentJakarta::create([
                     'upload_type' => 'Fund_Req',
+                    'no_PR' => $request->no_PR,
                     'no_mohon' => $request->no_mohon,
                     'nama_kapal' => $mergenama_kapal,
                     'periode_awal' => $request->tgl_awal,
@@ -2355,6 +2375,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2403,6 +2424,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2451,6 +2473,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2499,6 +2522,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2547,6 +2571,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2595,6 +2620,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2643,6 +2669,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2691,6 +2718,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2739,6 +2767,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2787,6 +2816,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2835,6 +2865,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2883,6 +2914,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2931,6 +2963,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -2979,6 +3012,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3027,6 +3061,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3075,6 +3110,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3123,6 +3159,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3171,6 +3208,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3219,6 +3257,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3267,6 +3306,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3315,6 +3355,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3363,6 +3404,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3411,6 +3453,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3459,6 +3502,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3509,6 +3553,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3557,6 +3602,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
@@ -3605,6 +3651,7 @@ class StaffLegalController extends Controller
                 else{
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR,
                         'no_mohon' => $request->no_mohon,
                         'nama_kapal' => $mergenama_kapal,
                         'periode_awal' => $request->tgl_awal,
