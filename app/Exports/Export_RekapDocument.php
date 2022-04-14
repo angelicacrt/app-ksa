@@ -35,10 +35,10 @@ class Export_RekapDocument implements FromView , ShouldAutoSize , WithEvents , W
     * @return \Illuminate\Support\Collection
     */
 
-    public function __construct($cabang_download)
+    public function __construct($cabang_download , $cabang_PR)
     {
         $this->cabang = $cabang_download;
-        $this->noPR = $cabang_download;
+        $this->noPR = $cabang_PR;
         $this->name = Auth::user()->name;
     }
 
@@ -58,66 +58,71 @@ class Export_RekapDocument implements FromView , ShouldAutoSize , WithEvents , W
         if ($this->cabang == 'Babelan') {
             return view('picadmin.export_rekap-doc', [
                 'document' => documents::where('upload_type','Fund_Req')
+                ->where('no_PR', $this->noPR)
                 ->whereYear('created_at', $year)
                 ->whereMonth('created_at' , date('m'))
                 ->latest()
                 ->get()->filter(function ($value) { return !empty($value); }),
 
-                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
             ]);
         }
         elseif ($this->cabang == 'Berau') {
             return view('picadmin.export_rekap-doc', [
                 'documentberau' => documentberau::where('upload_type','Fund_Req')
+                ->where('no_PR', $this->noPR)
                 ->whereYear('created_at', $year)
                 ->whereMonth('created_at' , date('m'))
                 ->latest()
                 ->get()->filter(function ($value) { return !empty($value); }) ,
 
-                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
             ]);
         }
         elseif ($this->cabang == 'Banjarmasin') {
             return view('picadmin.export_rekap-doc', [
                 'documentbanjarmasin' => documentbanjarmasin::where('upload_type','Fund_Req')
+                ->where('no_PR', $this->noPR)
                 ->whereYear('created_at', $year)
                 ->whereMonth('created_at' , date('m'))
                 ->latest()->get()->filter(function ($value) { return !empty($value); }) ,
 
-                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
             ]);
         }
         elseif ($this->cabang == 'Samarinda' or $this->cabang == 'Kendari' or $this->cabang == 'Morosi') {
             return view('picadmin.export_rekap-doc', [
                 'documentsamarinda' => documentsamarinda::where('upload_type','Fund_Req')
+                ->where('no_PR', $this->noPR)
                 ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))
                 ->latest()->get()->filter(function ($value) { return !empty($value); }),
 
-                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentjakarta' => documentjakarta::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
             ]);
         }
         elseif ($this->cabang == 'Jakarta') {
             return view('picadmin.export_rekap-doc', [
                 'documentjakarta' => documentjakarta::where('upload_type','Fund_Req')
+                ->where('no_PR', $this->noPR)
                 ->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))
                 ->latest()->get()->filter(function ($value) { return !empty($value); }),
 
-                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
-                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
-                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'document' => documents::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
+                'documentberau' => documentberau::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentbanjarmasin' => documentbanjarmasin::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }) ,
+                'documentsamarinda' => documentsamarinda::where('cabang',$this->cabang)->where('upload_type','Fund_Req')->where('no_PR', $this->noPR)->whereYear('created_at', $year)->whereMonth('created_at' , date('m'))->latest()->get()->filter(function ($value) { return !empty($value); }),
             ]);
         }
     }
@@ -127,7 +132,7 @@ class Export_RekapDocument implements FromView , ShouldAutoSize , WithEvents , W
     {
         return [
             AfterSheet::class => function (AfterSheet $event){
-                $event->sheet->getStyle('A1:K1')->applyFromArray([
+                $event->sheet->getStyle('A2:I2')->applyFromArray([
                     'font' => [
                         'bold' => true ,
                         // 'color' => ['argb' => 'ffffffff']
@@ -144,7 +149,6 @@ class Export_RekapDocument implements FromView , ShouldAutoSize , WithEvents , W
                 ]);
                 // Append row as very last
                 $event->sheet->appendRows(array(
-                    array(' '),
                     array(' '),
                     array(' '),
                     array('Prepared by:' , ' ' , ' ' , ' ' ,' ' ,'Checked by :'),

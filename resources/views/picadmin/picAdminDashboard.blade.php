@@ -92,7 +92,12 @@
                     @foreach ($errors->all() as $error)
                         <div class="alert error alert-danger" id="error">{{ $error }}
                             <strong> No data found</strong>
-                        </div>
+                        </
+                        <tr>
+                    <td>
+                        {{-- pisah beda nama kapal --}}
+                    </td>
+                </tr>div>
                     @endforeach
                 @endif
 
@@ -224,15 +229,17 @@
                                 </form>
                             </td>    
                         </tr>
-                        @else
+                    @else
                         <tr>
-                          {{-- agar tidak keluar hasil kosong --}}
+                            
                         </tr>
-                        @endif
+                    @endif
                     @endfor
-                        <tr>
-                            <td> </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            {{-- pisah beda nama kapal --}}
+                        </td>
+                    </tr>
                     @endforeach
 {{-- Berau----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                 @foreach($documentberau as $d )
@@ -305,7 +312,7 @@
                         <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
                         <td class="table-dark" id="jenisfile"><strong>DANA</strong></td>
                         <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>  
-                        <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
+                        <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}} By {{$d->approved_by}}</td>                                      
                         <td class="table-success" id="reason">{{$d->$reason}}</td>    
                         <td class="table-success">
                             <form method="post" action="/dashboard/dana/view" target="_blank">
@@ -347,11 +354,17 @@
                             </form>
                         </td>     
                     </tr>
+                @else
+                    <tr>
+                                
+                    </tr>
                 @endif
                 @endfor
-                    <tr>
-                        <td> </td>
-                    </tr>
+                <tr>
+                    <td>
+                        {{-- pisah beda nama kapal --}}
+                    </td>
+                </tr>
                 @endforeach
 {{-- Banjarmasin---------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
             @foreach($documentbanjarmasin as $b )
@@ -444,11 +457,17 @@
                             </form>
                         </td>        
                     </tr>
+                @else
+                    <tr>
+                        
+                    </tr>
                 @endif
                 @endfor
-                    <tr>
-                        <td> </td>
-                    </tr>
+                <tr>
+                    <td>
+                        {{-- pisah beda nama kapal --}}
+                    </td>
+                </tr>
                 @endforeach
 {{-- Samarinda------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}}
                 @foreach($documentsamarinda as $s )
@@ -549,12 +568,17 @@
                                 </form>
                             </td>                  
                         </tr>
+                        @else
+                            <tr>
+                                
+                            </tr>
                         @endif
                         @endfor
-                            <tr>
-                                <td> </td>
-                            </tr>
-                            
+                        <tr>
+                            <td>
+                                {{-- pisah beda nama kapal --}}
+                            </td>
+                        </tr>
                         @endforeach
 {{-- Jakarta------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --}}          
                         @foreach($documentjakarta as $jkt )
@@ -677,11 +701,17 @@
                                     </form>
                                 </td>                  
                             </tr>
+                        @else
+                            <tr>
+                                
+                            </tr>
                         @endif
                         @endfor
-                            <tr>
-                                <td> </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                {{-- pisah beda nama kapal --}}
+                            </td>
+                        </tr>
                         @endforeach
                   </tbody>
                 </table>

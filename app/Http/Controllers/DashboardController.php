@@ -740,11 +740,11 @@ class DashboardController extends Controller
             //search filter based on cabang on picadmin dashboard page
                 $searchresult = $request->search;
                 if ($searchresult == 'All') {
-                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
                     return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 }
                 elseif ($request->filled('search')) {
@@ -821,11 +821,11 @@ class DashboardController extends Controller
                     ->latest()->paginate(10)->withQueryString();
                     return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 }else{
-                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
                     return view('picadmin.picAdminDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 };
         }elseif(Auth::user()->hasRole('StaffLegal')){
@@ -906,11 +906,11 @@ class DashboardController extends Controller
             //Search bar --------------------------------------------------
                 $searchresult = $request->search;
                 if ($searchresult == 'All') {
-                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
                     return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 }elseif ($request->filled('search')) {
                     $document = DB::table('documents')->where('cabang', request('search'))->whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
@@ -986,11 +986,11 @@ class DashboardController extends Controller
                     ->latest()->paginate(10)->withQueryString();
                     return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 }else{
-                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
-                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->paginate(10)->withQueryString();
+                    $document = documents::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentberau = documentberau::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentbanjarmasin = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentsamarinda = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
+                    $documentjakarta = documentJakarta::whereDate('periode_akhir', '>=', $datetime)->where('upload_type','Fund_Req')->latest()->get();
                     return view('StaffLegal.StaffLegalDashboard', compact('searchresult','document', 'documentberau' , 'documentbanjarmasin' , 'documentsamarinda' , 'documentjakarta'));
                 };
         }elseif(Auth::user()->hasRole('AsuransiIncident')){

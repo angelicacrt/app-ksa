@@ -85,6 +85,7 @@
                   <thead class="thead-dark">
                       <tr>
                         <th>Time Uploaded</th>
+                        <th>No.PR</th>
                         <th>No.Permohonan</th>
                         <th>Cabang</th>
                         <th>Nama Kapal</th>
@@ -128,16 +129,17 @@
                       </tr>
                       @elseif ($doc->$stats == "on review")
                       <tr>
-                          <td class="table-info"><strong>{{ $doc->$time_upload }}</strong></td>
-                          <td class="table-info"><strong>{{ $doc->no_mohon }}</strong></td>
-                          <td class="table-info" id=""><strong>{{$doc->cabang}}</strong></td>                                        
-                          <td class="table-info" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
-                          <td class="table-info" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
-                          <td class="table-info" id="namafile">{{$names[$a-1]}}</td>  
+                          <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
+                          <td class="table-warning"><strong>{{ $doc->no_PR }}</strong></td>
+                          <td class="table-warning"><strong>{{ $doc->no_mohon }}</strong></td>
+                          <td class="table-warning" id=""><strong>{{$doc->cabang}}</strong></td>                                        
+                          <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
+                          <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
+                          <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
                           <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
                           <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
-                          <td class="table-info" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                          <td class="table-info" id="reason">{{$doc ->$reason}}</td>
+                          <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
+                          <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
                           <td scope="col">
                             <div class="form-row">
                             {{-- Approve Button --}}
@@ -167,7 +169,6 @@
                                 </form>  
                               </div>
                             </div>
-
                           <!-- Modal Approve -->
                               <div class="modal fade" id="ApproveTitle-{{$reason}}" tabindex="-1" role="dialog" aria-labelledby="ApproveTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -233,22 +234,19 @@
                                 </div>
                             </td>
                         </tr>
-                          @else
-                          <tr>
-                            
-                          </tr>
+                      @else
+                        <tr>
+                          {{-- pisah beda nama kapal --}}
+                        </tr>
                       @endif
                       @endfor
-                        <tr>
-                          <td>
-                              {{-- pisah beda nama kapal --}}
-                          </td>
-                        </tr>
                       @empty
-                        <tr>
-                            
-                        </tr>
                       @endforelse
+                      <tr>
+                        <td>
+                            
+                        </td>
+                      </tr>
 {{-- Berau------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                     @forelse($documentberau as $d )
                        @for ( $a = 1 ; $a <= 34 ; $a++)
@@ -288,6 +286,7 @@
                         @elseif ($d->$stats == "on review")
                         <tr>
                             <td class="table-warning"><strong>{{$d->$time_upload }}</strong></td>
+                            <td class="table-warning"><strong>{{$d->no_PR }}</strong></td>
                             <td class="table-warning"><strong>{{$d->no_mohon }}</strong></td>
                             <td class="table-warning"><strong>{{$d->cabang }}</strong></td>
                             <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
@@ -393,19 +392,18 @@
                           </td>
                         </tr>
                         @else
-                          <tr>
-                            {{-- agar tidak keluar hasil kosong --}}
-                          </tr>
+                        <tr>
+                              
+                        </tr>
                         @endif
                         @endfor
-                          <tr>
-                            <td>
-                                {{-- pisah beda nama kapal --}}
-                            </td>
-                          </tr>
                         @empty
-                      
                         @endforelse
+                        <tr>
+                          <td>
+                              
+                          </td>
+                        </tr>
 {{-- Banjarmasin------------------------------------------------------------------------------------------------------------------------------------------------------ --}}
                     @forelse($documentbanjarmasin as $b )
                        @for ( $a = 1 ; $a <= 39 ; $a++)
@@ -448,6 +446,7 @@
                         @elseif ($b->$stats == "on review")
                         <tr>
                             <td class="table-warning"><strong>{{ $b->$time_upload }}</strong></td>
+                            <td class="table-warning"><strong>{{ $b->no_PR }}</strong></td>
                             <td class="table-warning"><strong>{{ $b->no_mohon }}</strong></td>
                             <td class="table-warning"><strong>{{ $b->cabang }}</strong></td>
                             <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
@@ -526,20 +525,20 @@
                               </div>
                             </td>
                         </tr>
+                        <tr>
+                          <td>
+                              {{-- pisah beda nama kapal --}}
+                          </td>
+                        </tr>
                         @else
                         <tr>
                           {{-- agar tidak keluar hasil kosong --}}
                         </tr>
                         @endif
                         @endfor
-                          <tr>
-                            <td>
-                                {{-- pisah beda nama kapal --}}
-                            </td>
-                          </tr>
                         @empty
-                          
-                    @endforelse
+                        
+                        @endforelse
 {{-- Samarinda-------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                       @forelse($documentsamarinda as $s )
                       @for ( $a = 1 ; $a <= 48 ; $a++)
@@ -589,6 +588,7 @@
                         @elseif ($s->$stats == "on review")
                         <tr>
                           <td class="table-warning"><strong>{{ $s->$time_upload }}</strong></td>
+                          <td class="table-warning"><strong>{{ $s->no_PR }}</strong></td>
                           <td class="table-warning"><strong>{{ $s->no_mohon }}</strong></td>
                           <td class="table-warning"><strong>{{ $s->cabang }}</strong></td>
                           <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
@@ -701,14 +701,14 @@
                         </tr>
                         @endif
                         @endfor
-                          <tr>
-                            <td>
-                                {{-- pisah beda nama kapal --}}
-                            </td>
-                          </tr>
                         @empty
-                          
-                      @endforelse
+                        
+                        @endforelse
+                        <tr>
+                          <td>
+                              {{-- pisah beda nama kapal --}}
+                          </td>
+                        </tr>
 {{-- Jakarta---------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                         @forelse($documentjakarta as $jkt )
                         @for ( $a = 1 ; $a <= 47 ; $a++)
@@ -758,6 +758,7 @@
                             <tr>
                                 {{-- hasil on review --}}
                                 <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
+                                <td class="table-warning"><strong>{{ $jkt->no_PR }}</strong></td>
                                 <td class="table-warning"><strong>{{ $jkt->no_mohon }}</strong></td>
                                 <td class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
                                 <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
@@ -767,7 +768,7 @@
                                 <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>     
                                 <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
                                 <td class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
-                                <td class="table-light">
+                                <td>
                                   <div class="form-row">
                                     {{-- approve button --}}
                                       <div class="col-md-auto">
@@ -811,8 +812,8 @@
                                             <form method="POST" action="/picadmin/dana/approvedana">
                                               @csrf
                                               <div class="modal-body">
-                                                <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
-                                                <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
+                                                <input type="hidden" name ='cabang' value={{$jkt->cabang}}>
+                                                <input type="hidden" name ='kapal_nama' value={{$jkt->nama_kapal}}>
                                                 <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                                 <input type="hidden" name='result' value={{$jkt->$scan}} />
                                                 <input type="hidden" name = 'tipefile' value='DANA'>
@@ -871,14 +872,14 @@
                           </tr>
                         @endif
                         @endfor
-                          <tr>
-                            <td>
-                                {{-- pisah beda nama kapal --}}
-                            </td>
-                          </tr>
                         @empty
-                            
+                        
                         @endforelse
+                        <tr>
+                          <td>
+                              {{-- pisah beda nama kapal --}}
+                          </td>
+                        </tr>
                   </tbody>
                 </table>
               </div>

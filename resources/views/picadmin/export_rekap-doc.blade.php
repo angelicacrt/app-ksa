@@ -1,10 +1,23 @@
-<table class="table">
-    <thead>
-        <th scope="col" style="text-align: center">No.PR</th>
-    </thead>
-</table>
 <table>
     <thead>
+        <tr>
+                <th scope="col" style="text-align: center">No.PR : </th>
+            @foreach($document as $doc )
+                <th scope="col" style="text-align: center">{{$doc->no_PR}}</th>
+            @endforeach
+            @foreach($documentberau as $d )
+                <th scope="col" style="text-align: center">{{$d->no_PR}}</th>
+            @endforeach
+            @foreach($documentbanjarmasin as $b )
+                <th scope="col" style="text-align: center">{{$b->no_PR}}</th>
+            @endforeach
+            @foreach($documentsamarinda as $s )
+                <th scope="col" style="text-align: center">{{$s->no_PR}}</th>
+            @endforeach
+            @foreach($documentjakarta as $jkt )
+                <th scope="col" style="text-align: center">{{$jkt->no_PR}}</th>
+            @endforeach
+        </tr>
         <tr>
             <th scope="col" style="text-align: center">Time Uploaded</th>
             <th scope="col" style="text-align: center">No.Permohonan</th>

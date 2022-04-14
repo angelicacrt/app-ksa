@@ -67,11 +67,11 @@ class picAdminController extends Controller
         //pakai umn agar munculkan data dari pembuatan sampai bulan akhir periode
         $searchresult = $request->search;
         if ($searchresult == 'All') {
-            $document = DB::table('documents')->where('upload_type','Fund_Req')->latest()->get();
-            $documentberau = DB::table('beraudb')->where('upload_type','Fund_Req')->latest()->get();
-            $documentbanjarmasin = DB::table('banjarmasindb')->where('upload_type','Fund_Req')->latest()->get();
-            $documentsamarinda = DB::table('samarindadb')->where('upload_type','Fund_Req')->latest()->get();
-            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get();
+            $document = DB::table('documents')->where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentberau = DB::table('beraudb')->where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentbanjarmasin = DB::table('banjarmasindb')->where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentsamarinda = DB::table('samarindadb')->where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' ,'documentjakarta' , 'searchresult'));
         }
         elseif ($request->filled('search')) {
@@ -141,11 +141,11 @@ class picAdminController extends Controller
             ->latest()->paginate(10)->withQueryString();
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult'));
         }else{
-            $document = documents::where('upload_type','Fund_Req')->latest()->get();
-            $documentberau = documentberau::where('upload_type','Fund_Req')->latest()->get();
-            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->latest()->get();
-            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->latest()->get();
-            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get();
+            $document = documents::where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentberau = documentberau::where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentbanjarmasin = documentbanjarmasin::where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentsamarinda = documentsamarinda::where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
+            $documentjakarta = documentJakarta::where('upload_type','Fund_Req')->latest()->get()->filter(function ($value) { return !empty($value); });
             
             return view('picadmin.picAdminDoc' , compact('document', 'documentberau' , 'documentbanjarmasin', 'documentsamarinda' , 'documentjakarta' , 'searchresult')); 
         }
@@ -207,7 +207,7 @@ class picAdminController extends Controller
                 $request->reason => $request->reasonbox ,
             ]);
         }
-        if ($request->cabang == 'Berau'){
+        elseif ($request->cabang == 'Berau'){
             //  dd($request);
             $filename = $request->viewdoc;
             $result = $request->result;
@@ -223,7 +223,7 @@ class picAdminController extends Controller
                 $request->reason => $request->reasonbox ,
             ]);
         }
-        if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+        elseif ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
             //  dd($request);
             $filename = $request->viewdoc;
             $result = $request->result;
@@ -239,7 +239,7 @@ class picAdminController extends Controller
                 $request->reason => $request->reasonbox ,
             ]);
         }
-        if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+        elseif ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
             // dd($request);
             $filename = $request->viewdoc;
             $result = $request->result;
@@ -255,13 +255,13 @@ class picAdminController extends Controller
                 $request->reason => $request->reasonbox ,
             ]);
         }
-        if ($request->cabang == 'Jakarta'){
+        elseif ($request->cabang == 'Jakarta'){
             //  dd($request);
             $filename = $request->viewdoc;
             $result = $request->result;
             $kapal_id = $request->kapal_nama;
 
-            documentJakarta::where($filename, 'Like', '%' . $result . '%')
+            $test = documentJakarta::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -270,6 +270,7 @@ class picAdminController extends Controller
                 $request->status => 'rejected',
                 $request->reason => $request->reasonbox ,
             ]);
+            // dd($test);
         }
         return redirect('/picadmin/dana');
     }
@@ -314,7 +315,7 @@ class picAdminController extends Controller
                     $request->reason => $request->reasonbox ,
                 ]);
             }
-            if ($request->cabang == 'Berau'){
+            elseif ($request->cabang == 'Berau'){
                 $filename = $request->viewdoc;
                 $result = $request->result;
                 $kapal_id = $request->kapal_nama;
@@ -329,7 +330,7 @@ class picAdminController extends Controller
                     $request->reason => $request->reasonbox ,
                 ]);
             }
-            if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+            elseif ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
                 $filename = $request->viewdoc;
                 $result = $request->result;
                 $kapal_id = $request->kapal_nama;
@@ -346,21 +347,22 @@ class picAdminController extends Controller
                     $request->reason => $request->reasonbox ,
                 ]);
             }
-            if ($request->cabang == 'Jakarta'){
+            elseif ($request->cabang == 'Jakarta'){
                 $filename = $request->viewdoc;
                 $result = $request->result;
                 $kapal_id = $request->kapal_nama;
 
-                documentJakarta::where($filename, 'Like', '%' . $result . '%')
+                $test = documentJakarta::where($filename, 'Like', '%' . $result . '%')
+                ->where('upload_type','Fund_Req')
                 ->where('cabang', $request->cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
-                ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
                     'approved_by' => Auth::user()->name,
                     $request->reason => $request->reasonbox ,
                 ]);
+                // dd($test);
             }
         }
         return redirect('/picadmin/dana');
@@ -1172,7 +1174,8 @@ class picAdminController extends Controller
         $date = Carbon::now();
         $monthName = $date->format('F');
         $cabang_download = $request->select_download;
-        // dd($cabang_download);
-        return Excel::download(new Export_RekapDocument($cabang_download), 'Rekapitulasi-Document ' . $cabang_download . '-' . $monthName . '.xlsx');
+        $cabang_PR = $request->select_noPR;
+        // dd($cabang_PR);
+        return Excel::download(new Export_RekapDocument($cabang_download , $cabang_PR), 'Rekapitulasi-Document-' . $cabang_download . '-' . $monthName . '.xlsx');
     }
 }
