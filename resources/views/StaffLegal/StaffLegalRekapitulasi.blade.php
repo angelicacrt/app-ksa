@@ -68,33 +68,6 @@
                         </div>
                     @else
                     <br>
-                    <form method="POST" action="/picadmin/exportExcel" target="_blank">
-                        @csrf
-                        <select name="select_noPR" id="select_download2" required class="form-select">
-                            <option selected disabled hidden='true' value="">Pilih No.PR</option>
-                            @if($searchresult == 'Babelan')
-                                @foreach($document as $doc )
-                                    <option value="{{$doc->no_PR}}">{{$doc->no_PR}}</option>
-                                @endforeach
-                            @elseif($searchresult == 'Berau')
-                                @foreach($documentberau as $d )
-                                    <option value="{{$d->no_PR}}">{{$d->no_PR}}</option>
-                                @endforeach
-                            @elseif($searchresult == 'Banjarmasin')
-                                @foreach($documentbanjarmasin as $b )
-                                    <option value="{{$b->no_PR}}">{{$b->no_PR}}</option>
-                                @endforeach
-                            @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
-                                @foreach($documentsamarinda as $s )
-                                    <option value="{{$s->no_PR}}">{{$s->no_PR}}</option>
-                                @endforeach
-                            @elseif($searchresult == 'Jakarta')
-                                @foreach($documentjakarta as $jkt )
-                                    <option value="{{$jkt->no_PR}}">{{$jkt->no_PR}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <br>
                         <div class="col">
                             <div class="text-md-right">
                                 <button class="btn btn-outline-success" id="top" data-toggle="modal" data-target="#Download">Download</button>
@@ -113,7 +86,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="form-group">
+                                    <form method="POST" action="/picadmin/exportExcel" target="_blank">
+                                        @csrf
+                                        <div class="form-group">
                                             <select name="select_download" id="select_download" required class="form-select">
                                                 <option selected disabled hidden='true' value="">Pilih Cabang</option>
                                                 <option value="All">Semua Cabang</option>
@@ -126,6 +101,31 @@
                                                 <option value="Morosi">Morosi</option>
                                             </select>
                                             <br>
+                                                <select name="select_noPR" id="select_download2" required class="form-select">
+                                                    <option selected disabled hidden='true' value="">Pilih No.PR</option>
+                                                    @if($searchresult == 'Babelan')
+                                                        @foreach($document as $doc )
+                                                            <option value="{{$doc->no_PR}}">{{$doc->no_PR}}</option>
+                                                        @endforeach
+                                                    @elseif($searchresult == 'Berau')
+                                                        @foreach($documentberau as $d )
+                                                            <option value="{{$d->no_PR}}">{{$d->no_PR}}</option>
+                                                        @endforeach
+                                                    @elseif($searchresult == 'Banjarmasin')
+                                                        @foreach($documentbanjarmasin as $b )
+                                                            <option value="{{$b->no_PR}}">{{$b->no_PR}}</option>
+                                                        @endforeach
+                                                    @elseif($searchresult == 'Samarinda' or $searchresult == 'Kendari' or $searchresult == 'Morosi')
+                                                        @foreach($documentsamarinda as $s )
+                                                            <option value="{{$s->no_PR}}">{{$s->no_PR}}</option>
+                                                        @endforeach
+                                                    @elseif($searchresult == 'Jakarta')
+                                                        @foreach($documentjakarta as $jkt )
+                                                            <option value="{{$jkt->no_PR}}">{{$jkt->no_PR}}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <br>
                                             <label for="downloadExcel">Download As Excel :</label>
                                             <button  name='downloadExcel' id="downloadExcel" class="btn btn-outline-dark">Download Excel</button>
                                         </form>
@@ -139,6 +139,7 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col" style="text-align: center">Time Uploaded</th>
+                                <th scope="col" style="text-align: center">No.PR</th>
                                 <th scope="col" style="text-align: center">No.Permohonan</th>
                                 <th scope="col" style="text-align: center">Cabang</th>
                                 <th scope="col" style="text-align: center">Nama Kapal</th>
@@ -181,8 +182,8 @@
                         @elseif($doc->$stats == 'approved')
                             <tr>
                                 <td style="text-align: center" class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
-                                <td style="text-align: center" class="table-success"><strong>{{ $doc->no_mohon }}</strong></td>
                                 <td style="text-align: center" class="table-success"><strong>{{ $doc->no_PR }}</strong></td>
+                                <td style="text-align: center" class="table-success"><strong>{{ $doc->no_mohon }}</strong></td>
                                 <td style="text-align: center" class="table-success"><strong>{{ $doc->cabang }}</strong></td>
                                 <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                 <td style="text-align: center" class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
@@ -233,8 +234,8 @@
                         @elseif($d->$stats == 'approved')
                             <tr>
                                 <td style="text-align: center" class="table-success"><strong>{{ $d->$time_upload }}</strong></td>
-                                <td style="text-align: center" class="table-success"><strong>{{ $d->no_mohon }}</strong></td>
                                 <td style="text-align: center" class="table-success"><strong>{{ $d->no_PR }}</strong></td>
+                                <td style="text-align: center" class="table-success"><strong>{{ $d->no_mohon }}</strong></td>
                                 <td style="text-align: center" class="table-success"><strong>{{ $d->cabang }}</strong></td>
                                 <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                 <td style="text-align: center" class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
@@ -291,8 +292,8 @@
                             @elseif($b->$stats == 'approved')
                                 <tr>
                                     <td style="text-align: center" class="table-success"><strong>{{ $b->$time_upload }}</strong></td>
-                                    <td style="text-align: center" class="table-success"><strong>{{ $b->no_mohon }}</strong></td>
                                     <td style="text-align: center" class="table-success"><strong>{{ $b->no_PR }}</strong></td>
+                                    <td style="text-align: center" class="table-success"><strong>{{ $b->no_mohon }}</strong></td>
                                     <td style="text-align: center" class="table-success"><strong>{{ $b->cabang }}</strong></td>
                                     <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td style="text-align: center" class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
@@ -357,8 +358,8 @@
                                 @elseif($s->$stats == 'approved')
                                     <tr>
                                         <td style="text-align: center" class="table-success"><strong>{{ $s->$time_upload }}</strong></td>
-                                        <td style="text-align: center" class="table-success"><strong>{{ $s->no_mohon }}</strong></td>
                                         <td style="text-align: center" class="table-success"><strong>{{ $s->no_PR }}</strong></td>
+                                        <td style="text-align: center" class="table-success"><strong>{{ $s->no_mohon }}</strong></td>
                                         <td style="text-align: center" class="table-success"><strong>{{ $s->cabang }}</strong></td>
                                         <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                         <td style="text-align: center" class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
@@ -421,8 +422,8 @@
                                     @elseif($jkt->$stats == 'approved')
                                         <tr>
                                             <td style="text-align: center" class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                            <td style="text-align: center" class="table-success"><strong>{{ $jkt->no_mohon }}</strong></td>
                                             <td style="text-align: center" class="table-success"><strong>{{ $jkt->no_PR }}</strong></td>
+                                            <td style="text-align: center" class="table-success"><strong>{{ $jkt->no_mohon }}</strong></td>
                                             <td style="text-align: center" class="table-success"><strong>{{ $jkt->cabang }}</strong></td>
                                             <td style="text-align: center" class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                             <td style="text-align: center" class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   

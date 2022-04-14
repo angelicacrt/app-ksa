@@ -1122,7 +1122,7 @@ class StaffLegalController extends Controller
             }
     }
 
-    // Rekapitulasi document page
+    // Rekapitulasi document page && untuk exportnya di PIC Admin controller
     public function Rekap_staff_page(Request $request){
         $year = date('Y');
         $searchresult = $request->search;
@@ -1241,21 +1241,6 @@ class StaffLegalController extends Controller
         }    
         
         return view('StaffLegal.StaffLegalRekapitulasi', compact('searchresult','document','documentberau','documentbanjarmasin','documentsamarinda','documentjakarta'));
-    }
-
-    private $excel;
-    public function __construct(Excel $excel){
-        $this->excel = $excel;
-    }
-
-    //export Rekap Excel page
-    public function exportEXCEL(Request $request) {
-        $searchresult = $request->search;
-        $date = Carbon::now();
-        $monthName = $date->format('F');
-        $cabang_download = $request->select_download;
-        // dd($cabang_download);
-        return Excel::download(new Export_RekapDocument($cabang_download), 'Rekapitulasi-Document ' . $cabang_download . '-' . $monthName . '.xlsx');
     }
 
     // upload RPK file
