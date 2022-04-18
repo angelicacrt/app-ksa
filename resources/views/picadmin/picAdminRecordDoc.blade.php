@@ -689,7 +689,7 @@
                             @elseif($jkt->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                    <td class="table-success"><strong>{{ $jkt->$cabang}}</strong></td>
+                                    <td class="table-success"><strong>{{ $jkt->cabang}}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -715,7 +715,7 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $jkt->$time_upload }}</strong></td>
-                                    <td class="table-danger"><strong>{{ $jkt->$cabang}}</strong></td>
+                                    <td class="table-danger"><strong>{{ $jkt->cabang}}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   

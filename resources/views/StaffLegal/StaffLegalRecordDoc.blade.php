@@ -85,6 +85,7 @@
                     <thead class="thead-dark" >
                         <tr>
                             <th class="table-info">Time Uploaded</th>
+                            <th class="table-info">Cabang</th>
                             <th class="table-info">Nama Kapal</th>
                             <th class="table-info">Periode (Y-M-D)</th>
                             <th class="table-info">Nama File</th>
@@ -128,6 +129,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $doc->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -153,6 +155,7 @@
                             @elseif($doc->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $doc->$time_upload }}</strong></td>
+                                    <td class="table-success"><strong>{{ $doc->cabang }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>    
@@ -178,6 +181,7 @@
                                 @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $doc->$time_upload }}</strong></td>
+                                    <td class="table-danger"><strong>{{ $doc->cabang }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$doc->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>     
@@ -255,6 +259,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $d->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $d->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -280,6 +285,7 @@
                             @elseif($d->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $d->$time_upload }}</strong></td>
+                                    <td class="table-success"><strong>{{ $d->cabang }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -305,6 +311,7 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $d->$time_upload }}</strong></td>
+                                    <td class="table-danger"><strong>{{ $d->cabang }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>
@@ -383,6 +390,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $b->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $b->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -408,6 +416,7 @@
                             @elseif($b->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $b->$time_upload }}</strong></td>
+                                    <td class="table-success"><strong>{{ $b->cabang }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td> 
@@ -433,6 +442,7 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $b->$time_upload }}</strong></td>
+                                    <td class="table-danger"><strong>{{ $b->cabang }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
@@ -519,6 +529,7 @@
                                 <tr>
                                     {{-- hasil on review --}}
                                     <td class="table-warning"><strong>{{ $s->$time_upload }}</strong></td>
+                                    <td class="table-warning"><strong>{{ $s->cabang }}</strong></td>
                                     <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -544,6 +555,7 @@
                             @elseif($s->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $s->$time_upload }}</strong></td>
+                                    <td class="table-success"><strong>{{ $s->cabang }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -569,6 +581,7 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $s->$time_upload }}</strong></td>
+                                    <td class="table-danger"><strong>{{ $s->cabang }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
@@ -650,6 +663,7 @@
                                 @elseif ($jkt->$stats == 'on review')
                                     <tr>
                                         <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
+                                        <td class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
                                         <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                         <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                         <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
@@ -675,6 +689,7 @@
                             @elseif($jkt->$stats == 'approved')
                                 <tr>
                                     <td class="table-success"><strong>{{ $jkt->$time_upload }}</strong></td>
+                                    <td class="table-success"><strong>{{ $jkt->cabang }}</strong></td>
                                     <td class="table-success" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-success" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-success" id="namafile">{{$names[$a-1]}}</td>     
@@ -700,6 +715,7 @@
                             @else
                                 <tr>
                                     <td class="table-danger"><strong>{{ $jkt->$time_upload }}</strong></td>
+                                    <td class="table-danger"><strong>{{ $jkt->cabang }}</strong></td>
                                     <td class="table-danger" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
                                     <td class="table-danger" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
                                     <td class="table-danger" id="namafile">{{$names[$a-1]}}</td>   
