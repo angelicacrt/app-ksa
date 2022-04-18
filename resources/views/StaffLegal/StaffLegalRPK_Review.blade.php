@@ -157,6 +157,7 @@
                                             <input type="hidden" name='created_at_Year' value={{ Carbon\Carbon::parse($d->created_at)->format('Y') }} />
                                             <input type="hidden" name='created_at_month' value={{ Carbon\Carbon::parse($d->created_at)->format('m') }} />
                                             <input type="hidden" name ='tipefile' value='RPK'>
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />
@@ -180,6 +181,7 @@
                                         <form method="POST" action="/Staff_Legal/rpk/update-status">
                                             @csrf
                                             <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name='result' value={{$d->$scan}} />
                                             <input type="hidden" name='status' value={{$stats}}>
                                             <input type="hidden" name='reason' value={{$reason}}>
@@ -210,6 +212,7 @@
                                         <form method="POST" action="/Staff_Legal/rpk/rejectrpk">
                                             @csrf
                                             <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name='result' value={{$d->$scan}} />
                                             <input type="hidden" name='status' value={{$stats}}>
                                             <input type="hidden" name='reason' value={{$reason}}>

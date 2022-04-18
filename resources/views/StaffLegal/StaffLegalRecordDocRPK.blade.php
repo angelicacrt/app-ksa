@@ -87,16 +87,16 @@
                   <tbody>
 {{-- RPK----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
                     @forelse($docrpk as $d )
-                    @for ( $r = 1 ; $r <= 7 ; $r++)
+                    @for ( $r = 1 ; $r <= 10 ; $r++)
                     @php
                     $RPK = array('surat_barang', 'cargo_manifest',
                                 'voyage','bill_lading',
                                 'gerak_kapal','docking',
-                                'surat_kapal');
+                                'surat_kapal' , 'RPK' , 'Penambahan_pelabuhan_singgah' , 'Penambahan_urgensi_muatan');
                     $names = array('Surat Keterangan Asal Barang', 'Cargo Manifest',
                                     'Voyage Report/ Term Sheet','Bill of Lading',
                                     'Ijin Olah Gerak Kapal','Docking',
-                                    'Surat Keterangan Persiapan Kapal');
+                                    'Surat Keterangan Persiapan Kapal' , 'RPK' , 'Penambahan pelabuhan singgah' , 'Penambahan urgensi muatan');
                     $time_upload ="time_upload".$r;
                     $stats ="status".$r;
                     $reason = "reason".$r;
@@ -124,6 +124,7 @@
                                     <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                     <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                     <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                    <input type="hidden" name = 'identity' value={{$d->id}}>
                                     <input type="hidden" name = 'tipefile' value='RPK'>
                                     <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                     <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
@@ -146,6 +147,7 @@
                                 <form method="post" action="/picadmin/RecordDocuments/RPK/view" target="_blank">
                                     @csrf
                                     <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                    <input type="hidden" name = 'identity' value={{$d->id}}>
                                     <input type="hidden" name = 'tipefile' value='RPK'>
                                     <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                     <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />

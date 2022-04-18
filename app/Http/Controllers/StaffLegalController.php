@@ -158,6 +158,7 @@ class StaffLegalController extends Controller
                 $viewer = documents::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -170,6 +171,7 @@ class StaffLegalController extends Controller
                 $viewer = documentberau::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -183,6 +185,7 @@ class StaffLegalController extends Controller
                 ->where('upload_type','Fund_Real')
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -196,6 +199,7 @@ class StaffLegalController extends Controller
                 ->where('upload_type','Fund_Real')
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -208,6 +212,7 @@ class StaffLegalController extends Controller
                 $viewer = documentJakarta::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -258,6 +263,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -271,6 +277,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -284,6 +291,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -297,6 +305,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -310,6 +319,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -462,6 +472,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
 
             documents::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -478,6 +489,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
 
             documentberau::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -494,6 +506,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
 
             documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -510,6 +523,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
 
             documentsamarinda::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -526,6 +540,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
 
             documentJakarta::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -549,6 +564,7 @@ class StaffLegalController extends Controller
             $cabang = $request->cabang;
             
             documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->whereNotNull($filename)
             ->where('upload_type','Fund_Req')
@@ -568,6 +584,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 
                 documents::where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->whereNotNull($filename)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -583,6 +600,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 
                 documentberau::where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
                 ->where('upload_type','Fund_Req')
@@ -599,6 +617,7 @@ class StaffLegalController extends Controller
                 $cabang = $request->cabang;
 
                 documentsamarinda::where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('cabang', $cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
@@ -615,6 +634,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
 
                 documentJakarta::where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('cabang', $request->cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
@@ -639,6 +659,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
 
             documentrpk::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -656,6 +677,7 @@ class StaffLegalController extends Controller
             $kapal_id = $request->kapal_nama;
             
             documentrpk::where($filename, 'Like', '%' . $result . '%')
+            ->where('id', $request->identity)
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
@@ -680,6 +702,7 @@ class StaffLegalController extends Controller
         $kapal_id = $request->kapal_nama;
 
         documentrpk::where($filename, 'Like', '%' . $result . '%')
+        ->where('id', $request->identity)
         ->where('cabang', $request->cabang)
         ->whereNotNull($filename)
         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -705,6 +728,7 @@ class StaffLegalController extends Controller
                 $result = $request->result;
                 $viewer = documents::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -717,6 +741,7 @@ class StaffLegalController extends Controller
                 $result = $request->result;
                 $viewer = documentberau::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -730,6 +755,7 @@ class StaffLegalController extends Controller
                 $viewer = documentbanjarmasin::whereNotNull ($filename)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -743,6 +769,7 @@ class StaffLegalController extends Controller
                 $viewer = documentsamarinda::whereNotNull ($filename)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -755,6 +782,7 @@ class StaffLegalController extends Controller
                 $result = $request->result;
                 $viewer = documentJakarta::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -776,6 +804,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -788,6 +817,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -800,6 +830,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -812,6 +843,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -824,6 +856,7 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
+                ->where('id', $request->identity)
                 ->whereNotNull ($filenameRPK)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%') 
@@ -992,6 +1025,7 @@ class StaffLegalController extends Controller
                     ->whereNotNull ($filename)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -1005,6 +1039,7 @@ class StaffLegalController extends Controller
                     ->whereNotNull ($filename)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -1019,6 +1054,7 @@ class StaffLegalController extends Controller
                     ->where('upload_type','Fund_Req')
                     ->where('cabang' , $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -1033,6 +1069,7 @@ class StaffLegalController extends Controller
                     ->where('upload_type','Fund_Req')
                     ->where('cabang' , $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -1046,6 +1083,7 @@ class StaffLegalController extends Controller
                     ->whereNotNull ($filename)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -1059,6 +1097,7 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
+                    ->where('id', $request->identity)
                     ->whereNotNull ($filenameRPK)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -1072,6 +1111,7 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
+                    ->where('id', $request->identity)
                     ->whereNotNull ($filenameRPK)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -1085,6 +1125,7 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
+                    ->where('id', $request->identity)
                     ->whereNotNull ($filenameRPK)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -1098,6 +1139,7 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
+                    ->where('id', $request->identity)
                     ->whereNotNull ($filenameRPK)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -1111,6 +1153,7 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
+                    ->where('id', $request->identity)
                     ->whereNotNull ($filenameRPK)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')

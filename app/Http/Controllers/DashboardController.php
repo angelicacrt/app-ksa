@@ -842,6 +842,7 @@ class DashboardController extends Controller
                     ->whereNotNull ($filename)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -855,6 +856,7 @@ class DashboardController extends Controller
                     ->whereNotNull ($filename)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -869,6 +871,7 @@ class DashboardController extends Controller
                     ->where('upload_type','Fund_Req')
                     ->where('cabang', $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -883,6 +886,7 @@ class DashboardController extends Controller
                     ->where('upload_type','Fund_Req')
                     ->where('cabang', $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
@@ -896,6 +900,7 @@ class DashboardController extends Controller
                     ->whereNotNull ($filename)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
+                    ->where('id', $request->identity)
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->pluck($filename)[0];
                     // dd($viewer);
