@@ -227,7 +227,7 @@ class StaffLegalController extends Controller
         $searchresult = $request->search;
 
         if ($searchresult == 'All') {
-            $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
+            $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
             return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
         }elseif ($request->filled('search')) {
             $docrpk = DB::table('rpkdocuments')->where('cabang', $request->search)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
@@ -251,7 +251,7 @@ class StaffLegalController extends Controller
             return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
         }else{
             //get DocRPK Data as long as the periode_akhir(column database)
-            $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
+            $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
             return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
         }
     }
@@ -263,8 +263,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereDate('periode_akhir', '>=', $datetime)
@@ -277,8 +278,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereDate('periode_akhir', '>=', $datetime)
@@ -291,8 +293,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereDate('periode_akhir', '>=', $datetime)
@@ -305,8 +308,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereDate('periode_akhir', '>=', $datetime)
@@ -319,8 +323,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereDate('periode_akhir', '>=', $datetime)
@@ -804,8 +809,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0];
@@ -817,8 +823,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0]; 
@@ -830,8 +837,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0]; 
@@ -843,8 +851,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0]; 
@@ -856,8 +865,9 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                ->where('id', $request->identity)
+                
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%') 
                 ->pluck($filenameRPK)[0]; 
@@ -1097,8 +1107,9 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
-                    ->where('id', $request->identity)
+                    
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1111,8 +1122,9 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
-                    ->where('id', $request->identity)
+                    
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1125,8 +1137,9 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
-                    ->where('id', $request->identity)
+                    
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1139,8 +1152,9 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
-                    ->where('id', $request->identity)
+                    
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1153,8 +1167,9 @@ class StaffLegalController extends Controller
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
-                    ->where('id', $request->identity)
+                    
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)

@@ -199,6 +199,7 @@ class picAdminController extends Controller
 
             documents::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
+            ->where('id', $request->identity)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
             ->where('upload_type','Fund_Req')
@@ -215,6 +216,7 @@ class picAdminController extends Controller
 
             documentberau::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
+            ->where('id', $request->identity)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
             ->where('upload_type','Fund_Req')
@@ -231,6 +233,7 @@ class picAdminController extends Controller
 
             documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
+            ->where('id', $request->identity)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
             ->where('upload_type','Fund_Req')
@@ -247,6 +250,7 @@ class picAdminController extends Controller
 
             documentsamarinda::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
+            ->where('id', $request->identity)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
             ->where('upload_type','Fund_Req')
@@ -263,6 +267,7 @@ class picAdminController extends Controller
 
             $test = documentJakarta::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
+            ->where('id', $request->identity)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
             ->where('upload_type','Fund_Req')
@@ -289,6 +294,7 @@ class picAdminController extends Controller
             documentbanjarmasin::where($filename, 'Like', '%' . $result . '%')
             ->where('cabang', $request->cabang)
             ->whereNotNull($filename)
+            ->where('id', $request->identity)
             ->where('upload_type','Fund_Req')
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->update([
@@ -307,6 +313,7 @@ class picAdminController extends Controller
                 
                 documents::where($filename, 'Like', '%' . $result . '%')
                 ->whereNotNull($filename)
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->update([
@@ -323,6 +330,7 @@ class picAdminController extends Controller
                 documentberau::where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
@@ -340,6 +348,7 @@ class picAdminController extends Controller
                 ->where('cabang', $cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
+                ->where('id', $request->identity)
                 ->where('upload_type','Fund_Req')
                 ->update([
                     $request->status => 'approved',
@@ -357,6 +366,7 @@ class picAdminController extends Controller
                 ->where('cabang', $request->cabang)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->whereNotNull($filename)
+                ->where('id', $request->identity)
                 ->update([
                     $request->status => 'approved',
                     'approved_by' => Auth::user()->name,
@@ -382,6 +392,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('id', $request->identity)
             ->update([
                 $request->status => 'approved',
                 'approved_by' => Auth::user()->name,
@@ -399,6 +410,7 @@ class picAdminController extends Controller
             ->where('cabang', $request->cabang)
             ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
             ->whereNotNull($filename)
+            ->where('id', $request->identity)
             ->update([
                 $request->status => 'approved',
                 'approved_by' => Auth::user()->name,
@@ -423,6 +435,7 @@ class picAdminController extends Controller
         documentrpk::where($filename, 'Like', '%' . $result . '%')
         ->where('cabang', $request->cabang)
         ->whereNotNull($filename)
+        ->where('id', $request->identity)
         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
         ->update([
             $request->status => 'rejected',
@@ -447,6 +460,7 @@ class picAdminController extends Controller
                 $viewer = documents::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('upload_type','Fund_Req')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -459,6 +473,7 @@ class picAdminController extends Controller
                 $viewer = documentberau::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('upload_type','Fund_Req')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -472,6 +487,7 @@ class picAdminController extends Controller
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('upload_type','Fund_Req')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -485,6 +501,7 @@ class picAdminController extends Controller
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('upload_type','Fund_Req')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -497,6 +514,7 @@ class picAdminController extends Controller
                 $viewer = documentJakarta::whereNotNull ($filename)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('upload_type','Fund_Req')
+                ->where('id', $request->identity)
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
                 // dd($viewer);
@@ -518,6 +536,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0];
@@ -530,6 +549,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0]; 
@@ -542,6 +562,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0]; 
@@ -554,6 +575,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filenameRPK)[0]; 
@@ -566,6 +588,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
                 ->whereNotNull ($filenameRPK)
+                ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%') 
                 ->pluck($filenameRPK)[0]; 
@@ -695,6 +718,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documents::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -707,6 +731,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentberau::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -719,6 +744,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentbanjarmasin::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -732,6 +758,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentsamarinda::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -745,6 +772,7 @@ class picAdminController extends Controller
                 $result = $request->result;
                 $viewer = documentJakarta::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -910,6 +938,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documents::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -923,6 +952,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentberau::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -936,6 +966,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentbanjarmasin::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where('cabang' , $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
@@ -950,6 +981,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentsamarinda::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where('cabang' , $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
@@ -964,6 +996,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentJakarta::whereDate('periode_akhir', '<', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -980,6 +1013,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -993,6 +1027,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1006,6 +1041,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1019,6 +1055,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)
@@ -1032,6 +1069,7 @@ class picAdminController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '<', $datetime)

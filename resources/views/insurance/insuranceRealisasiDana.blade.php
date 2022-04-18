@@ -149,6 +149,7 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name = 'identity' value={{$doc->id}}>
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
@@ -219,6 +220,7 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
@@ -292,6 +294,7 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name = 'identity' value={{$b->id}}>
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
@@ -373,6 +376,7 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name = 'identity' value={{$s->id}}>
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
@@ -448,6 +452,7 @@
                                         <form method="post" action="/insurance/Realisasi-Dana-view" target="_blank">
                                             @csrf
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
+                                            <input type="hidden" name = 'identity' value={{$jkt->id}}>
                                             <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>

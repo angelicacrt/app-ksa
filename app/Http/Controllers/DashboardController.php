@@ -346,6 +346,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentberau::whereDate('periode_akhir', '>=', $datetime)
                         ->whereNotNull ($filename)
+                        ->where('id', $request->identity)
                         ->where('upload_type','Fund_Req')
                         ->where($filename, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -359,6 +360,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)
                         ->whereNotNull ($filename)
+                        ->where('id', $request->identity)
                         ->where('upload_type','Fund_Req')
                         ->where('cabang' , $request->cabang)
                         ->where($filename, 'Like', '%' . $result . '%')
@@ -373,6 +375,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)
                         ->whereNotNull ($filename)
+                        ->where('id', $request->identity)
                         ->where('upload_type','Fund_Req')
                         ->where('cabang' , $request->cabang)
                         ->where($filename, 'Like', '%' . $result . '%')
@@ -388,6 +391,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentJakarta::whereDate('periode_akhir', '>=', $datetime)
                         ->whereNotNull ($filename)
+                        ->where('id', $request->identity)
                         ->where('upload_type','Fund_Req')
                         ->where($filename, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -405,6 +409,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentrpk::where('cabang' , $request->cabang)
                         ->whereNotNull ($filenameRPK)
+                        ->where('id', $request->identity)
                         ->where($filenameRPK, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
@@ -418,6 +423,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentrpk::where('cabang' , $request->cabang)
                         ->whereNotNull ($filenameRPK)
+                        ->where('id', $request->identity)
                         ->where($filenameRPK, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
@@ -431,6 +437,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentrpk::where('cabang' , $request->cabang)
                         ->whereNotNull ($filenameRPK)
+                        ->where('id', $request->identity)
                         ->where($filenameRPK, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
@@ -444,6 +451,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentrpk::where('cabang' , $request->cabang)
                         ->whereNotNull ($filenameRPK)
+                        ->where('id', $request->identity)
                         ->where($filenameRPK, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
@@ -457,6 +465,7 @@ class DashboardController extends Controller
                         $result = $request->result;
                         $viewer = documentrpk::where('cabang' , $request->cabang)
                         ->whereNotNull ($filenameRPK)
+                        ->where('id', $request->identity)
                         ->where($filenameRPK, 'Like', '%' . $result . '%')
                         ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                         ->whereDate('periode_akhir', '>=', $datetime)
@@ -602,6 +611,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documents::whereDate('periode_akhir', '>=', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -615,6 +625,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentberau::whereDate('periode_akhir', '>=', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -628,6 +639,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentbanjarmasin::whereDate('periode_akhir', '>=', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where('cabang', $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
@@ -642,6 +654,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentsamarinda::whereDate('periode_akhir', '>=', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where('cabang', $request->cabang)
                     ->where($filename, 'Like', '%' . $result . '%')
@@ -656,6 +669,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentJakarta::whereDate('periode_akhir', '>=', $datetime)
                     ->whereNotNull ($filename)
+                    ->where('id', $request->identity)
                     ->where('upload_type','Fund_Req')
                     ->where($filename, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -673,6 +687,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '>=', $datetime)
@@ -686,6 +701,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '>=', $datetime)
@@ -699,6 +715,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '>=', $datetime)
@@ -712,6 +729,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '>=', $datetime)
@@ -725,6 +743,7 @@ class DashboardController extends Controller
                     $result = $request->result;
                     $viewer = documentrpk::where('cabang' , $request->cabang)
                     ->whereNotNull ($filenameRPK)
+                    ->where('id', $request->identity)
                     ->where($filenameRPK, 'Like', '%' . $result . '%')
                     ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                     ->whereDate('periode_akhir', '>=', $datetime)

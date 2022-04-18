@@ -182,6 +182,7 @@ class InsuranceController extends Controller
                 $result = $request->result;
                 $viewer = documents::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -194,6 +195,7 @@ class InsuranceController extends Controller
                 $result = $request->result;
                 $viewer = documentberau::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];
@@ -206,6 +208,7 @@ class InsuranceController extends Controller
                 $result = $request->result;
                 $viewer = documentbanjarmasin::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -219,6 +222,7 @@ class InsuranceController extends Controller
                 $result = $request->result;
                 $viewer = documentsamarinda::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where('cabang' , $request->cabang)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
@@ -232,6 +236,7 @@ class InsuranceController extends Controller
                 $result = $request->result;
                 $viewer = documentJakarta::whereNotNull($filename)
                 ->where('upload_type','Fund_Real')
+                ->where('id', $request->identity)
                 ->where($filename, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
                 ->pluck($filename)[0];

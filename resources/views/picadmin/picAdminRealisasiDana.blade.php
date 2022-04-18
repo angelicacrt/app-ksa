@@ -160,6 +160,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$doc->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$doc->$scan}} />
@@ -182,6 +183,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$doc->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$doc->$scan}} />
@@ -204,6 +206,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$doc->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$doc->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$doc->$scan}} />
@@ -276,6 +279,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />
@@ -298,6 +302,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />
@@ -320,6 +325,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                             <input type="hidden" name='result' value={{$d->$scan}} />
@@ -395,6 +401,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$b->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$b->$scan}} />
@@ -417,6 +424,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$b->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$b->$scan}} />
@@ -439,6 +447,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$b->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$b->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                             <input type="hidden" name='result' value={{$b->$scan}} />
@@ -522,6 +531,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$s->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$s->$scan}} />
@@ -544,6 +554,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$s->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$s->$scan}} />
@@ -566,6 +577,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$s->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$s->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$s->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$s->$scan}} />
@@ -644,6 +656,7 @@
                                                 <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                                 <input type="hidden" name='type_upload' value="Fund_Real" />
                                                 <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
+                                                <input type="hidden" name = 'identity' value={{$jkt->id}}>
                                                 <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                                 <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                                 <input type="hidden" name='result' value={{$jkt->$scan}} />
@@ -666,6 +679,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$jkt->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$jkt->$scan}} />
@@ -688,6 +702,7 @@
                                             <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                             <input type="hidden" name='type_upload' value="Fund_Real" />
                                             <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
+                                            <input type="hidden" name = 'identity' value={{$jkt->id}}>
                                             <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                             <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                             <input type="hidden" name='result' value={{$jkt->$scan}} />
