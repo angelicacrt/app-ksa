@@ -168,6 +168,7 @@
                 var doc = document.getElementById("picSite")
                 var crew = document.getElementById("crew")
                 var StaffOperasional = document.getElementById("StaffOperasional")
+                var maintenance = document.getElementById("maintenance")
                 var StaffLegal = document.getElementById("StaffLegal")
                 var departmentChooseOption = document.getElementById("department")
 
@@ -176,6 +177,7 @@
                 crew.style.display = 'none'
                 StaffLegal.style.display = 'none'
                 StaffOperasional.style.display = 'none'
+                maintenance.style.display = 'none'
 
                 departmentChooseOption.onchange = function (event){
                     
@@ -184,6 +186,7 @@
 
                         crew.style.display = 'none'
                         StaffOperasional.style.display = 'none'
+                        maintenance.style.display = 'none'
 
                         insiden.style.display = ''
                         StaffLegal.style.display = ''
@@ -194,6 +197,7 @@
                         insiden.style.display = 'none'
                         doc.style.display = 'none'
                         StaffLegal.style.display = 'none'
+                        maintenance.style.display = ''
                         crew.style.display = ''
                         StaffOperasional.style.display = ''
                     }else{
@@ -202,6 +206,7 @@
                         document.getElementById("crew").hidden = false;
                         document.getElementById("StaffOperasional").hidden = false;
                         document.getElementById("StaffLegal").hidden = false;
+                        document.getElementById("maintenance").hidden = false;
                     }
                 }
 

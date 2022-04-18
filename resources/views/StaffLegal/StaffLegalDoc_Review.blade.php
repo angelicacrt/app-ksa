@@ -84,17 +84,18 @@
                 <table class="table" style="margin-top: 2%">
                   <thead class="thead-dark">
                       <tr>
-                        <th>Time Uploaded</th>
-                        <th>No.Permohonan</th>
-                        <th>Cabang</th>
-                        <th>Nama Kapal</th>
-                        <th>Periode (Y-M-D)</th>
-                        <th>Nama File</th>
-                        <th>Jenis File</th>
-                        <th>Dana diajukan</th>
-                        <th>Status</th>
-                        <th>Reason</th>
-                        <th>Action</th>
+                        <th style="text-align: center">Time Uploaded</th>
+                        <th style="text-align: center">No.PR</th>
+                        <th style="text-align: center">No.Permohonan</th>
+                        <th style="text-align: center">Cabang</th>
+                        <th style="text-align: center">Nama Kapal</th>
+                        <th style="text-align: center">Periode (Y-M-D)</th>
+                        <th style="text-align: center">Nama File</th>
+                        <th style="text-align: center">Jenis File</th>
+                        <th style="text-align: center">Dana diajukan</th>
+                        <th style="text-align: center">Status</th>
+                        <th style="text-align: center">Reason</th>
+                        <th style="text-align: center">Action</th>
                       </tr>
                   </thead>
                   <tbody> 
@@ -128,17 +129,17 @@
                   </tr>
                   @elseif ($doc->$stats == "on review")
                   <tr>
-                      <td class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
-                      <td class="table-warning"><strong>{{ $doc->no_PR }}</strong></td>
-                      <td class="table-warning"><strong>{{ $doc->no_mohon }}</strong></td>
-                      <td class="table-warning" id=""><strong>{{$doc->cabang}}</strong></td>                                        
-                      <td class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
-                      <td class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
-                      <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                      <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
-                      <td class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
-                      <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
-                      <td class="table-warning" id="reason">{{$doc ->$reason}}</td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $doc->$time_upload }}</strong></td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $doc->no_PR }}</strong></td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $doc->no_mohon }}</strong></td>
+                      <td style="text-align: center" class="table-warning" id=""><strong>{{$doc->cabang}}</strong></td>                                        
+                      <td style="text-align: center" class="table-warning" style="text-transform: uppercase;"id="namakapal">{{$doc->nama_kapal}}</td>                                        
+                      <td style="text-align: center" class="table-warning" id="periode"><strong>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</strong></td>                                   
+                      <td style="text-align: center" class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
+                      <td style="text-align: center" class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                      <td style="text-align: center" class="table-primary"><strong>RP. {{$doc->$dana}}</strong></td>     
+                      <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$doc->$stats}}</td>                                      
+                      <td style="text-align: center" class="table-warning" id="reason">{{$doc ->$reason}}</td>
                       <td scope="col">
                         <div class="form-row">
                         {{-- Approve Button --}}
@@ -157,7 +158,8 @@
                           <div class="col-md-auto">
                             <form method="post" action="/Staff_Legal/dana/view" target="_blank">
                               @csrf
-                              <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
+                                  <input type="hidden" name = 'cabang' value={{$doc->cabang}}>
+                                  <input type="hidden" name = 'identity' value={{$doc->id}}>
                                   <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($doc->created_at)->format('Y')}} />
                                   <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($doc->created_at)->format('m')}} />
                                   <input type="hidden" name='viewdoc' value={{$BABELAN[$a-1]}} />
@@ -284,17 +286,17 @@
                     </tr>
                     @elseif ($d->$stats == "on review")
                     <tr>
-                        <td class="table-warning"><strong>{{$d->$time_upload }}</strong></td>
-                        <td class="table-warning"><strong>{{$d->no_PR }}</strong></td>
-                        <td class="table-warning"><strong>{{$d->no_mohon }}</strong></td>
-                        <td class="table-warning"><strong>{{$d->cabang }}</strong></td>
-                        <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
-                        <td class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
-                        <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                        <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
-                        <td class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>     
-                        <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
-                        <td class="table-warning" id="reason">{{$d ->$reason}}</td>
+                        <td style="text-align: center" class="table-warning"><strong>{{$d->$time_upload }}</strong></td>
+                        <td style="text-align: center" class="table-warning"><strong>{{$d->no_PR }}</strong></td>
+                        <td style="text-align: center" class="table-warning"><strong>{{$d->no_mohon }}</strong></td>
+                        <td style="text-align: center" class="table-warning"><strong>{{$d->cabang }}</strong></td>
+                        <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$d->nama_kapal}}</td>                                        
+                        <td style="text-align: center" class="table-warning" id="periode"><strong>{{$d->periode_awal}} To {{$d->periode_akhir}}</strong></td>                                   
+                        <td style="text-align: center" class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
+                        <td style="text-align: center" class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                        <td style="text-align: center" class="table-primary"><strong>RP. {{$d->$dana}}</strong></td>     
+                        <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
+                        <td style="text-align: center" class="table-warning" id="reason">{{$d ->$reason}}</td>
                         <td scope="col">
                             <div class="form-row">
                           {{-- Approve Button --}}
@@ -316,6 +318,7 @@
                                   <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                   <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                   <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                  <input type="hidden" name = 'identity' value={{$d->id}}>
                                   <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                   <input type="hidden" name='viewdoc' value={{$BERAU[$a-1]}} />
                                   <input type="hidden" name='result' value={{$d->$scan}} />
@@ -444,17 +447,17 @@
                     </tr>
                     @elseif ($b->$stats == "on review")
                     <tr>
-                        <td class="table-warning"><strong>{{ $b->$time_upload }}</strong></td>
-                        <td class="table-warning"><strong>{{ $b->no_PR }}</strong></td>
-                        <td class="table-warning"><strong>{{ $b->no_mohon }}</strong></td>
-                        <td class="table-warning"><strong>{{ $b->cabang }}</strong></td>
-                        <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
-                        <td class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
-                        <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                        <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
-                        <td class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>     
-                        <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
-                        <td class="table-warning" id="reason">{{$b ->$reason}}</td>
+                        <td style="text-align: center" class="table-warning"><strong>{{ $b->$time_upload }}</strong></td>
+                        <td style="text-align: center" class="table-warning"><strong>{{ $b->no_PR }}</strong></td>
+                        <td style="text-align: center" class="table-warning"><strong>{{ $b->no_mohon }}</strong></td>
+                        <td style="text-align: center" class="table-warning"><strong>{{ $b->cabang }}</strong></td>
+                        <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$b->nama_kapal}}</td>                                        
+                        <td style="text-align: center" class="table-warning" id="periode"><strong>{{$b->periode_awal}} To {{$b->periode_akhir}}</strong></td>                                   
+                        <td style="text-align: center" class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
+                        <td style="text-align: center" class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                        <td style="text-align: center" class="table-primary"><strong>RP. {{$b->$dana}}</strong></td>     
+                        <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$b->$stats}}</td>                                      
+                        <td style="text-align: center" class="table-warning" id="reason">{{$b ->$reason}}</td>
                         <td scope="col">
                           <div class="form-row">
                           {{-- approve button --}}
@@ -482,6 +485,7 @@
                                 <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($b->created_at)->format('Y')}} />
                                   <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($b->created_at)->format('m')}} />
                                 <input type="hidden" name = 'cabang' value={{$b->cabang}}>
+                                <input type="hidden" name = 'identity' value={{$b->id}}>
                                 <input type="hidden" name='viewdoc' value={{$BANJARMASIN[$a-1]}} />
                                 <input type="hidden" name='result' value={{$b->$scan}} />
                                 <input type="hidden" name = 'kapal_nama' value={{$b->nama_kapal}}>
@@ -586,17 +590,17 @@
                     </tr>
                     @elseif ($s->$stats == "on review")
                     <tr>
-                      <td class="table-warning"><strong>{{ $s->$time_upload }}</strong></td>
-                      <td class="table-warning"><strong>{{ $s->no_PR }}</strong></td>
-                      <td class="table-warning"><strong>{{ $s->no_mohon }}</strong></td>
-                      <td class="table-warning"><strong>{{ $s->cabang }}</strong></td>
-                      <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
-                      <td class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
-                      <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                      <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
-                      <td class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>     
-                      <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
-                      <td class="table-warning" id="reason">{{$s ->$reason}}</td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $s->$time_upload }}</strong></td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $s->no_PR }}</strong></td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $s->no_mohon }}</strong></td>
+                      <td style="text-align: center" class="table-warning"><strong>{{ $s->cabang }}</strong></td>
+                      <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$s->nama_kapal}}</td>                                        
+                      <td style="text-align: center" class="table-warning" id="periode"><strong>{{$s->periode_awal}} To {{$s->periode_akhir}}</strong></td>                                   
+                      <td style="text-align: center" class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
+                      <td style="text-align: center" class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                      <td style="text-align: center" class="table-primary"><strong>RP. {{$s->$dana}}</strong></td>     
+                      <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$s->$stats}}</td>                                      
+                      <td style="text-align: center" class="table-warning" id="reason">{{$s ->$reason}}</td>
                         <td scope="col">
                           <div class="form-row">
                           {{-- approve button --}}
@@ -620,6 +624,7 @@
                                     <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($s->created_at)->format('Y')}} />
                                     <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($s->created_at)->format('m')}} />
                                     <input type="hidden" name = 'cabang' value={{$s->cabang}}>
+                                    <input type="hidden" name = 'identity' value={{$s->id}}>
                                     <input type="hidden" name='viewdoc' value={{$SAMARINDA[$a-1]}} />
                                     <input type="hidden" name='result' value={{$s->$scan}} />
                                     <input type="hidden" name = 'tipefile' value='DANA'>
@@ -756,17 +761,17 @@
                       @elseif ($jkt->$stats == 'on review')
                       <tr>
                           {{-- hasil on review --}}
-                          <td class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
-                          <td class="table-warning"><strong>{{ $jkt->no_PR }}</strong></td>
-                          <td class="table-warning"><strong>{{ $jkt->no_mohon }}</strong></td>
-                          <td class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
-                          <td class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
-                          <td class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
-                          <td class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
-                          <td class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
-                          <td class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>     
-                          <td class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
-                          <td class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
+                          <td style="text-align: center" class="table-warning"><strong>{{ $jkt->$time_upload }}</strong></td>
+                          <td style="text-align: center" class="table-warning"><strong>{{ $jkt->no_PR }}</strong></td>
+                          <td style="text-align: center" class="table-warning"><strong>{{ $jkt->no_mohon }}</strong></td>
+                          <td style="text-align: center" class="table-warning"><strong>{{ $jkt->cabang }}</strong></td>
+                          <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="namakapal">{{$jkt->nama_kapal}}</td>                                        
+                          <td style="text-align: center" class="table-warning" id="periode"><strong>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</strong></td>                                   
+                          <td style="text-align: center" class="table-warning" id="namafile">{{$names[$a-1]}}</td>  
+                          <td style="text-align: center" class="table-secondary" id="jenisfile"><strong>DANA</strong></td>
+                          <td style="text-align: center" class="table-primary"><strong>RP. {{$jkt->$dana}}</strong></td>     
+                          <td style="text-align: center" class="table-warning" style="text-transform: uppercase;" id="status"><strong>{{$jkt->$stats}}</td>                                      
+                          <td style="text-align: center" class="table-warning" id="reason">{{$jkt ->$reason}}</td>   
                           <td>
                             <div class="form-row">
                               {{-- approve button --}}
@@ -790,6 +795,7 @@
                                     <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($jkt->created_at)->format('Y')}} />
                                     <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($jkt->created_at)->format('m')}} />
                                     <input type="hidden" name = 'cabang' value={{$jkt->cabang}}>
+                                    <input type="hidden" name = 'identity' value={{$jkt->id}}>
                                     <input type="hidden" name = 'kapal_nama' value={{$jkt->nama_kapal}}>
                                     <input type="hidden" name='viewdoc' value={{$JAKARTA[$a-1]}} />
                                     <input type="hidden" name='result' value={{$jkt->$scan}} />

@@ -26,8 +26,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -108,6 +108,64 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         // Lost Time Details Page
         Route::get('/lost-time-details', [AdminOperationalController::class, 'lostTimeDetailsPage'])->name('lostTimeDetails');
     });
+
+// in -progress-
+    // Route::prefix('staff-operational')->name('staffOperational.')->group(function(){
+    //     // Daily Reports Page
+    //     Route::get('/daily-reports', [AdminOperationalController::class, 'reportTranshipmentPage'])->name('reportTranshipment');
+    //     Route::post('/daily-reports', [AdminOperationalController::class, 'searchDailyReports'])->name('searchDailyReports');
+    //     Route::post('/daily-reports/download', [AdminOperationalController::class, 'downloadDailyReports']);
+
+    //     // Monitoring Page
+    //     Route::get('/monitoring', [AdminOperationalController::class, 'monitoringPage'])->name('monitoring');
+    //     Route::post('/search-monitoring', [AdminOperationalController::class, 'searchMonitoring'])->name('searchMonitoring');
+
+    //     // Add Tugboat Page
+    //     Route::get('/add-tugboat', [AdminOperationalController::class, 'addTugboatPage'])->name('addTugboat');
+    //     Route::post('/add-tugboat', [AdminOperationalController::class, 'searchTugboat'])->name('searchTugboat');
+    //     Route::patch('/add-tugboat', [AdminOperationalController::class, 'paginationTugBoat'])->name('paginationTugboat');
+    //     Route::post('/add-newtugboat', [AdminOperationalController::class, 'addNewTugboat'])->name('addNewTugboat');
+    //     Route::delete('/delete-tugboat', [AdminOperationalController::class, 'deleteTugboat']);
+
+    //     // Add Barge Page
+    //     Route::get('/add-barge', [AdminOperationalController::class, 'addBargePage'])->name('addBarge');
+    //     Route::post('/add-barge', [AdminOperationalController::class, 'searchBarge'])->name('searchBarge');
+    //     Route::patch('/add-barge', [AdminOperationalController::class, 'paginationBarge'])->name('paginationBarge');
+    //     Route::post('/add-newbarge', [AdminOperationalController::class, 'addNewBarge'])->name('addNewBarge');
+    //     Route::delete('/delete-barge', [AdminOperationalController::class, 'deleteBarge']);
+
+    //     // Lost Time Details Page
+    //     Route::get('/lost-time-details', [AdminOperationalController::class, 'lostTimeDetailsPage'])->name('lostTimeDetails');
+    // });
+
+    // Route::prefix('maintenance')->name('maintenance.')->group(function(){
+    //     // Daily Reports Page
+    //     Route::get('/daily-reports', [AdminOperationalController::class, 'reportTranshipmentPage'])->name('reportTranshipment');
+    //     Route::post('/daily-reports', [AdminOperationalController::class, 'searchDailyReports'])->name('searchDailyReports');
+    //     Route::post('/daily-reports/download', [AdminOperationalController::class, 'downloadDailyReports']);
+
+    //     // Monitoring Page
+    //     Route::get('/monitoring', [AdminOperationalController::class, 'monitoringPage'])->name('monitoring');
+    //     Route::post('/search-monitoring', [AdminOperationalController::class, 'searchMonitoring'])->name('searchMonitoring');
+
+    //     // Add Tugboat Page
+    //     Route::get('/add-tugboat', [AdminOperationalController::class, 'addTugboatPage'])->name('addTugboat');
+    //     Route::post('/add-tugboat', [AdminOperationalController::class, 'searchTugboat'])->name('searchTugboat');
+    //     Route::patch('/add-tugboat', [AdminOperationalController::class, 'paginationTugBoat'])->name('paginationTugboat');
+    //     Route::post('/add-newtugboat', [AdminOperationalController::class, 'addNewTugboat'])->name('addNewTugboat');
+    //     Route::delete('/delete-tugboat', [AdminOperationalController::class, 'deleteTugboat']);
+
+    //     // Add Barge Page
+    //     Route::get('/add-barge', [AdminOperationalController::class, 'addBargePage'])->name('addBarge');
+    //     Route::post('/add-barge', [AdminOperationalController::class, 'searchBarge'])->name('searchBarge');
+    //     Route::patch('/add-barge', [AdminOperationalController::class, 'paginationBarge'])->name('paginationBarge');
+    //     Route::post('/add-newbarge', [AdminOperationalController::class, 'addNewBarge'])->name('addNewBarge');
+    //     Route::delete('/delete-barge', [AdminOperationalController::class, 'deleteBarge']);
+
+    //     // Lost Time Details Page
+    //     Route::get('/lost-time-details', [AdminOperationalController::class, 'lostTimeDetailsPage'])->name('lostTimeDetails');
+    // });
+//end of in progress
 
     Route::prefix('logistic')->name('logistic.')->group(function(){
         // Dashboard Page
