@@ -64,7 +64,7 @@
                     <td>{{$doc->nama_kapal}}</td>                                        
                     <td>{{$doc->periode_awal}} To {{$doc->periode_akhir}}</td>                                   
                     <td>{{$names[$a-1]}}</td>    
-                    <td>{{$doc->$dana}}</td>   
+                    <td>{{str_replace(',', '', $doc->$dana)}}</td>   
                     <td>{{$doc->$stats}} By {{$doc->approved_by}}</td>                                      
                     <td>{{$doc ->$reason}}</td>
                 </tr>
@@ -112,7 +112,7 @@
                 <td>{{$d->nama_kapal}}</td>                                        
                 <td>{{$d->periode_awal}} To {{$d->periode_akhir}}</td>                                   
                 <td>{{$names[$a-1]}}</td>     
-                <td>{{$d->$dana}}</td>  
+                <td>{{str_replace(',', '', $d->$dana)}}</td>  
                 <td>{{$d->$stats}} By {{$d->approved_by}}</td>                                      
                 <td>{{$d->$reason}}</td>    
             </tr>
@@ -162,7 +162,7 @@
                 <td>{{$b->nama_kapal}}</td>                                        
                 <td>{{$b->periode_awal}} To {{$b->periode_akhir}}</td>                                   
                 <td>{{$names[$a-1]}}</td> 
-                <td>{{$b->$dana}}</td>      
+                <td>{{str_replace(',', '', $b->$dana)}}</td>      
                 <td>{{$b->$stats}} By {{$b->approved_by}}</td>                                      
                 <td>{{$b->$reason}}</td>
             </tr>
@@ -220,7 +220,7 @@
                     <td>{{$s->nama_kapal}}</td>                                        
                     <td>{{$s->periode_awal}} To {{$s->periode_akhir}}</td>                                   
                     <td>{{$names[$a-1]}}</td>     
-                    <td>{{$s->$dana}}</td>  
+                    <td>{{str_replace(',', '', $s->$dana)}}</td>  
                     <td>{{$s->$stats}} By {{$s->approved_by}}</td>                                      
                     <td>{{$s->$reason}}</td>    
                 </tr>
@@ -277,7 +277,7 @@
                         <td>{{$jkt->nama_kapal}}</td>                                        
                         <td>{{$jkt->periode_awal}} To {{$jkt->periode_akhir}}</td>                                   
                         <td>{{$names[$a-1]}}</td>     
-                        <td>{{$jkt->$dana}}</td>  
+                        <td>{{str_replace(',', '', $jkt->$dana)}}</td>  
                         <td>{{$jkt->$stats}} By {{$jkt->approved_by}}</td>                                      
                         <td>{{$jkt->$reason}}</td>    
                     </tr>
