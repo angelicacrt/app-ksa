@@ -149,7 +149,7 @@ class Export_RekapDocument implements FromView , ShouldAutoSize , WithEvents , W
                 ]);
                 // Append row as very last
                 $event->sheet->appendRows(array(
-                    array(' '),
+                    array(' ', ' ' , ' ' , ' ' ,' ','Total : ',''),
                     array(' '),
                     array('Prepared by:' , ' ' , ' ' , ' ' ,' ' ,'Checked by :'),
                     array(' '),
