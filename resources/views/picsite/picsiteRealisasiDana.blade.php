@@ -31,6 +31,7 @@
                        
                         <form action="/picsite/upload" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
                             @csrf
+                            {{-- unutk perbedaan fund req sama fund real --}}
                             <input type="hidden" name='type_upload' value="Fund_Real" />
                             <div class="row">
                                 <div class="col-md-6">

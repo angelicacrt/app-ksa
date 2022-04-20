@@ -42,7 +42,7 @@
                                     <input class="form-control" required name="no_mohon" placeholder="No.Permohonan">
                                 </div>
                             </div>
-                            <input type="hidden" name='type_upload' value="Fund_Req" />
+                            <input type="hidden" name='type_upload' value="Fund_Real" />
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">

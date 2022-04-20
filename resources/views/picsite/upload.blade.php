@@ -48,6 +48,7 @@
                                     <input class="form-control" required name="no_mohon" placeholder="No.Permohonan">
                                 </div>
                             </div>
+                            {{-- unutk perbedaan fund req sama fund real --}}
                             <input type="hidden" name='type_upload' value="Fund_Req" />
                             <div class="row">
                                 <div class="col-md-6">

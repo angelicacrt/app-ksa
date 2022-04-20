@@ -426,7 +426,7 @@ class PicsiteController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('babelan/' . $year . "/". $month . "/" . $viewer);
                 }
-                if ($request->cabang == 'Berau'){
+                elseif ($request->cabang == 'Berau'){
                     $filename = $request->viewdoc;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
@@ -439,7 +439,7 @@ class PicsiteController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/" . $viewer);
                 }
-                if ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
+                elseif ($request->cabang == 'Banjarmasin' or $request->cabang == 'Bunati'){
                     $filename = $request->viewdoc;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
@@ -453,7 +453,7 @@ class PicsiteController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('banjarmasin/' . $year . "/". $month . "/" . $viewer);
                 }
-                if ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
+                elseif ($request->cabang == 'Samarinda' or $request->cabang == 'Kendari' or $request->cabang == 'Morosi'){
                     $filename = $request->viewdoc;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
@@ -467,7 +467,7 @@ class PicsiteController extends Controller
                     // dd($viewer);
                     return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/" . $viewer);
                 }
-                if ($request->cabang == 'Jakarta'){
+                elseif ($request->cabang == 'Jakarta'){
                     $filename = $request->viewdoc;
                     $kapal_id = $request->kapal_nama;
                     $result = $request->result;
@@ -493,61 +493,118 @@ class PicsiteController extends Controller
         $documentsamarinda = documentsamarinda::with('user')->where('cabang',Auth::user()->cabang)->latest()->get();
        
         if (Auth::user()->cabang == 'Babelan') {
-            
-            $request->validate([
-            'ufile1' => 'mimes:pdf|max:3072' ,
-                'ufile2' => 'mimes:pdf|max:3072' ,
-                'ufile3' => 'mimes:pdf|max:3072' ,
-                'ufile4' => 'mimes:pdf|max:3072' ,
-                'ufile5' => 'mimes:pdf|max:3072' , 
-                'ufile6' => 'mimes:pdf|max:3072' ,
-                'ufile7' => 'mimes:pdf|max:3072' ,
-                'ufile8' => 'mimes:pdf|max:3072' ,
-                'ufile9' => 'mimes:pdf|max:3072' ,
-                'ufile10' => 'mimes:pdf|max:3072' ,
-                'ufile11' => 'mimes:pdf|max:3072' ,
-                'ufile12' => 'mimes:pdf|max:3072' ,
-                'ufile13' => 'mimes:pdf|max:3072' ,
-                'ufile14' => 'mimes:pdf|max:3072' ,
-                'ufile15' => 'mimes:pdf|max:3072' ,
-                'ufile16' => 'mimes:pdf|max:3072' ,
-                'ufile17' => 'mimes:pdf|max:3072' ,
-                'ufile18' => 'mimes:pdf|max:3072' ,
-                'ufile19' => 'mimes:pdf|max:3072' ,
-                'ufile20' => 'mimes:pdf|max:3072' ,
-                'ufile21' => 'mimes:pdf|max:3072' ,
-                'ufile22' => 'mimes:pdf|max:3072' ,
-                'ufile23' => 'mimes:pdf|max:3072' ,
-                'ufile24' => 'mimes:pdf|max:3072' ,
-            'dana1' => 'nullable|string|min:4|max:15' ,
-                'dana2' => 'nullable|string|min:4|max:15' ,
-                'dana3' => 'nullable|string|min:4|max:15' ,
-                'dana4' => 'nullable|string|min:4|max:15' ,
-                'dana5' => 'nullable|string|min:4|max:15' ,
-                'dana6' => 'nullable|string|min:4|max:15' ,
-                'dana7' => 'nullable|string|min:4|max:15' ,
-                'dana8' => 'nullable|string|min:4|max:15' ,
-                'dana9' => 'nullable|string|min:4|max:15' ,
-                'dana10' => 'nullable|string|min:4|max:15' ,
-                'dana11' => 'nullable|string|min:4|max:15' ,
-                'dana12' => 'nullable|string|min:4|max:15' ,
-                'dana13' => 'nullable|string|min:4|max:15' ,
-                'dana14' => 'nullable|string|min:4|max:15' ,
-                'dana15' => 'nullable|string|min:4|max:15' ,
-                'dana16' => 'nullable|string|min:4|max:15' ,
-                'dana17' => 'nullable|string|min:4|max:15' ,
-                'dana18' => 'nullable|string|min:4|max:15' ,
-                'dana19' => 'nullable|string|min:4|max:15' ,
-                'dana20' => 'nullable|string|min:4|max:15' ,
-                'dana21' => 'nullable|string|min:4|max:15' ,
-                'dana22' => 'nullable|string|min:4|max:15' ,
-                'dana23' => 'nullable|string|min:4|max:15' ,
-                'dana24' => 'nullable|string|min:4|max:15' ,
-            'nama_kapal' => 'nullable|string',
-            'Nama_Barge' => 'nullable|string',
-            'no_mohon' => 'required|string',
-            'no_PR' => 'required|string',
-            ]);
+            if($request->type_upload == 'Fund_Req'){
+                $request->validate([
+                'ufile1' => 'mimes:pdf|max:3072' ,
+                    'ufile2' => 'mimes:pdf|max:3072' ,
+                    'ufile3' => 'mimes:pdf|max:3072' ,
+                    'ufile4' => 'mimes:pdf|max:3072' ,
+                    'ufile5' => 'mimes:pdf|max:3072' , 
+                    'ufile6' => 'mimes:pdf|max:3072' ,
+                    'ufile7' => 'mimes:pdf|max:3072' ,
+                    'ufile8' => 'mimes:pdf|max:3072' ,
+                    'ufile9' => 'mimes:pdf|max:3072' ,
+                    'ufile10' => 'mimes:pdf|max:3072' ,
+                    'ufile11' => 'mimes:pdf|max:3072' ,
+                    'ufile12' => 'mimes:pdf|max:3072' ,
+                    'ufile13' => 'mimes:pdf|max:3072' ,
+                    'ufile14' => 'mimes:pdf|max:3072' ,
+                    'ufile15' => 'mimes:pdf|max:3072' ,
+                    'ufile16' => 'mimes:pdf|max:3072' ,
+                    'ufile17' => 'mimes:pdf|max:3072' ,
+                    'ufile18' => 'mimes:pdf|max:3072' ,
+                    'ufile19' => 'mimes:pdf|max:3072' ,
+                    'ufile20' => 'mimes:pdf|max:3072' ,
+                    'ufile21' => 'mimes:pdf|max:3072' ,
+                    'ufile22' => 'mimes:pdf|max:3072' ,
+                    'ufile23' => 'mimes:pdf|max:3072' ,
+                    'ufile24' => 'mimes:pdf|max:3072' ,
+                'dana1' => 'nullable|string|min:4|max:15' ,
+                    'dana2' => 'nullable|string|min:4|max:15' ,
+                    'dana3' => 'nullable|string|min:4|max:15' ,
+                    'dana4' => 'nullable|string|min:4|max:15' ,
+                    'dana5' => 'nullable|string|min:4|max:15' ,
+                    'dana6' => 'nullable|string|min:4|max:15' ,
+                    'dana7' => 'nullable|string|min:4|max:15' ,
+                    'dana8' => 'nullable|string|min:4|max:15' ,
+                    'dana9' => 'nullable|string|min:4|max:15' ,
+                    'dana10' => 'nullable|string|min:4|max:15' ,
+                    'dana11' => 'nullable|string|min:4|max:15' ,
+                    'dana12' => 'nullable|string|min:4|max:15' ,
+                    'dana13' => 'nullable|string|min:4|max:15' ,
+                    'dana14' => 'nullable|string|min:4|max:15' ,
+                    'dana15' => 'nullable|string|min:4|max:15' ,
+                    'dana16' => 'nullable|string|min:4|max:15' ,
+                    'dana17' => 'nullable|string|min:4|max:15' ,
+                    'dana18' => 'nullable|string|min:4|max:15' ,
+                    'dana19' => 'nullable|string|min:4|max:15' ,
+                    'dana20' => 'nullable|string|min:4|max:15' ,
+                    'dana21' => 'nullable|string|min:4|max:15' ,
+                    'dana22' => 'nullable|string|min:4|max:15' ,
+                    'dana23' => 'nullable|string|min:4|max:15' ,
+                    'dana24' => 'nullable|string|min:4|max:15' ,
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
+                'no_mohon' => 'required|string',
+                'no_PR' => 'required|string',
+                ]);
+                
+            }elseif($request->type_upload == 'Fund_Real'){
+                $request->validate([
+                'ufile1' => 'mimes:pdf|max:3072' ,
+                    'ufile2' => 'mimes:pdf|max:3072' ,
+                    'ufile3' => 'mimes:pdf|max:3072' ,
+                    'ufile4' => 'mimes:pdf|max:3072' ,
+                    'ufile5' => 'mimes:pdf|max:3072' , 
+                    'ufile6' => 'mimes:pdf|max:3072' ,
+                    'ufile7' => 'mimes:pdf|max:3072' ,
+                    'ufile8' => 'mimes:pdf|max:3072' ,
+                    'ufile9' => 'mimes:pdf|max:3072' ,
+                    'ufile10' => 'mimes:pdf|max:3072' ,
+                    'ufile11' => 'mimes:pdf|max:3072' ,
+                    'ufile12' => 'mimes:pdf|max:3072' ,
+                    'ufile13' => 'mimes:pdf|max:3072' ,
+                    'ufile14' => 'mimes:pdf|max:3072' ,
+                    'ufile15' => 'mimes:pdf|max:3072' ,
+                    'ufile16' => 'mimes:pdf|max:3072' ,
+                    'ufile17' => 'mimes:pdf|max:3072' ,
+                    'ufile18' => 'mimes:pdf|max:3072' ,
+                    'ufile19' => 'mimes:pdf|max:3072' ,
+                    'ufile20' => 'mimes:pdf|max:3072' ,
+                    'ufile21' => 'mimes:pdf|max:3072' ,
+                    'ufile22' => 'mimes:pdf|max:3072' ,
+                    'ufile23' => 'mimes:pdf|max:3072' ,
+                    'ufile24' => 'mimes:pdf|max:3072' ,
+                'dana1' => 'nullable|string|min:4|max:15' ,
+                    'dana2' => 'nullable|string|min:4|max:15' ,
+                    'dana3' => 'nullable|string|min:4|max:15' ,
+                    'dana4' => 'nullable|string|min:4|max:15' ,
+                    'dana5' => 'nullable|string|min:4|max:15' ,
+                    'dana6' => 'nullable|string|min:4|max:15' ,
+                    'dana7' => 'nullable|string|min:4|max:15' ,
+                    'dana8' => 'nullable|string|min:4|max:15' ,
+                    'dana9' => 'nullable|string|min:4|max:15' ,
+                    'dana10' => 'nullable|string|min:4|max:15' ,
+                    'dana11' => 'nullable|string|min:4|max:15' ,
+                    'dana12' => 'nullable|string|min:4|max:15' ,
+                    'dana13' => 'nullable|string|min:4|max:15' ,
+                    'dana14' => 'nullable|string|min:4|max:15' ,
+                    'dana15' => 'nullable|string|min:4|max:15' ,
+                    'dana16' => 'nullable|string|min:4|max:15' ,
+                    'dana17' => 'nullable|string|min:4|max:15' ,
+                    'dana18' => 'nullable|string|min:4|max:15' ,
+                    'dana19' => 'nullable|string|min:4|max:15' ,
+                    'dana20' => 'nullable|string|min:4|max:15' ,
+                    'dana21' => 'nullable|string|min:4|max:15' ,
+                    'dana22' => 'nullable|string|min:4|max:15' ,
+                    'dana23' => 'nullable|string|min:4|max:15' ,
+                    'dana24' => 'nullable|string|min:4|max:15' ,
+                'nama_kapal' => 'nullable|string',
+                'Nama_Barge' => 'nullable|string',
+                'no_mohon' => 'nullable|string',
+                'no_PR' => 'nullable|string',
+                ]);
+            }
             
             $year = date('Y');
             $month = date('m');
@@ -588,7 +645,7 @@ class PicsiteController extends Controller
                     'sertifikat_keselamatan' => basename($path)
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -643,7 +700,7 @@ class PicsiteController extends Controller
                         'time_upload2' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -753,7 +810,7 @@ class PicsiteController extends Controller
                         'time_upload4' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -808,7 +865,7 @@ class PicsiteController extends Controller
                         'time_upload5' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -863,7 +920,7 @@ class PicsiteController extends Controller
                         'time_upload6' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -918,7 +975,7 @@ class PicsiteController extends Controller
                         'time_upload7' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -974,7 +1031,7 @@ class PicsiteController extends Controller
                         'time_upload8' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1029,7 +1086,7 @@ class PicsiteController extends Controller
                         'time_upload9' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1084,7 +1141,7 @@ class PicsiteController extends Controller
                         'time_upload10' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1139,7 +1196,7 @@ class PicsiteController extends Controller
                         'time_upload11' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1194,7 +1251,7 @@ class PicsiteController extends Controller
                         'time_upload12' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1249,7 +1306,7 @@ class PicsiteController extends Controller
                         'time_upload13' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1359,7 +1416,7 @@ class PicsiteController extends Controller
                         'time_upload15' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1414,7 +1471,7 @@ class PicsiteController extends Controller
                         'time_upload16' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1468,7 +1525,7 @@ class PicsiteController extends Controller
                         'time_upload17' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1522,7 +1579,7 @@ class PicsiteController extends Controller
                         'time_upload18' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1576,7 +1633,7 @@ class PicsiteController extends Controller
                         'time_upload19' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1627,7 +1684,7 @@ class PicsiteController extends Controller
                         'Lain_Lain1' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1678,7 +1735,7 @@ class PicsiteController extends Controller
                         'Lain_Lain2' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1729,7 +1786,7 @@ class PicsiteController extends Controller
                         'Lain_Lain3' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1780,7 +1837,7 @@ class PicsiteController extends Controller
                         'Lain_Lain4' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1831,7 +1888,7 @@ class PicsiteController extends Controller
                         'Lain_Lain5' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documents::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -1851,85 +1908,163 @@ class PicsiteController extends Controller
                 }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
+            return redirect()->back()->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
 
         if (Auth::user()->cabang == 'Berau') {
             // dd($request);
-            $request->validate([
-                'beraufile1'=> 'mimes:pdf|max:3072' ,
-                    'beraufile2'=> 'mimes:pdf|max:3072' ,
-                    'beraufile3'=> 'mimes:pdf|max:3072' ,
-                    'beraufile4'=> 'mimes:pdf|max:3072' ,
-                    'beraufile5'=> 'mimes:pdf|max:3072' ,
-                    'beraufile6'=> 'mimes:pdf|max:3072' ,
-                    'beraufile7'=> 'mimes:pdf|max:3072' ,
-                    'beraufile8'=> 'mimes:pdf|max:3072' ,
-                    'beraufile9'=> 'mimes:pdf|max:3072' ,
-                    'beraufile10'=> 'mimes:pdf|max:3072' ,
-                    'beraufile11'=> 'mimes:pdf|max:3072' ,
-                    'beraufile12'=> 'mimes:pdf|max:3072' ,
-                    'beraufile13'=> 'mimes:pdf|max:3072' ,
-                    'beraufile14'=> 'mimes:pdf|max:3072' ,
-                    'beraufile15'=> 'mimes:pdf|max:3072' ,
-                    'beraufile16'=> 'mimes:pdf|max:3072' ,
-                    'beraufile17'=> 'mimes:pdf|max:3072' ,
-                    'beraufile18'=> 'mimes:pdf|max:3072' ,
-                    'beraufile19'=> 'mimes:pdf|max:3072' ,
-                    'beraufile20'=> 'mimes:pdf|max:3072' , 
-                    'beraufile21'=> 'mimes:pdf|max:3072' ,
-                    'beraufile22'=> 'mimes:pdf|max:3072' ,
-                    'beraufile23'=> 'mimes:pdf|max:3072' ,
-                    'beraufile24'=> 'mimes:pdf|max:3072' , 
-                    'beraufile25'=> 'mimes:pdf|max:3072' ,
-                    'beraufile26'=> 'mimes:pdf|max:3072' ,
-                    'beraufile27'=> 'mimes:pdf|max:3072' ,
-                    'beraufile28'=> 'mimes:pdf|max:3072' ,
-                    'beraufile29'=> 'mimes:pdf|max:3072' ,
-                    'beraufile30'=> 'mimes:pdf|max:3072' ,
-                    'beraufile31'=> 'mimes:pdf|max:3072' ,
-                    'beraufile32'=> 'mimes:pdf|max:3072' ,
-                    'beraufile33'=> 'mimes:pdf|max:3072' ,
-                    'beraufile34'=> 'mimes:pdf|max:3072' ,
-                'dana1' => 'nullable|string|min:4|max:15' ,
-                    'dana2' => 'nullable|string|min:4|max:15' ,
-                    'dana3' => 'nullable|string|min:4|max:15' ,
-                    'dana4' => 'nullable|string|min:4|max:15' ,
-                    'dana5' => 'nullable|string|min:4|max:15' , 
-                    'dana6' => 'nullable|string|min:4|max:15' ,
-                    'dana7' => 'nullable|string|min:4|max:15' ,
-                    'dana8' => 'nullable|string|min:4|max:15' ,
-                    'dana9' => 'nullable|string|min:4|max:15' ,
-                    'dana10' => 'nullable|string|min:4|max:15' ,
-                    'dana11' => 'nullable|string|min:4|max:15' ,
-                    'dana12' => 'nullable|string|min:4|max:15' ,
-                    'dana13' => 'nullable|string|min:4|max:15' ,
-                    'dana14' => 'nullable|string|min:4|max:15' ,
-                    'dana15' => 'nullable|string|min:4|max:15' ,
-                    'dana16' => 'nullable|string|min:4|max:15' ,
-                    'dana17' => 'nullable|string|min:4|max:15' ,
-                    'dana18' => 'nullable|string|min:4|max:15' ,
-                    'dana19' => 'nullable|string|min:4|max:15' ,
-                    'dana20' => 'nullable|string|min:4|max:15' ,
-                    'dana21' => 'nullable|string|min:4|max:15' ,
-                    'dana22' => 'nullable|string|min:4|max:15' ,
-                    'dana23' => 'nullable|string|min:4|max:15' ,
-                    'dana24' => 'nullable|string|min:4|max:15' ,
-                    'dana25' => 'nullable|string|min:4|max:15' ,
-                    'dana26' => 'nullable|string|min:4|max:15' ,
-                    'dana27' => 'nullable|string|min:4|max:15' ,
-                    'dana28' => 'nullable|string|min:4|max:15' ,
-                    'dana29' => 'nullable|string|min:4|max:15' , 
-                    'dana30' => 'nullable|string|min:4|max:15' ,
-                    'dana31' => 'nullable|string|min:4|max:15' ,
-                    'dana32' => 'nullable|string|min:4|max:15' ,
-                    'dana33' => 'nullable|string|min:4|max:15' ,
-                    'dana34' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'nullable|string',
-                'Nama_Barge' => 'nullable|string',
-                'no_mohon' => 'required|string',
-                'no_PR' => 'required|string',
-            ]);
+            if($request->type_upload == 'Fund_Req'){
+                $request->validate([
+                    'beraufile1'=> 'mimes:pdf|max:3072' ,
+                        'beraufile2'=> 'mimes:pdf|max:3072' ,
+                        'beraufile3'=> 'mimes:pdf|max:3072' ,
+                        'beraufile4'=> 'mimes:pdf|max:3072' ,
+                        'beraufile5'=> 'mimes:pdf|max:3072' ,
+                        'beraufile6'=> 'mimes:pdf|max:3072' ,
+                        'beraufile7'=> 'mimes:pdf|max:3072' ,
+                        'beraufile8'=> 'mimes:pdf|max:3072' ,
+                        'beraufile9'=> 'mimes:pdf|max:3072' ,
+                        'beraufile10'=> 'mimes:pdf|max:3072' ,
+                        'beraufile11'=> 'mimes:pdf|max:3072' ,
+                        'beraufile12'=> 'mimes:pdf|max:3072' ,
+                        'beraufile13'=> 'mimes:pdf|max:3072' ,
+                        'beraufile14'=> 'mimes:pdf|max:3072' ,
+                        'beraufile15'=> 'mimes:pdf|max:3072' ,
+                        'beraufile16'=> 'mimes:pdf|max:3072' ,
+                        'beraufile17'=> 'mimes:pdf|max:3072' ,
+                        'beraufile18'=> 'mimes:pdf|max:3072' ,
+                        'beraufile19'=> 'mimes:pdf|max:3072' ,
+                        'beraufile20'=> 'mimes:pdf|max:3072' , 
+                        'beraufile21'=> 'mimes:pdf|max:3072' ,
+                        'beraufile22'=> 'mimes:pdf|max:3072' ,
+                        'beraufile23'=> 'mimes:pdf|max:3072' ,
+                        'beraufile24'=> 'mimes:pdf|max:3072' , 
+                        'beraufile25'=> 'mimes:pdf|max:3072' ,
+                        'beraufile26'=> 'mimes:pdf|max:3072' ,
+                        'beraufile27'=> 'mimes:pdf|max:3072' ,
+                        'beraufile28'=> 'mimes:pdf|max:3072' ,
+                        'beraufile29'=> 'mimes:pdf|max:3072' ,
+                        'beraufile30'=> 'mimes:pdf|max:3072' ,
+                        'beraufile31'=> 'mimes:pdf|max:3072' ,
+                        'beraufile32'=> 'mimes:pdf|max:3072' ,
+                        'beraufile33'=> 'mimes:pdf|max:3072' ,
+                        'beraufile34'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' , 
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' , 
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'required|string',
+                    'no_PR' => 'required|string',
+                ]);
+                
+            }elseif($request->type_upload == 'Fund_Real'){
+                $request->validate([
+                    'beraufile1'=> 'mimes:pdf|max:3072' ,
+                        'beraufile2'=> 'mimes:pdf|max:3072' ,
+                        'beraufile3'=> 'mimes:pdf|max:3072' ,
+                        'beraufile4'=> 'mimes:pdf|max:3072' ,
+                        'beraufile5'=> 'mimes:pdf|max:3072' ,
+                        'beraufile6'=> 'mimes:pdf|max:3072' ,
+                        'beraufile7'=> 'mimes:pdf|max:3072' ,
+                        'beraufile8'=> 'mimes:pdf|max:3072' ,
+                        'beraufile9'=> 'mimes:pdf|max:3072' ,
+                        'beraufile10'=> 'mimes:pdf|max:3072' ,
+                        'beraufile11'=> 'mimes:pdf|max:3072' ,
+                        'beraufile12'=> 'mimes:pdf|max:3072' ,
+                        'beraufile13'=> 'mimes:pdf|max:3072' ,
+                        'beraufile14'=> 'mimes:pdf|max:3072' ,
+                        'beraufile15'=> 'mimes:pdf|max:3072' ,
+                        'beraufile16'=> 'mimes:pdf|max:3072' ,
+                        'beraufile17'=> 'mimes:pdf|max:3072' ,
+                        'beraufile18'=> 'mimes:pdf|max:3072' ,
+                        'beraufile19'=> 'mimes:pdf|max:3072' ,
+                        'beraufile20'=> 'mimes:pdf|max:3072' , 
+                        'beraufile21'=> 'mimes:pdf|max:3072' ,
+                        'beraufile22'=> 'mimes:pdf|max:3072' ,
+                        'beraufile23'=> 'mimes:pdf|max:3072' ,
+                        'beraufile24'=> 'mimes:pdf|max:3072' , 
+                        'beraufile25'=> 'mimes:pdf|max:3072' ,
+                        'beraufile26'=> 'mimes:pdf|max:3072' ,
+                        'beraufile27'=> 'mimes:pdf|max:3072' ,
+                        'beraufile28'=> 'mimes:pdf|max:3072' ,
+                        'beraufile29'=> 'mimes:pdf|max:3072' ,
+                        'beraufile30'=> 'mimes:pdf|max:3072' ,
+                        'beraufile31'=> 'mimes:pdf|max:3072' ,
+                        'beraufile32'=> 'mimes:pdf|max:3072' ,
+                        'beraufile33'=> 'mimes:pdf|max:3072' ,
+                        'beraufile34'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' , 
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' , 
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'nullable|string',
+                    'no_PR' => 'nullable|string',
+                ]);
+            }
 
             $year = date('Y');
             $month = date('m');
@@ -1970,7 +2105,7 @@ class PicsiteController extends Controller
                     'pnbp_sertifikat_konstruksi' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -2024,7 +2159,7 @@ class PicsiteController extends Controller
                         'time_upload2' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2078,7 +2213,7 @@ class PicsiteController extends Controller
                         'dana3' => $request->dana3,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2132,7 +2267,7 @@ class PicsiteController extends Controller
                         'dana4' => $request->dana4,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2186,7 +2321,7 @@ class PicsiteController extends Controller
                         'dana5' => $request->dana5,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2240,7 +2375,7 @@ class PicsiteController extends Controller
                         'dana6' => $request->dana6,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2294,7 +2429,7 @@ class PicsiteController extends Controller
                         'dana7' => $request->dana7,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2348,7 +2483,7 @@ class PicsiteController extends Controller
                         'dana8' => $request->dana8,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2402,7 +2537,7 @@ class PicsiteController extends Controller
                         'dana9' => $request->dana9,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2456,7 +2591,7 @@ class PicsiteController extends Controller
                         'dana10' => $request->dana10,
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2510,7 +2645,7 @@ class PicsiteController extends Controller
                         'time_upload11' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2564,7 +2699,7 @@ class PicsiteController extends Controller
                         'time_upload12' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2618,7 +2753,7 @@ class PicsiteController extends Controller
                         'time_upload13' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2672,7 +2807,7 @@ class PicsiteController extends Controller
                         'time_upload14' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2726,7 +2861,7 @@ class PicsiteController extends Controller
                         'time_upload15' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2780,7 +2915,7 @@ class PicsiteController extends Controller
                         'time_upload16' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2834,7 +2969,7 @@ class PicsiteController extends Controller
                         'pnbp_engine_logbook' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2888,7 +3023,7 @@ class PicsiteController extends Controller
                         'time_upload18' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2940,7 +3075,7 @@ class PicsiteController extends Controller
                         'time_upload19' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -2992,7 +3127,7 @@ class PicsiteController extends Controller
                         'time_upload20' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3044,7 +3179,7 @@ class PicsiteController extends Controller
                         'time_upload20' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3096,7 +3231,7 @@ class PicsiteController extends Controller
                         'time_upload22' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3148,7 +3283,7 @@ class PicsiteController extends Controller
                         'time_upload23' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3200,7 +3335,7 @@ class PicsiteController extends Controller
                         'time_upload24' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3252,7 +3387,7 @@ class PicsiteController extends Controller
                         'time_upload25' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3304,7 +3439,7 @@ class PicsiteController extends Controller
                         'time_upload26' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3356,7 +3491,7 @@ class PicsiteController extends Controller
                         'time_upload27' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3408,7 +3543,7 @@ class PicsiteController extends Controller
                         'time_upload28' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3460,7 +3595,7 @@ class PicsiteController extends Controller
                         'time_upload29' => date("Y-m-d h:i:s"),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3511,7 +3646,7 @@ class PicsiteController extends Controller
                         'Lain_Lain1' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3562,7 +3697,7 @@ class PicsiteController extends Controller
                         'Lain_Lain2' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3613,7 +3748,7 @@ class PicsiteController extends Controller
                         'Lain_Lain3' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3664,7 +3799,7 @@ class PicsiteController extends Controller
                         'Lain_Lain4' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3715,7 +3850,7 @@ class PicsiteController extends Controller
                         'Lain_Lain5' => basename($path),
                     ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentberau::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3735,95 +3870,184 @@ class PicsiteController extends Controller
                 }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
+            return redirect()->back()->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
             
         if (Auth::user()->cabang == 'Banjarmasin') {
-            $request->validate([
-                //Banjarmasin
-                'banjarmasinfile1'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile2'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile3'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile4'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile5'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile6'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile7'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile8'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile9'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile10'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile11'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile12'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile13'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile14'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile15'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile16'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile17'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile18'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile19'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile20'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile21'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile22'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile23'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile24'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile25'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile26'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile27'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile28'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile29'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile30'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile31'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile32'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile33'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile34'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile35'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile36'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile37'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile38'=> 'mimes:pdf|max:3072' ,
-                    'banjarmasinfile39'=> 'mimes:pdf|max:3072' ,
-                'dana1' => 'nullable|string|min:4|max:15' ,
-                    'dana2' => 'nullable|string|min:4|max:15' ,
-                    'dana3' => 'nullable|string|min:4|max:15' ,
-                    'dana4' => 'nullable|string|min:4|max:15' ,
-                    'dana5' => 'nullable|string|min:4|max:15' ,
-                    'dana6' => 'nullable|string|min:4|max:15' ,
-                    'dana7' => 'nullable|string|min:4|max:15' ,
-                    'dana8' => 'nullable|string|min:4|max:15' ,
-                    'dana9' => 'nullable|string|min:4|max:15' ,
-                    'dana10' => 'nullable|string|min:4|max:15' ,
-                    'dana11' => 'nullable|string|min:4|max:15' ,
-                    'dana12' => 'nullable|string|min:4|max:15' ,
-                    'dana13' => 'nullable|string|min:4|max:15' ,
-                    'dana14' => 'nullable|string|min:4|max:15' ,
-                    'dana15' => 'nullable|string|min:4|max:15' ,
-                    'dana16' => 'nullable|string|min:4|max:15' ,
-                    'dana17' => 'nullable|string|min:4|max:15' ,
-                    'dana18' => 'nullable|string|min:4|max:15' ,
-                    'dana19' => 'nullable|string|min:4|max:15' ,
-                    'dana20' => 'nullable|string|min:4|max:15' ,
-                    'dana21' => 'nullable|string|min:4|max:15' ,
-                    'dana22' => 'nullable|string|min:4|max:15' ,
-                    'dana23' => 'nullable|string|min:4|max:15' ,
-                    'dana24' => 'nullable|string|min:4|max:15' ,
-                    'dana25' => 'nullable|string|min:4|max:15' ,
-                    'dana26' => 'nullable|string|min:4|max:15' ,
-                    'dana27' => 'nullable|string|min:4|max:15' ,
-                    'dana28' => 'nullable|string|min:4|max:15' ,
-                    'dana29' => 'nullable|string|min:4|max:15' ,
-                    'dana30' => 'nullable|string|min:4|max:15' ,
-                    'dana31' => 'nullable|string|min:4|max:15' ,
-                    'dana32' => 'nullable|string|min:4|max:15' ,
-                    'dana33' => 'nullable|string|min:4|max:15' ,
-                    'dana34' => 'nullable|string|min:4|max:15' ,
-                    'dana35' => 'nullable|string|min:4|max:15' ,
-                    'dana36' => 'nullable|string|min:4|max:15' ,
-                    'dana37' => 'nullable|string|min:4|max:15' ,
-                    'dana38' => 'nullable|string|min:4|max:15' ,
-                    'dana39' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'nullable|string',
-                'Nama_Barge' => 'nullable|string',
-                'no_mohon' => 'required|string',
-                'no_PR' => 'required|string',
-            ]);
+            if($request->type_upload == 'Fund_Req'){
+                $request->validate([
+                    //Banjarmasin
+                    'banjarmasinfile1'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile2'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile3'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile4'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile5'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile6'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile7'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile8'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile9'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile10'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile11'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile12'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile13'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile14'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile15'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile16'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile17'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile18'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile19'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile20'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile21'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile22'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile23'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile24'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile25'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile26'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile27'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile28'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile29'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile30'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile31'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile32'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile33'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile34'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile35'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile36'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile37'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile38'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile39'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' ,
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' ,
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                        'dana35' => 'nullable|string|min:4|max:15' ,
+                        'dana36' => 'nullable|string|min:4|max:15' ,
+                        'dana37' => 'nullable|string|min:4|max:15' ,
+                        'dana38' => 'nullable|string|min:4|max:15' ,
+                        'dana39' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'required|string',
+                    'no_PR' => 'required|string',
+                ]);
+                
+            }elseif($request->type_upload == 'Fund_Real'){
+                $request->validate([
+                    //Banjarmasin
+                    'banjarmasinfile1'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile2'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile3'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile4'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile5'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile6'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile7'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile8'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile9'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile10'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile11'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile12'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile13'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile14'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile15'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile16'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile17'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile18'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile19'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile20'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile21'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile22'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile23'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile24'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile25'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile26'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile27'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile28'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile29'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile30'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile31'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile32'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile33'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile34'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile35'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile36'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile37'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile38'=> 'mimes:pdf|max:3072' ,
+                        'banjarmasinfile39'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' ,
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' ,
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                        'dana35' => 'nullable|string|min:4|max:15' ,
+                        'dana36' => 'nullable|string|min:4|max:15' ,
+                        'dana37' => 'nullable|string|min:4|max:15' ,
+                        'dana38' => 'nullable|string|min:4|max:15' ,
+                        'dana39' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'nullable|string',
+                    'no_PR' => 'nullable|string',
+                ]);
+            }
             $year = date('Y');
             $month = date('m');
             $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
@@ -3860,7 +4084,7 @@ class PicsiteController extends Controller
                         'perjalanan' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3911,7 +4135,7 @@ class PicsiteController extends Controller
                         'sertifikat_keselamatan' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -3962,7 +4186,7 @@ class PicsiteController extends Controller
                         'sertifikat_anti_fauling' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4013,7 +4237,7 @@ class PicsiteController extends Controller
                         'surveyor' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4064,7 +4288,7 @@ class PicsiteController extends Controller
                         'drawing&stability' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4115,7 +4339,7 @@ class PicsiteController extends Controller
                         'laporan_pengeringan' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4166,7 +4390,7 @@ class PicsiteController extends Controller
                         'berita_acara_lambung' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4217,7 +4441,7 @@ class PicsiteController extends Controller
                         'laporan_pemeriksaan_anti_faulin' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4268,7 +4492,7 @@ class PicsiteController extends Controller
                         'laporan_pemeriksaan_anti_faulin' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4319,7 +4543,7 @@ class PicsiteController extends Controller
                         'laporan_pemeriksaan_radio' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4370,7 +4594,7 @@ class PicsiteController extends Controller
                         'laporan_pemeriksaan_snpp' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4421,7 +4645,7 @@ class PicsiteController extends Controller
                         'bki' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4472,7 +4696,7 @@ class PicsiteController extends Controller
                         'snpp_permanen' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4523,7 +4747,7 @@ class PicsiteController extends Controller
                         'snpp_endorse' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4574,7 +4798,7 @@ class PicsiteController extends Controller
                         'surat_laut_endorse' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4625,7 +4849,7 @@ class PicsiteController extends Controller
                         'surat_laut_permanen' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4676,7 +4900,7 @@ class PicsiteController extends Controller
                         'compas_seren' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4727,7 +4951,7 @@ class PicsiteController extends Controller
                         'keselamatan_(tahunan)' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4778,7 +5002,7 @@ class PicsiteController extends Controller
                         'keselamatan_(pengaturan_dok)' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4829,7 +5053,7 @@ class PicsiteController extends Controller
                         'keselamatan_(dok)' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4880,7 +5104,7 @@ class PicsiteController extends Controller
                         'garis_muat' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4931,7 +5155,7 @@ class PicsiteController extends Controller
                         'dispensasi_isr' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -4982,7 +5206,7 @@ class PicsiteController extends Controller
                         'life_raft_1_2_pemadam' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5033,7 +5257,7 @@ class PicsiteController extends Controller
                         'sscec' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5084,7 +5308,7 @@ class PicsiteController extends Controller
                         'seatrail' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5135,7 +5359,7 @@ class PicsiteController extends Controller
                         'laporan_pemeriksaan_umum' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5186,7 +5410,7 @@ class PicsiteController extends Controller
                         'laporan_pemeriksaan_mesin' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5237,7 +5461,7 @@ class PicsiteController extends Controller
                         'nota_dinas_perubahan_kawasan' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5288,7 +5512,7 @@ class PicsiteController extends Controller
                         'PAS' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5339,7 +5563,7 @@ class PicsiteController extends Controller
                         'invoice_bki' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5390,7 +5614,7 @@ class PicsiteController extends Controller
                         'safe_manning' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5441,7 +5665,7 @@ class PicsiteController extends Controller
                         'bki_lambung' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5492,7 +5716,7 @@ class PicsiteController extends Controller
                         'bki_mesin' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5543,7 +5767,7 @@ class PicsiteController extends Controller
                         'bki_Garis_muat' => basename($path),
                         ]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5593,7 +5817,7 @@ class PicsiteController extends Controller
                         'Lain_Lain1' => basename($path),
                         ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5642,7 +5866,7 @@ class PicsiteController extends Controller
                         'Lain_Lain2' => basename($path),
                         ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5691,7 +5915,7 @@ class PicsiteController extends Controller
                         'Lain_Lain3' => basename($path),
                         ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5740,7 +5964,7 @@ class PicsiteController extends Controller
                         'Lain_Lain4' => basename($path),
                         ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5789,7 +6013,7 @@ class PicsiteController extends Controller
                         'Lain_Lain5' => basename($path),
                         ]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentbanjarmasin::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -5808,113 +6032,218 @@ class PicsiteController extends Controller
                 }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
+            return redirect()->back()->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
             
         if (Auth::user()->cabang == 'Samarinda' or Auth::user()->cabang == 'Kendari' or Auth::user()->cabang == 'Morosi') {
             //Samarinda
-            $request->validate([
-                'samarindafile1' => 'mimes:pdf|max:3072' , 
-                    'samarindafile2' => 'mimes:pdf|max:3072' ,
-                    'samarindafile3' => 'mimes:pdf|max:3072' ,
-                    'samarindafile4' => 'mimes:pdf|max:3072' ,
-                    'samarindafile5' => 'mimes:pdf|max:3072' ,
-                    'samarindafile6' => 'mimes:pdf|max:3072' ,
-                    'samarindafile7' => 'mimes:pdf|max:3072' ,
-                    'samarindafile8' => 'mimes:pdf|max:3072' ,
-                    'samarindafile9' => 'mimes:pdf|max:3072' ,
-                    'samarindafile10'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile11'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile12'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile13'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile14'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile15'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile16'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile17'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile18'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile19'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile20'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile21'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile22'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile23'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile24'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile25'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile26'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile27'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile28'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile29'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile30'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile31'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile32'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile33'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile34'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile35'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile36'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile37'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile38'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile39'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile40'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile41'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile42'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile43'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile44'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile45'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile46'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile47'=> 'mimes:pdf|max:3072' ,
-                    'samarindafile48'=> 'mimes:pdf|max:3072' ,
-                'dana1' => 'nullable|string|min:4|max:15' ,
-                    'dana2' => 'nullable|string|min:4|max:15' ,
-                    'dana3' => 'nullable|string|min:4|max:15' ,
-                    'dana4' => 'nullable|string|min:4|max:15' ,
-                    'dana5' => 'nullable|string|min:4|max:15' , 
-                    'dana6' => 'nullable|string|min:4|max:15' ,
-                    'dana7' => 'nullable|string|min:4|max:15' ,
-                    'dana8' => 'nullable|string|min:4|max:15' ,
-                    'dana9' => 'nullable|string|min:4|max:15' ,
-                    'dana10' => 'nullable|string|min:4|max:15' ,
-                    'dana11' => 'nullable|string|min:4|max:15' ,
-                    'dana12' => 'nullable|string|min:4|max:15' ,
-                    'dana13' => 'nullable|string|min:4|max:15' ,
-                    'dana14' => 'nullable|string|min:4|max:15' ,
-                    'dana15' => 'nullable|string|min:4|max:15' ,
-                    'dana16' => 'nullable|string|min:4|max:15' ,
-                    'dana17' => 'nullable|string|min:4|max:15' ,
-                    'dana18' => 'nullable|string|min:4|max:15' ,
-                    'dana19' => 'nullable|string|min:4|max:15' ,
-                    'dana20' => 'nullable|string|min:4|max:15' ,
-                    'dana21' => 'nullable|string|min:4|max:15' ,
-                    'dana22' => 'nullable|string|min:4|max:15' ,
-                    'dana23' => 'nullable|string|min:4|max:15' ,
-                    'dana24' => 'nullable|string|min:4|max:15' ,
-                    'dana25' => 'nullable|string|min:4|max:15' ,
-                    'dana26' => 'nullable|string|min:4|max:15' ,
-                    'dana27' => 'nullable|string|min:4|max:15' ,
-                    'dana28' => 'nullable|string|min:4|max:15' ,
-                    'dana29' => 'nullable|string|min:4|max:15' , 
-                    'dana30' => 'nullable|string|min:4|max:15' ,
-                    'dana31' => 'nullable|string|min:4|max:15' ,
-                    'dana32' => 'nullable|string|min:4|max:15' ,
-                    'dana33' => 'nullable|string|min:4|max:15' ,
-                    'dana34' => 'nullable|string|min:4|max:15' ,
-                    'dana35' => 'nullable|string|min:4|max:15' ,
-                    'dana36' => 'nullable|string|min:4|max:15' ,
-                    'dana37' => 'nullable|string|min:4|max:15' ,
-                    'dana38' => 'nullable|string|min:4|max:15' ,
-                    'dana39' => 'nullable|string|min:4|max:15' , 
-                    'dana40' => 'nullable|string|min:4|max:15' ,
-                    'dana41' => 'nullable|string|min:4|max:15' ,
-                    'dana42' => 'nullable|string|min:4|max:15' ,
-                    'dana43' => 'nullable|string|min:4|max:15' ,
-                    'dana44' => 'nullable|string|min:4|max:15' ,
-                    'dana45' => 'nullable|string|min:4|max:15' ,
-                    'dana46' => 'nullable|string|min:4|max:15' ,
-                    'dana47' => 'nullable|string|min:4|max:15' ,
-                    'dana48' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'nullable|string',
-                'Nama_Barge' => 'nullable|string',
-                'no_mohon' => 'required|string',
-                'no_PR' => 'required|string',
-            ]);
+            if($request->type_upload == 'Fund_Req'){
+                $request->validate([
+                    'samarindafile1' => 'mimes:pdf|max:3072' , 
+                        'samarindafile2' => 'mimes:pdf|max:3072' ,
+                        'samarindafile3' => 'mimes:pdf|max:3072' ,
+                        'samarindafile4' => 'mimes:pdf|max:3072' ,
+                        'samarindafile5' => 'mimes:pdf|max:3072' ,
+                        'samarindafile6' => 'mimes:pdf|max:3072' ,
+                        'samarindafile7' => 'mimes:pdf|max:3072' ,
+                        'samarindafile8' => 'mimes:pdf|max:3072' ,
+                        'samarindafile9' => 'mimes:pdf|max:3072' ,
+                        'samarindafile10'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile11'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile12'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile13'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile14'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile15'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile16'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile17'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile18'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile19'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile20'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile21'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile22'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile23'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile24'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile25'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile26'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile27'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile28'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile29'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile30'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile31'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile32'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile33'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile34'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile35'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile36'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile37'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile38'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile39'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile40'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile41'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile42'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile43'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile44'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile45'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile46'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile47'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile48'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' , 
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' , 
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                        'dana35' => 'nullable|string|min:4|max:15' ,
+                        'dana36' => 'nullable|string|min:4|max:15' ,
+                        'dana37' => 'nullable|string|min:4|max:15' ,
+                        'dana38' => 'nullable|string|min:4|max:15' ,
+                        'dana39' => 'nullable|string|min:4|max:15' , 
+                        'dana40' => 'nullable|string|min:4|max:15' ,
+                        'dana41' => 'nullable|string|min:4|max:15' ,
+                        'dana42' => 'nullable|string|min:4|max:15' ,
+                        'dana43' => 'nullable|string|min:4|max:15' ,
+                        'dana44' => 'nullable|string|min:4|max:15' ,
+                        'dana45' => 'nullable|string|min:4|max:15' ,
+                        'dana46' => 'nullable|string|min:4|max:15' ,
+                        'dana47' => 'nullable|string|min:4|max:15' ,
+                        'dana48' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'required|string',
+                    'no_PR' => 'required|string',
+                ]);
+            }elseif($request->type_upload == 'Fund_Real'){
+                $request->validate([
+                    'samarindafile1' => 'mimes:pdf|max:3072' , 
+                        'samarindafile2' => 'mimes:pdf|max:3072' ,
+                        'samarindafile3' => 'mimes:pdf|max:3072' ,
+                        'samarindafile4' => 'mimes:pdf|max:3072' ,
+                        'samarindafile5' => 'mimes:pdf|max:3072' ,
+                        'samarindafile6' => 'mimes:pdf|max:3072' ,
+                        'samarindafile7' => 'mimes:pdf|max:3072' ,
+                        'samarindafile8' => 'mimes:pdf|max:3072' ,
+                        'samarindafile9' => 'mimes:pdf|max:3072' ,
+                        'samarindafile10'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile11'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile12'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile13'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile14'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile15'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile16'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile17'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile18'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile19'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile20'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile21'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile22'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile23'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile24'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile25'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile26'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile27'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile28'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile29'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile30'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile31'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile32'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile33'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile34'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile35'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile36'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile37'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile38'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile39'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile40'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile41'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile42'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile43'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile44'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile45'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile46'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile47'=> 'mimes:pdf|max:3072' ,
+                        'samarindafile48'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' , 
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' , 
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                        'dana35' => 'nullable|string|min:4|max:15' ,
+                        'dana36' => 'nullable|string|min:4|max:15' ,
+                        'dana37' => 'nullable|string|min:4|max:15' ,
+                        'dana38' => 'nullable|string|min:4|max:15' ,
+                        'dana39' => 'nullable|string|min:4|max:15' , 
+                        'dana40' => 'nullable|string|min:4|max:15' ,
+                        'dana41' => 'nullable|string|min:4|max:15' ,
+                        'dana42' => 'nullable|string|min:4|max:15' ,
+                        'dana43' => 'nullable|string|min:4|max:15' ,
+                        'dana44' => 'nullable|string|min:4|max:15' ,
+                        'dana45' => 'nullable|string|min:4|max:15' ,
+                        'dana46' => 'nullable|string|min:4|max:15' ,
+                        'dana47' => 'nullable|string|min:4|max:15' ,
+                        'dana48' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'nullable|string',
+                    'no_PR' => 'nullable|string',
+                ]);
+            }
             $year = date('Y');
             $month = date('m');
             $mergenama_kapal = $request->nama_kapal . '-' . $request->Nama_Barge;
@@ -5951,7 +6280,7 @@ class PicsiteController extends Controller
                         'time_upload1' => date("Y-m-d h:i:s"),
                         'sertifikat_keselamatan(perpanjangan)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6001,7 +6330,7 @@ class PicsiteController extends Controller
                         'time_upload2' => date("Y-m-d h:i:s"),
                         'perubahan_ok_13_ke_ok_1' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6051,7 +6380,7 @@ class PicsiteController extends Controller
                         'time_upload3' => date("Y-m-d h:i:s"),
                         'keselamatan_(tahunan)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6101,7 +6430,7 @@ class PicsiteController extends Controller
                         'time_upload4' => date("Y-m-d h:i:s"),
                         'keselamatan_(dok)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6151,7 +6480,7 @@ class PicsiteController extends Controller
                         'time_upload5' => date("Y-m-d h:i:s"),
                         'keselamatan_(pengaturan_dok)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6201,7 +6530,7 @@ class PicsiteController extends Controller
                         'time_upload6' => date("Y-m-d h:i:s"),
                         'keselamatan_(penundaan_dok)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6251,7 +6580,7 @@ class PicsiteController extends Controller
                         'time_upload7' => date("Y-m-d h:i:s"),
                         'sertifikat_garis_muat' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6301,7 +6630,7 @@ class PicsiteController extends Controller
                         'time_upload8' => date("Y-m-d h:i:s"),
                         'laporan_pemeriksaan_garis_muat' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6351,7 +6680,7 @@ class PicsiteController extends Controller
                             'time_upload9' => date("Y-m-d h:i:s"),
                             'sertifikat_anti_fauling' => basename($path),]);
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentsamarinda::create([
                             'upload_type' => 'Fund_Req',
                             'no_PR' => $request->no_PR ,
@@ -6401,7 +6730,7 @@ class PicsiteController extends Controller
                         'time_upload10' => date("Y-m-d h:i:s"),
                         'surat_laut_permanen' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6451,7 +6780,7 @@ class PicsiteController extends Controller
                         'time_upload11' => date("Y-m-d h:i:s"),
                         'surat_laut_endorse' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -6501,7 +6830,7 @@ class PicsiteController extends Controller
                         'time_upload12' => date("Y-m-d h:i:s"),
                         'call_sign' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6551,7 +6880,7 @@ class PicsiteController extends Controller
                         'time_upload13' => date("Y-m-d h:i:s"),
                         'perubahan_sertifikat_keselamatan' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6601,7 +6930,7 @@ class PicsiteController extends Controller
                         'time_upload14' => date("Y-m-d h:i:s"),
                         'perubahan_kawasan_tanpa_notadin' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6651,7 +6980,7 @@ class PicsiteController extends Controller
                         'time_upload15' => date("Y-m-d h:i:s"),
                         'snpp_permanen' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -6701,7 +7030,7 @@ class PicsiteController extends Controller
                         'time_upload16' => date("Y-m-d h:i:s"),
                         'snpp_endorse' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -6751,7 +7080,7 @@ class PicsiteController extends Controller
                         'time_upload17' => date("Y-m-d h:i:s"),
                         'laporan_pemeriksaan_snpp' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -6801,7 +7130,7 @@ class PicsiteController extends Controller
                         'time_upload18' => date("Y-m-d h:i:s"),
                         'laporan_pemeriksaan_keselamatan' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -6851,7 +7180,7 @@ class PicsiteController extends Controller
                         'time_upload19' => date("Y-m-d h:i:s"),
                         'buku_kesehatan' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -6901,7 +7230,7 @@ class PicsiteController extends Controller
                         'time_upload20' => date("Y-m-d h:i:s"),
                         'sertifikat_sanitasi_water&p3k' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -6951,7 +7280,7 @@ class PicsiteController extends Controller
                         'time_upload21' => date("Y-m-d h:i:s"),
                         'pengaturan_non_ke_klas_bki' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7001,7 +7330,7 @@ class PicsiteController extends Controller
                         'time_upload22' => date("Y-m-d h:i:s"),
                         'pengaturan_klas_bki_(dok_ss)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7051,7 +7380,7 @@ class PicsiteController extends Controller
                         'time_upload23' => date("Y-m-d h:i:s"),
                         'surveyor_endorse_tahunan_bki' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7101,7 +7430,7 @@ class PicsiteController extends Controller
                         'time_upload24' => date("Y-m-d h:i:s"),
                         'pr_supplier_bki' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7151,7 +7480,7 @@ class PicsiteController extends Controller
                         'time_upload25' => date("Y-m-d h:i:s"),
                         'balik_nama_grosse' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7201,7 +7530,7 @@ class PicsiteController extends Controller
                         'time_upload26' => date("Y-m-d h:i:s"),
                         'kapal_baru_body_(set_dokumen)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7251,7 +7580,7 @@ class PicsiteController extends Controller
                         'time_upload27' => date("Y-m-d h:i:s"),
                         'halaman_tambahan_grosse' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7301,7 +7630,7 @@ class PicsiteController extends Controller
                         'time_upload28' => date("Y-m-d h:i:s"),
                         'pnbp&pup' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7351,7 +7680,7 @@ class PicsiteController extends Controller
                         'time_upload29' => date("Y-m-d h:i:s"),
                         'laporan_pemeriksaan_anti_teriti' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7401,7 +7730,7 @@ class PicsiteController extends Controller
                         'time_upload30' => date("Y-m-d h:i:s"),
                         'surveyor_pengedokan' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                 documentsamarinda::create([
                     'upload_type' => 'Fund_Req',
                     'no_PR' => $request->no_PR ,
@@ -7451,7 +7780,7 @@ class PicsiteController extends Controller
                         'time_upload31' => date("Y-m-d h:i:s"),
                         'surveyor_penerimaan_klas_bki' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7501,7 +7830,7 @@ class PicsiteController extends Controller
                         'time_upload32' => date("Y-m-d h:i:s"),
                         'nota_tagihan_jasa_perkapalan' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7551,7 +7880,7 @@ class PicsiteController extends Controller
                         'time_upload33' => date("Y-m-d h:i:s"),
                         'gambar_kapal_baru_(bki)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7601,7 +7930,7 @@ class PicsiteController extends Controller
                         'time_upload34' => date("Y-m-d h:i:s"),
                         'samarinda_jam1nan_(clc)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7651,7 +7980,7 @@ class PicsiteController extends Controller
                         'time_upload35' => date("Y-m-d h:i:s"),
                         'surat_ukur_dalam_negeri' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7701,7 +8030,7 @@ class PicsiteController extends Controller
                         'time_upload36' => date("Y-m-d h:i:s"),
                         'penerbitan_sertifikat_kapal_baru' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7751,7 +8080,7 @@ class PicsiteController extends Controller
                         'time_upload37' => date("Y-m-d h:i:s"),
                         'buku_stabilitas' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7801,7 +8130,7 @@ class PicsiteController extends Controller
                         'time_upload38' => date("Y-m-d h:i:s"),
                         'grosse_akta' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7850,7 +8179,7 @@ class PicsiteController extends Controller
                         'time_upload39' => date("Y-m-d h:i:s"),
                         'penerbitan_nota_dinas_pertama' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7899,7 +8228,7 @@ class PicsiteController extends Controller
                         'time_upload40' => date("Y-m-d h:i:s"),
                         'penerbitan_nota_dinas_kedua' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7948,7 +8277,7 @@ class PicsiteController extends Controller
                         'time_upload41' => date("Y-m-d h:i:s"),
                         'BKI_Lambung' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -7997,7 +8326,7 @@ class PicsiteController extends Controller
                         'time_upload42' => date("Y-m-d h:i:s"),
                         'BKI_Mesin' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8046,7 +8375,7 @@ class PicsiteController extends Controller
                         'time_upload43' => date("Y-m-d h:i:s"),
                         'BKI_Garis_Muat' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8095,7 +8424,7 @@ class PicsiteController extends Controller
                         'time_upload44' => date("Y-m-d h:i:s"),
                         'Lain_Lain1' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8144,7 +8473,7 @@ class PicsiteController extends Controller
                         'time_upload45' => date("Y-m-d h:i:s"),
                         'Lain_Lain2' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8193,7 +8522,7 @@ class PicsiteController extends Controller
                         'time_upload46' => date("Y-m-d h:i:s"),
                         'Lain_Lain3' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8242,7 +8571,7 @@ class PicsiteController extends Controller
                         'time_upload47' => date("Y-m-d h:i:s"),
                         'Lain_Lain4' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8291,7 +8620,7 @@ class PicsiteController extends Controller
                         'time_upload48' => date("Y-m-d h:i:s"),
                         'Lain_Lain5' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentsamarinda::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8310,111 +8639,214 @@ class PicsiteController extends Controller
                     }
             }
             
-            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
+            return redirect()->back()->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
 
         if (Auth::user()->cabang == "Jakarta") {
             //jakarta
-            $request->validate([
-                'jktfile1' => 'mimes:pdf|max:3072' , 
-                    'jktfile2' => 'mimes:pdf|max:3072' ,
-                    'jktfile3' => 'mimes:pdf|max:3072' ,
-                    'jktfile4' => 'mimes:pdf|max:3072' ,
-                    'jktfile5' => 'mimes:pdf|max:3072' ,
-                    'jktfile6' => 'mimes:pdf|max:3072' ,
-                    'jktfile7' => 'mimes:pdf|max:3072' ,
-                    'jktfile8' => 'mimes:pdf|max:3072' ,
-                    'jktfile9' => 'mimes:pdf|max:3072' ,
-                    'jktfile10'=> 'mimes:pdf|max:3072' ,
-                    'jktfile11'=> 'mimes:pdf|max:3072' ,
-                    'jktfile12'=> 'mimes:pdf|max:3072' ,
-                    'jktfile13'=> 'mimes:pdf|max:3072' ,
-                    'jktfile14'=> 'mimes:pdf|max:3072' ,
-                    'jktfile15'=> 'mimes:pdf|max:3072' ,
-                    'jktfile16'=> 'mimes:pdf|max:3072' ,
-                    'jktfile17'=> 'mimes:pdf|max:3072' ,
-                    'jktfile18'=> 'mimes:pdf|max:3072' ,
-                    'jktfile19'=> 'mimes:pdf|max:3072' ,
-                    'jktfile20'=> 'mimes:pdf|max:3072' ,
-                    'jktfile21'=> 'mimes:pdf|max:3072' ,
-                    'jktfile22'=> 'mimes:pdf|max:3072' ,
-                    'jktfile23'=> 'mimes:pdf|max:3072' ,
-                    'jktfile24'=> 'mimes:pdf|max:3072' ,
-                    'jktfile25'=> 'mimes:pdf|max:3072' ,
-                    'jktfile26'=> 'mimes:pdf|max:3072' ,
-                    'jktfile27'=> 'mimes:pdf|max:3072' ,
-                    'jktfile28'=> 'mimes:pdf|max:3072' ,
-                    'jktfile29'=> 'mimes:pdf|max:3072' ,
-                    'jktfile30'=> 'mimes:pdf|max:3072' ,
-                    'jktfile31'=> 'mimes:pdf|max:3072' ,
-                    'jktfile32'=> 'mimes:pdf|max:3072' ,
-                    'jktfile33'=> 'mimes:pdf|max:3072' ,
-                    'jktfile34'=> 'mimes:pdf|max:3072' ,
-                    'jktfile35'=> 'mimes:pdf|max:3072' ,
-                    'jktfile36'=> 'mimes:pdf|max:3072' ,
-                    'jktfile37'=> 'mimes:pdf|max:3072' ,
-                    'jktfile38'=> 'mimes:pdf|max:3072' ,
-                    'jktfile39'=> 'mimes:pdf|max:3072' ,
-                    'jktfile40'=> 'mimes:pdf|max:3072' ,
-                    'jktfile41'=> 'mimes:pdf|max:3072' ,
-                    'jktfile42'=> 'mimes:pdf|max:3072' ,
-                    'jktfile43'=> 'mimes:pdf|max:3072' ,
-                    'jktfile44'=> 'mimes:pdf|max:3072' ,
-                    'jktfile45'=> 'mimes:pdf|max:3072' ,
-                    'jktfile46'=> 'mimes:pdf|max:3072' ,
-                    'jktfile47'=> 'mimes:pdf|max:3072' ,
-                'dana1' => 'nullable|string|min:4|max:15' ,
-                    'dana2' => 'nullable|string|min:4|max:15' ,
-                    'dana3' => 'nullable|string|min:4|max:15' ,
-                    'dana4' => 'nullable|string|min:4|max:15' ,
-                    'dana5' => 'nullable|string|min:4|max:15' , 
-                    'dana6' => 'nullable|string|min:4|max:15' ,
-                    'dana7' => 'nullable|string|min:4|max:15' ,
-                    'dana8' => 'nullable|string|min:4|max:15' ,
-                    'dana9' => 'nullable|string|min:4|max:15' ,
-                    'dana10' => 'nullable|string|min:4|max:15' ,
-                    'dana11' => 'nullable|string|min:4|max:15' ,
-                    'dana12' => 'nullable|string|min:4|max:15' ,
-                    'dana13' => 'nullable|string|min:4|max:15' ,
-                    'dana14' => 'nullable|string|min:4|max:15' ,
-                    'dana15' => 'nullable|string|min:4|max:15' ,
-                    'dana16' => 'nullable|string|min:4|max:15' ,
-                    'dana17' => 'nullable|string|min:4|max:15' ,
-                    'dana18' => 'nullable|string|min:4|max:15' ,
-                    'dana19' => 'nullable|string|min:4|max:15' ,
-                    'dana20' => 'nullable|string|min:4|max:15' ,
-                    'dana21' => 'nullable|string|min:4|max:15' ,
-                    'dana22' => 'nullable|string|min:4|max:15' ,
-                    'dana23' => 'nullable|string|min:4|max:15' ,
-                    'dana24' => 'nullable|string|min:4|max:15' ,
-                    'dana25' => 'nullable|string|min:4|max:15' ,
-                    'dana26' => 'nullable|string|min:4|max:15' ,
-                    'dana27' => 'nullable|string|min:4|max:15' ,
-                    'dana28' => 'nullable|string|min:4|max:15' ,
-                    'dana29' => 'nullable|string|min:4|max:15' , 
-                    'dana30' => 'nullable|string|min:4|max:15' ,
-                    'dana31' => 'nullable|string|min:4|max:15' ,
-                    'dana32' => 'nullable|string|min:4|max:15' ,
-                    'dana33' => 'nullable|string|min:4|max:15' ,
-                    'dana34' => 'nullable|string|min:4|max:15' ,
-                    'dana35' => 'nullable|string|min:4|max:15' ,
-                    'dana36' => 'nullable|string|min:4|max:15' ,
-                    'dana37' => 'nullable|string|min:4|max:15' ,
-                    'dana38' => 'nullable|string|min:4|max:15' ,
-                    'dana39' => 'nullable|string|min:4|max:15' , 
-                    'dana40' => 'nullable|string|min:4|max:15' ,
-                    'dana41' => 'nullable|string|min:4|max:15' ,
-                    'dana42' => 'nullable|string|min:4|max:15' ,
-                    'dana43' => 'nullable|string|min:4|max:15' ,
-                    'dana44' => 'nullable|string|min:4|max:15' ,
-                    'dana45' => 'nullable|string|min:4|max:15' ,
-                    'dana46' => 'nullable|string|min:4|max:15' ,
-                    'dana47' => 'nullable|string|min:4|max:15' ,
-                'nama_kapal' => 'nullable|string',
-                'Nama_Barge' => 'nullable|string',
-                'no_mohon' => 'required|string',
-                'no_PR' => 'required|string',
-            ]);
+            if($request->type_upload == 'Fund_Req'){
+                $request->validate([
+                    'jktfile1' => 'mimes:pdf|max:3072' , 
+                        'jktfile2' => 'mimes:pdf|max:3072' ,
+                        'jktfile3' => 'mimes:pdf|max:3072' ,
+                        'jktfile4' => 'mimes:pdf|max:3072' ,
+                        'jktfile5' => 'mimes:pdf|max:3072' ,
+                        'jktfile6' => 'mimes:pdf|max:3072' ,
+                        'jktfile7' => 'mimes:pdf|max:3072' ,
+                        'jktfile8' => 'mimes:pdf|max:3072' ,
+                        'jktfile9' => 'mimes:pdf|max:3072' ,
+                        'jktfile10'=> 'mimes:pdf|max:3072' ,
+                        'jktfile11'=> 'mimes:pdf|max:3072' ,
+                        'jktfile12'=> 'mimes:pdf|max:3072' ,
+                        'jktfile13'=> 'mimes:pdf|max:3072' ,
+                        'jktfile14'=> 'mimes:pdf|max:3072' ,
+                        'jktfile15'=> 'mimes:pdf|max:3072' ,
+                        'jktfile16'=> 'mimes:pdf|max:3072' ,
+                        'jktfile17'=> 'mimes:pdf|max:3072' ,
+                        'jktfile18'=> 'mimes:pdf|max:3072' ,
+                        'jktfile19'=> 'mimes:pdf|max:3072' ,
+                        'jktfile20'=> 'mimes:pdf|max:3072' ,
+                        'jktfile21'=> 'mimes:pdf|max:3072' ,
+                        'jktfile22'=> 'mimes:pdf|max:3072' ,
+                        'jktfile23'=> 'mimes:pdf|max:3072' ,
+                        'jktfile24'=> 'mimes:pdf|max:3072' ,
+                        'jktfile25'=> 'mimes:pdf|max:3072' ,
+                        'jktfile26'=> 'mimes:pdf|max:3072' ,
+                        'jktfile27'=> 'mimes:pdf|max:3072' ,
+                        'jktfile28'=> 'mimes:pdf|max:3072' ,
+                        'jktfile29'=> 'mimes:pdf|max:3072' ,
+                        'jktfile30'=> 'mimes:pdf|max:3072' ,
+                        'jktfile31'=> 'mimes:pdf|max:3072' ,
+                        'jktfile32'=> 'mimes:pdf|max:3072' ,
+                        'jktfile33'=> 'mimes:pdf|max:3072' ,
+                        'jktfile34'=> 'mimes:pdf|max:3072' ,
+                        'jktfile35'=> 'mimes:pdf|max:3072' ,
+                        'jktfile36'=> 'mimes:pdf|max:3072' ,
+                        'jktfile37'=> 'mimes:pdf|max:3072' ,
+                        'jktfile38'=> 'mimes:pdf|max:3072' ,
+                        'jktfile39'=> 'mimes:pdf|max:3072' ,
+                        'jktfile40'=> 'mimes:pdf|max:3072' ,
+                        'jktfile41'=> 'mimes:pdf|max:3072' ,
+                        'jktfile42'=> 'mimes:pdf|max:3072' ,
+                        'jktfile43'=> 'mimes:pdf|max:3072' ,
+                        'jktfile44'=> 'mimes:pdf|max:3072' ,
+                        'jktfile45'=> 'mimes:pdf|max:3072' ,
+                        'jktfile46'=> 'mimes:pdf|max:3072' ,
+                        'jktfile47'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' , 
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' , 
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                        'dana35' => 'nullable|string|min:4|max:15' ,
+                        'dana36' => 'nullable|string|min:4|max:15' ,
+                        'dana37' => 'nullable|string|min:4|max:15' ,
+                        'dana38' => 'nullable|string|min:4|max:15' ,
+                        'dana39' => 'nullable|string|min:4|max:15' , 
+                        'dana40' => 'nullable|string|min:4|max:15' ,
+                        'dana41' => 'nullable|string|min:4|max:15' ,
+                        'dana42' => 'nullable|string|min:4|max:15' ,
+                        'dana43' => 'nullable|string|min:4|max:15' ,
+                        'dana44' => 'nullable|string|min:4|max:15' ,
+                        'dana45' => 'nullable|string|min:4|max:15' ,
+                        'dana46' => 'nullable|string|min:4|max:15' ,
+                        'dana47' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'required|string',
+                    'no_PR' => 'required|string',
+                ]);
+            }elseif($request->type_upload == 'Fund_Real'){
+                $request->validate([
+                    'jktfile1' => 'mimes:pdf|max:3072' , 
+                        'jktfile2' => 'mimes:pdf|max:3072' ,
+                        'jktfile3' => 'mimes:pdf|max:3072' ,
+                        'jktfile4' => 'mimes:pdf|max:3072' ,
+                        'jktfile5' => 'mimes:pdf|max:3072' ,
+                        'jktfile6' => 'mimes:pdf|max:3072' ,
+                        'jktfile7' => 'mimes:pdf|max:3072' ,
+                        'jktfile8' => 'mimes:pdf|max:3072' ,
+                        'jktfile9' => 'mimes:pdf|max:3072' ,
+                        'jktfile10'=> 'mimes:pdf|max:3072' ,
+                        'jktfile11'=> 'mimes:pdf|max:3072' ,
+                        'jktfile12'=> 'mimes:pdf|max:3072' ,
+                        'jktfile13'=> 'mimes:pdf|max:3072' ,
+                        'jktfile14'=> 'mimes:pdf|max:3072' ,
+                        'jktfile15'=> 'mimes:pdf|max:3072' ,
+                        'jktfile16'=> 'mimes:pdf|max:3072' ,
+                        'jktfile17'=> 'mimes:pdf|max:3072' ,
+                        'jktfile18'=> 'mimes:pdf|max:3072' ,
+                        'jktfile19'=> 'mimes:pdf|max:3072' ,
+                        'jktfile20'=> 'mimes:pdf|max:3072' ,
+                        'jktfile21'=> 'mimes:pdf|max:3072' ,
+                        'jktfile22'=> 'mimes:pdf|max:3072' ,
+                        'jktfile23'=> 'mimes:pdf|max:3072' ,
+                        'jktfile24'=> 'mimes:pdf|max:3072' ,
+                        'jktfile25'=> 'mimes:pdf|max:3072' ,
+                        'jktfile26'=> 'mimes:pdf|max:3072' ,
+                        'jktfile27'=> 'mimes:pdf|max:3072' ,
+                        'jktfile28'=> 'mimes:pdf|max:3072' ,
+                        'jktfile29'=> 'mimes:pdf|max:3072' ,
+                        'jktfile30'=> 'mimes:pdf|max:3072' ,
+                        'jktfile31'=> 'mimes:pdf|max:3072' ,
+                        'jktfile32'=> 'mimes:pdf|max:3072' ,
+                        'jktfile33'=> 'mimes:pdf|max:3072' ,
+                        'jktfile34'=> 'mimes:pdf|max:3072' ,
+                        'jktfile35'=> 'mimes:pdf|max:3072' ,
+                        'jktfile36'=> 'mimes:pdf|max:3072' ,
+                        'jktfile37'=> 'mimes:pdf|max:3072' ,
+                        'jktfile38'=> 'mimes:pdf|max:3072' ,
+                        'jktfile39'=> 'mimes:pdf|max:3072' ,
+                        'jktfile40'=> 'mimes:pdf|max:3072' ,
+                        'jktfile41'=> 'mimes:pdf|max:3072' ,
+                        'jktfile42'=> 'mimes:pdf|max:3072' ,
+                        'jktfile43'=> 'mimes:pdf|max:3072' ,
+                        'jktfile44'=> 'mimes:pdf|max:3072' ,
+                        'jktfile45'=> 'mimes:pdf|max:3072' ,
+                        'jktfile46'=> 'mimes:pdf|max:3072' ,
+                        'jktfile47'=> 'mimes:pdf|max:3072' ,
+                    'dana1' => 'nullable|string|min:4|max:15' ,
+                        'dana2' => 'nullable|string|min:4|max:15' ,
+                        'dana3' => 'nullable|string|min:4|max:15' ,
+                        'dana4' => 'nullable|string|min:4|max:15' ,
+                        'dana5' => 'nullable|string|min:4|max:15' , 
+                        'dana6' => 'nullable|string|min:4|max:15' ,
+                        'dana7' => 'nullable|string|min:4|max:15' ,
+                        'dana8' => 'nullable|string|min:4|max:15' ,
+                        'dana9' => 'nullable|string|min:4|max:15' ,
+                        'dana10' => 'nullable|string|min:4|max:15' ,
+                        'dana11' => 'nullable|string|min:4|max:15' ,
+                        'dana12' => 'nullable|string|min:4|max:15' ,
+                        'dana13' => 'nullable|string|min:4|max:15' ,
+                        'dana14' => 'nullable|string|min:4|max:15' ,
+                        'dana15' => 'nullable|string|min:4|max:15' ,
+                        'dana16' => 'nullable|string|min:4|max:15' ,
+                        'dana17' => 'nullable|string|min:4|max:15' ,
+                        'dana18' => 'nullable|string|min:4|max:15' ,
+                        'dana19' => 'nullable|string|min:4|max:15' ,
+                        'dana20' => 'nullable|string|min:4|max:15' ,
+                        'dana21' => 'nullable|string|min:4|max:15' ,
+                        'dana22' => 'nullable|string|min:4|max:15' ,
+                        'dana23' => 'nullable|string|min:4|max:15' ,
+                        'dana24' => 'nullable|string|min:4|max:15' ,
+                        'dana25' => 'nullable|string|min:4|max:15' ,
+                        'dana26' => 'nullable|string|min:4|max:15' ,
+                        'dana27' => 'nullable|string|min:4|max:15' ,
+                        'dana28' => 'nullable|string|min:4|max:15' ,
+                        'dana29' => 'nullable|string|min:4|max:15' , 
+                        'dana30' => 'nullable|string|min:4|max:15' ,
+                        'dana31' => 'nullable|string|min:4|max:15' ,
+                        'dana32' => 'nullable|string|min:4|max:15' ,
+                        'dana33' => 'nullable|string|min:4|max:15' ,
+                        'dana34' => 'nullable|string|min:4|max:15' ,
+                        'dana35' => 'nullable|string|min:4|max:15' ,
+                        'dana36' => 'nullable|string|min:4|max:15' ,
+                        'dana37' => 'nullable|string|min:4|max:15' ,
+                        'dana38' => 'nullable|string|min:4|max:15' ,
+                        'dana39' => 'nullable|string|min:4|max:15' , 
+                        'dana40' => 'nullable|string|min:4|max:15' ,
+                        'dana41' => 'nullable|string|min:4|max:15' ,
+                        'dana42' => 'nullable|string|min:4|max:15' ,
+                        'dana43' => 'nullable|string|min:4|max:15' ,
+                        'dana44' => 'nullable|string|min:4|max:15' ,
+                        'dana45' => 'nullable|string|min:4|max:15' ,
+                        'dana46' => 'nullable|string|min:4|max:15' ,
+                        'dana47' => 'nullable|string|min:4|max:15' ,
+                    'nama_kapal' => 'nullable|string',
+                    'Nama_Barge' => 'nullable|string',
+                    'no_mohon' => 'nullable|string',
+                    'no_PR' => 'nullable|string',
+                ]);
+            }
 
             $year = date('Y');
             $month = date('m');
@@ -8452,7 +8884,7 @@ class PicsiteController extends Controller
                         'time_upload1' => date("Y-m-d h:i:s"),
                         'pnbp_rpt' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8502,7 +8934,7 @@ class PicsiteController extends Controller
                         'pps' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8552,7 +8984,7 @@ class PicsiteController extends Controller
                         'pnbp_spesifikasi_kapal' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8602,7 +9034,7 @@ class PicsiteController extends Controller
                         'anti_fauling_permanen' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8652,7 +9084,7 @@ class PicsiteController extends Controller
                         'pnbp_pemeriksaan_anti_fauling' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8702,7 +9134,7 @@ class PicsiteController extends Controller
                         'snpp_permanen' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8752,7 +9184,7 @@ class PicsiteController extends Controller
                         'pengesahan_gambar' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8802,7 +9234,7 @@ class PicsiteController extends Controller
                         'surat_laut_permanen' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8852,7 +9284,7 @@ class PicsiteController extends Controller
                         'pnbp_surat_laut' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8902,7 +9334,7 @@ class PicsiteController extends Controller
                         'pnbp_surat_laut_(ubah_pemilik)' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -8952,7 +9384,7 @@ class PicsiteController extends Controller
                         'clc_bunker' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9002,7 +9434,7 @@ class PicsiteController extends Controller
                             'nota_dinas_penundaan_dok_i' => basename($path),]);
 
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
                             'no_PR' => $request->no_PR ,
@@ -9052,7 +9484,7 @@ class PicsiteController extends Controller
                             'nota_dinas_penundaan_dok_ii' => basename($path),]);
 
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
                             'no_PR' => $request->no_PR ,
@@ -9102,7 +9534,7 @@ class PicsiteController extends Controller
                             'nota_dinas_perubahan_kawasan' => basename($path),]);
 
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
                             'no_PR' => $request->no_PR ,
@@ -9152,7 +9584,7 @@ class PicsiteController extends Controller
                             'call_sign' => basename($path),]);
 
                     }
-                    else{
+                    elseif($request->type_upload == 'Fund_Req'){
                         documentJakarta::create([
                             'upload_type' => 'Fund_Req',
                             'no_PR' => $request->no_PR ,
@@ -9202,7 +9634,7 @@ class PicsiteController extends Controller
                         'perubahan_kepemilikan_kapal' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9252,7 +9684,7 @@ class PicsiteController extends Controller
                         'nota_dinas_bendera_(baru)' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9302,7 +9734,7 @@ class PicsiteController extends Controller
                         'pup_safe_manning' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9352,7 +9784,7 @@ class PicsiteController extends Controller
                         'corporate' => basename($path),]);
 
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9400,22 +9832,22 @@ class PicsiteController extends Controller
                         'status20' => 'on review',
                         'time_upload20' => date("Y-m-d h:i:s"),
                         'dokumen_kapal_asing_(baru)' => basename($path),]);
-                }else{
-                documentJakarta::create([
-                    'upload_type' => 'Fund_Req',
-                    'no_PR' => $request->no_PR ,
-                    'no_mohon' => $request->no_mohon,
-                    'nama_kapal' => $mergenama_kapal,
-                    'periode_awal' => $request->tgl_awal,
-                    'periode_akhir' => $request->tgl_akhir,
-            
-                    'cabang' => Auth::user()->cabang ,
-                    'user_id' => Auth::user()->id,
+                }elseif($request->type_upload == 'Fund_Req'){
+                    documentJakarta::create([
+                        'upload_type' => 'Fund_Req',
+                        'no_PR' => $request->no_PR ,
+                        'no_mohon' => $request->no_mohon,
+                        'nama_kapal' => $mergenama_kapal,
+                        'periode_awal' => $request->tgl_awal,
+                        'periode_akhir' => $request->tgl_akhir,
+                
+                        'cabang' => Auth::user()->cabang ,
+                        'user_id' => Auth::user()->id,
 
-                    'dana20' => $request->dana20,
-                    'status20' => 'on review',
-                    'time_upload20' => date("Y-m-d h:i:s"),
-                    'dokumen_kapal_asing_(baru)' => basename($path),]);
+                        'dana20' => $request->dana20,
+                        'status20' => 'on review',
+                        'time_upload20' => date("Y-m-d h:i:s"),
+                        'dokumen_kapal_asing_(baru)' => basename($path),]);
                 }
             }
             if ($request->hasFile('jktfile21')) {
@@ -9449,7 +9881,7 @@ class PicsiteController extends Controller
                         'time_upload21' => date("Y-m-d h:i:s"),
                         'rekomendasi_radio_kapal' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9498,7 +9930,7 @@ class PicsiteController extends Controller
                         'time_upload22' => date("Y-m-d h:i:s"),
                         'izin_stasiun_radio_kapal' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9547,7 +9979,7 @@ class PicsiteController extends Controller
                         'time_upload23' => date("Y-m-d h:i:s"),
                         'mmsi' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9596,7 +10028,7 @@ class PicsiteController extends Controller
                         'time_upload24' => date("Y-m-d h:i:s"),
                         'pnbp_pemeriksaan_konstruksi' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9645,7 +10077,7 @@ class PicsiteController extends Controller
                         'time_upload25' => date("Y-m-d h:i:s"),
                         'ok_1_skb' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9694,7 +10126,7 @@ class PicsiteController extends Controller
                         'time_upload26' => date("Y-m-d h:i:s"),
                         'ok_1_skp' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9743,7 +10175,7 @@ class PicsiteController extends Controller
                         'time_upload27' => date("Y-m-d h:i:s"),
                         'ok_1_skr' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9792,7 +10224,7 @@ class PicsiteController extends Controller
                         'time_upload28' => date("Y-m-d h:i:s"),
                         'status_hukum_kapal' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9841,7 +10273,7 @@ class PicsiteController extends Controller
                         'time_upload29' => date("Y-m-d h:i:s"),
                         'autorization_garis_muat' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9890,7 +10322,7 @@ class PicsiteController extends Controller
                         'time_upload30' => date("Y-m-d h:i:s"),
                         'otorisasi_klas' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9939,7 +10371,7 @@ class PicsiteController extends Controller
                         'time_upload31' => date("Y-m-d h:i:s"),
                         'pnbp_otorisasi(all)' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -9988,7 +10420,7 @@ class PicsiteController extends Controller
                         'time_upload32' => date("Y-m-d h:i:s"),
                         'halaman_tambah_grosse_akta' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10037,7 +10469,7 @@ class PicsiteController extends Controller
                         'time_upload33' => date("Y-m-d h:i:s"),
                         'pnbp_surat_ukur' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10086,7 +10518,7 @@ class PicsiteController extends Controller
                         'time_upload34' => date("Y-m-d h:i:s"),
                         'nota_dinas_penundaan_klas_bki_ss' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10135,7 +10567,7 @@ class PicsiteController extends Controller
                         'time_upload35' => date("Y-m-d h:i:s"),
                         'uwild_pengganti_doking' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10184,7 +10616,7 @@ class PicsiteController extends Controller
                         'time_upload36' => date("Y-m-d h:i:s"),
                         'update_nomor_call_sign' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10233,7 +10665,7 @@ class PicsiteController extends Controller
                         'time_upload37' => date("Y-m-d h:i:s"),
                         'clc_badan_kapal' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10282,7 +10714,7 @@ class PicsiteController extends Controller
                         'time_upload38' => date("Y-m-d h:i:s"),
                         'wreck_removal' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10331,7 +10763,7 @@ class PicsiteController extends Controller
                         'time_upload39' => date("Y-m-d h:i:s"),
                         'biaya_percepatan_proses' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10380,7 +10812,7 @@ class PicsiteController extends Controller
                         'time_upload40' => date("Y-m-d h:i:s"),
                         'BKI_Lambung' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10429,7 +10861,7 @@ class PicsiteController extends Controller
                         'time_upload41' => date("Y-m-d h:i:s"),
                         'BKI_Mesin' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10478,7 +10910,7 @@ class PicsiteController extends Controller
                         'time_upload42' => date("Y-m-d h:i:s"),
                         'BKI_Garis_Muat' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10527,7 +10959,7 @@ class PicsiteController extends Controller
                         'time_upload43' => date("Y-m-d h:i:s"),
                         'Lain_Lain1' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10576,7 +11008,7 @@ class PicsiteController extends Controller
                         'time_upload44' => date("Y-m-d h:i:s"),
                         'Lain_Lain2' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10625,7 +11057,7 @@ class PicsiteController extends Controller
                         'time_upload45' => date("Y-m-d h:i:s"),
                         'Lain_Lain3' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10674,7 +11106,7 @@ class PicsiteController extends Controller
                         'time_upload46' => date("Y-m-d h:i:s"),
                         'Lain_Lain4' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10723,7 +11155,7 @@ class PicsiteController extends Controller
                         'time_upload47' => date("Y-m-d h:i:s"),
                         'Lain_Lain5' => basename($path),]);
                 }
-                else{
+                elseif($request->type_upload == 'Fund_Req'){
                     documentJakarta::create([
                         'upload_type' => 'Fund_Req',
                         'no_PR' => $request->no_PR ,
@@ -10741,7 +11173,7 @@ class PicsiteController extends Controller
                         'Lain_Lain5' => basename($path),]);
                     }
             }
-            return redirect('/picsite/upload')->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
+            return redirect()->back()->with('success', 'Upload Success! Silahkan di cek ke DASHBOARD !');
         }
         
 //email to user
