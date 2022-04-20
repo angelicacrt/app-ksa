@@ -66,11 +66,19 @@
                             <option value="Morosi">Morosi</option>
                         </select>
                     </div>
-                    <div class="col">
-                        <div class="d-flex justify-content-end">
-                            {{ $docrpk->links() }}
+                    @if($searchresult == null)
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                            
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                                {{ $docrpk->links() }}
+                            </div>
+                        </div>
+                    @endif
                     <div class="col">
                         <a class="btn btn-outline-danger" style="margin-left:40%" href="/Staff_Legal/dashboard-StaffLegal-Realisasi">Change to Realisasi Dana</a>
                     </div>
