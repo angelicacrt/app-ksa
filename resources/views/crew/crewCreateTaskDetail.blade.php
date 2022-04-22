@@ -826,6 +826,11 @@
                                     <div class="d-flex justify-content-center mt-3">
                                         <button class="btn btn-primary" type="button" data-toggle="modal" id="finalize" data-target="#finalize-{{ $ot -> id }}" style="width: 90%">Finalize</button>
                                     </div>
+                                    @if($ot -> taskType == 'Operational Shipment')
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
+                                        </div>
+                                    @endif
                                     @if($ot -> taskType == 'Operational Transhipment' && $ot -> user -> cabang == 'Babelan')
                                         <div class="d-flex justify-content-around mt-3">
                                             <button class="btn btn-success text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
@@ -834,11 +839,15 @@
                                         <div class="d-flex justify-content-center mt-3">
                                             <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
                                         </div>
-                                    @elseif ($ot -> taskType == 'Operational Transhipment')
+                                    @endif
+                                    @if ($ot -> taskType == 'Operational Transhipment' && $ot -> user -> cabang != 'Babelan')
                                         <div class="d-flex justify-content-around mt-3">
                                                 <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 40%">Cancel Task</button>
                                                 <button class="btn btn-warning text-white" type="button" data-toggle="modal" id="return cargo" data-target="#return-cargo-{{ $ot -> id }}" style="width: 40%">Continue Return Cargo</button>
-                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" id="cancel" data-target="#cancel-{{ $ot -> id }}" style="width: 90%">Cancel Task</button>
+                                        </div>
                                     @endif
                                     @if($ot -> taskType == 'Towing Cargo' && $ot -> user -> cabang == 'Babelan')
                                         <div class="d-flex justify-content-center mt-3">
