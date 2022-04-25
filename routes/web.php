@@ -26,8 +26,8 @@ use App\Http\Controllers\DashboardAjaxController;
 // we hope you guys the best of luck and can make a better version of our own project ! 
 // =================================================================================================================================================================================== 
 
-// Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
-Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
+Route::group(['middleware' => ['auth',/* 'verified', */'PreventBackHistory']], function(){
+// Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard/search', [DashboardController::class, 'index']);
     Route::get('/dashboard/searchspgr', [DashboardController::class, 'index']);
@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
     Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
     Route::prefix('crew')->name('crew.')->group(function(){
+        // profile page
+        Route::get('/profile-page', [CrewController::class, 'profile_page'])->name('profile_page');
+        // Route::post('/profile-update', [CrewController::class, '']);
+
         // Dashboard Page
         Route::post('/change-branch', [CrewController::class, 'changeBranch'])->name('changeBranch');
         Route::get('/completed-order', [CrewController::class, 'completedOrder'])->name('completed-order');

@@ -81,6 +81,18 @@ class CrewController extends Controller
     // this mechanism will check if the order is already processed or not by checking the number => crew(1), logistic(2), supervisor A(3), supervisor B(4),
     // purchasing (5), if the tracker number is different then it will return the "error" message.
 
+// profile page
+    public function profile_page(){
+        $user = User::with('user')->where('cabang', Auth::user()->cabang)->where('id', Auth::user()->id);
+        return view('crew.profile' , compact('user'));
+    }
+
+    public function edit_profile_page(Request $request){
+
+    }
+// end of profile page
+
+// order page
     public function orderPage(){
         // Select items to choose in the order page & carts according to the login user
         $items = Item::where('cabang', Auth::user()->cabang)->where('itemState', 'like', 'Available')->get();
@@ -233,8 +245,9 @@ class CrewController extends Controller
 
         return redirect('/dashboard')->with('status', 'Request Order Accepted');
     }
+// end of order page
 
-    // ============================ Task Section =========================
+// ============================ Task Section =========================
 
     public function taskPage()
     {   
@@ -670,25 +683,31 @@ class CrewController extends Controller
         // Helper Var
         if($data -> user -> cabang == 'Samarinda'){
             $operationShipment_loops = ['MotherVessel', 'condition', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departureJetty', 'pengolonganNaik', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD', 'DOBPOD'];
+            $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'arrivalPODCargo', 'startAsideMVCargo', 'asideMVCargo', 'commMVCargo', 'compMVCargo', 'cOffMVCargo', 'departureTime'];
             $operationTranshipment_loops = ['MotherVessel', 'condition', 'cargoAmountEnd','customer', 'faVessel', 'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
         
         }elseif($data -> user -> cabang == 'Kendari' || $data -> user -> cabang == 'Babelan'){
             $operationShipment_loops = ['MotherVessel', 'condition','StandByB', 'cargoAmountEnd', 'customer', 'arrivalTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'arrivalPODCargo', 'startAsideMVCargo', 'asideMVCargo', 'commMVCargo', 'compMVCargo', 'cOffMVCargo', 'departureTime'];
             $operationTranshipment_loops = ['MotherVessel', 'condition','StandByB', 'cargoAmountEnd','customer', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
         
         }elseif($data -> user -> cabang == 'Morosi'){
             $operationShipment_loops = ['MotherVessel', 'condition', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD'];
+            $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'arrivalPODCargo', 'startAsideMVCargo', 'asideMVCargo', 'commMVCargo', 'compMVCargo', 'cOffMVCargo', 'departureTime'];
             $operationTranshipment_loops = ['MotherVessel', 'condition', 'cargoAmountEnd','customer', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
         
         }elseif($data -> user -> cabang == 'Batu Licin'){
+            $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'arrivalPODCargo', 'startAsideMVCargo', 'asideMVCargo', 'commMVCargo', 'compMVCargo', 'cOffMVCargo', 'departureTime'];
             $operationTranshipment_loops = [ 'MotherVessel','condition','customer', 'cargoAmountEnd', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL','DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+        }elseif($data -> user -> cabang == 'Berau'){
+            $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'arrivalPOL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'arrivalPODGeneral', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment'];
+            $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'startAsideMVCargo'];
         }else{
             $operationShipment_loops = ['MotherVessel', 'condition', 'cargoAmountEnd', 'customer', 'arrivalTime', 'departureTime', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsidePOD', 'asidePOD', 'commenceLoadPOD', 'completedLoadingPOD', 'cOffPOD', 'DOBPOD'];
             $operationTranshipment_loops = ['MotherVessel', 'condition', 'cargoAmountEnd','customer', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
-        
+            $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'arrivalPODCargo', 'startAsideMVCargo', 'asideMVCargo', 'commMVCargo', 'compMVCargo', 'cOffMVCargo', 'departureTime'];
         }
        
-        $returnCargo_loops = ['from', 'to', 'condition', 'cargoAmountEnd', 'cargoAmountEndCargo', 'arrivalPODCargo', 'startAsideMVCargo', 'asideMVCargo', 'commMVCargo', 'compMVCargo', 'cOffMVCargo', 'departureTime'];
         $nonOperational_loops = ['from', 'to', 'condition', 'estimatedTime', 'arrivalTime', 'startDocking', 'finishDocking', 'departurePOL'];
 
 
@@ -752,15 +771,18 @@ class CrewController extends Controller
 
         // Helper Var
         if($request -> cabang == 'Samarinda'){
-            $operationTranshipment_loops = ['MotherVessel','condition', 'customer', 'cargoAmountEnd', 'faVessel', 'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+            $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'faVessel', 'departureJetty', 'pengolonganNaik', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'pengolonganTurun', 'mooringArea', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment', 'Arrival_at'];
         }elseif($request -> cabang == 'Kendari' || $request -> cabang == 'Babelan'){
-            $operationTranshipment_loops = ['MotherVessel','condition', 'StandByB', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL'];
+            $operationTranshipment_loops = ['MotherVessel','condition', 'StandByB', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'Arrival_at'];
         }elseif($request -> cabang == 'Morosi'){
-            $operationTranshipment_loops = ['MotherVessel','condition', 'customer', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+            $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment' , 'Arrival_at'];
         }elseif($request -> cabang == 'Batu Licin'){
-            $operationTranshipment_loops = [ 'MotherVessel','condition','customer', 'cargoAmountEnd', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL','DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
-        }else{
-            $operationTranshipment_loops = ['MotherVessel','condition', 'customer', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment'];
+            $operationTranshipment_loops = [ 'MotherVessel','condition', 'cargoAmountEnd', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL','DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment' , 'Arrival_at'];
+        }elseif($request -> cabang == 'Berau'){
+            $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'arrivalPOL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'arrivalPODGeneral', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment'];
+        }
+        else{
+            $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment' , 'Arrival_at'];
         }
         
         $data = OperationalBoatData::where('id', $request -> taskId)->first();
@@ -847,8 +869,9 @@ class CrewController extends Controller
         // Then Redirect To Create Task Page
         return redirect('/crew/create-task')->with('status', 'Towing Cancelled Successfully');
     }
+// ============================ End Task Section =========================
 
-    //job request
+//job request
     public function completedJobRequest(){
         // Get all the job request within the logged in user within 6 month
         $JobRequestHeads = JobHead::with('user')->where(function($query){
@@ -1032,4 +1055,5 @@ class CrewController extends Controller
             cartJasa::where('user_id', Auth::user()->id)->delete();
         return redirect('/crew/Job_Request_List')->with('status', 'Submit Order Success');
     }
+// end of job request
 }

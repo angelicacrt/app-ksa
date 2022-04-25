@@ -89,12 +89,12 @@
             Menu
             </button>
             <div class="dropdown-menu navbar-custom" aria-labelledby="dropdownMenu2">
-                <a  class="nav-link px-20 border-0" style="color:white; font-size: 18px;" href="#" >
+                <a  class="nav-link px-20 border-0" style="color:white; font-size: 18px;" href="{{route('crew.profile_page')}}" >
                     <i class="bi bi-box-arrow-right"></i>
                     <span style="color:white; width: 22px; height: 22px;" data-feather="user"></span>
                     Profile   
                 </a>
-                <a  class="nav-link px-20 border-0" style="color:white; font-size: 16px;" href="change-password" >
+                <a  class="nav-link px-20 border-0" style="color:white; font-size: 16px;" href="#" >
                     <i class="bi bi-box-arrow-right"></i>
                     <span style="color:white; width: 22px; height: 22px;" data-feather="key"></span>
                     Change Password   
