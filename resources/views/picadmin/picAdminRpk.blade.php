@@ -159,6 +159,7 @@
                                             <input type="hidden" name ='tipefile' value='RPK'>
                                             <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                             <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
+                                            <input type="hidden" name = 'identity' value={{$d->id}}>
                                             <input type="hidden" name='result' value={{$d->$scan}} />
                                             <input type="hidden" name='cabang' value={{$d->cabang}}>
                                             <button type="submit" name="views3" class="btn btn-dark">view</button>
