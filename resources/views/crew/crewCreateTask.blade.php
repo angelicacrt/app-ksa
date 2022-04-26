@@ -39,22 +39,24 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label>Tug</label>
-                                        <select class="form-control" name="tugName" id="tugName" style=" height:50px;" required>
+                                        <input list="Nama_kapals" name="tugName" id="tugName" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
+                                        <datalist id="Nama_kapals">
                                             @forelse($tugs as $t)
                                                 <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
                                             @empty
                                                 <option value="" disabled>No Tugs Available</option>
                                             @endforelse
-                                        </select>
+                                        </datalist>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Barge</label>
-                                        <select class="form-control" name="bargeName" id="bargeName" style=" height:50px;">
-                                                <option value="">None</option>
-                                            @foreach($barges as $b)
+                                        <input list="nama_tug_barges" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="bargeName" id="bargeName" >
+                                        <datalist id="nama_tug_barges">
+                                            <option value="">None</option>
+                                            @foreach ($barge as $b)
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
                                             @endforeach
-                                        </select>
+                                        </datalist>
                                     </div>
 
                                     <div class="form-group col-md-4">
@@ -92,22 +94,24 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label>Tug</label>
-                                        <select class="form-control" name="tugName" id="tugName" style=" height:50px;" required>
+                                        <input list="Nama_tugName" name="tugName" id="tugName" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
+                                        <datalist id="Nama_tugName">
                                             @forelse($tugs as $t)
                                                 <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
                                             @empty
                                                 <option value="" disabled>No Tugs Available</option>
                                             @endforelse
-                                        </select>
+                                        </datalist>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Barge</label>
-                                        <select class="form-control" name="bargeName" id="bargeName" style=" height:50px;">
-                                                <option value="">None</option>
-                                            @foreach($barges as $b)
+                                        <input list="nama_bargeName" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="bargeName" id="bargeName" >
+                                        <datalist id="nama_bargeName">
+                                            <option value="">None</option>
+                                            @foreach ($barges as $b)
                                                 <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
                                             @endforeach
-                                        </select>
+                                        </datalist>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="cargoAmountStart">Jumlah Kargo Awal</label>

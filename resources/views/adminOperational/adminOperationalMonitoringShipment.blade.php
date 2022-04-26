@@ -16,25 +16,26 @@
                     <div class="form-row">
                         <div class="form-group col-md-2 mx-3">
                             <label class="font-weight-bold" for="">Search Tug</label>
-                            <select class="custom-select" id="tugName">
-                                <option disabled>Choose</option>
+                            <input list="Nama_tugName" name="tugName" id="tugName" placeholder="Nama tug" style="text-transform: uppercase;" class="col-lg-full custom-select custom-select-md">
+                            <datalist id="Nama_tugName">
                                 @forelse($tugs as $t)
                                     <option value="{{ $t -> tugName }}">{{ $t -> tugName }}</option>
                                 @empty
                                     <option value="" disabled>No Tugs Available</option>
                                 @endforelse
-                            </select>
+                            </datalist>
                         </div>
                         <div class="form-group col-md-2 mx-3">
                             <label class="font-weight-bold" for="">Search Barge</label>
-                            <select class="custom-select" id="bargeName">
-                                <option disabled>Choose</option>
+                            <input list="nama_bargeName" class="col-lg-full custom-select custom-select-md" style="text-transform: uppercase;" placeholder="Nama Barge" name="bargeName" id="bargeName" >
+                            <datalist id="nama_bargeName">
+                                <option value="">None</option>
                                 @forelse($barges as $b)
                                     <option value="{{ $b -> bargeName }}">{{ $b -> bargeName }}</option>
                                 @empty
                                     <option value="" disabled>No Barges Available</option>
                                 @endforelse
-                            </select>
+                            </datalist>
                         </div>
                         <div class="form-group col-md-2 mx-3">
                             <label class="font-weight-bold" for="">From</label>
