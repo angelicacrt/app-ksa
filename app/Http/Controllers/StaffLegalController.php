@@ -228,10 +228,10 @@ class StaffLegalController extends Controller
 
         if ($searchresult == 'All') {
             $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
+            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk','searchresult'));
         }elseif ($request->filled('search')) {
             $docrpk = DB::table('rpkdocuments')->where('cabang', $request->search)->whereDate('periode_akhir', '>=', $datetime)->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
+            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk','searchresult'));
         }elseif($request->filled('search_kapal')){
              //get DocRPK Data as long as the periode_akhir(column database)
              $docrpk = DB::table('rpkdocuments')
@@ -239,7 +239,7 @@ class StaffLegalController extends Controller
              ->whereDate('periode_akhir', '>=', $datetime)
              ->orderBy('id', 'DESC')
              ->latest()->paginate(10)->withQueryString();
-             return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
+             return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk','searchresult'));
         }elseif ($request->filled('search_kapal') && $request->filled('search')) {
             //get DocRPK Data as long as the periode_akhir(column database) with cabang
             $docrpk = DB::table('rpkdocuments')
@@ -248,14 +248,18 @@ class StaffLegalController extends Controller
             ->whereDate('periode_akhir', '>=', $datetime)
             ->orderBy('id', 'DESC')
             ->latest()->paginate(10)->withQueryString();
-            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
+            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk','searchresult'));
         }else{
             //get DocRPK Data as long as the periode_akhir(column database)
             $docrpk = DB::table('rpkdocuments')->whereDate('periode_akhir', '>=', $datetime)->latest()->get();
-            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk'));
+            return view('StaffLegal.StaffLegalDashboardRpk' , compact('docrpk','searchresult'));
         }
     }
     public function Dashboard_staffrpk_view(Request $request){
+        $datetime = date('Y-m-d');
+        $year = $request->created_at_Year;
+        $month = $request->created_at_month;
+        // dd($request);
         // RPK view ----------------------------------------------------------
         if($request->tipefile == 'RPK'){
             if ($request->cabang == 'Babelan'){
@@ -263,12 +267,10 @@ class StaffLegalController extends Controller
                 $kapal_id = $request->kapal_nama;
                 $result = $request->result;
                 $viewer = documentrpk::where('cabang' , $request->cabang)
-                
                 ->whereNotNull ($filenameRPK)
                 ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
                 ->pluck($filenameRPK)[0];
                 // dd($viewer);
                 return Storage::disk('s3')->response('babelan/' . $year . "/". $month . "/RPK" . "/" . $viewer);
@@ -283,7 +285,6 @@ class StaffLegalController extends Controller
                 ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
                 ->pluck($filenameRPK)[0]; 
                 // dd($viewer);
                 return Storage::disk('s3')->response('berau/' . $year . "/". $month . "/RPK" . "/" . $viewer);
@@ -298,7 +299,6 @@ class StaffLegalController extends Controller
                 ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
                 ->pluck($filenameRPK)[0]; 
                 // dd($viewer);
                 return Storage::disk('s3')->response('banjarmasin/' . $year . "/". $month . "/RPK" . "/" . $viewer);
@@ -313,7 +313,6 @@ class StaffLegalController extends Controller
                 ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
                 ->pluck($filenameRPK)[0]; 
                 // dd($viewer);
                 return Storage::disk('s3')->response('samarinda/' . $year . "/". $month . "/RPK" . "/" . $viewer);
@@ -328,7 +327,6 @@ class StaffLegalController extends Controller
                 ->where('id', $request->identity)
                 ->where($filenameRPK, 'Like', '%' . $result . '%')
                 ->where('nama_kapal', 'Like', '%' . $kapal_id . '%')
-                ->whereDate('periode_akhir', '>=', $datetime)
                 ->pluck($filenameRPK)[0]; 
                 // dd($viewer);
                 return Storage::disk('s3')->response('jakarta/' . $year . "/". $month . "/RPK" . "/" . $viewer);

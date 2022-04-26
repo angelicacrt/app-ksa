@@ -540,7 +540,7 @@ Route::group(['middleware' => ['auth', 'verified', 'PreventBackHistory']], funct
         Route::post('/dana/view',[StaffLegalController::class, 'view']);
         Route::post('/rpk/view',[StaffLegalController::class, 'viewrpk']);
         Route::post('/dashboard-staff-Real/view',[StaffLegalController::class, 'Dashboard_fund_Real_view']);
-        Route::post('/dashboard-staff-Rpk/view',[StaffLegalController::class, 'Dashboard_staffrpk_view']);
+        Route::post('/dashboard-StaffLegal-RPK/view',[StaffLegalController::class, 'Dashboard_staffrpk_view']);
 
         //RPK page
         Route::get('/upload-rpk', [StaffLegalController::class , 'staffrpk_page']);

@@ -1,6 +1,6 @@
 @extends('../layouts.base')
 
-@section('title', 'PicAdmin Dashboard')
+@section('title', 'Staff Legal Dashboard')
 
 @section('container')
 <div class="row">

@@ -1,13 +1,13 @@
 @extends('../layouts.base')
 
-@section('title', 'PicAdmin Dashboard')
+@section('title', 'Staff Legal Dashboard')
 
 @section('container')
 <div class="row">
     @include('StaffLegal.StaffLegalSidebar')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2>Welcome back, {{ Auth::user()->name }} ! - Admin</h2>
+            <h2>Welcome back, {{ Auth::user()->name }} ! - Staff Legal</h2>
             <h2>Cabang : {{ Auth::user()->cabang }}</h2>
             <h3>
                 <div id="txt"></div>
@@ -152,11 +152,12 @@
                         <td class="table-success" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-success" id="reason">{{$d->$reason}}</td>
                         <td class="table-success" >
-                            <form method="post" action="/dashboard/rpk/view" target="_blank">
+                            <form method="post" action="/Staff_Legal/dashboard-StaffLegal-RPK/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                 <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                 <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                <input type="hidden" name = 'identity' value={{$d->id}}>
                                 <input type="hidden" name = 'tipefile' value='RPK'>
                                 <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                 <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
@@ -181,11 +182,12 @@
                         <td class="table-danger" style="text-transform: uppercase;" id="status"><strong>{{$d->$stats}}</td>                                      
                         <td class="table-danger" id="reason">{{$d->$reason}}</td>
                         <td class="table-danger" >
-                            <form method="post" action="/dashboard/rpk/view" target="_blank">
+                            <form method="post" action="/Staff_Legal/dashboard-StaffLegal-RPK/view" target="_blank">
                                 @csrf
                                 <input type="hidden" name='created_at_Year' value={{Carbon\Carbon::parse($d->created_at)->format('Y')}} />
                                 <input type="hidden" name='created_at_month' value={{Carbon\Carbon::parse($d->created_at)->format('m')}} />
                                 <input type="hidden" name = 'cabang' value={{$d->cabang}}>
+                                <input type="hidden" name = 'identity' value={{$d->id}}>
                                 <input type="hidden" name = 'tipefile' value='RPK'>
                                 <input type="hidden" name = 'kapal_nama' value={{$d->nama_kapal}}>
                                 <input type="hidden" name='viewdocrpk' value={{$RPK[$r-1]}} />
