@@ -176,7 +176,11 @@
                                             @if($ot -> user -> cabang !== 'Kendari' && $ot -> user -> cabang !== 'Babelan')
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand {{ $ot -> user -> cabang == 'Samarinda' ? '(Optional)' : '' }}</h5>
+                                                        @if($ot -> user -> cabang == 'Bunati')
+                                                            <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand (Optional)</h5>
+                                                        @else
+                                                            <h5 class="card-title text-center text-danger font-weight-bold">Doc Overhand {{ $ot -> user -> cabang == 'Samarinda' ? '(Optional)' : '' }}</h5>
+                                                        @endif
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="DOH" id="DOH" value="{{ $ot -> DOH != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOH)) : '' }}">
@@ -185,7 +189,7 @@
                                                 </div>
                                                 <div class="card border-dark mx-3 mb-3" style="width: 17rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat</h5>
+                                                        <h5 class="card-title text-center text-danger font-weight-bold">Doc On Boat {{ $ot -> user -> cabang == 'Bunati' ? '(Optional)' : '' }}</h5>
                                                         <h6 class="card-subtitle mb-2 text-muted text-center text-center font-weight-bold">Start Date & Time</h6>
                                                         <div class="form-group mt-3">
                                                             <input class="form-control" type="datetime-local" name="DOB" id="DOB" value="{{ $ot -> DOB != NULL ? date('Y-m-d\TH:i:s', strtotime($ot -> DOB)) : '' }}">
