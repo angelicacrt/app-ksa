@@ -780,6 +780,8 @@ class CrewController extends Controller
             $operationTranshipment_loops = [ 'MotherVessel','condition', 'cargoAmountEnd', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL','DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment' , 'Arrival_at'];
         }elseif($request -> cabang == 'Berau'){
             $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'arrivalPOL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'arrivalPODGeneral', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment'];
+        }elseif($request -> cabang == 'Bunati'){
+            $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment' , 'Arrival_at'];
         }
         else{
             $operationTranshipment_loops = ['MotherVessel','condition', 'cargoAmountEnd', 'faVessel', 'arrivalPOL', 'startAsideL', 'asideL', 'commenceLoadL', 'completedLoadingL', 'cOffL', 'DOH', 'DOB', 'departurePOD', 'arrivalPODGeneral', 'startAsideMVTranshipment', 'asideMVTranshipment', 'commMVTranshipment', 'compMVTranshipment', 'cOffMVTranshipment', 'departureTimeTranshipment' , 'Arrival_at'];
